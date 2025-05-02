@@ -2,32 +2,38 @@ package ar.edu.utn.frba.dds;
 
 import lombok.Getter;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Coleccion {
   @Getter
   String titulo;
-  Set<Hecho> hechos;
+  List<Hecho> hechos;
   String descripcion;
   Fuente fuente;
-  String criterio;
+  Criterio criterio;
 
-  void traerHechos(){
-    Set<Hecho> hechosFuente;
-    //hechos = hechosFuente.filter(criterio);
-  }
-  public Set<Hecho> mostrarHechos() {
-    return hechos;
-  }
+  // public Set<Hecho> mostrarHechos() {return hechos;  }
 
-  void eliminarColeccion(){}
+  //void eliminarColeccion(){}
 
-  void cambiarCriterio(){}
+  //void cambiarCriterio(){}
 
-  public Coleccion(String titulo, String descripcion, Fuente fuente){
+  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio){
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
-    //criterio = "";
+    this.criterio = criterio;
+    this.hechos = new ArrayList<>();
+
+    cargarHechos();
+  }
+
+  private void cargarHechos() {
+    for (Hecho hecho : fuente.getHechos()) {
+      if(criterio.cumpleCriterio(hecho)){
+        hechos.add(hecho);
+      }
+    }
   }
 }
