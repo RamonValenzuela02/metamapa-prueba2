@@ -7,9 +7,9 @@ public class Hecho {
   Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion
   String titulo;
   String descripcion;
-  String categoria;
-  Ubicacion lugarAcontecimiento;
-  LocalDate fechaAcontecimiento;
+  Categoria categoria;
+  Ubicacion lugarHecho;
+  LocalDate fechaHecho;
   LocalDate fechaCarga;
   //origen;
   //tipo;
