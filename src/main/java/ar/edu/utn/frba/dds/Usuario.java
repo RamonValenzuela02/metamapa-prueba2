@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds;
 
+import java.util.List;
+
 public class Usuario {
   private String nombre;
   private String apellido;
@@ -13,11 +15,14 @@ public class Usuario {
     this.tipo = tipo;
   }
 
-  //public ver(coleccion) {
-    //
-  //}
 
-  //public subirHecho(hecho){}
+  public List<Hecho> visualizar(Coleccion coleccion) {
+     return coleccion.hechos;
+  }
+
+//  public void subirHechoA( ,Coleccion coleccion) {
+ //   coleccion.hechos.add()
+ // }
 
 
 }
