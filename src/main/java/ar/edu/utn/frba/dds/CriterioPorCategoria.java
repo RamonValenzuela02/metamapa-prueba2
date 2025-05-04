@@ -5,6 +5,6 @@ public class CriterioPorCategoria implements Criterio {
 
   @Override
   public Boolean cumpleCriterio(Hecho hecho){
-    return hecho.categoria == categoria;
+    return hecho.getCategoria() == categoria;
   }
 }
