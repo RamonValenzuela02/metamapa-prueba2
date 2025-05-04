@@ -42,7 +42,8 @@ public class FuenteCSV extends Fuente {
         LocalDate fecha = LocalDate.parse(tokens[5]);
 
         Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha);
-        hechos.add(hecho);
+
+        agregarHechoNuevo(hecho,hechos);
       }
     }catch(IOException e){
       e.printStackTrace();
@@ -57,7 +58,10 @@ public class FuenteCSV extends Fuente {
       file.close();
     }catch(IOException e){
       e.printStackTrace();
-      return;
     }
+  }
+  private void agregarHechoNuevo(Hecho hecho,List<Hecho> hechos) {
+    hechos.removeIf(h-> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
+    hechos.add(hecho);
   }
 }
