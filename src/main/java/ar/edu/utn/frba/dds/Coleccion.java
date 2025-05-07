@@ -29,7 +29,7 @@ public class Coleccion {
     cargarHechos();
   }
 
-  private void cargarHechos() {
+  public void cargarHechos() {
     for (Hecho hecho : fuente.getHechos()) {
       if(criterio.cumpleCriterio(hecho)){
         hechos.add(hecho);

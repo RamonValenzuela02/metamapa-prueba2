@@ -11,7 +11,7 @@ public class FuenteTest {
 
   @Test
   public void lecturaCorrectaDeArchivoCSV(){
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\IdeaProjects\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     List<Hecho> hechos = fuenteCSV.getHechos();
 
     assertEquals("Incendio Forestal en Bariloche", hechos.get(0).getTitulo());
