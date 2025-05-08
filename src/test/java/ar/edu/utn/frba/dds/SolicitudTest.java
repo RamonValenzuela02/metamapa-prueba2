@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SolicitudTest {
   List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-  FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+  FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\santi\\OneDrive\\Documentos\\UTN\\Diseño\\Java\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
   List<Hecho> hechos = fuenteCSV.getHechos();
   String titulo = hechos.get(0).getTitulo();
   String motivo = "Ubicacion erronea";

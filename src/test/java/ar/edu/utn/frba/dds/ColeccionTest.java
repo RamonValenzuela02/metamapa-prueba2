@@ -5,22 +5,18 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
+import static ar.edu.utn.frba.dds.Categoria.ACCIDENTE_VIAL;
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ColeccionTest {
-
-  Coleccion coleccion1;
-  Hecho unHecho;
-  Fuente unaFuente;
-
 
   public Coleccion coleccionSegunCategoria(Categoria categoria) {
     //---------------------------------------------------------------------
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\Desktop\\disenioo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\santi\\OneDrive\\Documentos\\UTN\\Diseño\\Java\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
@@ -35,16 +31,21 @@ public class ColeccionTest {
     constructor de la clase colección, podemos ver que ya está utilizada dentro, por lo que al crear la
     colección ya ejecuta esa función automáticamente
      */
-
   }
 
-  @DisplayName("La cantidad de incendios forestales en prueba.csv es 3")
+  @DisplayName("Como persona administradora, deseo crear una colección")
+  @Test
+  public void crearColeccion() {
+    Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
+    assertEquals(3, coleccion1.getHechos().size());
+  }
+
+  @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección.")
   @Test
   public void cantidadDeIncendiosForestalesEs3() {
     Coleccion coleccion = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    assertEquals(3, coleccion.getHechos().size());
+    //assertEquals(3, coleccion.getHechos().size());
     coleccion.navegar();
   }
-
-  }
+}
 
