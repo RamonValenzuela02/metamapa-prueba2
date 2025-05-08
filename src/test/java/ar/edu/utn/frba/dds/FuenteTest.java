@@ -17,15 +17,15 @@ public class FuenteTest {
     assertEquals("Incendio Forestal en Bariloche", hechos.get(0).getTitulo());
     assertEquals("Hubo un incendio en Bariloche", hechos.get(0).getDescripcion());
     assertEquals(Categoria.INCENDIO_FORESTAL, hechos.get(0).getCategoria());
-    assertEquals(11.2222, hechos.get(0).getLatitud());
-    assertEquals(33.4444, hechos.get(0).getLongitud());
+    assertEquals("11.2222", hechos.get(0).getLatitud());
+    assertEquals("33.4444", hechos.get(0).getLongitud());
     assertEquals(LocalDate.parse("2025-04-05"), hechos.get(0).getFechaHecho());
 
     assertEquals("Accidente Fatal en General Paz", hechos.get(1).getTitulo());
     assertEquals("Accidente fatal en General Paz. Hubo 3 victimas.", hechos.get(1).getDescripcion());
     assertEquals(Categoria.ACCIDENTE_VIAL, hechos.get(1).getCategoria());
-    assertEquals(55.6666, hechos.get(1).getLatitud());
-    assertEquals(77.8888, hechos.get(1).getLongitud());
+    assertEquals("55.6666", hechos.get(1).getLatitud());
+    assertEquals("77.8888", hechos.get(1).getLongitud());
     assertEquals(LocalDate.parse("2025-04-05"), hechos.get(1).getFechaHecho());
   }
 }

@@ -3,10 +3,10 @@ package ar.edu.utn.frba.dds;
 public class CriterioPorCategoriaYLugar implements Criterio {
 
   Categoria categoria;
-  double latitud;
-  double longitud;
+  String latitud;
+  String longitud;
 
-  public CriterioPorCategoriaYLugar(Categoria categoria, double latitud, double longitud) {
+  public CriterioPorCategoriaYLugar(Categoria categoria, String latitud, String longitud) {
     this.categoria = categoria;
     this.latitud = latitud;
     this.longitud = longitud;
@@ -14,6 +14,6 @@ public class CriterioPorCategoriaYLugar implements Criterio {
 
   @Override
   public Boolean cumpleCriterio(Hecho hecho){
-    return hecho.getCategoria() == categoria && hecho.getLatitud() == latitud && hecho.getLongitud() == longitud;
+    return hecho.getCategoria() == categoria && hecho.getLatitud().equals(latitud)  && hecho.getLongitud().equals(longitud);
   }
 }

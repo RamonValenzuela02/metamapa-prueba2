@@ -14,16 +14,19 @@ public class Hecho {
   @Getter
   private Categoria categoria;
   @Getter
-  private double latitud;
+  private String latitud;
   @Getter
-  private double longitud;
+  private String longitud;
   @Getter
   private LocalDate fechaHecho;
   private LocalDate fechaCarga;
   //origen;
   //tipo;
 
-  public Hecho (String titulo, String descripcion, Categoria categoria, double latitud, double longitud, LocalDate fecha){
+
+  // Preguntar si convendria hacer un
+  public Hecho (String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDate fecha){
+    validarNotNuLL(titulo, descripcion, categoria, latitud, longitud, fecha);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
@@ -31,6 +34,37 @@ public class Hecho {
     this.longitud = longitud;
     this.fechaHecho = fecha;
   }
+
+  private void validarNotNuLL(String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDate fecha) {
+    if(titulo == null) {
+      throw new HechoInvalidoExeption("titulo");
+    }
+    if(descripcion == null) {
+      throw new HechoInvalidoExeption("descripcion");
+    }
+    if(categoria == null) {
+      throw new HechoInvalidoExeption("categoria");
+    }
+    if(null == latitud) {
+      throw new HechoInvalidoExeption("latitud");
+    }
+    if(null == longitud) {
+      throw new HechoInvalidoExeption("longitud");
+    }
+    if(fecha == null) {
+      throw new HechoInvalidoExeption("fecha");
+    }
+  }
+
+  static class HechoInvalidoExeption extends RuntimeException {
+
+    public HechoInvalidoExeption(String causa) {
+      super("No selecciono " + causa + " del hecho.");
+    }
+
+  }
+
+  //TODO
   void agregarMultimedia(){}
 
   public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador

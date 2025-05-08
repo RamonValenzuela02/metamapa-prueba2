@@ -37,8 +37,8 @@ public class FuenteCSV extends Fuente {
         String titulo = tokens[0];
         String descripcion = tokens[1];
         Categoria categoria = Categoria.valueOf(tokens[2]);
-        double latitud = Double.valueOf(tokens[3]);
-        double longitud = Double.valueOf(tokens[4]);
+        String latitud = tokens[3];
+        String longitud = tokens[4];
         LocalDate fecha = LocalDate.parse(tokens[5]);
 
         Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha);
@@ -60,6 +60,7 @@ public class FuenteCSV extends Fuente {
       e.printStackTrace();
     }
   }
+
   private void agregarHechoNuevo(Hecho hecho,List<Hecho> hechos) {
     hechos.removeIf(h-> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
     hechos.add(hecho);
