@@ -42,15 +42,25 @@ public class Coleccion {
   public void navegar(Coleccion coleccion) {
     List<Hecho> hechos = coleccion.getHechos();
     for (Hecho hecho : hechos) {
-      System.out.println("Titulo: " + hecho.getTitulo());
-      System.out.println("Descripcion: " + hecho.getDescripcion());
-      System.out.println("Categoria: " + hecho.getCategoria().toString());
-      System.out.println("Latitud: " + hecho.getLatitud());
-      System.out.println("Longitud: " + hecho.getLongitud());
-      System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
+      mostrarHecho(hecho);
     }
   }
 
-  public void navegarConFiltro(Coleccion coleccion, Criterio criterio){}
+  public void navegarConFiltro(Coleccion coleccion, Criterio criterio){
+    List<Hecho> hechos = coleccion.getHechos();
+    for (Hecho hecho : hechos) {
+      if(criterio.cumpleCriterio(hecho)){
+        mostrarHecho(hecho);
+      }
+    }
+  }
 
+  public void mostrarHecho(Hecho hecho){
+    System.out.println("Titulo: " + hecho.getTitulo());
+    System.out.println("Descripcion: " + hecho.getDescripcion());
+    System.out.println("Categoria: " + hecho.getCategoria().toString());
+    System.out.println("Latitud: " + hecho.getLatitud());
+    System.out.println("Longitud: " + hecho.getLongitud());
+    System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
+  }
 }
