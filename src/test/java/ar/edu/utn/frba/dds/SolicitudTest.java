@@ -25,15 +25,22 @@ public class SolicitudTest {
   public void aceptarSolicitud(){
     List<SolicitudDeEliminacion> pendientes = solicitudes.stream().
             filter(soli -> soli.getEstado().
-            equals(Estado.PENDIENTE)).toList();
+            equals(Estado.PENDIENTE)).collect(Collectors.toList());
     SolicitudDeEliminacion soliAanalizar = pendientes.get(0);
     soliAanalizar.aceptar();
-    for (SolicitudDeEliminacion soliCitud : solicitudes) {
-      System.out.println("ESTADO: " + soliCitud.estado);
-    }
-    pendientes = solicitudes.stream().
-        filter(soli -> soli.getEstado().
-            equals(Estado.PENDIENTE)).toList();
+    pendientes.remove(0);
     assertEquals(0, pendientes.size());
+    assertEquals(Estado.ACEPTADA, soliAanalizar.getEstado());
+  }
+  @Test
+  public void rechazarSolicitud(){
+    List<SolicitudDeEliminacion> pendientes = solicitudes.stream().
+        filter(soli -> soli.getEstado().
+            equals(Estado.PENDIENTE)).collect(Collectors.toList());
+    SolicitudDeEliminacion soliAanalizar = pendientes.get(0);
+    soliAanalizar.rechazar();
+    pendientes.remove(0);
+    assertEquals(0, pendientes.size());
+    assertEquals(Estado.RECHAZADA, soliAanalizar.getEstado());
   }
 }
