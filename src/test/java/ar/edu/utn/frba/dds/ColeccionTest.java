@@ -15,13 +15,13 @@ public class ColeccionTest {
   Fuente unaFuente;
 
 
-  public Coleccion ColeccionDeIncendiosForestales(Categoria categoria) {
+  public Coleccion coleccionSegunCategoria(Categoria categoria) {
     //---------------------------------------------------------------------
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\Facultad\\3er año\\Diseño de Sistemas\\TPA\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
-    //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\Desktop\\disenioo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+     //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
@@ -38,15 +38,12 @@ public class ColeccionTest {
 
   }
 
-  coleccion1 = ColeccionDeIncendiosForestales(INCENDIO_FORESTAL);
-
-  @DisplayName("Viendo si se creo la coleccion segun el criterio")
+  @DisplayName("La cantidad de incendios forestales en prueba.csv es 3")
   @Test
-  public void hechosDeColeccionSegunLaCategoria() {
-    assertEquals(3, .getHechos().size());
-    //aca preguntamos si los hechos que están en la colección son iguales a dos
-
-    coleccion.navegar()
+  public void cantidadDeIncendiosForestalesEs3() {
+    Coleccion coleccion = coleccionSegunCategoria(INCENDIO_FORESTAL);
+    assertEquals(3, coleccion.getHechos().size());
+    coleccion.navegar();
   }
 
   }
