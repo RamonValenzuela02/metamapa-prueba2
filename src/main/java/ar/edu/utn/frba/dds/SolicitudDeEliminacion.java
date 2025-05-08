@@ -1,7 +1,12 @@
 package ar.edu.utn.frba.dds;
 
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
 public class SolicitudDeEliminacion {
-  Hecho hecho;
+  String tituloHecho;
   String motivo;
   Estado estado = Estado.PENDIENTE;
 
@@ -12,9 +17,11 @@ public class SolicitudDeEliminacion {
   void rechazar(){
     this.estado = Estado.RECHAZADA;
   }
-public SolicitudDeEliminacion(Hecho hecho, String motivo) {
-    this.hecho = hecho;
+
+  public SolicitudDeEliminacion(String tituloHecho, String motivo, List<SolicitudDeEliminacion> solicitudes) {
+    this.tituloHecho = tituloHecho;
     this.motivo = motivo;
+    solicitudes.add(this);
 }
 
 }
