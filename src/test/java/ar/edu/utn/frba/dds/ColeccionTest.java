@@ -14,20 +14,19 @@ public class ColeccionTest {
   Hecho unHecho;
   Fuente unaFuente;
 
-  @Test
-  @DisplayName("Creo Coleccion")
-  void crearColeccion() {
+
+  public Coleccion ColeccionDeIncendiosForestales(Categoria categoria) {
     //---------------------------------------------------------------------
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("D:\\Facultad\\3er año\\Diseño de Sistemas\\TPA\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
-    Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
+    Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    Coleccion coleccion = new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
+    return new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
     //Aca creamos una colección, que tiene todos nuestros hechos de la fuente pero filtrados por el criterio recién
     //creado
 
@@ -37,12 +36,18 @@ public class ColeccionTest {
     colección ya ejecuta esa función automáticamente
      */
 
-    assertEquals(2, coleccion.getHechos().size());
+  }
+
+  coleccion1 = ColeccionDeIncendiosForestales(INCENDIO_FORESTAL);
+
+  @DisplayName("Viendo si se creo la coleccion segun el criterio")
+  @Test
+  public void hechosDeColeccionSegunLaCategoria() {
+    assertEquals(3, .getHechos().size());
     //aca preguntamos si los hechos que están en la colección son iguales a dos
 
-    for (Hecho hecho : coleccion.getHechos()) {
-      System.out.println("Título: " + hecho.getTitulo());
-    }
-    //este es un print que hice de gede para que muestre los hechos
+    coleccion.navegar()
   }
-}
+
+  }
+

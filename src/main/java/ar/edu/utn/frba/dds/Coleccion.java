@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Coleccion {
   @Getter
@@ -39,20 +40,12 @@ public class Coleccion {
     }
   }
 
-  public void navegar(Coleccion coleccion) {
-    List<Hecho> hechos = coleccion.getHechos();
-    for (Hecho hecho : hechos) {
-      mostrarHecho(hecho);
-    }
+  public void navegar() {
+    hechos.forEach( this::mostrarHecho );
   }
 
-  public void navegarConFiltro(Coleccion coleccion, Criterio criterio){
-    List<Hecho> hechos = coleccion.getHechos();
-    for (Hecho hecho : hechos) {
-      if(criterio.cumpleCriterio(hecho)){
-        mostrarHecho(hecho);
-      }
-    }
+  public void navegarConFiltro(Criterio criterio){
+    hechos.stream().filter( criterio::cumpleCriterio ).forEach( this::mostrarHecho );
   }
 
   public void mostrarHecho(Hecho hecho){
@@ -62,5 +55,6 @@ public class Coleccion {
     System.out.println("Latitud: " + hecho.getLatitud());
     System.out.println("Longitud: " + hecho.getLongitud());
     System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
+    System.out.println("\n");
   }
 }
