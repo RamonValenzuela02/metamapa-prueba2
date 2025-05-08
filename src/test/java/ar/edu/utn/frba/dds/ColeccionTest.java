@@ -16,14 +16,33 @@ public class ColeccionTest {
 
   @Test
   @DisplayName("Creo Coleccion")
-
   void crearColeccion() {
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
-    List<Hecho> hechos = fuenteCSV.getHechos();
-    Criterio criterio = new CriterioPorCategoria(INCENDIO_FORESTAL);
-    coleccion1 = new Coleccion("Incendios Forestales","Test", fuenteCSV, criterio);
-    coleccion1.cargarHechos();
-    assertEquals(2, coleccion1.hechos.size());
-  }
+    //---------------------------------------------------------------------
+    //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
+    //---------------------------------------------------------------------
 
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\santi\\OneDrive\\Documentos\\UTN\\Diseño\\Java\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
+
+    Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
+    //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
+
+    Coleccion coleccion = new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
+    //Aca creamos una colección, que tiene todos nuestros hechos de la fuente pero filtrados por el criterio recién
+    //creado
+
+    /*
+    Explicación de porque no hace falta usar la función cargarHechos() manualmente: si vemos en el
+    constructor de la clase colección, podemos ver que ya está utilizada dentro, por lo que al crear la
+    colección ya ejecuta esa función automáticamente
+     */
+
+    assertEquals(2, coleccion.getHechos().size());
+    //aca preguntamos si los hechos que están en la colección son iguales a dos
+
+    for (Hecho hecho : coleccion.getHechos()) {
+      System.out.println("Título: " + hecho.getTitulo());
+    }
+    //este es un print que hice de gede para que muestre los hechos
+  }
 }

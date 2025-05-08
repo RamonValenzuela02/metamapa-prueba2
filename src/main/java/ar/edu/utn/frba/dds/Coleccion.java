@@ -8,10 +8,12 @@ import java.util.List;
 public class Coleccion {
   @Getter
   String titulo;
+  @Getter
   List<Hecho> hechos;
   String descripcion;
   Fuente fuente;
   Criterio criterio;
+
 
   // public Set<Hecho> mostrarHechos() {return hechos;  }
 
