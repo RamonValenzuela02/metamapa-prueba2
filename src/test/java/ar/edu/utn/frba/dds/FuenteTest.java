@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FuenteTest {
 
   @Test
-  public void lecturaCorrectaDeArchivoCSV(){
+  public void lecturaCorrectaDeArchivoCSV(){ // req 2
     FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\santi\\OneDrive\\Documentos\\UTN\\Diseño\\Java\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     List<Hecho> hechos = fuenteCSV.getHechos();
 

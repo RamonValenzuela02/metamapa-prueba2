@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class ColeccionTest {
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\santi\\OneDrive\\Documentos\\UTN\\Diseño\\Java\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
@@ -33,19 +34,27 @@ public class ColeccionTest {
      */
   }
 
-  @DisplayName("Como persona administradora, deseo crear una colección")
+  @DisplayName("Como persona administradora, deseo crear una colección") // req 1
   @Test
   public void crearColeccion() {
     Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
     assertEquals(3, coleccion1.getHechos().size());
   }
 
-  @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección.")
+  @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección.") // req 3
   @Test
   public void cantidadDeIncendiosForestalesEs3() {
     Coleccion coleccion = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    //assertEquals(3, coleccion.getHechos().size());
     coleccion.navegar();
+  }
+
+  @Test
+  public void navegacionColeccion() { // req 4
+
+    Coleccion coleccion2 = coleccionSegunCategoria(INCENDIO_FORESTAL);
+    String fechaString = "2025-04-05";
+    Criterio criterio = new CriterioXfecha(fechaString);
+    coleccion2.navegarConFiltro(criterio);;
   }
 }
 

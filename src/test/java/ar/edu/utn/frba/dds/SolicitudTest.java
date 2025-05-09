@@ -16,13 +16,13 @@ public class SolicitudTest {
   List<Hecho> hechos = fuenteCSV.getHechos();
   String titulo = hechos.get(0).getTitulo();
   String motivo = "Ubicacion erronea";
-  SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(titulo, motivo, solicitudes);
+  SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(titulo, motivo, solicitudes); // req 5
   @Test
   public void solicitud(){
     assertEquals(1, solicitudes.size());
   }
   @Test
-  public void aceptarSolicitud(){
+  public void aceptarSolicitud(){ // req 6
     List<SolicitudDeEliminacion> pendientes = solicitudes.stream().
             filter(soli -> soli.getEstado().
             equals(Estado.PENDIENTE)).collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class SolicitudTest {
     assertEquals(Estado.ACEPTADA, soliAanalizar.getEstado());
   }
   @Test
-  public void rechazarSolicitud(){
+  public void rechazarSolicitud(){ // req 6
     List<SolicitudDeEliminacion> pendientes = solicitudes.stream().
         filter(soli -> soli.getEstado().
             equals(Estado.PENDIENTE)).collect(Collectors.toList());
