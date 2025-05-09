@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,21 +24,17 @@ public class Coleccion {
   //void cambiarCriterio(){}
 
   public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio){
+    validarNotNuLL( titulo, descripcion, fuente, criterio);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterio = criterio;
     this.hechos = new ArrayList<>();
-
     cargarHechos();
   }
-
+ //TODO chequear esto:
   public void cargarHechos() {
-    for (Hecho hecho : fuente.getHechos()) {
-      if(criterio.cumpleCriterio(hecho)){
-        hechos.add(hecho);
-      }
-    }
+    hechos.addAll( fuente.getHechos().stream().filter(hecho -> criterio.cumpleCriterio(hecho)).toList() );
   }
 
   public void navegar() {
@@ -57,4 +54,29 @@ public class Coleccion {
     System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
     System.out.println("\n");
   }
+
+  private void validarNotNuLL(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    if(titulo == null) {
+      throw new ColeccionInvalidoExeption("titulo");
+    }
+    if(descripcion == null) {
+      throw new ColeccionInvalidoExeption("descripcion");
+    }
+    if(fuente == null) {
+      throw new ColeccionInvalidoExeption("fuente");
+    }
+    if(criterio == null) {
+      throw new ColeccionInvalidoExeption("criterio");
+    }
+
+  }
+
+}
+
+class ColeccionInvalidoExeption extends RuntimeException {
+
+  public ColeccionInvalidoExeption(String causa) {
+    super("No selecciono " + causa + " de la coleccion.");
+  }
+
 }

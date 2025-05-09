@@ -56,18 +56,17 @@ public class Hecho {
     }
   }
 
-  static class HechoInvalidoExeption extends RuntimeException {
-
-    public HechoInvalidoExeption(String causa) {
-      super("No selecciono " + causa + " del hecho.");
-    }
-
-  }
-
   //TODO
   void agregarMultimedia(){}
 
   public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador
     etiquetas.add(nuevaEtiqueta);
   }
+}
+
+class HechoInvalidoExeption extends RuntimeException {
+  public HechoInvalidoExeption(String causa) {
+    super("No selecciono " + causa + " del hecho.");
+    }
+
 }
