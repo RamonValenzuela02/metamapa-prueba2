@@ -35,6 +35,7 @@ public class Hecho {
     this.latitud = latitud;
     this.longitud = longitud;
     this.fechaHecho = fecha;
+    this.fechaCarga = LocalDate.now();
   }
 
   private void validarNotNull(String titulo, String descripcion, Categoria categoria,
