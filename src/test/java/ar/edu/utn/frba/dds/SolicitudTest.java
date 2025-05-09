@@ -16,7 +16,7 @@ public class SolicitudTest {
   List<Hecho> hechos = fuenteCSV.getHechos();
   String titulo = hechos.get(0).getTitulo();
   String motivo = "Ubicacion erronea";
-  SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(titulo, motivo, solicitudes); // req 5
+  SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(titulo, motivo, solicitudes, fuenteCSV); // req 5
   @Test
   public void solicitud(){
     assertEquals(1, solicitudes.size());
