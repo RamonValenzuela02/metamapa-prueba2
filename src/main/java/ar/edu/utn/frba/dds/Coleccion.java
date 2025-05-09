@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
 
@@ -10,7 +11,6 @@ import lombok.Getter;
 public class Coleccion {
   @Getter
   private final String titulo;
-  @Getter
   private final List<Hecho> hechos;
   @Getter
   private final String descripcion;
@@ -32,6 +32,10 @@ public class Coleccion {
     this.criterio = criterio;
     this.hechos = new ArrayList<>();
     cargarHechos();
+  }
+
+  public List<Hecho> getHechos() {
+    return Collections.unmodifiableList(hechos);
   }
 
   //TODO chequear esto:
