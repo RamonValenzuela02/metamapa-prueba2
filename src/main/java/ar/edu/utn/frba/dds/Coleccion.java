@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Representa una colección de hechos basada en un criterio y una fuente.
+ */
 public class Coleccion {
   @Getter
-  String titulo;
+  private String titulo;
   @Getter
-  List<Hecho> hechos;
-  String descripcion;
-  Fuente fuente;
-  Criterio criterio;
+  private List<Hecho> hechos;
+  private String descripcion;
+  private Fuente fuente;
+  private Criterio criterio;
 
 
   // public Set<Hecho> mostrarHechos() {return hechos;  }
@@ -22,9 +25,11 @@ public class Coleccion {
   //void eliminarColeccion(){}
 
   //void cambiarCriterio(){}
-
-  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio){
-    validarNotNuLL( titulo, descripcion, fuente, criterio);
+  /**
+   * Crea una nueva colección y carga los hechos de la fuente .
+   */
+  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    validarNotNull(titulo, descripcion, fuente, criterio);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
@@ -33,19 +38,34 @@ public class Coleccion {
     cargarHechos();
   }
  //TODO chequear esto:
+
+  /**
+   * carga los hechos de la fuente .
+   */
   public void cargarHechos() {
-    hechos.addAll( fuente.getHechos().stream().filter(hecho -> criterio.cumpleCriterio(hecho)).toList() );
+    hechos.addAll(
+        fuente.getHechos().stream()
+            .filter(hecho -> criterio.cumpleCriterio(hecho))
+            .toList()
+    );
   }
-
+  /**
+   * vagega/muestra todos los hechos .
+   */
   public void navegar() {
-    hechos.forEach( this::mostrarHecho );
+    hechos.forEach(this::mostrarHecho );
   }
 
-  public void navegarConFiltro(Criterio criterio){
-    hechos.stream().filter( criterio::cumpleCriterio ).forEach( this::mostrarHecho );
+  /**
+   * vagega/muetra los hechos que cumplen con criterio .
+   */
+  public void navegarConFiltro(Criterio criterio) {
+    hechos.stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
   }
-
-  public void mostrarHecho(Hecho hecho){
+  /**
+   * muestra un hecho .
+   */
+  public void mostrarHecho(Hecho hecho) {
     System.out.println("Titulo: " + hecho.getTitulo());
     System.out.println("Descripcion: " + hecho.getDescripcion());
     System.out.println("Categoria: " + hecho.getCategoria().toString());
@@ -54,8 +74,10 @@ public class Coleccion {
     System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
     System.out.println("\n");
   }
-
-  private void validarNotNuLL(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  /**
+   * valida que los datos ingresados no sean NULL.
+   */
+  private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
     if(titulo == null) {
       throw new ColeccionInvalidoExeption("titulo");
     }
@@ -72,11 +94,14 @@ public class Coleccion {
   }
 
 }
-
+/**
+ * EXECPCION para cuando los valores del contructor sean invalidos (por ej= falta de valores).
+ */
 class ColeccionInvalidoExeption extends RuntimeException {
-
+  /**
+   * muestra la causa por la cual se produjo esa exepcion .
+   */
   public ColeccionInvalidoExeption(String causa) {
     super("No selecciono " + causa + " de la coleccion.");
   }
-
 }

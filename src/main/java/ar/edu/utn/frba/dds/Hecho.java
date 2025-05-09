@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 public class Hecho {
   //Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion

@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.dds;
 
-import lombok.Getter;
-
 import java.io.FileReader;
 import java.util.List;
 
+/**
+ * clase abstracta fuente que por ahora solo esta la CSV.
+ */
 public abstract class Fuente {
 //  String nombre;
 //  @Getter
@@ -15,6 +16,9 @@ public abstract class Fuente {
 //    this.hechos = hechos;
 //  }
 
+  /**
+   * retorna los hechos que  pertenecen a la fuente.
+   */
   public List<Hecho> getHechos() {
     FileReader file = openFile();
     List<Hecho> hechos = guardarHechos(file);
@@ -22,7 +26,18 @@ public abstract class Fuente {
     return hechos;
   }
 
+  /**
+   * abre el archivo en donde se encuentran los hechos.
+   */
   protected abstract FileReader openFile();
+
+  /**
+   * guarda y retorna los hechos del archivo.
+   */
   protected abstract List<Hecho> guardarHechos(FileReader file);
+
+  /**
+   * cierra archivo.
+   */
   protected abstract void closeFile(FileReader file);
   }

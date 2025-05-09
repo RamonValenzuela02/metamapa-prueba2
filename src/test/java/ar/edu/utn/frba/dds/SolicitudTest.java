@@ -12,7 +12,7 @@ public class SolicitudTest {
   @Test
   public void solicitud() { // req 5
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\ra02v\\Documents\\diseño de sistemas\\codigo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
@@ -24,7 +24,7 @@ public class SolicitudTest {
   @Test
   public void aceptarSolicitud() { // req 6
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\ra02v\\Documents\\diseño de sistemas\\codigo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
@@ -43,7 +43,7 @@ public class SolicitudTest {
   @Test
   public void rechazarSolicitud() {  // req 6
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCSV fuenteCSV = new FuenteCSV("D:\\UTN pc\\3er año\\Diseño de Sistemas de Informacion\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\ra02v\\Documents\\diseño de sistemas\\codigo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
