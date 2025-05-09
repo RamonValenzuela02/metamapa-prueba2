@@ -12,7 +12,7 @@ public class ColeccionTest {
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCsv fuenteCSV = new FuenteCsv("C:\\Users\\PC\\Documents\\UTN\\Tercero\\Diseño de Sistemas\\TP_ANUAL\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCsv fuenteCSV = new FuenteCsv("src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
