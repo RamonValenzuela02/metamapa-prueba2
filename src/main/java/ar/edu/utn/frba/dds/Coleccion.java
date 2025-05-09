@@ -2,28 +2,25 @@ package ar.edu.utn.frba.dds;
 
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Representa una colección de hechos basada en un criterio y una fuente.
  */
 public class Coleccion {
   @Getter
-  private String titulo;
+  private final String titulo;
   @Getter
-  private List<Hecho> hechos;
-  private String descripcion;
-  private Fuente fuente;
-  private Criterio criterio;
+  private final List<Hecho> hechos;
+  @Getter
+  private final String descripcion;
+  private final Fuente fuente;
+  private final Criterio criterio;
 
 
   // public Set<Hecho> mostrarHechos() {return hechos;  }
-
   //void eliminarColeccion(){}
-
   //void cambiarCriterio(){}
   /**
    * Crea una nueva colección y carga los hechos de la fuente .
@@ -45,19 +42,19 @@ public class Coleccion {
   public void cargarHechos() {
     hechos.addAll(
         fuente.getHechos().stream()
-            .filter(hecho -> criterio.cumpleCriterio(hecho))
+            .filter(criterio::cumpleCriterio)
             .toList()
     );
   }
   /**
-   * vagega/muestra todos los hechos .
+   * nagega/muestra todos los hechos .
    */
   public void navegar() {
     hechos.forEach(this::mostrarHecho );
   }
 
   /**
-   * vagega/muetra los hechos que cumplen con criterio .
+   * nagega/muetra los hechos que cumplen con criterio .
    */
   public void navegarConFiltro(Criterio criterio) {
     hechos.stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class FuenteCSV extends Fuente {
 
-  private String path;
+  private final String path;
 
   /**
    * Contructor de objetos, que va a necesitar el path en donde va a buscar la informacion.
@@ -40,7 +40,7 @@ public class FuenteCSV extends Fuente {
    */
   @Override
   public List<Hecho> guardarHechos(FileReader file) {
-    List<Hecho> hechos = new ArrayList<Hecho>();
+    List<Hecho> hechos = new ArrayList<>();
     try{
       BufferedReader br = new BufferedReader(file);
       String registro;

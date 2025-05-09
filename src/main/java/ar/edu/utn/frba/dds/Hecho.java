@@ -7,17 +7,17 @@ import java.time.LocalDate;
 public class Hecho {
   //Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion
   @Getter
-  private String titulo;
+  private final String titulo;
   @Getter
-  private String descripcion;
+  private final String descripcion;
   @Getter
-  private Categoria categoria;
+  private final Categoria categoria;
   @Getter
-  private String latitud;
+  private final String latitud;
   @Getter
-  private String longitud;
+  private final String longitud;
   @Getter
-  private LocalDate fechaHecho;
+  private final LocalDate fechaHecho;
   private LocalDate fechaCarga;
   //origen;
   //tipo;
@@ -56,7 +56,7 @@ public class Hecho {
   }
 
   //TODO
-  void agregarMultimedia(){}
+  //void agregarMultimedia(){}
 
   /*public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador
     etiquetas.add(nuevaEtiqueta);

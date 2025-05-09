@@ -5,13 +5,13 @@ import java.time.LocalDate;
 /**
  * Representa un criterio que filtra hechos por una fecha específica.
  */
-public class CriterioXfecha implements Criterio {
-  private LocalDate fecha;
+public class CriterioPorFecha implements Criterio {
+  private final LocalDate fecha;
 
   /**
    * Crea un criterio que filtra por fecha exacta.
    */
-  public CriterioXfecha(String fecha) {
+  public CriterioPorFecha(String fecha) {
     this.fecha = LocalDate.parse(fecha);
   }
 

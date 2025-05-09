@@ -5,7 +5,7 @@ package ar.edu.utn.frba.dds;
  */
 public class CriterioPorCategoria implements Criterio {
 
-  private Categoria categoria;
+  private final Categoria categoria;
 
   /**
    * constructor de objeto  .

@@ -5,9 +5,9 @@ package ar.edu.utn.frba.dds;
  */
 public class CriterioPorCategoriaYLugar implements Criterio {
 
-  private Categoria categoria;
-  private String latitud;
-  private String longitud;
+  private final Categoria categoria;
+  private final String latitud;
+  private final String longitud;
 
   /**
    * Crea un criterio que filtra por categoría y ubicación específica.

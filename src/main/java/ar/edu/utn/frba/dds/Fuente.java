@@ -7,14 +7,6 @@ import java.util.List;
  * clase abstracta fuente que por ahora solo esta la CSV.
  */
 public abstract class Fuente {
-//  String nombre;
-//  @Getter
-//  List<Hecho> hechos;
-//
-//  public Fuente(String nombre, List<Hecho> hechos) {
-//    this.nombre = nombre;
-//    this.hechos = hechos;
-//  }
 
   /**
    * retorna los hechos que  pertenecen a la fuente.

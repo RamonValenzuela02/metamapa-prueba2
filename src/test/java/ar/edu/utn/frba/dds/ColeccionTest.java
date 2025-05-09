@@ -17,7 +17,7 @@ public class ColeccionTest {
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\ra02v\\Documents\\diseño de sistemas\\codigo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\Documents\\UTN\\Tercero\\Diseño de Sistemas\\TP_ANUAL\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
@@ -53,7 +53,7 @@ public class ColeccionTest {
 
     Coleccion coleccion2 = coleccionSegunCategoria(INCENDIO_FORESTAL);
     String fechaString = "2025-04-05";
-    Criterio criterio = new CriterioXfecha(fechaString);
+    Criterio criterio = new CriterioPorFecha(fechaString);
     coleccion2.navegarConFiltro(criterio);;
   }
 }

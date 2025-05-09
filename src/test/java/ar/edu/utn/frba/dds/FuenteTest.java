@@ -11,7 +11,7 @@ public class FuenteTest {
 
   @Test
   public void lecturaCorrectaDeArchivoCSV(){ // req 2
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\ra02v\\Documents\\diseño de sistemas\\codigo\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\Documents\\UTN\\Tercero\\Diseño de Sistemas\\TP_ANUAL\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
     List<Hecho> hechos = fuenteCSV.getHechos();
 
 
