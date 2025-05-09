@@ -2,6 +2,9 @@ package ar.edu.utn.frba.dds;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,8 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FuenteTest {
 
   @Test
-  public void lecturaCorrectaDeArchivoCSV(){ // req 2
-    FuenteCsv fuenteCSV = new FuenteCsv("src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+  public void lecturaCorrectaDeArchivoCSV() throws Exception { // req 2
+    URL resource = getClass().getClassLoader().getResource("prueba.csv");
+    if (resource == null) {
+      throw new RuntimeException("No se encontró el archivo prueba.csv");
+    }
+    File csvFile = Paths.get(resource.toURI()).toFile();
+    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
     List<Hecho> hechos = fuenteCSV.getHechos();
 
 

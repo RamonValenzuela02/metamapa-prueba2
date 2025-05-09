@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds;
 
 import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,9 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SolicitudTest {
 
   @Test
-  public void solicitud() { // req 5
+  public void solicitud() throws Exception { // req 5
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCsv fuenteCSV = new FuenteCsv("src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    URL resource = getClass().getClassLoader().getResource("prueba.csv");
+    if (resource == null) {
+      throw new RuntimeException("No se encontró el archivo prueba.csv");
+    }
+    File csvFile = Paths.get(resource.toURI()).toFile();
+    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
@@ -22,9 +30,14 @@ public class SolicitudTest {
   }
 
   @Test
-  public void aceptarSolicitud() { // req 6
+  public void aceptarSolicitud() throws Exception { // req 6
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCsv fuenteCSV = new FuenteCsv("src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    URL resource = getClass().getClassLoader().getResource("prueba.csv");
+    if (resource == null) {
+      throw new RuntimeException("No se encontró el archivo prueba.csv");
+    }
+    File csvFile = Paths.get(resource.toURI()).toFile();
+    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
@@ -41,9 +54,14 @@ public class SolicitudTest {
   }
 
   @Test
-  public void rechazarSolicitud() {  // req 6
+  public void rechazarSolicitud() throws Exception {  // req 6
     List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
-    FuenteCsv fuenteCSV = new FuenteCsv("src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    URL resource = getClass().getClassLoader().getResource("prueba.csv");
+    if (resource == null) {
+      throw new RuntimeException("No se encontró el archivo prueba.csv");
+    }
+    File csvFile = Paths.get(resource.toURI()).toFile();
+    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
     String titulo = fuenteCSV.getHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
