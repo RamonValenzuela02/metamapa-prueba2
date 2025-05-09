@@ -16,10 +16,11 @@ public class SolicitudDeEliminacion {
   /**
    * Contructor de objetos, en donde una vez creado lo agrega a la lista de solicitudes.
    */
-  public SolicitudDeEliminacion(String tituloHecho, String motivo, List<SolicitudDeEliminacion> solicitudes, FuenteCsv fuenteCSV) {
+  public SolicitudDeEliminacion(String tituloHecho, String motivo,
+                                List<SolicitudDeEliminacion> solicitudes, FuenteCsv fuenteCsv) {
     this.tituloHecho = tituloHecho;
     this.motivo = motivo;
-    this.fuenteCsv = fuenteCSV;
+    this.fuenteCsv = fuenteCsv;
     solicitudes.add(this);
   }
 
@@ -45,7 +46,7 @@ public class SolicitudDeEliminacion {
   /**
    * Rechazar una solicitud implica cambiarle el estado a RECHAZADA.
    */
-  void rechazar(){
+  void rechazar() {
     this.estado = Estado.RECHAZADA;
   }
 }

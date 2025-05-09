@@ -34,7 +34,7 @@ public class Coleccion {
     cargarHechos();
   }
 
- //TODO chequear esto:
+  //TODO chequear esto:
 
   /**
    * carga los hechos de la fuente .
@@ -51,7 +51,7 @@ public class Coleccion {
    * nagega/muestra todos los hechos .
    */
   public void navegar() {
-    hechos.forEach(this::mostrarHecho );
+    hechos.forEach(this::mostrarHecho);
   }
 
   /**
@@ -73,32 +73,22 @@ public class Coleccion {
     System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
     System.out.println("\n");
   }
+
   /**
    * valida que los datos ingresados no sean NULL.
    */
   private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
     if (titulo == null) {
-      throw new ColeccionInvalidoExeption("titulo");
+      throw new ColeccionInvalidaException("titulo");
     }
     if (descripcion == null) {
-      throw new ColeccionInvalidoExeption("descripcion");
+      throw new ColeccionInvalidaException("descripcion");
     }
     if (fuente == null) {
-      throw new ColeccionInvalidoExeption("fuente");
+      throw new ColeccionInvalidaException("fuente");
     }
     if (criterio == null) {
-      throw new ColeccionInvalidoExeption("criterio");
+      throw new ColeccionInvalidaException("criterio");
     }
-  }
-}
-/**
- * EXECPCION para cuando los valores del contructor sean invalidos (por ej= falta de valores).
- */
-class ColeccionInvalidoExeption extends RuntimeException {
-  /**
-   * muestra la causa por la cual se produjo esa exepcion .
-   */
-  public ColeccionInvalidoExeption(String causa) {
-    super("No selecciono " + causa + " de la coleccion.");
   }
 }

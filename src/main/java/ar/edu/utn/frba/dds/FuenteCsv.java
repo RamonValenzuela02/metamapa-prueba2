@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
@@ -29,14 +28,14 @@ public class FuenteCsv extends Fuente {
   public FileReader openFile() {
     try {
       return new FileReader(path);
-    } catch (IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
       return null;
     }
   }
 
   /**
-   * va a ir creando y guardando los hechos de la fuente. Y tambien los retorna
+   * va a ir creando y guardando los hechos de la fuente. Y tambien los retorna.
    */
   @Override
   public List<Hecho> guardarHechos(FileReader file) {
@@ -44,7 +43,7 @@ public class FuenteCsv extends Fuente {
     try {
       BufferedReader br = new BufferedReader(file);
       String registro;
-      while((registro = br.readLine()) != null) {
+      while ((registro = br.readLine()) != null) {
 
         String[] tokens = registro.split(",");
         String titulo = tokens[0];
@@ -55,7 +54,7 @@ public class FuenteCsv extends Fuente {
         LocalDate fecha = LocalDate.parse(tokens[5]);
 
         Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha);
-        agregarHechoNuevo(hecho,hechos);
+        agregarHechoNuevo(hecho, hechos);
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -77,10 +76,11 @@ public class FuenteCsv extends Fuente {
   }
 
   /**
-   * verifica que no exista un hecho que tenga su mismo titulo, si es asi lo pisa y si no lo carga normalmente
+   * verifica que no exista un hecho que tenga su mismo titulo,
+   * si es asi lo pisa y si no lo carga normalmente.
    */
-  private void agregarHechoNuevo(Hecho hecho,List<Hecho> hechos) {
-    hechos.removeIf(h-> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
+  private void agregarHechoNuevo(Hecho hecho, List<Hecho> hechos) {
+    hechos.removeIf(h -> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
     hechos.add(hecho);
   }
 }

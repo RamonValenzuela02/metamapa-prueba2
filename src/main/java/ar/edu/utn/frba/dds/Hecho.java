@@ -21,55 +21,60 @@ public class Hecho {
   private final String longitud;
   @Getter
   private final LocalDate fechaHecho;
+  @Getter
   private LocalDate fechaCarga;
   //origen;
   //tipo;
 
-  // Preguntar si convendria hacer un
-  public Hecho (String titulo, String descripcion, Categoria categoria,
-                String latitud, String longitud, LocalDate fecha){
-    validarNotNull (titulo, descripcion, categoria, latitud, longitud, fecha);
+  /**
+   * Constructor.
+   *
+   * @param titulo Es el titulo del Hecho.
+   * @param descripcion La descripcion del Hecho.
+   * @param categoria La Categoria del Hecho. Por ejemplo: INCENDIO_FORESTAL
+   * @param latitud Latitud del origen del Hecho.
+   * @param longitud Longitud del origen del Hecho. Parte de su ubicacion geografica.
+   * @param fecha Fecha del Hecho.
+   */
+  public Hecho(String titulo, String descripcion, Categoria categoria,
+                String latitud, String longitud, LocalDate fecha) {
+    validarNotNull(titulo, descripcion, categoria, latitud, longitud, fecha);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
     this.latitud = latitud;
     this.longitud = longitud;
     this.fechaHecho = fecha;
+    this.fechaCarga = LocalDate.now();
   }
 
   private void validarNotNull(String titulo, String descripcion, Categoria categoria,
                               String latitud, String longitud, LocalDate fecha) {
     if (titulo == null) {
-      throw new HechoInvalidoExeption("titulo");
+      throw new HechoInvalidoException("titulo");
     }
     if (descripcion == null) {
-      throw new HechoInvalidoExeption("descripcion");
+      throw new HechoInvalidoException("descripcion");
     }
     if (categoria == null) {
-      throw new HechoInvalidoExeption("categoria");
+      throw new HechoInvalidoException("categoria");
     }
     if (null == latitud) {
-      throw new HechoInvalidoExeption("latitud");
+      throw new HechoInvalidoException("latitud");
     }
     if (null == longitud) {
-      throw new HechoInvalidoExeption("longitud");
+      throw new HechoInvalidoException("longitud");
     }
     if (fecha == null) {
-      throw new HechoInvalidoExeption("fecha");
+      throw new HechoInvalidoException("fecha");
     }
   }
 
   //TODO
   //void agregarMultimedia(){}
 
-  /*public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador
+  /*public void addEtiqueta(Etiqueta nuevaEtiqueta){
+    es publico ya que el que va a etiquetarlo  mas adelante es el administrador
     etiquetas.add(nuevaEtiqueta);
   }*/
-}
-
-class HechoInvalidoExeption extends RuntimeException {
-  public HechoInvalidoExeption(String causa) {
-    super("No selecciono " + causa + " del hecho.");
-    }
-
 }
