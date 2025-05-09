@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class Hecho {
-  Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion
+  //Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion
   @Getter
   private String titulo;
   @Getter
@@ -59,9 +59,9 @@ public class Hecho {
   //TODO
   void agregarMultimedia(){}
 
-  public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador
+  /*public void addEtiqueta(Etiqueta nuevaEtiqueta){ //es publico ya que el que va a etiquetarlo mas adelante es el administrador
     etiquetas.add(nuevaEtiqueta);
-  }
+  }*/
 }
 
 class HechoInvalidoExeption extends RuntimeException {
