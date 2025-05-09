@@ -1,11 +1,14 @@
 package ar.edu.utn.frba.dds;
 
+import java.time.LocalDate;
 import lombok.Getter;
 
-import java.time.LocalDate;
-
+/**
+ * Representa un HECHO. Estos van a estar disponibles en las fuentes
+ * y van a poder pertenecer a Colecciones y ser consultados por usuarios.
+ */
 public class Hecho {
-  //Set<Etiqueta> etiquetas; //el set es un tipo de lista que no permite repeticion
+  //Set<Etiqueta> etiquetas;
   @Getter
   private final String titulo;
   @Getter
@@ -22,10 +25,10 @@ public class Hecho {
   //origen;
   //tipo;
 
-
   // Preguntar si convendria hacer un
-  public Hecho (String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDate fecha){
-    validarNotNuLL(titulo, descripcion, categoria, latitud, longitud, fecha);
+  public Hecho (String titulo, String descripcion, Categoria categoria,
+                String latitud, String longitud, LocalDate fecha){
+    validarNotNull (titulo, descripcion, categoria, latitud, longitud, fecha);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
@@ -34,23 +37,24 @@ public class Hecho {
     this.fechaHecho = fecha;
   }
 
-  private void validarNotNuLL(String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDate fecha) {
-    if(titulo == null) {
+  private void validarNotNull(String titulo, String descripcion, Categoria categoria,
+                              String latitud, String longitud, LocalDate fecha) {
+    if (titulo == null) {
       throw new HechoInvalidoExeption("titulo");
     }
-    if(descripcion == null) {
+    if (descripcion == null) {
       throw new HechoInvalidoExeption("descripcion");
     }
-    if(categoria == null) {
+    if (categoria == null) {
       throw new HechoInvalidoExeption("categoria");
     }
-    if(null == latitud) {
+    if (null == latitud) {
       throw new HechoInvalidoExeption("latitud");
     }
-    if(null == longitud) {
+    if (null == longitud) {
       throw new HechoInvalidoExeption("longitud");
     }
-    if(fecha == null) {
+    if (fecha == null) {
       throw new HechoInvalidoExeption("fecha");
     }
   }

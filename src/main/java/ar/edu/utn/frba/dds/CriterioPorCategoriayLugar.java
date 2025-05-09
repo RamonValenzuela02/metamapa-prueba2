@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds;
 /**
  * Representa un criterio que filtra hechos por categoría y ubicación (latitud y longitud).
  */
-public class CriterioPorCategoriaYLugar implements Criterio {
+public class CriterioPorCategoriayLugar implements Criterio {
 
   private final Categoria categoria;
   private final String latitud;
@@ -12,7 +12,7 @@ public class CriterioPorCategoriaYLugar implements Criterio {
   /**
    * Crea un criterio que filtra por categoría y ubicación específica.
    */
-  public CriterioPorCategoriaYLugar(Categoria categoria, String latitud, String longitud) {
+  public CriterioPorCategoriayLugar(Categoria categoria, String latitud, String longitud) {
     this.categoria = categoria;
     this.latitud = latitud;
     this.longitud = longitud;

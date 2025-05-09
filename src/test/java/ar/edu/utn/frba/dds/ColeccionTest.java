@@ -2,11 +2,6 @@ package ar.edu.utn.frba.dds;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
-
-import static ar.edu.utn.frba.dds.Categoria.ACCIDENTE_VIAL;
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +12,7 @@ public class ColeccionTest {
     //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
     //---------------------------------------------------------------------
 
-    FuenteCSV fuenteCSV = new FuenteCSV("C:\\Users\\PC\\Documents\\UTN\\Tercero\\Diseño de Sistemas\\TP_ANUAL\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
+    FuenteCsv fuenteCSV = new FuenteCsv("C:\\Users\\PC\\Documents\\UTN\\Tercero\\Diseño de Sistemas\\TP_ANUAL\\tpa-2025-26\\src\\test\\java\\ar\\edu\\utn\\frba\\dds\\prueba.csv");
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);

@@ -1,34 +1,33 @@
 package ar.edu.utn.frba.dds;
 
-import lombok.Getter;
-
 import java.util.List;
+import lombok.Getter;
 
 /**
  * Clase que representa la solicitud de eliminacion de un Hecho.
  */
 @Getter
 public class SolicitudDeEliminacion {
-  private String tituloHecho;
-  private String motivo;
+  private final String tituloHecho;
+  private final String motivo;
   private Estado estado = Estado.PENDIENTE;
-  private FuenteCSV fuenteCSV;
+  private final FuenteCsv fuenteCsv;
 
   /**
    * Contructor de objetos, en donde una vez creado lo agrega a la lista de solicitudes.
    */
-  public SolicitudDeEliminacion(String tituloHecho, String motivo, List<SolicitudDeEliminacion> solicitudes, FuenteCSV fuenteCSV) {
+  public SolicitudDeEliminacion(String tituloHecho, String motivo, List<SolicitudDeEliminacion> solicitudes, FuenteCsv fuenteCSV) {
     this.tituloHecho = tituloHecho;
     this.motivo = motivo;
-    this.fuenteCSV = fuenteCSV;
+    this.fuenteCsv = fuenteCSV;
     solicitudes.add(this);
   }
 
   /**
    * Retorna y busca un hecho en su fuente por su titulo.
    */
-  public Hecho buscarHecho() {
-    for (Hecho hechoBuscado : fuenteCSV.getHechos()) {
+  public Hecho buscarHechoporTitulo() {
+    for (Hecho hechoBuscado : fuenteCsv.getHechos()) {
       if (hechoBuscado.getTitulo().equals(tituloHecho)) {
         return hechoBuscado;
       }
@@ -39,7 +38,7 @@ public class SolicitudDeEliminacion {
   /**
    * Aceptar una solicitud imploca cambiarle el estado a ACEPTADA.
    */
-  void aceptar(){
+  void aceptar() {
     this.estado = Estado.ACEPTADA;
   }
 

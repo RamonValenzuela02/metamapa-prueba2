@@ -32,4 +32,5 @@ public abstract class Fuente {
    * cierra archivo.
    */
   protected abstract void closeFile(FileReader file);
-  }
+
+}

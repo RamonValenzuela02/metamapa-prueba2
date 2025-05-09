@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 /**
  * Representa una colección de hechos basada en un criterio y una fuente.
@@ -34,6 +33,7 @@ public class Coleccion {
     this.hechos = new ArrayList<>();
     cargarHechos();
   }
+
  //TODO chequear esto:
 
   /**
@@ -46,6 +46,7 @@ public class Coleccion {
             .toList()
     );
   }
+
   /**
    * nagega/muestra todos los hechos .
    */
@@ -59,6 +60,7 @@ public class Coleccion {
   public void navegarConFiltro(Criterio criterio) {
     hechos.stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
   }
+
   /**
    * muestra un hecho .
    */
@@ -75,21 +77,19 @@ public class Coleccion {
    * valida que los datos ingresados no sean NULL.
    */
   private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    if(titulo == null) {
+    if (titulo == null) {
       throw new ColeccionInvalidoExeption("titulo");
     }
-    if(descripcion == null) {
+    if (descripcion == null) {
       throw new ColeccionInvalidoExeption("descripcion");
     }
-    if(fuente == null) {
+    if (fuente == null) {
       throw new ColeccionInvalidoExeption("fuente");
     }
-    if(criterio == null) {
+    if (criterio == null) {
       throw new ColeccionInvalidoExeption("criterio");
     }
-
   }
-
 }
 /**
  * EXECPCION para cuando los valores del contructor sean invalidos (por ej= falta de valores).

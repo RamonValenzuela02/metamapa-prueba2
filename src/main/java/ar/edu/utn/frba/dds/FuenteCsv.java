@@ -11,14 +11,14 @@ import java.util.List;
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
-public class FuenteCSV extends Fuente {
+public class FuenteCsv extends Fuente {
 
   private final String path;
 
   /**
    * Contructor de objetos, que va a necesitar el path en donde va a buscar la informacion.
    */
-  public FuenteCSV(String path) {
+  public FuenteCsv(String path) {
     this.path = path;
   }
 
@@ -27,9 +27,9 @@ public class FuenteCSV extends Fuente {
    */
   @Override
   public FileReader openFile() {
-    try{
+    try {
       return new FileReader(path);
-    }catch(IOException e){
+    } catch (IOException e){
       e.printStackTrace();
       return null;
     }
@@ -41,7 +41,7 @@ public class FuenteCSV extends Fuente {
   @Override
   public List<Hecho> guardarHechos(FileReader file) {
     List<Hecho> hechos = new ArrayList<>();
-    try{
+    try {
       BufferedReader br = new BufferedReader(file);
       String registro;
       while((registro = br.readLine()) != null) {
@@ -57,7 +57,7 @@ public class FuenteCSV extends Fuente {
         Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha);
         agregarHechoNuevo(hecho,hechos);
       }
-    }catch(IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       return null;
     }
@@ -69,9 +69,9 @@ public class FuenteCSV extends Fuente {
    */
   @Override
   public void closeFile(FileReader file) {
-    try{
+    try {
       file.close();
-    }catch(IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
