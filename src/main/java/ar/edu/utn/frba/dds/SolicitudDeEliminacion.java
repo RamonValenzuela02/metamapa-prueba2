@@ -28,7 +28,7 @@ public class SolicitudDeEliminacion {
    * Retorna y busca un hecho en su fuente por su titulo.
    */
   public Hecho buscarHechoporTitulo() {
-    return fuenteCsv.getHechos().stream()
+    return fuenteCsv.obtenerHechos().stream()
         .filter(hecho -> hecho.getTitulo().equals(tituloHecho))
         .findFirst().orElse(null);
   }

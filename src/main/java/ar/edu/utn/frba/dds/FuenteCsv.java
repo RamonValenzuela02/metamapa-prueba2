@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
+import lombok.Getter;
 
 
 /**
@@ -19,9 +20,8 @@ public class FuenteCsv {
     this.path = path;
   }
 
-  public List<Hecho> guardarHechos() {
+  public List<Hecho> obtenerHechos() {
     List<Hecho> hechos = new ArrayList<>();
-
     try (CSVReader reader = new CSVReader(new FileReader(path))) {
       String[] fila;
       while ((fila = reader.readNext()) != null) {
@@ -46,10 +46,4 @@ public class FuenteCsv {
     hechos.add(hecho);
   }
 
-  //raro porque lo unico que hace es llamar a guardar hechos
-  public List<Hecho> getHechos() {
-    List<Hecho> hechos = guardarHechos();
-
-    return hechos;
-  }
 }

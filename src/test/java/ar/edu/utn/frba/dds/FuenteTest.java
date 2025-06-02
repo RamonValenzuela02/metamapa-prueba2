@@ -20,7 +20,7 @@ public class FuenteTest {
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
     FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
-    List<Hecho> hechos = fuenteCSV.getHechos();
+    List<Hecho> hechos = fuenteCSV.obtenerHechos();
 
 
     assertEquals("Incendio Forestal en Bariloche", hechos.get(0).getTitulo());

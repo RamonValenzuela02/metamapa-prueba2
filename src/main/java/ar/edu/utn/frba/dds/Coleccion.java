@@ -11,7 +11,6 @@ import lombok.Getter;
 public class Coleccion {
   @Getter
   private final String titulo;
-  private final List<Hecho> hechos;
   @Getter
   private final String descripcion;
   private final FuenteCsv fuente;
