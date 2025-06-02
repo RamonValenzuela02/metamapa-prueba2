@@ -14,7 +14,7 @@ public class Coleccion {
   private final List<Hecho> hechos;
   @Getter
   private final String descripcion;
-  private final Fuente fuente;
+  private final FuenteCsv fuente;
   private final Criterio criterio;
 
 
@@ -24,7 +24,7 @@ public class Coleccion {
   /**
    * Crea una nueva colección y carga los hechos de la fuente .
    */
-  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  public Coleccion(String titulo, String descripcion, FuenteCsv fuente, Criterio criterio) {
     validarNotNull(titulo, descripcion, fuente, criterio);
     this.titulo = titulo;
     this.descripcion = descripcion;
@@ -81,7 +81,7 @@ public class Coleccion {
   /**
    * valida que los datos ingresados no sean NULL.
    */
-  private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  private void validarNotNull(String titulo, String descripcion, FuenteCsv fuente, Criterio criterio) {
     if (titulo == null) {
       throw new ColeccionInvalidaException("titulo");
     }
