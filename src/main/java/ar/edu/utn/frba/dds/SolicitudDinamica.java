@@ -23,12 +23,13 @@ public class SolicitudDinamica {
   public void aceptarConSugerencia(String sugerencia) {
     this.sugerencia = sugerencia;
     this.estado = EstadoSolicitudDinamica.ACCEPTADA_CON_SUGERENCIA;
+    cuandoEsAceptada.run();
     cuandoEsTratada.run();
   }
 
   public void rechazar() {
     this.estado = EstadoSolicitudDinamica.RECHAZADA;
-    cuandoEsAceptada.run();
+    cuandoEsTratada.run();
   }
 
   public void setCallbackCuandoEsTratada(Runnable callback) {

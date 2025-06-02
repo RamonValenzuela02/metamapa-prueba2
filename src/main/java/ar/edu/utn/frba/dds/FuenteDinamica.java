@@ -16,7 +16,7 @@ public class FuenteDinamica implements Fuente{
   public List<Hecho> obtenerHechos() {
     return hechos;
   }
-  
+
   public void agregarHecho(Hecho hecho) {
     //aca usaria una continuacion (patron de comu asincrionica),
     //en donde una vez que se acepte  ese hecho se agrege a la lista de hechos.
