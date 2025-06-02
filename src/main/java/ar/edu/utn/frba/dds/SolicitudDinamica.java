@@ -1,0 +1,37 @@
+package ar.edu.utn.frba.dds;
+
+public class SolicitudDinamica {
+  private Hecho hecho;
+  private EstadoSolicitudDinamica estado;
+  private String sugerencia;
+  private Runnable cuandoEsAceptada;
+  private Runnable cuandoEsTratada;
+
+  public SolicitudDinamica(Hecho hecho, Runnable cuandoEsAceptada, Runnable cuandoEsTratada) {
+    this.hecho = hecho;
+    this.estado = EstadoSolicitudDinamica.PENDIENTE;
+    this.cuandoEsAceptada = cuandoEsAceptada;
+    this.cuandoEsTratada = cuandoEsTratada;
+  }
+
+  public void aceptar() {
+    this.estado = EstadoSolicitudDinamica.ACCEPTADA;
+    cuandoEsAceptada.run();
+    cuandoEsTratada.run();
+  }
+
+  public void aceptarConSugerencia(String sugerencia) {
+    this.sugerencia = sugerencia;
+    this.estado = EstadoSolicitudDinamica.ACCEPTADA_CON_SUGERENCIA;
+    cuandoEsTratada.run();
+  }
+
+  public void rechazar() {
+    this.estado = EstadoSolicitudDinamica.RECHAZADA;
+    cuandoEsAceptada.run();
+  }
+
+  public void setCallbackCuandoEsTratada(Runnable callback) {
+    this.cuandoEsAceptada = callback;
+  }
+}

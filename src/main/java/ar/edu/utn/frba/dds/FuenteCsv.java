@@ -13,13 +13,14 @@ import lombok.Getter;
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
-public class FuenteCsv {
+public class FuenteCsv implements Fuente {
   private final String path;
 
   public FuenteCsv(String path) {
     this.path = path;
   }
 
+  @Override
   public List<Hecho> obtenerHechos() {
     List<Hecho> hechos = new ArrayList<>();
     try (CSVReader reader = new CSVReader(new FileReader(path))) {

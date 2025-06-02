@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +15,7 @@ public class Coleccion {
   private final String titulo;
   @Getter
   private final String descripcion;
-  private final FuenteCsv fuente;
+  private final Fuente fuente;
   private final Criterio criterio;
 
 
@@ -23,45 +25,33 @@ public class Coleccion {
   /**
    * Crea una nueva colección y carga los hechos de la fuente .
    */
-  public Coleccion(String titulo, String descripcion, FuenteCsv fuente, Criterio criterio) {
+  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
     validarNotNull(titulo, descripcion, fuente, criterio);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterio = criterio;
-    this.hechos = new ArrayList<>();
-    cargarHechos();
   }
 
   public List<Hecho> getHechos() {
-    return Collections.unmodifiableList(hechos);
+    return fuente.obtenerHechos();
   }
 
   //TODO chequear esto:
 
   /**
-   * carga los hechos de la fuente .
-   */
-  public void cargarHechos() {
-    hechos.addAll(
-        fuente.getHechos().stream()
-            .filter(criterio::cumpleCriterio)
-            .toList()
-    );
-  }
-
-  /**
    * nagega/muestra todos los hechos .
    */
+
   public void navegar() {
-    hechos.forEach(this::mostrarHecho);
+    fuente.obtenerHechos().forEach(this::mostrarHecho);
   }
 
   /**
    * nagega/muetra los hechos que cumplen con criterio .
    */
   public void navegarConFiltro(Criterio criterio) {
-    hechos.stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
+    fuente.obtenerHechos().stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
   }
 
   /**
@@ -80,18 +70,10 @@ public class Coleccion {
   /**
    * valida que los datos ingresados no sean NULL.
    */
-  private void validarNotNull(String titulo, String descripcion, FuenteCsv fuente, Criterio criterio) {
-    if (titulo == null) {
-      throw new ColeccionInvalidaException("titulo");
-    }
-    if (descripcion == null) {
-      throw new ColeccionInvalidaException("descripcion");
-    }
-    if (fuente == null) {
-      throw new ColeccionInvalidaException("fuente");
-    }
-    if (criterio == null) {
-      throw new ColeccionInvalidaException("criterio");
-    }
+  private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    requireNonNull(titulo);
+    requireNonNull(descripcion);
+    requireNonNull(fuente);
+    requireNonNull(criterio);
   }
 }
