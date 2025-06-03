@@ -1,15 +1,17 @@
 package ar.edu.utn.frba.dds;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +28,8 @@ class FuenteDemoTest {
   void agregarHechoAFuenteDemo() throws MalformedURLException {
     URL url = crearUrlPrueba();
     Map<String, Object> rta = crearMapConHechoDePrueba();
-    when(conexion.siguienteHecho(url,new DateTime())).thenReturn(rta);
-    
+    when(conexion.siguienteHecho(eq(url), any(DateTime.class))).thenReturn(rta);
+
     FuenteDemo fuenteDemo = new FuenteDemo(url, conexion);
     fuenteDemo.obtenerSiguienteHecho();
 
@@ -37,7 +39,7 @@ class FuenteDemoTest {
   @Test
   void nosDevuelteNullSiguienteHecho() throws MalformedURLException {
     URL url = crearUrlPrueba();
-    when(conexion.siguienteHecho(url,new DateTime())).thenReturn(null);
+    when(conexion.siguienteHecho(eq(url),  any(DateTime.class))).thenReturn(null);
     FuenteDemo fuenteDemo = new FuenteDemo(url, conexion);
     fuenteDemo.obtenerSiguienteHecho();
 

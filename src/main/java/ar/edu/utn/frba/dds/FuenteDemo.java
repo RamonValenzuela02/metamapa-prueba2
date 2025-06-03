@@ -28,6 +28,7 @@ public class FuenteDemo implements Fuente {
   }
 
   private Hecho getHechoDeMap(Map<String, Object> datos) {
+
     return new Hecho((String) datos.get("titulo"),
         (String) datos.get("descripcion"),
         Categoria.valueOf((String) datos.get("categoria")),
