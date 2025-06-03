@@ -2,8 +2,10 @@ package ar.edu.utn.frba.dds;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static ar.edu.utn.frba.dds.Categoria.ACCIDENTE_VIAL;
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.net.URL;
@@ -12,10 +14,6 @@ import java.nio.file.Paths;
 public class ColeccionTest {
 
   public Coleccion coleccionSegunCategoria(Categoria categoria) throws Exception {
-    //---------------------------------------------------------------------
-    //ACUERDENSE DE SIEMPRE CAMBIAR EL PATH POR EL SUYO !!!!!!!!!!!!!!!!!!!
-    //---------------------------------------------------------------------
-
     URL resource = getClass().getClassLoader().getResource("prueba.csv");
     if (resource == null) {
       throw new RuntimeException("No se encontró el archivo prueba.csv");
@@ -27,9 +25,8 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    return new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
-    //Aca creamos una colección, que tiene todos nuestros hechos de la fuente pero filtrados por el criterio recién
-    //creado
+    return new Coleccion("incendio2013","Incendios Forestales", "Test", fuenteCSV, criterio);
+    //Aca creamos una colección, que tiene la fuente pero filtrados por el criterio recién
 
     /*
     Explicación de porque no hace falta usar la función cargarHechos() manualmente: si vemos en el
@@ -42,7 +39,7 @@ public class ColeccionTest {
   @Test
   public void crearColeccion() throws Exception {
     Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    assertEquals(3, coleccion1.getHechos().size());
+    assertEquals(4, coleccion1.getHechos().size());
   }
 
   @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección.") // req 3
@@ -60,5 +57,15 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorFecha(fechaString);
     coleccion2.navegarConFiltro(criterio);;
   }
+
+  @Test
+  public void noSeHaberTenerDosColeccionesConMismoHandle() throws Exception {
+    Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      Coleccion coleccion2 = coleccionSegunCategoria(ACCIDENTE_VIAL);
+    });
+  }
+
 }
 

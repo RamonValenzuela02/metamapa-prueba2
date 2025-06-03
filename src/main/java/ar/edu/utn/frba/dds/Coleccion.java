@@ -17,20 +17,18 @@ public class Coleccion {
   private final String descripcion;
   private final Fuente fuente;
   private final Criterio criterio;
+  private final String handle;
 
+  private static List<String> handlesUsados = new ArrayList<>();
 
-  // public Set<Hecho> mostrarHechos() {return hechos;  }
-  //void eliminarColeccion(){}
-  //void cambiarCriterio(){}
-  /**
-   * Crea una nueva colección y carga los hechos de la fuente .
-   */
-  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    validarNotNull(titulo, descripcion, fuente, criterio);
+  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    validarColeccion(handle, titulo, descripcion, fuente, criterio);
+    this.handle = handle;
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterio = criterio;
+    handlesUsados.add(handle);
   }
 
   public List<Hecho> getHechos() {
@@ -47,16 +45,10 @@ public class Coleccion {
     fuente.obtenerHechos().forEach(this::mostrarHecho);
   }
 
-  /**
-   * nagega/muetra los hechos que cumplen con criterio .
-   */
   public void navegarConFiltro(Criterio criterio) {
     fuente.obtenerHechos().stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
   }
 
-  /**
-   * muestra un hecho .
-   */
   public void mostrarHecho(Hecho hecho) {
     System.out.println("Titulo: " + hecho.getTitulo());
     System.out.println("Descripcion: " + hecho.getDescripcion());
@@ -67,13 +59,20 @@ public class Coleccion {
     System.out.println("\n");
   }
 
-  /**
-   * valida que los datos ingresados no sean NULL.
-   */
-  private void validarNotNull(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  private void validarColeccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    validarHandle(handle);
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(fuente);
     requireNonNull(criterio);
+  }
+
+  private void validarHandle(String handle) {
+    if (handle.contains(" ")) {
+      throw new IllegalArgumentException("El handle no puede contain espacions");
+    }
+    if(handlesUsados.contains(handle)) {
+      throw new IllegalArgumentException("El handle ya esta usado");
+    }
   }
 }
