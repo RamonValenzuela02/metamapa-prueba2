@@ -7,11 +7,10 @@ public class SolicitudDinamica {
   private Runnable cuandoEsAceptada;
   private Runnable cuandoEsTratada;
 
-  public SolicitudDinamica(Hecho hecho, Runnable cuandoEsAceptada, Runnable cuandoEsTratada) {
+  public SolicitudDinamica(Hecho hecho, Runnable cuandoEsAceptada) {
     this.hecho = hecho;
     this.estado = EstadoSolicitudDinamica.PENDIENTE;
     this.cuandoEsAceptada = cuandoEsAceptada;
-    this.cuandoEsTratada = cuandoEsTratada;
   }
 
   public void aceptar() {
@@ -33,6 +32,6 @@ public class SolicitudDinamica {
   }
 
   public void setCallbackCuandoEsTratada(Runnable callback) {
-    this.cuandoEsAceptada = callback;
+    this.cuandoEsTratada= callback;
   }
 }

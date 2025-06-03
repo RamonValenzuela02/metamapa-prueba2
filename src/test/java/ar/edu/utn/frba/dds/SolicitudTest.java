@@ -21,7 +21,7 @@ public class SolicitudTest {
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
     FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
-    String titulo = fuenteCSV.getHechos().get(0).getTitulo();
+    String titulo = fuenteCSV.obtenerHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
     SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(titulo, motivo, solicitudes, fuenteCSV);
@@ -38,7 +38,7 @@ public class SolicitudTest {
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
     FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
-    String titulo = fuenteCSV.getHechos().get(0).getTitulo();
+    String titulo = fuenteCSV.obtenerHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
     new SolicitudDeEliminacion(titulo, motivo, solicitudes, fuenteCSV);
@@ -62,7 +62,7 @@ public class SolicitudTest {
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
     FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
-    String titulo = fuenteCSV.getHechos().get(0).getTitulo();
+    String titulo = fuenteCSV.obtenerHechos().get(0).getTitulo();
     String motivo = "Ubicacion erronea";
 
     new SolicitudDeEliminacion(titulo, motivo, solicitudes, fuenteCSV);
