@@ -10,8 +10,8 @@ public class FuenteDinamica implements Fuente{
   private List<SolicitudDinamica> pendientes;
 
   public FuenteDinamica() {
-    hechos = new ArrayList<Hecho>();
-    pendientes = new ArrayList<SolicitudDinamica>();
+    hechos = new ArrayList<>();
+    pendientes = new ArrayList<>();
   }
 
   @Override
