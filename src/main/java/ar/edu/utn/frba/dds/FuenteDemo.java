@@ -86,4 +86,16 @@ public class FuenteDemo implements Fuente {
   public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
     return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
+
+  // Método para detener el scheduler (importante para cleanup)
+  public void detenerTareaCalendarizada() {
+    if (scheduler != null && !scheduler.isShutdown()) {
+      scheduler.shutdown();
+      schedulerIniciado = false;
+    }
+  }
+
 }
+
+
+
