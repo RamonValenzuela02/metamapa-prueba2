@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.joda.time.DateTime;
 
 public class FuenteDemo implements Fuente {
@@ -38,7 +39,7 @@ public class FuenteDemo implements Fuente {
   }
 
   @Override
-  public List<Hecho> obtenerHechos() {
-    return hechos;
+  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
+    return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
 }

@@ -1,10 +1,13 @@
 package ar.edu.utn.frba.dds;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 
 public class FuenteDinamica implements Fuente{
+  @Getter
   private List<Hecho> hechos;
   @Getter
   private List<SolicitudDinamica> pendientes;
@@ -12,11 +15,6 @@ public class FuenteDinamica implements Fuente{
   public FuenteDinamica() {
     hechos = new ArrayList<>();
     pendientes = new ArrayList<>();
-  }
-
-  @Override
-  public List<Hecho> obtenerHechos() {
-    return hechos;
   }
 
   public void agregarHecho(Hecho hecho) {
@@ -27,4 +25,10 @@ public class FuenteDinamica implements Fuente{
     solicitud.setCallbackCuandoEsTratada(()-> pendientes.remove(solicitud));
     pendientes.add(solicitud);
   }
+
+  @Override
+  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
+    return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
+  }
+
 }

@@ -2,10 +2,9 @@ package ar.edu.utn.frba.dds;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static ar.edu.utn.frba.dds.Categoria.ACCIDENTE_VIAL;
+
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.net.URL;
@@ -25,7 +24,7 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    return new Coleccion("incendio2013","Incendios Forestales", "Test", fuenteCSV, criterio);
+    return new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
     //Aca creamos una colección, que tiene la fuente pero filtrados por el criterio recién
 
     /*
@@ -39,9 +38,10 @@ public class ColeccionTest {
   @Test
   public void crearColeccion() throws Exception {
     Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    assertEquals(4, coleccion1.getHechos().size());
+    assertEquals(4, coleccion1.obtenerHechos().size());
   }
 
+  /*
   @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección.") // req 3
   @Test
   public void cantidadDeIncendiosForestalesEs3() throws Exception {
@@ -57,15 +57,7 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorFecha(fechaString);
     coleccion2.navegarConFiltro(criterio);;
   }
-
-  @Test
-  public void noSeHaberTenerDosColeccionesConMismoHandle() throws Exception {
-    Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-
-    assertThrows(IllegalArgumentException.class, () -> {
-      Coleccion coleccion2 = coleccionSegunCategoria(ACCIDENTE_VIAL);
-    });
-  }
+   */
 
 }
 

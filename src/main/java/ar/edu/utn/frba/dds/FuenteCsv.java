@@ -7,8 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
-import lombok.Getter;
-
+import java.util.stream.Collectors;
 
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
@@ -20,8 +19,7 @@ public class FuenteCsv implements Fuente {
     this.path = path;
   }
 
-  @Override
-  public List<Hecho> obtenerHechos() {
+  private List<Hecho> obtenerHechos() {
     List<Hecho> hechos = new ArrayList<>();
     try (CSVReader reader = new CSVReader(new FileReader(path))) {
       String[] fila;
@@ -45,6 +43,11 @@ public class FuenteCsv implements Fuente {
   private void agregarHechoNuevo(Hecho hecho, List<Hecho> hechos) {
     hechos.removeIf(h -> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
     hechos.add(hecho);
+  }
+
+  @Override
+  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
+    return obtenerHechos().stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
 
 }

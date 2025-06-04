@@ -9,10 +9,12 @@ import static org.mockito.Mockito.when;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FuenteDemoTest {
@@ -22,7 +24,6 @@ class FuenteDemoTest {
   void iniciarConexion() {
     conexion = mock(Conexion.class);
   }
-
 
   @Test
   void agregarHechoAFuenteDemo() throws MalformedURLException {
@@ -46,6 +47,26 @@ class FuenteDemoTest {
     assertTrue(fuenteDemo.hechos.isEmpty());
   }
 
+
+  @DisplayName("Como persona usuaria, quiero poder obtener todos los hechos de una fuente proxy demo configurada en una colección,con un nivel de antigüedad máximo de una hora") //req 2
+  @Test
+  void obtenerHechosDeColeccionConFuenteDemo() throws MalformedURLException {
+    Criterio criterioPorAntiguedad = new CriterioPorAntiguedad(LocalDateTime.now(),1);
+    //creacionDeLaFuente
+    URL url = crearUrlPrueba();
+    Map<String, Object> rta = crearMapConHechoDePrueba();
+    when(conexion.siguienteHecho(eq(url), any(DateTime.class))).thenReturn(rta);
+    FuenteDemo fuenteDemo = new FuenteDemo(crearUrlPrueba(), conexion);
+
+    Coleccion coleccion = new Coleccion("fuego34",
+        "fuego patagonico",
+        fuenteDemo,
+        criterioPorAntiguedad
+        );
+    fuenteDemo.obtenerSiguienteHecho();
+    assertTrue(coleccion.obtenerHechos().size() == 1);
+  }
+
   private URL crearUrlPrueba() throws MalformedURLException {
     return new URL("http://hola");
   }
@@ -61,5 +82,6 @@ class FuenteDemoTest {
 
     return rta;
   }
+
 
 }

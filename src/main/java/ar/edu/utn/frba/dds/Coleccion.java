@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 
 /**
@@ -17,36 +18,28 @@ public class Coleccion {
   private final String descripcion;
   private final Fuente fuente;
   private final Criterio criterio;
-  private final String handle;
 
-  private static List<String> handlesUsados = new ArrayList<>();
 
-  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    validarColeccion(handle, titulo, descripcion, fuente, criterio);
-    this.handle = handle;
+  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    validarColeccion(titulo, descripcion, fuente, criterio);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterio = criterio;
-    handlesUsados.add(handle);
   }
 
-  public List<Hecho> getHechos() {
-    return fuente.obtenerHechos();
+  public List<Hecho> obtenerHechos() {
+    return fuente.obtenerHechosConCriterio(criterio);
   }
 
   //TODO chequear esto:
-
-  /**
-   * nagega/muestra todos los hechos .
-   */
-
+  /*
   public void navegar() {
-    fuente.obtenerHechos().forEach(this::mostrarHecho);
+    fuente.obtenerHechosConCriterio(criterio).forEach(this::mostrarHecho);
   }
 
   public void navegarConFiltro(Criterio criterio) {
-    fuente.obtenerHechos().stream().filter(criterio::cumpleCriterio).forEach(this::mostrarHecho);
+    fuente.obtenerHechosConCriterio(criterio);
   }
 
   public void mostrarHecho(Hecho hecho) {
@@ -58,21 +51,13 @@ public class Coleccion {
     System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
     System.out.println("\n");
   }
+   */
 
-  private void validarColeccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    validarHandle(handle);
+  private void validarColeccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(fuente);
     requireNonNull(criterio);
   }
 
-  private void validarHandle(String handle) {
-    if (handle.contains(" ")) {
-      throw new IllegalArgumentException("El handle no puede contain espacions");
-    }
-    if(handlesUsados.contains(handle)) {
-      throw new IllegalArgumentException("El handle ya esta usado");
-    }
-  }
 }
