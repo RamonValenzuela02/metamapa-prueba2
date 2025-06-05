@@ -32,10 +32,45 @@ public class FuenteMetaMapa implements Fuente {
     return obtenerRespuesta("hecho", Optional.ofNullable(criterio));
   }
 
+  @Override
+  public List<Hecho> obtenerHechosConVariosCriterios(List<Hecho> hechosAfiltrar, List<Criterio> criterios) {
+    return Fuente.super.obtenerHechosConVariosCriterios(hechos, criterios);
+  }
+
+  public List<Hecho> obtenerHechos() {
+    return obtenerRespuesta("hecho", Optional.empty());
+  }
+
   public List<Hecho> obtenerHechosDeColeccion(String idColeccion, Optional<Criterio> criterio) {
     String endpoint = "colecciones/" + idColeccion + "/hechos";
     return obtenerRespuesta(endpoint, criterio);
   }
+
+  public void enviarSolicitudDeEliminacion(SolicitudDeEliminacion solicitud) {
+
+    WebResource url = client.resource(baseUrl).path("solicitudes");
+
+    WebResource.Builder builder = url.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+
+    // Creamos el JSON manualmente
+    String body;
+    try {
+      body = mapper.writeValueAsString(Map.of(
+          "tituloHecho", solicitud.getTituloHecho(),
+          "motivo", solicitud.getMotivo()
+      ));
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException("Error al serializar la solicitud a JSON", e);
+    }
+
+    ClientResponse respuesta = builder.post(ClientResponse.class, body);
+
+    if (respuesta.getStatus() != 200 && respuesta.getStatus() != 201) {
+      throw new RuntimeException("Error al enviar solicitud de eliminación: " + respuesta.getStatus());
+    }
+  }
+
+
 
   private List<Hecho> obtenerRespuesta(String endpoint, Optional<Criterio> criterio) { //obtengo hechos del sistema
 
