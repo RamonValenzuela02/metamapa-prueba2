@@ -19,7 +19,7 @@ public class FuenteCsv implements Fuente {
     this.path = path;
   }
 
-  private List<Hecho> obtenerHechos() {
+  public List<Hecho> obtenerHechos() {
     List<Hecho> hechos = new ArrayList<>();
     try (CSVReader reader = new CSVReader(new FileReader(path))) {
       String[] fila;
@@ -31,7 +31,7 @@ public class FuenteCsv implements Fuente {
         String longitud = fila[4];
         LocalDate fecha = LocalDate.parse(fila[5]);
 
-        Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha);
+        Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha, fecha);
         agregarHechoNuevo(hecho, hechos);
       }
     } catch (IOException | CsvValidationException e) {

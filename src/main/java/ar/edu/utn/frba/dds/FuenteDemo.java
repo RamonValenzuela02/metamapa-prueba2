@@ -35,7 +35,8 @@ public class FuenteDemo implements Fuente {
         Categoria.valueOf((String) datos.get("categoria")),
         (String) datos.get("latitud"),
         (String) datos.get("longitud"),
-        (LocalDate) datos.get("fechaHecho"));
+        (LocalDate) datos.get("fechaHecho"),
+        (LocalDate) datos.get("fechaCarga"));
   }
 
   @Override
