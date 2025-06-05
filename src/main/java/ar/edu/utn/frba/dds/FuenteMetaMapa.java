@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import javax.ws.rs.core.MediaType;
@@ -11,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -27,9 +27,23 @@ public class FuenteMetaMapa implements Fuente {
     this.mapper = mapper;
   }
 
-  private List<Hecho> obtenerRespuesta(String endpoint) { //obtengo hechos del sistema
+  @Override
+  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
+    return obtenerRespuesta("hecho", Optional.ofNullable(criterio));
+  }
+
+  public List<Hecho> obtenerHechosDeColeccion(String idColeccion, Optional<Criterio> criterio) {
+    String endpoint = "colecciones/" + idColeccion + "/hechos";
+    return obtenerRespuesta(endpoint, criterio);
+  }
+
+  private List<Hecho> obtenerRespuesta(String endpoint, Optional<Criterio> criterio) { //obtengo hechos del sistema
 
     WebResource url = client.resource(baseUrl).path(endpoint); //le agrego el endpoint a la url
+
+    if (criterio.isPresent()) {
+      url = agregarQueryParams(url, criterio.get());
+    }
 
     WebResource.Builder builder = url.accept(MediaType.APPLICATION_JSON);
 
@@ -40,6 +54,7 @@ public class FuenteMetaMapa implements Fuente {
     }
 
     List<Hecho> hechos_aux = new ArrayList<>();
+
     try {
       String json = respuesta.getEntity(String.class); //extrae el body del json y lo convierte a string
 
@@ -48,8 +63,7 @@ public class FuenteMetaMapa implements Fuente {
           } // va a leer un json y lo convierte a lista de diccionarios
       );
       for (Map<String, Object> dato : datosHechos) {
-        Hecho hecho = construirHechoDesdeMap(dato);
-        hechos_aux.add(hecho);
+        hechos_aux.add(construirHechoDesdeMap(dato));
       }
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
@@ -57,23 +71,32 @@ public class FuenteMetaMapa implements Fuente {
     return hechos_aux;
   }
 
-  @Override
-  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
-    List<Hecho> hechos_aux = obtenerRespuesta("hecho");
-    List<Hecho> hechos = hechos_aux.stream().filter(criterio::cumpleCriterio).toList();
-    return hechos;
+  private WebResource agregarQueryParams(WebResource url, Criterio criterio) {
+
+    if (criterio instanceof CriterioPorCategoria c) {
+      url = url.queryParam("categoria", c.getCategoria().toString());
+    }else if (criterio instanceof CriterioPorFechaHecho c) {
+      url = url.queryParam("fechaDesde", c.getFechaDesde().toString()).queryParam("fechaHasta", c.getFechaHasta().toString());
+    }else if (criterio instanceof CriterioPorFechaCarga c) {
+      url = url.queryParam("fechaDesde", c.getFechaDesde().toString()).queryParam("fechaHasta", c.getFechaHasta().toString());
+    }else if (criterio instanceof CriterioPorUbicacion c) {
+      url = url.queryParam("latitud", c.getLatitud()).queryParam("longitud", c.getLongitud());
+    }
+
+    return url;
   }
 
   //agarra cada "campo" del diccionario para crear el hecho
   private Hecho construirHechoDesdeMap(Map<String, Object> dato) {
-    // Asegurate de adaptar esto a cómo viene el JSON desde MetaMapa
+
     String titulo = (String) dato.get("titulo");
     String descripcion = (String) dato.get("descripcion");
     Categoria categoria = Categoria.valueOf((String) dato.get("categoria"));
     String latitud = (String) dato.get("latitud");
     String longitud = (String) dato.get("longitud");
     LocalDate fechaHecho = LocalDate.parse((String) dato.get("fechaHecho"));
+    LocalDate fechaCarga = LocalDate.parse((String) dato.get("fechaCarga"));
 
-    return new Hecho(titulo, descripcion, categoria, latitud, longitud, fechaHecho);
+    return new Hecho(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
   }
 }

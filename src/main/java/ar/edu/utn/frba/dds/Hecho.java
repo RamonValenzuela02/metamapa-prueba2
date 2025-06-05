@@ -21,29 +21,31 @@ public class Hecho {
   @Getter
   private final LocalDate fechaHecho;
   @Getter
-  private LocalDateTime fechaCarga;
+  private LocalDate fechaCarga;
 
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
-                String latitud, String longitud, LocalDate fecha) {
-    validarNotNull(titulo, descripcion, categoria, latitud, longitud, fecha);
+                String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
+    validarNotNull(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
     this.latitud = latitud;
     this.longitud = longitud;
-    this.fechaHecho = fecha;
-    this.fechaCarga = LocalDateTime.now();
+    this.fechaHecho = fechaHecho;
+    this.fechaCarga = fechaCarga;
   }
 
   private void validarNotNull(String titulo, String descripcion, Categoria categoria,
-                              String latitud, String longitud, LocalDate fecha) {
+                              String latitud, String longitud,LocalDate fechaHecho, LocalDate fechaCarga) {
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(categoria);
     requireNonNull(latitud);
     requireNonNull(longitud);
-    requireNonNull(fecha);
+    requireNonNull(fechaHecho);
+    requireNonNull(fechaCarga);
   }
+
 
 }
