@@ -46,23 +46,23 @@ public class FuenteDemo implements Fuente {
 
   // Obtener varios hechos del servicio externo
   private void consultarServicioAutomaticamente() {
-      for (int i = 0; i < 5; i++) { // Ejemplo: obtener hasta 5 hechos
+    for (int i = 0; i < 5; i++) { // Ejemplo: obtener hasta 5 hechos
 
-        Map<String, Object> mapConHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
-        if (mapConHecho != null) {
-          Hecho hecho = getHechoDeMap(mapConHecho);
-          // Nuevo hecho agregado al buffer
-          synchronized (bufferHechos) {
-            bufferHechos.offer(hecho);
-          }
-        } else {
-          break; // No hay más hechos disponibles
+      Map<String, Object> mapConHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
+      if (mapConHecho != null) {
+        Hecho hecho = getHechoDeMap(mapConHecho);
+        // Nuevo hecho agregado al buffer
+        synchronized (bufferHechos) {
+          bufferHechos.offer(hecho);
         }
+      } else {
+        break; // No hay más hechos disponibles
       }
-      ultimaConexion = DateTime.now();
+    }
+    ultimaConexion = DateTime.now();
   }
 
- // Toma hechos del buffer el lugar de consultar directamente el servicio externo
+  // Toma hechos del buffer el lugar de consultar directamente el servicio externo
   public void obtenerSiguienteHecho() {
     synchronized (bufferHechos) {
       if (!bufferHechos.isEmpty()) {
@@ -97,6 +97,3 @@ public class FuenteDemo implements Fuente {
   }
 
 }
-
-
-

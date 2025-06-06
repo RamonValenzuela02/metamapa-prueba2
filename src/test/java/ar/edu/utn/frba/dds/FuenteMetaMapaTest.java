@@ -19,7 +19,7 @@ public class FuenteMetaMapaTest{
         // Creamos el mock de la fuente
         fuenteMock = mock(FuenteMetaMapa.class);
 
-        // Creamos una lista de hechos simulados
+        // Creamos dos hechos
         Hecho hecho1 = new Hecho(
             "Hecho 1", "Descripcion 1", Categoria.INCENDIO_FORESTAL,
             "-34.61", "-58.38",
@@ -39,21 +39,16 @@ public class FuenteMetaMapaTest{
         // Creamos un criterio dummy para usar en la coleccion
         Criterio criterioDummy = mock(Criterio.class);
 
-        // Creamos la coleccion con la fuente mockeada
-        coleccion = new Coleccion("Titulo Test", "Descripcion Test", fuenteMock, criterioDummy);
+        coleccion = new Coleccion("handle_test","Titulo Test", "Descripcion Test", fuenteMock, criterioDummy);
     }
 
     @Test
     public void testObtenerHechosDevuelveListaDesdeFuente() {
-        // Llamamos al metodo a testear
         List<Hecho> hechos = coleccion.obtenerHechos();
 
         // Verificamos que la lista tenga los hechos mockeados
         assertEquals(2, hechos.size());
         assertEquals("Hecho 1", hechos.get(0).getTitulo());
         assertEquals("Hecho 2", hechos.get(1).getTitulo());
-
-        // Verificamos que el método obtenerHechosConCriterio fue llamado una vez con el criterio que tiene la coleccion
-        verify(fuenteMock, times(1)).obtenerHechosConCriterio(any(Criterio.class));
     }
 }

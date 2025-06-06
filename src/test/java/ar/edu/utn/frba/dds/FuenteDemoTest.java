@@ -30,7 +30,6 @@ class FuenteDemoTest {
     URL url = crearUrlPrueba();
     Map<String, Object> rta = crearMapConHechoDePrueba();
     when(conexion.siguienteHecho(eq(url), any(DateTime.class))).thenReturn(rta);
-
     FuenteDemo fuenteDemo = new FuenteDemo(url, conexion);
     fuenteDemo.obtenerSiguienteHecho();
 
@@ -58,7 +57,7 @@ class FuenteDemoTest {
     when(conexion.siguienteHecho(eq(url), any(DateTime.class))).thenReturn(rta);
     FuenteDemo fuenteDemo = new FuenteDemo(crearUrlPrueba(), conexion);
 
-    Coleccion coleccion = new Coleccion("fuego34",
+    Coleccion coleccion = new Coleccion("fuego","fuego34",
         "fuego patagonico",
         fuenteDemo,
         criterioPorAntiguedad

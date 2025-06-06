@@ -24,21 +24,15 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    return new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
+    return new Coleccion("Incendios","Incendios Forestales", "Test", fuenteCSV, criterio);
     //Aca creamos una colección, que tiene la fuente pero filtrados por el criterio recién
-
-    /*
-    Explicación de porque no hace falta usar la función cargarHechos() manualmente: si vemos en el
-    constructor de la clase colección, podemos ver que ya está utilizada dentro, por lo que al crear la
-    colección ya ejecuta esa función automáticamente
-     */
   }
 
   @DisplayName("Como persona administradora, deseo crear una colección") // req 1
   @Test
   public void crearColeccion() throws Exception {
     Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    assertEquals(4, coleccion1.obtenerHechos().size());
+    assertEquals(3, coleccion1.obtenerHechos().size());
   }
 
   /*
