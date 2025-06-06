@@ -18,13 +18,13 @@ public class ColeccionTest {
       throw new RuntimeException("No se encontró el archivo prueba.csv");
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
-    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
+    FuenteEstatica fuenteEstatica = new FuenteEstatica(csvFile.getAbsolutePath());
      //Aca creamos una fuente que contenga todos los hechos que se encuentran en nuestro archivo
 
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    return new Coleccion("Incendios Forestales", "Test", fuenteCSV, criterio);
+    return new Coleccion("Incendios Forestales", "Test", fuenteEstatica, criterio);
     //Aca creamos una colección, que tiene la fuente pero filtrados por el criterio recién
 
     /*

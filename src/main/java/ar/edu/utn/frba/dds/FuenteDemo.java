@@ -14,18 +14,17 @@ import java.util.stream.Collectors;
 import org.joda.time.DateTime;
 
 public class FuenteDemo implements Fuente {
-  List<Hecho> hechos = new ArrayList<Hecho>();
-  Conexion conexion;
-  URL urlBase;
-  DateTime ultimaConexion = new DateTime();
-  // Buffer para almacenar hechos obtenidos automáticamente
-  private Queue<Hecho> bufferHechos = new LinkedList<>();           // Buffer para hechos
+  private List<Hecho> bufferHechos = new ArrayList<Hecho>();
+  private Conexion conexion;
+  private URL urlBase;
+  private DateTime ultimaConexion = new DateTime();
+  // Buffer para almacenar hechos obtenidos automáticamente   // Buffer para hechos
   private ScheduledExecutorService scheduler;                       // El "reloj" automático
   private boolean schedulerIniciado = false;                        // Control de estado
 
   public FuenteDemo(URL urlBase, Conexion conexion) {
-    this.conexion = conexion;
     this.urlBase = urlBase;
+    this.conexion = conexion;
     iniciarTareaCalendarizada();
   }
   /**
@@ -43,38 +42,36 @@ public class FuenteDemo implements Fuente {
       // Tarea calendarizada iniciada: consultará el servicio cada hora
     }
   }
-
-  // Obtener varios hechos del servicio externo
-  private void consultarServicioAutomaticamente() {
-      for (int i = 0; i < 5; i++) { // Ejemplo: obtener hasta 5 hechos
-
-        Map<String, Object> mapConHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
-        if (mapConHecho != null) {
-          Hecho hecho = getHechoDeMap(mapConHecho);
-          // Nuevo hecho agregado al buffer
-          synchronized (bufferHechos) {
-            bufferHechos.offer(hecho);
-          }
-        } else {
-          break; // No hay más hechos disponibles
-        }
-      }
-      ultimaConexion = DateTime.now();
-  }
-
- // Toma hechos del buffer el lugar de consultar directamente el servicio externo
-  public void obtenerSiguienteHecho() {
-    synchronized (bufferHechos) {
-      if (!bufferHechos.isEmpty()) {
-        Hecho hecho = bufferHechos.poll(); // Toma y remueve del buffer
-        hechos.add(hecho);
-      }
+/**
+   Método para detener el scheduler (importante para cleanup)
+ */
+  public void detenerTareaCalendarizada() {
+    if (scheduler != null && !scheduler.isShutdown()) {
+      scheduler.shutdown();
+      schedulerIniciado = false;
     }
   }
 
-  private Hecho getHechoDeMap(Map<String, Object> datos) {
+  /**
+  Obtiene hechos cada 1 hora automaticamente
+   */
+  public void consultarServicioAutomaticamente() {
+    Map<String, Object> ultimoHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
+      while(ultimoHecho != null) { // Ejemplo: obtener hasta 5 hechos
+          Hecho hecho = getHechoDeMap(ultimoHecho);
+          // Nuevo hecho agregado al buffer
+          synchronized (bufferHechos) { bufferHechos.add(hecho); }
+         ultimoHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
+        }
+      ultimaConexion = DateTime.now();
+  }
 
-    return new Hecho((String) datos.get("titulo"),
+  /**
+   * Transforma el map con los atributos de un hecho en un heho
+   */
+  private Hecho getHechoDeMap(Map<String, Object> datos) {
+    return new Hecho(
+        (String) datos.get("titulo"),
         (String) datos.get("descripcion"),
         Categoria.valueOf((String) datos.get("categoria")),
         (String) datos.get("latitud"),
@@ -85,15 +82,16 @@ public class FuenteDemo implements Fuente {
 
   @Override
   public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
-    return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
+    return bufferHechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
 
-  // Método para detener el scheduler (importante para cleanup)
-  public void detenerTareaCalendarizada() {
-    if (scheduler != null && !scheduler.isShutdown()) {
-      scheduler.shutdown();
-      schedulerIniciado = false;
-    }
+  @Override
+  public List<Hecho> obtenerHechosConVariosCriterios(List<Hecho> hechosAfiltrar, List<Criterio> criterios) {
+    return Fuente.super.obtenerHechosConVariosCriterios(bufferHechos, criterios);
+  }
+
+  public int getSizeHechosBuffer() {
+    return bufferHechos.size();
   }
 
 }

@@ -19,9 +19,9 @@ public class FuenteTest {
       throw new RuntimeException("No se encontró el archivo prueba.csv");
     }
     File csvFile = Paths.get(resource.toURI()).toFile();
-    FuenteCsv fuenteCSV = new FuenteCsv(csvFile.getAbsolutePath());
+    FuenteEstatica fuenteEstatica = new FuenteEstatica(csvFile.getAbsolutePath());
     Criterio criterio = new CriterioCumplidorSiempre();
-    List<Hecho> hechos = fuenteCSV.obtenerHechosConCriterio(criterio);
+    List<Hecho> hechos = fuenteEstatica.obtenerHechosConCriterio(criterio);
 
 
     assertEquals("Incendio Forestal en Bariloche", hechos.get(0).getTitulo());
