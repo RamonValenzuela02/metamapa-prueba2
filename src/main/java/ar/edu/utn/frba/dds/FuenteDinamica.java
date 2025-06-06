@@ -30,5 +30,4 @@ public class FuenteDinamica implements Fuente{
   public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
     return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
-
 }

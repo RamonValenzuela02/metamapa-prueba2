@@ -17,7 +17,8 @@ class FuenteDinamicaTest {
         Categoria.INCENDIO_FORESTAL,
         "1234",
         "5678",
-        LocalDate.now());
+        LocalDate.now(),
+            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
@@ -31,7 +32,8 @@ class FuenteDinamicaTest {
         Categoria.INCENDIO_FORESTAL,
         "1234",
         "5678",
-        LocalDate.now());
+        LocalDate.now(),
+            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
@@ -48,7 +50,8 @@ class FuenteDinamicaTest {
         Categoria.INCENDIO_FORESTAL,
         "1234",
         "5678",
-        LocalDate.now());
+        LocalDate.now(),
+            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
@@ -65,7 +68,8 @@ class FuenteDinamicaTest {
         Categoria.INCENDIO_FORESTAL,
         "1234",
         "5678",
-        LocalDate.now());
+        LocalDate.now(),
+            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
