@@ -29,13 +29,6 @@ abstract class   Fuente {
     #closeFile(FileReader file)
 }
 
-class FuenteCsv{
-    -path : String
-    +agregarHechoNuevo(Hecho hecho, List<Hecho> hechos9
-    +FileReader openFile()
-    +List<Hecho> guardarHechos(FileReader file)
-    +closeFile(FileReader file)
-}
 
 enum    Categoria {
     ACCIDENTE_VIAL,
@@ -79,6 +72,16 @@ enum Estado {
     PENDIENTE
 }
 
+class GestorDeSolicitudes {
+    -solicitudesDeEliminacion : List<SolicitudesDeEliminacion>
+    -detector : DetectorDeSpam
+    +registrarSolicituDeEliminacion(SolicitudDeEliminacion solicitud) : void
+}
+
+interface DetectorSpam {
+    + esSpam(String) : Boolean
+}
+
 Coleccion --> Criterio
 Coleccion --> Hecho
 Coleccion --> Fuente
@@ -86,7 +89,8 @@ Hecho --> Categoria
 Criterio <|.. CriterioPorCategoriaYLugar
 Criterio <|.. CriterioPorCategoria
 Criterio <|.. CriterioPorFecha
-Fuente <|-- FuenteCsv
 Fuente --> SolicitudDeEliminacion
+GestorDeSolicitudes --> DetectorSpam
+GestorDeSolicitudes --> SolicitudDeEliminacion
 SolicitudDeEliminacion --> Estado
 @enduml

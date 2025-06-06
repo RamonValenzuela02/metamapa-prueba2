@@ -1,0 +1,93 @@
+@startuml
+
+class   Coleccion {
+    -fuente : Fuente
+    -hechos : List<Hecho>
+    -titulo : String
+    -descripcion : String
+    -criterio : Criterio
+    +cargarHechos()
+    +navegar()
+    +navegarConFiltro(Criterio criterio9
+    +mostrarHecho(Hecho hecho)
+}
+
+abstract class   Fuente {
+    +getHechos() : List<Hecho>
+    #openFile() : FileReader
+    #guardarHechos(FileReader file) : List<Hecho>
+    #closeFile(FileReader file)
+}
+
+class FuenteCSV{
+    -path : String
+    +agregarHechoNuevo(Hecho hecho, List<Hecho> hechos9
+    +FileReader openFile()
+    +List<Hecho> guardarHechos(FileReader file)
+    +closeFile(FileReader file)
+}
+
+class FuenteDemo {
+    - hechos : List<Hecho>
+    - conexion : Conexion
+    - url : URL
+    - ultimaConexion : DateTime
+    + actualizar()
+    + iniciarTareaCalendarizada() : void
+    + consultarServicioAutomaticamente() : void
+    + obtenerHechosConCriterio(Criterio c) : List<Hecho>
+    + detenerTareaCalendarizada() : void
+}
+
+class FuenteMetaMapa  {
+    - client: Client
+    - baseURL : String
+    - mapper : ObjectMapper
+    - hechos : List<Hecho>
+    + obtenerHechosConCriterio(Criterio criterio) : List<Hecho>
+    + obtenerHechosConVariosCriterios(List<Hecho> hechosAfiltrar, List<Criterio> criterios) : List<Hecho>
+    + obtenerHechosDeColeccion(String idColeccion, Optional<Criterio> criterio) : List<Hecho>
+    + enviarSolicitudDeEliminacion(SolicitudDeEliminacion solicitud) : void
+    + construirHechoDesdeMap(Map<String, Object> dato)() : Hecho
+}
+
+interface Conexion  {
+    + siguienteHecho(URL url, DateTime fechaUltimaConsulta) : Map<String, Object>
+}
+
+class FuenteDinamica {
+    - hechos: List<Hecho>
+    - pendientes : List<SolicitudDinamica>
+    + agregarHecho(Hecho hecho)
+    + obtenerHechosConCriterio(Criterio criterio)
+}
+
+class SolicitudDinamica {
+    - hecho : Hecho
+    - estado : EstadoSolicitudDinamica
+    - sugerencia : String
+    - cuandoEsAceptada : Runnable
+    - cuandoEsTratada : Runnable
+    + SolicitudDinamica(Hecho, Runnable)
+    + aceptar()
+    + aceptarConSugerencia(String)
+    + rechazar()
+    + setCallbackCuandoEsTratada(Runnable)
+}
+
+enum EstadoSolicitudDinamica {
+    PENDIENTE
+    ACEPTADA
+    RECHAZADA
+    ACEPTADA_CON_SUGERENCIA
+}
+
+Coleccion --> Fuente
+Fuente <|-- FuenteCSV
+Fuente <|-- FuenteDinamica
+Fuente <|-- FuenteDemo
+Fuente <|-- FuenteMetaMapa
+FuenteDinamica  --> SolicitudDinamica
+SolicitudDinamica  --> EstadoSolicitudDinamica
+
+FuenteDemo --> Conexion
