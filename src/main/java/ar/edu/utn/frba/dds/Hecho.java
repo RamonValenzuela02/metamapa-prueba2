@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
 import lombok.Getter;
 
 
@@ -23,10 +25,18 @@ public class Hecho {
   @Getter
   private LocalDate fechaCarga;
 
+  Boolean anonimo;
+  @Getter
+  Optional<String> nombreContribuyente;
+  @Getter
+  Optional<String> apellidoContribuyente;
+  @Getter
+  Optional<Integer> edadContribuyente;
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
-                String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
-    validarNotNull(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
+                String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga,
+                  Boolean anonimo, Optional<String> nombreContribuyente, Optional<String> apellidoContribuyente, Optional<Integer> edadContribuyente ) {
+    validar(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga, anonimo, nombreContribuyente);
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
@@ -34,10 +44,15 @@ public class Hecho {
     this.longitud = longitud;
     this.fechaHecho = fechaHecho;
     this.fechaCarga = fechaCarga;
+    this.anonimo = anonimo;
+    this.nombreContribuyente = nombreContribuyente;
+    this.apellidoContribuyente = apellidoContribuyente;
+    this.edadContribuyente = edadContribuyente;
   }
 
-  private void validarNotNull(String titulo, String descripcion, Categoria categoria,
-                              String latitud, String longitud,LocalDate fechaHecho, LocalDate fechaCarga) {
+  private void validar(String titulo, String descripcion, Categoria categoria,
+                       String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga,
+                       Boolean anonimo, Optional<String> nombreContribuyente) {
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(categoria);
@@ -45,7 +60,9 @@ public class Hecho {
     requireNonNull(longitud);
     requireNonNull(fechaHecho);
     requireNonNull(fechaCarga);
+    if (!anonimo && (!nombreContribuyente.isPresent() || nombreContribuyente.get().isBlank())) {
+      throw new IllegalArgumentException("El nombre es obligatorio si la carga no se realiza de manera anónima");
+    }
   }
-
 
 }
