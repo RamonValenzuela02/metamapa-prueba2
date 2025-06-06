@@ -1,19 +1,21 @@
 @startuml
-actor visualizador
-actor contribuyente
-actor administrador
+actor Contribuyente
+database "Repositorio (en memoria)\nde Hechos y Solicitudes" as DB
 
-cloud "Internet" as internet
+node "Servidor MetaMapa" {
+  component "Servicio de Fuentes Dinámicas" as FD
+  component "Servicio de Fuentes Proxy" as FP {
+    component "Fuente Demo" as Demo
+    component "Fuente MetaMapa\n(API REST en tiempo real)" as Meta
+  }
+}
 
-node "Nodo Cliente\n(GUI)" as nodoCliente
-node "Nodo Backend\n" as nodoBackend
-database "Fuente Estatica\n(Dataset CSV)" as fuenteCSV
+database "Fuente Externa" as Externa
+database "API REST\nOtra instancia MetaMapa" as API_REST
+Contribuyente --> FD : sube hechos
+FD --> DB
 
-visualizador --> nodoCliente
-contribuyente --> nodoCliente
-administrador --> nodoCliente
 
-nodoCliente --> internet : HTTP / HTTPS
-internet --> nodoBackend
-nodoBackend --> fuenteCSV : Lectura
+Demo --> Externa : consulta una vez por hora
+Meta --> API_REST : consumir API en tiempo real
 @enduml
