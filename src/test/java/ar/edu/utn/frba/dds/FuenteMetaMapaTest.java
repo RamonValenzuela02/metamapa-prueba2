@@ -1,61 +1,59 @@
 package ar.edu.utn.frba.dds;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+import ar.edu.utn.frba.dds.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import org.junit.jupiter.api.*;
+public class FuenteMetaMapaTest{
 
-public class FuenteMetaMapaTest {
-
-    private WireMockServer wireMockServer;
-    private FuenteMetaMapa fuente;
+    private FuenteMetaMapa fuenteMock;
+    private Coleccion coleccion;
 
     @BeforeEach
-    void iniciarMockServer() {
-        wireMockServer = new WireMockServer(8089);
-        wireMockServer.start();
-        configureFor("localhost", 8089);
+    public void setup() {
+        // Creamos el mock de la fuente
+        fuenteMock = mock(FuenteMetaMapa.class);
 
-        ObjectMapper mapper = new ObjectMapper();
-        fuente = new FuenteMetaMapa("http://localhost:8089", mapper);
-    }
+        // Creamos una lista de hechos simulados
+        Hecho hecho1 = new Hecho(
+            "Hecho 1", "Descripcion 1", Categoria.INCENDIO_FORESTAL,
+            "-34.61", "-58.38",
+            LocalDate.of(2025, 6, 1), LocalDate.of(2025, 6, 2)
+        );
 
-    @AfterEach
-    void detenerMockServer() {
-        wireMockServer.stop();
+        Hecho hecho2 = new Hecho(
+            "Hecho 2", "Descripcion 2", Categoria.INCENDIO_FORESTAL,
+            "-34.60", "-58.37",
+            LocalDate.of(2025, 5, 15), LocalDate.of(2025, 5, 20)
+        );
+
+        // Definimos qué devuelve el mock cuando se llama a obtenerHechosConCriterio
+        when(fuenteMock.obtenerHechosConCriterio(any(Criterio.class)))
+            .thenReturn(List.of(hecho1, hecho2));
+
+        // Creamos un criterio dummy para usar en la coleccion
+        Criterio criterioDummy = mock(Criterio.class);
+
+        // Creamos la coleccion con la fuente mockeada
+        coleccion = new Coleccion("Titulo Test", "Descripcion Test", fuenteMock, criterioDummy);
     }
 
     @Test
-    void puedeObtenerHechosDeUnaColeccionEnTiempoReal() {
-        stubFor(get(urlPathEqualTo("/colecciones/123/hechos"))
-                .willReturn(aResponse()
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("""
-                  [
-                    {
-                      "titulo": "Incendio en fábrica",
-                      "descripcion": "Un incendio afectó a una fábrica.",
-                      "categoria": "INCENDIO_FORESTAL",
-                      "latitud": "-34.6037",
-                      "longitud": "-58.3816",
-                      "fechaHecho": "2024-10-01",
-                      "fechaCarga": "2024-10-02"
-                    }
-                  ]
-                """)));
+    public void testObtenerHechosDevuelveListaDesdeFuente() {
+        // Llamamos al metodo a testear
+        List<Hecho> hechos = coleccion.obtenerHechos();
 
-        List<Hecho> hechos = fuente.obtenerHechosDeColeccion("123", Optional.empty());
+        // Verificamos que la lista tenga los hechos mockeados
+        assertEquals(2, hechos.size());
+        assertEquals("Hecho 1", hechos.get(0).getTitulo());
+        assertEquals("Hecho 2", hechos.get(1).getTitulo());
 
-        assertEquals(1, hechos.size());
-        Hecho hecho = hechos.get(0);
-        assertEquals("Incendio en fábrica", hecho.getTitulo());
-        assertEquals(Categoria.INCENDIO_FORESTAL, hecho.getCategoria());
-        assertEquals(LocalDate.of(2024, 10, 1), hecho.getFechaHecho());
+        // Verificamos que el método obtenerHechosConCriterio fue llamado una vez con el criterio que tiene la coleccion
+        verify(fuenteMock, times(1)).obtenerHechosConCriterio(any(Criterio.class));
     }
 }
