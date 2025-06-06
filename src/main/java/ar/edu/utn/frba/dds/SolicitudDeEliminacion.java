@@ -8,6 +8,7 @@ import lombok.Getter;
 
 
 public class SolicitudDeEliminacion {
+  @Getter
   private final String tituloHecho;
   @Getter
   private final String motivo;
