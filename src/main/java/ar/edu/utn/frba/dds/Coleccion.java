@@ -13,6 +13,8 @@ import lombok.Getter;
  */
 public class Coleccion {
   @Getter
+  private final String handle;
+  @Getter
   private final String titulo;
   @Getter
   private final String descripcion;
@@ -20,8 +22,9 @@ public class Coleccion {
   private final Criterio criterio;
 
 
-  public Coleccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    validarColeccion(titulo, descripcion, fuente, criterio);
+  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    validarColeccion(handle, titulo, descripcion, fuente, criterio);
+    this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
@@ -32,32 +35,16 @@ public class Coleccion {
     return fuente.obtenerHechosConCriterio(criterio);
   }
 
-  //TODO chequear esto:
-  /*
-  public void navegar() {
-    fuente.obtenerHechosConCriterio(criterio).forEach(this::mostrarHecho);
-  }
-
-  public void navegarConFiltro(Criterio criterio) {
-    fuente.obtenerHechosConCriterio(criterio);
-  }
-
-  public void mostrarHecho(Hecho hecho) {
-    System.out.println("Titulo: " + hecho.getTitulo());
-    System.out.println("Descripcion: " + hecho.getDescripcion());
-    System.out.println("Categoria: " + hecho.getCategoria().toString());
-    System.out.println("Latitud: " + hecho.getLatitud());
-    System.out.println("Longitud: " + hecho.getLongitud());
-    System.out.println("Fecha del Hecho: " + hecho.getFechaHecho());
-    System.out.println("\n");
-  }
-   */
-
-  private void validarColeccion(String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  private void validarColeccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+    requireNonNull(handle);
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(fuente);
     requireNonNull(criterio);
+
+    if (!handle.matches("^[a-zA-Z0-9_-]+$")) {
+      throw new IllegalArgumentException("El handle debe ser alfanumérico, sin espacios.");
+    } //Aca nos fijamos si cumple con las condiciones que debe tener el handler
   }
 
 }

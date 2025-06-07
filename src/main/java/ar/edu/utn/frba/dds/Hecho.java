@@ -6,26 +6,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
-
+@Getter
 public class Hecho {
-  @Getter
   private final String titulo;
-  @Getter
   private final String descripcion;
-  @Getter
   private final Categoria categoria;
-  @Getter
   private final String latitud;
-  @Getter
   private final String longitud;
-  @Getter
   private final LocalDate fechaHecho;
-  @Getter
-  private LocalDate fechaCarga;
+  private final LocalDate fechaCarga;
 
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
-                String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
+               String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
     validarNotNull(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
     this.titulo = titulo;
     this.descripcion = descripcion;

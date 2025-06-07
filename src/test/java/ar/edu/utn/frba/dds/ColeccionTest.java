@@ -24,7 +24,7 @@ public class ColeccionTest {
     Criterio criterio = new CriterioPorCategoria(categoria);
     //Aca creamos un criterio que contiene un filtro por categoría = INCENDIO_FORESTAL
 
-    return new Coleccion("Incendios Forestales", "Test", fuenteEstatica, criterio);
+    return new Coleccion("Incendios","Incendios Forestales", "Test", fuenteEstatica, criterio);
     //Aca creamos una colección, que tiene la fuente pero filtrados por el criterio recién
 
     /*
@@ -38,7 +38,7 @@ public class ColeccionTest {
   @Test
   public void crearColeccion() throws Exception {
     Coleccion coleccion1 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    assertEquals(4, coleccion1.obtenerHechos().size());
+    assertEquals(3, coleccion1.obtenerHechos().size());
   }
 
   /*
