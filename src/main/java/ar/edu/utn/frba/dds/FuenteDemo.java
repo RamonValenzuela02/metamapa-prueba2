@@ -52,19 +52,38 @@ public class FuenteDemo implements Fuente {
     }
   }
 
-  /**
-  Obtiene hechos cada 1 hora automaticamente
-   */
   public void consultarServicioAutomaticamente() {
-    Map<String, Object> ultimoHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
-      while(ultimoHecho != null) { // Ejemplo: obtener hasta 5 hechos
-          Hecho hecho = getHechoDeMap(ultimoHecho);
-          // Nuevo hecho agregado al buffer
-          synchronized (bufferHechos) { bufferHechos.add(hecho); }
-         ultimoHecho = conexion.siguienteHecho(urlBase, ultimaConexion);
-        }
-      ultimaConexion = DateTime.now();
+    synchronized (bufferHechos) {
+      bufferHechos.clear();
+    }
+
+    DateTime fechaConsulta = ultimaConexion;
+
+    Map<String, Object> hechoMap = conexion.siguienteHecho(urlBase, fechaConsulta);
+
+    while (hechoMap != null) {
+      Hecho hecho = getHechoDeMap(hechoMap);
+
+      synchronized (bufferHechos) {
+        bufferHechos.add(hecho);
+      }
+
+      LocalDate fechaHechoLocal = hecho.getFechaHecho();
+      DateTime fechaHechoDateTime = new DateTime(fechaHechoLocal.getYear(),
+          fechaHechoLocal.getMonthValue(),
+          fechaHechoLocal.getDayOfMonth(),
+          0, 0);
+      if (fechaHechoDateTime.isAfter(fechaConsulta)) {
+        fechaConsulta = fechaHechoDateTime;
+      }
+
+      hechoMap = conexion.siguienteHecho(urlBase, fechaConsulta);
+    }
+
+    ultimaConexion = DateTime.now();
   }
+
+
 
   /**
    * Transforma el map con los atributos de un hecho en un heho
