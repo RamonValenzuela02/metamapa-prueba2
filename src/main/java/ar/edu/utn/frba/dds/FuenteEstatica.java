@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
-public class FuenteEstatica implements Fuente {
+public class FuenteEstatica extends Fuente {
   private final String path;
 
   public FuenteEstatica(String path) {
@@ -20,7 +20,6 @@ public class FuenteEstatica implements Fuente {
   }
 
   public List<Hecho> obtenerHechos() {
-    List<Hecho> hechos = new ArrayList<>();
     try (CSVReader reader = new CSVReader(new FileReader(path))) {
       String[] fila;
       while ((fila = reader.readNext()) != null) {
@@ -44,10 +43,4 @@ public class FuenteEstatica implements Fuente {
     hechos.removeIf(h -> h.getTitulo().equalsIgnoreCase(hecho.getTitulo()));
     hechos.add(hecho);
   }
-
-  @Override
-  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
-    return obtenerHechos().stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
-  }
-
 }

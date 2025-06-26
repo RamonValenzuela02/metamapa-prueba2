@@ -19,28 +19,32 @@ public class Coleccion {
   @Getter
   private final String descripcion;
   private final Fuente fuente;
-  private final Criterio criterio;
+  private List<Criterio> criterios = new ArrayList<>();
 
 
-  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
-    validarColeccion(handle, titulo, descripcion, fuente, criterio);
+  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios) {
+    validarColeccion(handle, titulo, descripcion, fuente, criterios);
     this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
-    this.criterio = criterio;
+    this.criterios = criterios;
   }
 
   public List<Hecho> obtenerHechos() {
-    return fuente.obtenerHechosConCriterio(criterio);
+    List<Hecho>hechos = fuente.obtenerHechos();
+
+    return hechos.stream()
+            .filter(hecho -> criterios.stream().allMatch(c -> c.cumpleCriterio(hecho)))
+            .collect(Collectors.toList());
   }
 
-  private void validarColeccion(String handle, String titulo, String descripcion, Fuente fuente, Criterio criterio) {
+  private void validarColeccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios) {
     requireNonNull(handle);
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(fuente);
-    requireNonNull(criterio);
+    requireNonNull(criterios);
 
     if (!handle.matches("^[a-zA-Z0-9_-]+$")) {
       throw new IllegalArgumentException("El handle debe ser alfanumérico, sin espacios.");

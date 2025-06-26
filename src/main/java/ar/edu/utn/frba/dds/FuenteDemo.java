@@ -13,8 +13,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.joda.time.DateTime;
 
-public class FuenteDemo implements Fuente {
-  private List<Hecho> bufferHechos = new ArrayList<Hecho>();
+public class FuenteDemo extends Fuente {
   private Conexion conexion;
   private URL urlBase;
   private DateTime ultimaConexion = new DateTime();
@@ -42,9 +41,7 @@ public class FuenteDemo implements Fuente {
       // Tarea calendarizada iniciada: consultará el servicio cada hora
     }
   }
-/**
-   Método para detener el scheduler (importante para cleanup)
- */
+
   public void detenerTareaCalendarizada() {
     if (scheduler != null && !scheduler.isShutdown()) {
       scheduler.shutdown();
@@ -53,35 +50,45 @@ public class FuenteDemo implements Fuente {
   }
 
   public void consultarServicioAutomaticamente() {
-    synchronized (bufferHechos) {
-      bufferHechos.clear();
-    }
-
     DateTime fechaConsulta = ultimaConexion;
 
+    // 2. Llama al método 'siguienteHecho' del objeto 'conexion', pasando la URL base y la fechaConsulta.
+    //    Este método probablemente consulta el próximo hecho después de fechaConsulta y devuelve un Map con los datos.
     Map<String, Object> hechoMap = conexion.siguienteHecho(urlBase, fechaConsulta);
 
+    // 3. Mientras que el mapa 'hechoMap' no sea nulo (o sea, mientras haya hechos nuevos para procesar)
     while (hechoMap != null) {
+
+      // 4. Convierte el Map recibido a un objeto 'Hecho' usando el método 'getHechoDeMap'
       Hecho hecho = getHechoDeMap(hechoMap);
 
-      synchronized (bufferHechos) {
-        bufferHechos.add(hecho);
-      }
+      // 5. Agrega ese objeto 'Hecho' a la lista de hechos (suponiendo que 'hechos' es un atributo de la clase)
+      hechos.add(hecho);
 
+      // 6. Obtiene la fecha del hecho como un objeto LocalDate
       LocalDate fechaHechoLocal = hecho.getFechaHecho();
+
+      // 7. Convierte esa fecha LocalDate a DateTime (añadiendo hora 00:00), para facilitar comparación con fechaConsulta
       DateTime fechaHechoDateTime = new DateTime(fechaHechoLocal.getYear(),
-          fechaHechoLocal.getMonthValue(),
-          fechaHechoLocal.getDayOfMonth(),
-          0, 0);
+              fechaHechoLocal.getMonthValue(),
+              fechaHechoLocal.getDayOfMonth(),
+              0, 0);
+
+      // 8. Compara si la fecha del hecho es posterior a la fechaConsulta actual
       if (fechaHechoDateTime.isAfter(fechaConsulta)) {
+        // 9. Si es posterior, actualiza fechaConsulta a la fecha del hecho actual para la próxima consulta
         fechaConsulta = fechaHechoDateTime;
       }
 
+      // 10. Consulta el siguiente hecho después de la fechaConsulta actualizada,
+      //     para seguir iterando si hay más hechos nuevos
       hechoMap = conexion.siguienteHecho(urlBase, fechaConsulta);
     }
 
+    // 11. Finalmente, actualiza 'ultimaConexion' a la fecha y hora actual para registrar cuándo fue la última consulta
     ultimaConexion = DateTime.now();
   }
+
 
 
 
@@ -100,17 +107,12 @@ public class FuenteDemo implements Fuente {
   }
 
   @Override
-  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
-    return bufferHechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
-  }
-
-  @Override
-  public List<Hecho> obtenerHechosConVariosCriterios(List<Hecho> hechosAfiltrar, List<Criterio> criterios) {
-    return Fuente.super.obtenerHechosConVariosCriterios(bufferHechos, criterios);
+  public List<Hecho> obtenerHechos() {
+    return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
   }
 
   public int getSizeHechosBuffer() {
-    return bufferHechos.size();
+    return hechos.size();
   }
 
 }

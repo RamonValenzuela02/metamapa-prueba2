@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
 
-public class FuenteDinamica implements Fuente{
-  @Getter
-  private List<Hecho> hechos;
+public class FuenteDinamica extends Fuente{
   @Getter
   private List<SolicitudDinamica> pendientes;
 
@@ -18,16 +16,14 @@ public class FuenteDinamica implements Fuente{
   }
 
   public void agregarHecho(Hecho hecho) {
-    //aca usaria una continuacion (patron de comu asincrionica),
-    //en donde una vez que se acepte  ese hecho se agrege a la lista de hechos.
+    //en donde una vez que se acepte ese hecho se agregue a la lista de hechos.
     SolicitudDinamica solicitud = new SolicitudDinamica(hecho, () -> hechos.add(hecho));
 
     solicitud.setCallbackCuandoEsTratada(()-> pendientes.remove(solicitud));
     pendientes.add(solicitud);
   }
 
-  @Override
-  public List<Hecho> obtenerHechosConCriterio(Criterio criterio) {
-    return hechos.stream().filter(criterio::cumpleCriterio).collect(Collectors.toList());
+  public List<Hecho> obtenerHechos() {
+    return hechos;
   }
 }
