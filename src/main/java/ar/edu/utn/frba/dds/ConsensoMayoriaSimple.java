@@ -5,10 +5,10 @@ import java.util.List;
 public class ConsensoMayoriaSimple implements AlgoritmoConsenso {
 
     @Override
-    public boolean estaConsensuado(Hecho hecho, List<Fuente> fuentes){
-        long cantidadMenciones = fuentes.stream()
+    public boolean estaConsensuado(Hecho hecho, List<Fuente> fuentesDelNodo){
+        long cantidadMenciones = fuentesDelNodo.stream()
                 .filter(f -> f.obtenerHechos().contains(hecho)).count();
 
-        return  cantidadMenciones >= (fuentes.size() / 2);
+        return  cantidadMenciones >= (fuentesDelNodo.size() / 2);
     }
 }
