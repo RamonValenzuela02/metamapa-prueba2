@@ -20,6 +20,7 @@ public class Coleccion {
   private final String descripcion;
   private final Fuente fuente;
   private List<Criterio> criterios = new ArrayList<>();
+  private AlgoritmoConsenso algoritmoConsenso;
 
 
   public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios) {
