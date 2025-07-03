@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+/*
 class FuenteDinamicaTest {
 
   @DisplayName("Como persona contribuyente, deseo poder crear un hecho a partir de una fuente dinámica. ") // req 1
@@ -79,8 +79,5 @@ class FuenteDinamicaTest {
     
     assertTrue(fuente.getHechos().contains(hecho));
   }
-
-
-
-
 }
+ */

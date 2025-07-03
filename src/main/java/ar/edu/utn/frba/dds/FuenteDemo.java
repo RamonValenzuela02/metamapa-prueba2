@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class FuenteDemo {
+public class FuenteDemo extends  Fuente {
   private final Conexion conexion;
   private final URL url;
   private LocalDateTime fechaUltimaConsulta;
