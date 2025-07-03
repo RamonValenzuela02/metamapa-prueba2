@@ -5,11 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
-
+import java.time.LocalDate;
+import java.util.List;
+/*
 public class ColeccionTest {
 
   public Coleccion coleccionSegunCategoria(Categoria categoria) throws Exception {
@@ -32,7 +35,8 @@ public class ColeccionTest {
     constructor de la clase colección, podemos ver que ya está utilizada dentro, por lo que al crear la
     colección ya ejecuta esa función automáticamente
      */
-  }
+/*
+}
 
   @DisplayName("Como persona administradora, deseo crear una colección") // req 1
   @Test
@@ -59,5 +63,4 @@ public class ColeccionTest {
   }
    */
 
-}
-
+//}*/

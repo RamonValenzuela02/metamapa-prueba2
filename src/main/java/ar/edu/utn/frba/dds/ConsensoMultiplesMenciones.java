@@ -18,3 +18,4 @@ public class ConsensoMultiplesMenciones implements  AlgoritmoConsenso {
         return cantidadMenciones >= 2 && !existenVersionesDistintasDeUnHecho;
     }
 }
+
