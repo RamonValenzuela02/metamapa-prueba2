@@ -12,6 +12,11 @@ public class FuenteAgregadora extends Fuente {
       this.fuentesAgregadas = new ArrayList<>();
     }
 
+    @Override
+    public List<Fuente> fuentesDelNodo() {
+        return fuentesAgregadas;
+    }
+
     public void agregarFuente(Fuente fuente) {
       if (!this.fuentesAgregadas.contains(fuente)) {
         this.fuentesAgregadas.add(fuente);
@@ -20,10 +25,6 @@ public class FuenteAgregadora extends Fuente {
 
     public void removerFuente(Fuente fuente) {
       this.fuentesAgregadas.remove(fuente);
-    }
-
-    public List<Fuente> getFuentes() {
-      return fuentesAgregadas;
     }
 
     @Override

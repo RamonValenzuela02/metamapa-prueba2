@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds;
 
 public enum EstadoSolicitudDinamica {
   PENDIENTE,
-  ACCEPTADA,
+  ACEPTADA,
   RECHAZADA,
-  ACCEPTADA_CON_SUGERENCIA
+  ACEPTADA_CON_SUGERENCIA
 }
