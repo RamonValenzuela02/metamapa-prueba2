@@ -14,14 +14,14 @@ public class SolicitudDinamica {
   }
 
   public void aceptar() {
-    this.estado = EstadoSolicitudDinamica.ACCEPTADA;
+    this.estado = EstadoSolicitudDinamica.ACEPTADA;
     cuandoEsAceptada.run();
     cuandoEsTratada.run();
   }
 
   public void aceptarConSugerencia(String sugerencia) {
     this.sugerencia = sugerencia;
-    this.estado = EstadoSolicitudDinamica.ACCEPTADA_CON_SUGERENCIA;
+    this.estado = EstadoSolicitudDinamica.ACEPTADA_CON_SUGERENCIA;
     cuandoEsAceptada.run();
     cuandoEsTratada.run();
   }
