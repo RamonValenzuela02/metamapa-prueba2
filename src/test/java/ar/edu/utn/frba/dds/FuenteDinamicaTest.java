@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-/*
+
 class FuenteDinamicaTest {
 
   @DisplayName("Como persona contribuyente, deseo poder crear un hecho a partir de una fuente dinámica. ") // req 1
@@ -22,7 +22,7 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    assertFalse(fuente.getHechos().contains(hecho));
+    assertFalse(fuente.obtenerHechos().contains(hecho));
   }
 
   @Test
@@ -40,7 +40,7 @@ class FuenteDinamicaTest {
     SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
     solicitud.aceptar();
-    assertTrue(fuente.getHechos().contains(hecho));
+    assertTrue(fuente.obtenerHechos().contains(hecho));
   }
 
   @Test
@@ -58,7 +58,7 @@ class FuenteDinamicaTest {
     SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
     solicitud.rechazar();
-    assertFalse(fuente.getHechos().contains(hecho));
+    assertFalse(fuente.obtenerHechos().contains(hecho));
   }
 
   @Test
@@ -77,7 +77,6 @@ class FuenteDinamicaTest {
 
     solicitud.aceptarConSugerencia("latitud invalida");
     
-    assertTrue(fuente.getHechos().contains(hecho));
+    assertTrue(fuente.obtenerHechos().contains(hecho));
   }
 }
- */

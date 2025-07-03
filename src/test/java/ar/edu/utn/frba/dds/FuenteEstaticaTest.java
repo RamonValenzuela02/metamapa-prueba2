@@ -13,15 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FuenteEstaticaTest {
 
   @Test
-  public void lecturaCorrectaDeArchivoCSV() throws Exception {
-    URL resource = getClass().getClassLoader().getResource("prueba.csv");
-    if (resource == null) {
-      throw new RuntimeException("No se encontró el archivo prueba.csv");
-    }
+  public void lecturaCorrectaDeArchivoCSV() {
 
-    File csvFile = Paths.get(resource.toURI()).toFile();
-    FuenteEstatica fuenteEstatica = new FuenteEstatica(csvFile.getAbsolutePath());
-
+    FuenteEstatica fuenteEstatica = new FuenteEstatica("src/test/resources/prueba.csv");
     List<Hecho> hechos = fuenteEstatica.obtenerHechos();
 
     assertEquals(4, hechos.size());

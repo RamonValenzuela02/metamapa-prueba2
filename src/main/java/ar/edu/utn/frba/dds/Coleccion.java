@@ -26,6 +26,7 @@ public class Coleccion {
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;
+  private List<Hecho> hechos;
 
 
   public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios,
@@ -38,14 +39,21 @@ public class Coleccion {
   }
 
   public List<Hecho> getHechos() {
-    List<Hecho> hechos = fuente.obtenerHechos();
+    hechos = fuente.obtenerHechos();
     if (modoNavegacion == ModoNavegacion.IRRESTRICTA) {
-      return hechos;
+      return hechos.stream()
+          .filter(this::cumpleTodosLosCriterios)
+          .collect(Collectors.toList());
     } else {
       return hechos.stream()
-              .filter(this::estaConsensuado)
-              .collect(Collectors.toList());
+          .filter(this::estaConsensuado)
+          .filter(this::cumpleTodosLosCriterios)
+          .collect(Collectors.toList());
     }
+  }
+
+  private boolean cumpleTodosLosCriterios(Hecho hecho) {
+    return criterios.stream().allMatch(criterio -> criterio.cumpleCriterio(hecho));
   }
 
   private boolean estaConsensuado(Hecho hecho) {
