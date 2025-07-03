@@ -16,9 +16,12 @@ public class Coleccion {
   private final String titulo;
   @Getter
   private final String descripcion;
+  @Getter
   private final Fuente fuente;
+  @Getter
   private List<Criterio> criterios = new ArrayList<>();
   @Setter
+  @Getter
   private ModoNavegacion modoNavegacion;
   @Getter
   @Setter
