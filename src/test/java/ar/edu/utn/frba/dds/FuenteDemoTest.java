@@ -19,9 +19,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
-/*
-class FuenteDemoTest {
 
+class FuenteDemoTest {
+/*
   private Conexion conexion;
   private FuenteDemo fuenteDemo;
 
@@ -108,5 +108,6 @@ class FuenteDemoTest {
     assertEquals(1, hechosFiltrados.size());
     assertEquals("Hecho Reciente", hechosFiltrados.get(0).getTitulo());
   }
+
+ */
 }
-*/

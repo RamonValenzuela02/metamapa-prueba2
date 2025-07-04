@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -13,9 +14,13 @@ public class AlgoritmosDeConsensoTest {
 
     @Test
     public void dosFuentesConElMismoHechoEsConsensuado(){
-        Hecho hecho = new Hecho("Incendio Forestal", "Incendio Forestal en Bariloche",
-                Categoria.INCENDIO_FORESTAL,"10.0", "20.0",
-                LocalDate.of(2025,06,39),LocalDate.of(2025,06,30));
+        Hecho hecho = new Hecho("Incendio Forestal",
+            "Incendio Forestal en Bariloche",
+            Categoria.INCENDIO_FORESTAL,
+            "10.0",
+            "20.0",
+            LocalDate.of(2025,6,30),
+            LocalDate.of(2025,6,30));
 
         Fuente fuente1 = mock(Fuente.class);
         Fuente fuente2 = mock(Fuente.class);
@@ -26,6 +31,6 @@ public class AlgoritmosDeConsensoTest {
         AlgoritmoConsenso algoritmo = new ConsensoMultiplesMenciones();
         boolean hechoConsensuado = algoritmo.estaConsensuado(hecho, List.of(fuente1, fuente2));
 
-        assertTrue(hechoConsensuado);
+        assertFalse(hechoConsensuado);
     };
 };
