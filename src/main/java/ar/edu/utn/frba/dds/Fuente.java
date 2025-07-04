@@ -13,4 +13,8 @@ public abstract class Fuente {
   }
     
   public abstract List<Hecho> obtenerHechos();
+  Coleccion col = new ColeccionBuilder()
+          .conFuente(new FuenteAgregadora())
+          .conAlgoritmoConsenso(new ConsensoAbsoluta())
+          .crear();
 }

@@ -26,8 +26,6 @@ public class Coleccion {
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;
-  private List<Hecho> hechos;
-
 
   public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios,
                    ModoNavegacion modoNavegacion, AlgoritmoConsenso algoritmoConsenso) {
@@ -36,16 +34,20 @@ public class Coleccion {
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterios = criterios;
+    this.modoNavegacion = modoNavegacion;
+    this.algoritmoConsenso = algoritmoConsenso;
   }
 
   public List<Hecho> getHechos() {
-    hechos = fuente.obtenerHechos();
+    List<Hecho> hechos = fuente.obtenerHechos();
     if (modoNavegacion == ModoNavegacion.IRRESTRICTA) {
       return hechos.stream()
+          .filter(hecho -> !hecho.estaEliminado())
           .filter(this::cumpleTodosLosCriterios)
           .collect(Collectors.toList());
     } else {
       return hechos.stream()
+          .filter(hecho -> !hecho.estaEliminado())
           .filter(this::estaConsensuado)
           .filter(this::cumpleTodosLosCriterios)
           .collect(Collectors.toList());

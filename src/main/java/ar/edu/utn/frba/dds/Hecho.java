@@ -15,7 +15,7 @@ public class Hecho {
   private final String longitud;
   private final LocalDate fechaHecho;
   private final LocalDate fechaCarga;
-
+  private boolean eliminado = false;
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
                String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
@@ -30,7 +30,7 @@ public class Hecho {
   }
 
   private void validarNotNull(String titulo, String descripcion, Categoria categoria,
-                              String latitud, String longitud,LocalDate fechaHecho, LocalDate fechaCarga) {
+                              String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(categoria);
@@ -40,5 +40,11 @@ public class Hecho {
     requireNonNull(fechaCarga);
   }
 
+  public void marcarComoEliminado() {
+    this.eliminado = true;
+  }
 
+  public boolean estaEliminado() {
+    return eliminado;
+  }
 }

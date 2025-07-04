@@ -18,6 +18,12 @@ public class GestorDeSolicitudes {
     solicitudesDeEliminacion.add(solicitud);
   }
 
+  public void solicitudesAceptadas() {
+    for(SolicitudDeEliminacion solicitud : solicitudesDeEliminacion) {
+      if(solicitud.getEstado() == Estado.ACEPTADA) {}
+    }
+  }
+
   public List<SolicitudDeEliminacion> getSolicitudes() {
     return solicitudesDeEliminacion;
   }
