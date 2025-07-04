@@ -8,18 +8,16 @@ import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-/*
+
 public class FuenteMetaMapaTest{
 
     private FuenteMetaMapa fuenteMock;
-    private Coleccion coleccion;
 
     @BeforeEach
     public void setup() {
-        // Creamos el mock de la fuente
+
         fuenteMock = mock(FuenteMetaMapa.class);
 
-        // Creamos dos hechos
         Hecho hecho1 = new Hecho(
             "Hecho 1", "Descripcion 1", Categoria.INCENDIO_FORESTAL,
             "-34.61", "-58.38",
@@ -32,19 +30,25 @@ public class FuenteMetaMapaTest{
             LocalDate.of(2025, 5, 15), LocalDate.of(2025, 5, 20)
         );
 
-        // Definimos qué devuelve el mock cuando se llama a obtenerHechosConCriterio
-        when(fuenteMock.obtenerHechosConCriterio(any(Criterio.class)))
-            .thenReturn(List.of(hecho1, hecho2));
+        Criterio criterio = new CriterioCumplidorSiempre();
+        List<Criterio> criterios = List.of(criterio);
 
-        // Creamos un criterio dummy para usar en la coleccion
-        Criterio criterioDummy = mock(Criterio.class);
+        FuenteMetaMapa fuente = new FuenteMetaMapa();
 
-        coleccion = new Coleccion("handle_test","Titulo Test", "Descripcion Test", fuenteMock, criterioDummy);
+      Coleccion coleccion = new ColeccionBuilder()
+          .conHandle("ak1fjd1")
+          .conTitulo("Incendios")
+          .conDescripcion("Incendios en el norte")
+          .conFuente(fuente)
+          .conCriterios(criterios)
+          .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
+          .crear();
+
     }
 
     @Test
     public void testObtenerHechosDevuelveListaDesdeFuente() {
-        List<Hecho> hechos = coleccion.obtenerHechos();
+        List<Hecho> hechos = coleccion.();
 
         // Verificamos que la lista tenga los hechos mockeados
         assertEquals(2, hechos.size());
@@ -52,4 +56,3 @@ public class FuenteMetaMapaTest{
         assertEquals("Hecho 2", hechos.get(1).getTitulo());
     }
 }
-*/
