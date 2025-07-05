@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.io.File;
@@ -39,7 +40,8 @@ public class ColeccionTest {
   @DisplayName("Como persona visualizadora, deseo navegar todos los hechos disponibles de una colección, con algun filtro.")
   @Test
   public void cantidadDeIncendiosForestalesEs3() {
-      Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
+
+    Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
     List<Criterio> criterios = List.of(criterio);
 
     FuenteEstatica fuente = new FuenteEstatica("src/test/resources/prueba.csv");
@@ -55,7 +57,38 @@ public class ColeccionTest {
 
     assertEquals(3, coleccion.getHechos().size());
   }
+  @Test
+  public void noSeMuestranHechosEliminadosEnUnaColeccion() {
 
+    Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
+    List<Criterio> criterios = List.of(criterio);
+
+    Hecho hecho = new Hecho("habia una vez",
+            "holaholhola",
+            Categoria.INCENDIO_FORESTAL,
+            "1234",
+            "5678",
+            LocalDate.now(),
+            LocalDate.now());
+    hecho.marcarComoEliminado();
+
+    FuenteDinamica fuente = new FuenteDinamica();
+    fuente.agregarHecho(hecho);
+
+    Coleccion coleccion = new ColeccionBuilder()
+            .conHandle("ak1fjd1")
+            .conTitulo(hecho.getTitulo())
+            .conDescripcion(hecho.getDescripcion())
+            .conFuente(fuente)
+            .conCriterios(criterios)
+            .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
+            .crear();
+
+    List<Hecho> hechosColeccion = coleccion.getHechos();
+
+    assertTrue(hechosColeccion.isEmpty());
+  }
+}
   /*
   @Test
   public void navegacionColeccion() {
