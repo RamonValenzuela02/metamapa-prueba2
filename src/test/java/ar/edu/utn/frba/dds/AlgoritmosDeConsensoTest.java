@@ -59,7 +59,7 @@ public class AlgoritmosDeConsensoTest {
         Fuente fuente2 = mock(Fuente.class);
 
         when(fuente1.obtenerHechos()).thenReturn(List.of(hecho1));
-        when(fuente2.obtenerHechos()).thenReturn(List.of(hecho1));
+        when(fuente2.obtenerHechos()).thenReturn(List.of(hecho2));
 
         AlgoritmoConsenso algoritmo = new ConsensoMultiplesMenciones();
         boolean hechoConsensuado = algoritmo.estaConsensuado(hecho1, List.of(fuente1, fuente2));

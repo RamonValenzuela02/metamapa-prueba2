@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 
 import static ar.edu.utn.frba.dds.Categoria.INCENDIO_FORESTAL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.net.URL;
@@ -77,8 +77,8 @@ public class ColeccionTest {
 
     Coleccion coleccion = new ColeccionBuilder()
             .conHandle("ak1fjd1")
-            .conTitulo(hecho.getTitulo())
-            .conDescripcion(hecho.getDescripcion())
+            .conTitulo("Para test")
+            .conDescripcion("No se muestran hechos eliminados en una coleccion")
             .conFuente(fuente)
             .conCriterios(criterios)
             .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
@@ -88,15 +88,89 @@ public class ColeccionTest {
 
     assertTrue(hechosColeccion.isEmpty());
   }
-}
-  /*
-  @Test
-  public void navegacionColeccion() {
 
-    Coleccion coleccion2 = coleccionSegunCategoria(INCENDIO_FORESTAL);
-    String fechaString = "2025-04-05";
-    Criterio criterio = new CriterioPorFecha(fechaString);
-    coleccion2.navegarConFiltro(criterio);;
+  @Test
+  public void navegacionEnModoCuradoSoloDevuelveHechosConsensuados() {
+    Hecho hecho1 = new Hecho(
+            "Incendio Forestal",
+            "Incendio en Bariloche",
+            Categoria.INCENDIO_FORESTAL,
+            "10.0",
+            "20.0",
+            LocalDate.of(2025, 6, 30),
+            LocalDate.of(2025, 6, 30));
+
+    Hecho hecho2 = new Hecho(
+            "Incendio Forestal",
+            "Incendio Misiones",
+            Categoria.INCENDIO_FORESTAL,
+            "10.0",
+            "20.0",
+            LocalDate.of(2025, 6, 30),
+            LocalDate.of(2025, 6, 30));
+
+    Fuente fuenteMock = mock(Fuente.class);
+    when(fuenteMock.obtenerHechos()).thenReturn(List.of(hecho1, hecho2));
+
+    AlgoritmoConsenso consensoMock = mock(AlgoritmoConsenso.class);
+    when(consensoMock.estaConsensuado(hecho1, List.of(fuenteMock))).thenReturn(true);
+    when(consensoMock.estaConsensuado(hecho2, List.of(fuenteMock))).thenReturn(false);
+
+    Coleccion coleccion = new ColeccionBuilder()
+            .conHandle("test")
+            .conTitulo("Para Test")
+            .conDescripcion("Test Navegación Curada")
+            .conFuente(fuenteMock)
+            .conModoNavegacion(ModoNavegacion.CURADA)
+            .conAlgoritmoConsenso(consensoMock)
+            .crear();
+
+    List<Hecho> hechosCurados = coleccion.getHechos();
+
+    assertEquals(1, hechosCurados.size());
+    assertTrue(hechosCurados.contains(hecho1));
+    assertFalse(hechosCurados.contains(hecho2));
   }
-  */
+
+  @Test
+  public void navegacionEnModoIrrestrictaDevuelveTodosLosHechos() {
+    Hecho hecho1 = new Hecho(
+            "Incendio Forestal",
+            "Incendio en Bariloche",
+            Categoria.INCENDIO_FORESTAL,
+            "10.0",
+            "20.0",
+            LocalDate.of(2025, 6, 30),
+            LocalDate.of(2025, 6, 30));
+
+    Hecho hecho2 = new Hecho(
+            "Incendio Forestal",
+            "Incendio Misiones",
+            Categoria.INCENDIO_FORESTAL,
+            "10.0",
+            "20.0",
+            LocalDate.of(2025, 6, 30),
+            LocalDate.of(2025, 6, 30));
+
+    Fuente fuenteMock = mock(Fuente.class);
+    when(fuenteMock.obtenerHechos()).thenReturn(List.of(hecho1, hecho2));
+
+    AlgoritmoConsenso consensoMock = mock(AlgoritmoConsenso.class); // no se usará
+
+    Coleccion coleccion = new ColeccionBuilder()
+            .conHandle("test")
+            .conTitulo("Para test")
+            .conDescripcion("Test Navegacion Irrestricta")
+            .conFuente(fuenteMock)
+            .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
+            .conAlgoritmoConsenso(consensoMock)
+            .crear();
+
+    List<Hecho> hechos = coleccion.getHechos();
+
+    assertEquals(2, hechos.size());
+    assertTrue(hechos.contains(hecho1));
+    assertTrue(hechos.contains(hecho2));
+  }
 }
+
