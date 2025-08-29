@@ -2,18 +2,12 @@ package ar.edu.utn.frba.dds;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SolicitudTest {
+public class SolicitudDeEliminacionTest {
   DetectorDeSpam detector;
 
   @BeforeEach
@@ -24,7 +18,7 @@ public class SolicitudTest {
   @Test
   public void crearSolicitudDeEliminacion() {
     when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(false);
-    GestorDeSolicitudes gestor = new GestorDeSolicitudes(detector);
+    RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
     FuenteDinamica fuente = new FuenteDinamica();
 
     //creo la solicitud
@@ -42,7 +36,7 @@ public class SolicitudTest {
   @Test
   public void rechazarPorSpamSolicitudDeEliminacion() {
     when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(true);
-    GestorDeSolicitudes gestor = new GestorDeSolicitudes(detector);
+    RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
     FuenteDinamica fuente = new FuenteDinamica();
 
     //creo la solicitud

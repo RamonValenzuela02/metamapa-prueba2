@@ -14,13 +14,14 @@ public class FuenteDemo extends  Fuente {
   private final Conexion conexion;
   private final URL url;
   private LocalDateTime fechaUltimaConsulta;
-  private final List<Hecho> hechos = new ArrayList<>();
   private ScheduledExecutorService scheduler;
+  private RepoFuenteDemo repoFuenteDemo;
 
   public FuenteDemo(Conexion conexion, URL url) {
     this.conexion = conexion;
     this.url = url;
     this.fechaUltimaConsulta = LocalDateTime.now().minusHours(1);
+    repoFuenteDemo = RepoFuenteDemo.getInstance();
   }
 
   public void iniciarActualizacionPeriodica() {
@@ -40,7 +41,7 @@ public class FuenteDemo extends  Fuente {
     Map<String, Object> datosHecho = conexion.siguienteHecho(url, fechaUltimaConsulta);
     while (datosHecho != null) {
       Hecho hecho = mapearHecho(datosHecho);
-      hechos.add(hecho);
+      repoFuenteDemo.agregarHecho(hecho);
       fechaUltimaConsulta = LocalDateTime.now();
       datosHecho = conexion.siguienteHecho(url, fechaUltimaConsulta);
     }
@@ -59,6 +60,6 @@ public class FuenteDemo extends  Fuente {
   }
 
   public List<Hecho> obtenerHechos() {
-    return hechos;
+    return repoFuenteDemo.getHechos();
   }
 }

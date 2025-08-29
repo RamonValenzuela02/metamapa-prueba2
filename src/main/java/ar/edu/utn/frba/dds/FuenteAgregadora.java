@@ -27,6 +27,13 @@ public class FuenteAgregadora extends Fuente {
     this.fuentesAgregadas.remove(fuente);
   }
 
+  /*
+  @Override
+  public List<Hecho> obtenerHechos() {
+    return fuentesAgregadoras.flatmap(fuente -> fuente.obtenerHechos());
+  }
+  */
+  //aca no tendria que retornar los hechos de cada fuente??? para mi es como hice arriba
   @Override
   public List<Hecho> obtenerHechos() {
     return hechos;

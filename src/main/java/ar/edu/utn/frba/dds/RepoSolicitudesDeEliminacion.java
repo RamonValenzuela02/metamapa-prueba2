@@ -3,11 +3,11 @@ package ar.edu.utn.frba.dds;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorDeSolicitudes {
+public class RepoSolicitudesDeEliminacion {
   private List<SolicitudDeEliminacion> solicitudesDeEliminacion = new ArrayList<>();
   private final DetectorDeSpam detector;
 
-  public GestorDeSolicitudes(DetectorDeSpam detector) {
+  public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {
     this.detector = detector;
   }
 

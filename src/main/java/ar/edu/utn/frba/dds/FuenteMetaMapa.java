@@ -15,15 +15,11 @@
   import com.fasterxml.jackson.core.type.TypeReference;
 
   public class FuenteMetaMapa extends Fuente {
-
-    // Atributo que representa la API para conectarse al servicio externo
     private final Api api;
 
-    // Constructor que recibe una instancia de Api y la guarda
     public FuenteMetaMapa(Api api) {
       this.api = api;
     }
-
     // Implementación del metodo abstracto de Fuente.
     // Devuelve todos los hechos sin ningún criterio (GET a /hecho)
     @Override

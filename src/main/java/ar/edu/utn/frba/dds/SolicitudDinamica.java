@@ -24,6 +24,7 @@ public class SolicitudDinamica {
     this.estado = EstadoSolicitudDinamica.ACEPTADA_CON_SUGERENCIA;
     cuandoEsAceptada.run();
     cuandoEsTratada.run();
+    RepoSolicitudesConSugerencia.getInstance().agregarSolicitudConSugerencia(this);
   }
 
   public void rechazar() {

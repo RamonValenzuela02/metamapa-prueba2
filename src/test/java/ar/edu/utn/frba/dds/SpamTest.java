@@ -13,7 +13,7 @@ public class SpamTest {
         DetectorDeSpam detector = mock(DetectorDeSpam.class);
         when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(false);
 
-        GestorDeSolicitudes gestor = new GestorDeSolicitudes(detector);
+        RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
         FuenteDinamica fuente = new FuenteDinamica();
 
         SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(
@@ -33,7 +33,7 @@ public class SpamTest {
         DetectorDeSpam detector = mock(DetectorDeSpam.class);
         when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(true);
 
-        GestorDeSolicitudes gestor = new GestorDeSolicitudes(detector);
+        RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
         FuenteDinamica fuente = new FuenteDinamica();
 
         SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(
