@@ -17,11 +17,8 @@ public class FuenteDinamica extends Fuente{
 
   //modificar despues
   public void agregarHecho(Hecho hecho) {
-    //en donde una vez que se acepte ese hecho se agregue a la lista de hechos.
-    SolicitudDinamica solicitud = new SolicitudDinamica(hecho, () -> repositorio.agregarHecho(hecho));
-
-    solicitud.setCallbackCuandoEsTratada(()-> pendientes.remove(solicitud));
-    pendientes.add(solicitud);
+    //en donde cada vez que se agreguen hechos los va a agregar un repo que si es aceptado los pasa a repoDeSolAcep
+    RepoSolicitudesDinamicasPendientes.getInstance().agregarSolicitud(hecho);
   }
 
   public List<Hecho> obtenerHechos() {

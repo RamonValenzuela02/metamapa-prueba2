@@ -59,6 +59,7 @@ public class FuenteDemo extends  Fuente {
     return new Hecho(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
   }
 
+  //tengo que buscar una manera que solamente me devuelva los hechos de esa fuente, no todos los hechos
   public List<Hecho> obtenerHechos() {
     return repoFuenteDemo.getHechos();
   }

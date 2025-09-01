@@ -1,18 +1,23 @@
 package ar.edu.utn.frba.dds;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SolicitudDinamica {
+  @Getter
   private Hecho hecho;
-  private EstadoSolicitudDinamica estado;
+  //private EstadoSolicitudDinamica estado;
+  @Setter
   private String sugerencia;
-  private Runnable cuandoEsAceptada;
-  private Runnable cuandoEsTratada;
+  //private Runnable cuandoEsAceptada;
+  //private Runnable cuandoEsTratada;
 
-  public SolicitudDinamica(Hecho hecho, Runnable cuandoEsAceptada) {
+  public SolicitudDinamica(Hecho hecho /*, Runnable cuandoEsAceptada*/) {
     this.hecho = hecho;
-    this.estado = EstadoSolicitudDinamica.PENDIENTE;
-    this.cuandoEsAceptada = cuandoEsAceptada;
+    //this.estado = EstadoSolicitudDinamica.PENDIENTE;
+    //this.cuandoEsAceptada = cuandoEsAceptada;
   }
-
+  /*
   public void aceptar() {
     this.estado = EstadoSolicitudDinamica.ACEPTADA;
     cuandoEsAceptada.run();
@@ -24,7 +29,6 @@ public class SolicitudDinamica {
     this.estado = EstadoSolicitudDinamica.ACEPTADA_CON_SUGERENCIA;
     cuandoEsAceptada.run();
     cuandoEsTratada.run();
-    RepoSolicitudesConSugerencia.getInstance().agregarSolicitudConSugerencia(this);
   }
 
   public void rechazar() {
@@ -35,4 +39,6 @@ public class SolicitudDinamica {
   public void setCallbackCuandoEsTratada(Runnable callback) {
     this.cuandoEsTratada= callback;
   }
+   */
+
 }

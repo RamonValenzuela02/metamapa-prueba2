@@ -37,9 +37,11 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    SolicitudDinamica solicitud = fuente.getPendientes().get(0);
+    RepoSolicitudesDinamicasPendientes.getInstance().aceptarSolicitud(hecho);
 
-    solicitud.aceptar();
+    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
+
+    //solicitud.aceptar();
     assertTrue(fuente.obtenerHechos().contains(hecho));
   }
 
@@ -54,10 +56,10 @@ class FuenteDinamicaTest {
             LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
+    RepoSolicitudesDinamicasPendientes.getInstance().rechazarSolicitud(hecho);
+    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
-    SolicitudDinamica solicitud = fuente.getPendientes().get(0);
-
-    solicitud.rechazar();
+    //solicitud.rechazar();
     assertFalse(fuente.obtenerHechos().contains(hecho));
   }
 
@@ -73,9 +75,11 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    SolicitudDinamica solicitud = fuente.getPendientes().get(0);
+    RepoSolicitudesDinamicasPendientes.getInstance().aceptarConSugerenciaSolicitud(hecho, "latitud invalida");
 
-    solicitud.aceptarConSugerencia("latitud invalida");
+    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
+
+    //solicitud.aceptarConSugerencia("latitud invalida");
     
     assertTrue(fuente.obtenerHechos().contains(hecho));
   }
