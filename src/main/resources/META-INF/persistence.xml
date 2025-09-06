@@ -8,6 +8,7 @@
   <persistence-unit name="simple-persistence-unit" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+    <class>ar.edu.utn.frba.dds.domain.Hecho</class>
 
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>

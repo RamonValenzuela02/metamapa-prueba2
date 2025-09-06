@@ -1,5 +1,10 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.domain.solicitud.DetectorDeSpam;
+import ar.edu.utn.frba.dds.domain.solicitud.Estado;
+import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
+import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDeEliminacion;
+import ar.edu.utn.frba.dds.repo.RepoSolicitudesDeEliminacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

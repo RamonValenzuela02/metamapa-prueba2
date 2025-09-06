@@ -217,7 +217,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>ar.edu.utn.frba.dds.Main</mainClass>
+              <mainClass>ar.edu.utn.frba.dds.domain.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

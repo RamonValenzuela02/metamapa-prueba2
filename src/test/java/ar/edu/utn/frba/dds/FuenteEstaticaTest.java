@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import ar.edu.utn.frba.dds.domain.fuente.FuenteEstatica;
+import ar.edu.utn.frba.dds.domain.Hecho;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 

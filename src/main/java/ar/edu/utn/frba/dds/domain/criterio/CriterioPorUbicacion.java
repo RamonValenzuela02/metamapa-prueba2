@@ -1,0 +1,20 @@
+package ar.edu.utn.frba.dds.domain.criterio;
+
+
+import ar.edu.utn.frba.dds.domain.Hecho;
+import lombok.Getter;
+
+@Getter
+public class CriterioPorUbicacion implements Criterio {
+  private final String latitud;
+  private final String longitud;
+
+  public CriterioPorUbicacion(String latitud, String longitud) {
+    this.latitud = latitud;
+    this.longitud = longitud;
+  }
+  @Override
+  public Boolean cumpleCriterio(Hecho hecho) {
+    return hecho.getLatitud().equals(latitud) && hecho.getLongitud().equals(longitud);
+  }
+}

@@ -4,6 +4,10 @@ import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
+import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicasPendientes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
