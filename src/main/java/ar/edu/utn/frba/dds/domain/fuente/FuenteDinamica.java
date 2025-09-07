@@ -7,11 +7,16 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDinamica;
 import ar.edu.utn.frba.dds.repo.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicas;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import lombok.Getter;
 
+@Entity
 public class FuenteDinamica extends Fuente{
+  @Transient
   @Getter
   private List<SolicitudDinamica> pendientes;
+  @Transient
   private RepoHechosDinamicos repositorio;
 
   public FuenteDinamica() {

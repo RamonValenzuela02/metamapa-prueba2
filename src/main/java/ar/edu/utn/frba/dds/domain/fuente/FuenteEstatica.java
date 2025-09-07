@@ -10,12 +10,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 /**
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
+@Entity
 public class FuenteEstatica extends Fuente {
+  @Transient
   List<Hecho> hechos = new ArrayList<>();
+  @Column
   private final String path;
 
   public FuenteEstatica(String path) {

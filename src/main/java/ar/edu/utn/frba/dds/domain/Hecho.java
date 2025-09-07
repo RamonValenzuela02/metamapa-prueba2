@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import lombok.Getter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Getter
@@ -23,8 +23,7 @@ public class Hecho {
   private final String titulo;
   @Column
   private final String descripcion;
-  //TODO
-  @Transient
+  @Enumerated(EnumType.STRING)
   private final Categoria categoria;
   @Column
   private final String latitud;

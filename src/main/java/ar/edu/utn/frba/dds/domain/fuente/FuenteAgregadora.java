@@ -4,8 +4,12 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import java.util.*;
 import java.util.stream.Collectors;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
+@Entity
 public class FuenteAgregadora extends Fuente {
+  @Transient
   List<Hecho> hechos = new ArrayList<>();
   private List<Fuente> fuentesAgregadas;
 

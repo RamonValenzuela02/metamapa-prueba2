@@ -8,8 +8,13 @@
   import java.util.List;
   import java.util.Map;
   import java.util.Optional;
+  import javax.persistence.Entity;
+  import javax.persistence.Transient;
+  import lombok.EqualsAndHashCode;
 
+  @Entity
   public class FuenteMetaMapa extends Fuente {
+    @Transient
     private final Api api;
 
     public FuenteMetaMapa(Api api) {
