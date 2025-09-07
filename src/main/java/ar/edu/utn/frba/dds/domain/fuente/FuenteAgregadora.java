@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FuenteAgregadora extends Fuente {
+  List<Hecho> hechos = new ArrayList<>();
   private List<Fuente> fuentesAgregadas;
 
   public FuenteAgregadora() {

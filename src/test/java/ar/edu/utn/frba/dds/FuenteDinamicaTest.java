@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
 import ar.edu.utn.frba.dds.domain.Hecho;
-import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicasPendientes;
+import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicas;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +41,7 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    RepoSolicitudesDinamicasPendientes.getInstance().aceptarSolicitud(hecho);
+    RepoSolicitudesDinamicas.getInstance().aceptarSolicitud(hecho);
 
     //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
@@ -60,7 +60,7 @@ class FuenteDinamicaTest {
             LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
-    RepoSolicitudesDinamicasPendientes.getInstance().rechazarSolicitud(hecho);
+    RepoSolicitudesDinamicas.getInstance().rechazarSolicitud(hecho);
     //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
     //solicitud.rechazar();
@@ -79,7 +79,7 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    RepoSolicitudesDinamicasPendientes.getInstance().aceptarConSugerenciaSolicitud(hecho, "latitud invalida");
+    RepoSolicitudesDinamicas.getInstance().aceptarConSugerenciaSolicitud(hecho, "latitud invalida");
 
     //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
