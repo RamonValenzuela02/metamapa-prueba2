@@ -20,10 +20,12 @@ public class RepoSolicitudesDeEliminacion {
     }
     solicitudesDeEliminacion.add(solicitud);
   }
-
+//tendria q devolver las solicitudes
   public void solicitudesAceptadas() {
     for(SolicitudDeEliminacion solicitud : solicitudesDeEliminacion) {
-      if(solicitud.getEstado() == Estado.ACEPTADA) {}
+      if(solicitud.getEstado() == Estado.ACEPTADA) {
+
+      }
     }
   }
 

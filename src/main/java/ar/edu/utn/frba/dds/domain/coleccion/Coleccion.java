@@ -24,9 +24,6 @@ public class Coleccion {
   private final Fuente fuente;
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
-  //@Setter
-  //@Getter
-  //private ModoNavegacion modoNavegacion;
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;

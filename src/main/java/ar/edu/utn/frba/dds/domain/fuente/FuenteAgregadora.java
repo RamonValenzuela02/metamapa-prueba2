@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,11 +11,7 @@ public class FuenteAgregadora extends Fuente {
 
   public FuenteAgregadora() {
     this.fuentesAgregadas = new ArrayList<>();
-  }
-
-  @Override
-  public List<Fuente> fuentesDelNodo() {
-    return fuentesAgregadas;
+    RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public void agregarFuente(Fuente fuente) {

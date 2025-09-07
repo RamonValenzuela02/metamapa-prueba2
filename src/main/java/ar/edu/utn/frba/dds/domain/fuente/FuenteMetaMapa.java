@@ -4,6 +4,7 @@
   import ar.edu.utn.frba.dds.domain.criterio.Criterio;
   import ar.edu.utn.frba.dds.domain.Hecho;
   import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDeEliminacion;
+  import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
   import java.util.List;
   import java.util.Map;
   import java.util.Optional;
@@ -13,6 +14,7 @@
 
     public FuenteMetaMapa(Api api) {
       this.api = api;
+      RepoFuentesDelSistema.getInstance().agregarFuente(this);
     }
     // Implementación del metodo abstracto de Fuente.
     // Devuelve todos los hechos sin ningún criterio (GET a /hecho)

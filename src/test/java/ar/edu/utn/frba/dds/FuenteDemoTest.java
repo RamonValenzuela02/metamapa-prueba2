@@ -6,6 +6,14 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.domain.coleccion.Coleccion;
+import ar.edu.utn.frba.dds.domain.coleccion.ModoNavegacion;
+import ar.edu.utn.frba.dds.domain.consenso.ConsensoAbsoluta;
+import ar.edu.utn.frba.dds.domain.criterio.Criterio;
+import ar.edu.utn.frba.dds.domain.criterio.CriterioPorAntiguedad;
+import ar.edu.utn.frba.dds.domain.fuente.Conexion;
+import ar.edu.utn.frba.dds.domain.fuente.FuenteDemo;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -21,15 +29,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 class FuenteDemoTest {
-/*
   private Conexion conexion;
   private FuenteDemo fuenteDemo;
 
   @BeforeEach
   void iniciarConexion() throws MalformedURLException {
     conexion = mock(Conexion.class);
-    fuenteDemo = new FuenteDemo(new URL("http://hola"), conexion);
-    fuenteDemo.detenerTareaCalendarizada(); // detenemos la tarea programada para evitar interferencias
+    fuenteDemo = new FuenteDemo(conexion, new URL("http://hola"));
   }
 
   private Map<String, Object> crearMapConHechoDePrueba() {
@@ -45,36 +51,27 @@ class FuenteDemoTest {
   }
 
   @Test
-  @Timeout(5) // falla si demora más de 5 segundos
   void agregarHechoAFuenteDemo() throws MalformedURLException {
     Map<String, Object> rta = crearMapConHechoDePrueba();
-    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(DateTime.class))).thenReturn(rta).thenReturn(null);
+    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(LocalDateTime.class))).thenReturn(rta).thenReturn(null);
 
-    System.out.println("Antes de consultarServicioAutomaticamente");
-    fuenteDemo.consultarServicioAutomaticamente();
-    System.out.println("Después de consultarServicioAutomaticamente");
+    fuenteDemo.actualizarHechos();
 
-    assertEquals(1, fuenteDemo.getSizeHechosBuffer());
+    assertEquals(1, fuenteDemo.obtenerHechos().size());
   }
 
   @Test
-  @Timeout(5)
   void nosDevuelteNullSiguienteHecho() throws MalformedURLException {
-    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(DateTime.class))).thenReturn(null);
+    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(LocalDateTime.class))).thenReturn(null);
 
-    System.out.println("Antes de consultarServicioAutomaticamente");
-    fuenteDemo.consultarServicioAutomaticamente();
-    System.out.println("Después de consultarServicioAutomaticamente");
+    fuenteDemo.actualizarHechos();
 
-    assertEquals(0, fuenteDemo.getSizeHechosBuffer());
+    assertEquals(0, fuenteDemo.obtenerHechos().size());
   }
 
   @DisplayName("Como persona usuaria, quiero poder obtener todos los hechos de una fuente proxy demo configurada en una colección, con un nivel de antigüedad máximo de una hora")
   @Test
-  @Timeout(5)
   void obtenerHechosDeColeccionConFuenteDemo() throws MalformedURLException {
-    fuenteDemo.detenerTareaCalendarizada(); // evitamos interferencias
-
     Map<String, Object> hechoReciente = new HashMap<>();
     hechoReciente.put("titulo", "Hecho Reciente");
     hechoReciente.put("descripcion", "desc");
@@ -93,21 +90,23 @@ class FuenteDemoTest {
     hechoViejo.put("fechaHecho", LocalDate.now().minusDays(2));
     hechoViejo.put("fechaCarga", LocalDate.now().minusDays(2));
 
-    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(DateTime.class)))
+    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(LocalDateTime.class)))
         .thenReturn(hechoReciente)
         .thenReturn(hechoViejo)
         .thenReturn(null);
 
-    System.out.println("Antes de consultarServicioAutomaticamente");
-    fuenteDemo.consultarServicioAutomaticamente();
-    System.out.println("Después de consultarServicioAutomaticamente");
+    fuenteDemo.actualizarHechos();
 
     Criterio criterio = new CriterioPorAntiguedad(LocalDateTime.now(), 1);
-    List<Hecho> hechosFiltrados = fuenteDemo.obtenerHechosConCriterio(criterio);
 
-    assertEquals(1, hechosFiltrados.size());
-    assertEquals("Hecho Reciente", hechosFiltrados.get(0).getTitulo());
+    Coleccion coleccion = new Coleccion("handle",
+      "titulo",
+      "descripcion",
+      fuenteDemo,
+      List.of(criterio),
+      ModoNavegacion.IRRESTRICTA,
+      new ConsensoAbsoluta());
+
+    assertEquals(1, coleccion.getHechos().size());
   }
-
- */
 }

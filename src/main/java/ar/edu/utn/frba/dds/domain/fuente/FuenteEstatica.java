@@ -2,10 +2,12 @@ package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
 
@@ -13,10 +15,12 @@ import com.opencsv.CSVReader;
  * clase que representa la carga de los hechos estaticos de un determinado path.
  */
 public class FuenteEstatica extends Fuente {
+  List<Hecho> hechos = new ArrayList<>();
   private final String path;
 
   public FuenteEstatica(String path) {
     this.path = path;
+    RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public List<Hecho> obtenerHechos() {

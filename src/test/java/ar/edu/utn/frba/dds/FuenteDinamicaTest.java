@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
+import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDinamica;
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FuenteDinamicaTest {
+  RepoSolicitudesDinamicas repoSolicitudes = RepoSolicitudesDinamicas.getInstance();
 
   @DisplayName("Como persona contribuyente, deseo poder crear un hecho a partir de una fuente dinámica. ") // req 1
   @Test
@@ -41,11 +43,9 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    RepoSolicitudesDinamicas.getInstance().aceptarSolicitud(hecho);
+    SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 
-    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
-
-    //solicitud.aceptar();
+    solicitud.aceptar();
     assertTrue(fuente.obtenerHechos().contains(hecho));
   }
 
@@ -60,10 +60,10 @@ class FuenteDinamicaTest {
             LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
-    RepoSolicitudesDinamicas.getInstance().rechazarSolicitud(hecho);
-    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
 
-    //solicitud.rechazar();
+    SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
+
+    solicitud.rechazar();
     assertFalse(fuente.obtenerHechos().contains(hecho));
   }
 
@@ -79,11 +79,9 @@ class FuenteDinamicaTest {
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho(hecho);
 
-    RepoSolicitudesDinamicas.getInstance().aceptarConSugerenciaSolicitud(hecho, "latitud invalida");
+    SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 
-    //SolicitudDinamica solicitud = fuente.getPendientes().get(0);
-
-    //solicitud.aceptarConSugerencia("latitud invalida");
+    solicitud.aceptarConSugerencia("latitud invalida");
     
     assertTrue(fuente.obtenerHechos().contains(hecho));
   }
