@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -29,7 +30,8 @@ public class FuenteDemo extends  Fuente {
   public FuenteDemo(Conexion conexion, URL url) {
     this.conexion = conexion;
     this.url = url;
-    this.fechaUltimaConsulta = null;
+    this.fechaUltimaConsulta = LocalDateTime.now();
+    this.hechosDemo = new ArrayList<>();
     RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
@@ -46,7 +48,7 @@ public class FuenteDemo extends  Fuente {
   private Hecho mapearHecho(Map<String, Object> datos) {
     String titulo = (String) datos.get("titulo");
     String descripcion = (String) datos.get("descripcion");
-    Categoria categoria = (Categoria) datos.get("categoria"); // Requiere casteo válido
+    Categoria categoria = Categoria.fromString((String) datos.get("categoria"));
     String latitud = (String) datos.get("latitud");
     String longitud = (String) datos.get("longitud");
     LocalDate fechaHecho = (LocalDate) datos.get("fechaHecho");

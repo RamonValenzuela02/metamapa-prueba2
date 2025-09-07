@@ -7,5 +7,14 @@ package ar.edu.utn.frba.dds.domain.criterio;
 public enum Categoria {
   INCENDIO_FORESTAL,
   HOMICIDOS_DOLOSOS,
-  ACCIDENTE_VIAL
+  ACCIDENTE_VIAL;
+
+  public static Categoria fromString(String valor) {
+    for (Categoria c : Categoria.values()) {
+      if (c.name().equalsIgnoreCase(valor)) {
+        return c;
+      }
+    }
+    throw new IllegalArgumentException("Categoría inválida: " + valor);
+  }
 }

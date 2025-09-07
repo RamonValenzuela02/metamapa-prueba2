@@ -53,7 +53,10 @@ class FuenteDemoTest {
   @Test
   void agregarHechoAFuenteDemo() throws MalformedURLException {
     Map<String, Object> rta = crearMapConHechoDePrueba();
-    when(conexion.siguienteHecho(eq(new URL("http://hola")), any(LocalDateTime.class))).thenReturn(rta).thenReturn(null);
+    //when(conexion.siguienteHecho(eq(new URL("http://hola")), any(LocalDateTime.class))).thenReturn(rta).thenReturn(null);
+    when(conexion.siguienteHecho(any(URL.class), any(LocalDateTime.class)))
+      .thenReturn(rta)
+      .thenReturn(null);
 
     fuenteDemo.actualizarHechos();
 
