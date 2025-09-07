@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.Hecho;
-import ar.edu.utn.frba.dds.repo.RepoFuenteDemo;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,19 +12,19 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class FuenteDemo extends  Fuente {
+
   private final Conexion conexion;
   private final URL url;
   private LocalDateTime fechaUltimaConsulta;
-  private ScheduledExecutorService scheduler;
-  private RepoFuenteDemo repoFuenteDemo;
+  //private ScheduledExecutorService scheduler;
+  private List<Hecho> hechos;
 
   public FuenteDemo(Conexion conexion, URL url) {
     this.conexion = conexion;
     this.url = url;
     this.fechaUltimaConsulta = LocalDateTime.now().minusHours(1);
-    repoFuenteDemo = RepoFuenteDemo.getInstance();
   }
-
+  /*
   public void iniciarActualizacionPeriodica() {
     if (scheduler == null || scheduler.isShutdown()) {
       scheduler = Executors.newSingleThreadScheduledExecutor();
@@ -33,17 +32,20 @@ public class FuenteDemo extends  Fuente {
     }
   }
 
+
   public void detenerActualizacion() {
     if (scheduler != null && !scheduler.isShutdown()) {
       scheduler.shutdown();
     }
   }
 
+   */
+
   public void actualizarHechos() {
     Map<String, Object> datosHecho = conexion.siguienteHecho(url, fechaUltimaConsulta);
     while (datosHecho != null) {
       Hecho hecho = mapearHecho(datosHecho);
-      repoFuenteDemo.agregarHecho(hecho);
+      hechos.add(hecho);
       fechaUltimaConsulta = LocalDateTime.now();
       datosHecho = conexion.siguienteHecho(url, fechaUltimaConsulta);
     }
@@ -63,6 +65,6 @@ public class FuenteDemo extends  Fuente {
 
   //tengo que buscar una manera que solamente me devuelva los hechos de esa fuente, no todos los hechos
   public List<Hecho> obtenerHechos() {
-    return repoFuenteDemo.getHechos();
+    return hechos;
   }
 }
