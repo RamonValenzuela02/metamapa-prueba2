@@ -10,7 +10,8 @@ import javax.persistence.Transient;
 @Entity
 public class FuenteAgregadora extends Fuente {
   @Transient
-  List<Hecho> hechos = new ArrayList<>();
+  private List<Hecho> hechos = new ArrayList<>();
+  @Transient
   private List<Fuente> fuentesAgregadas;
 
   public FuenteAgregadora() {

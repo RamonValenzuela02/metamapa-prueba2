@@ -5,9 +5,22 @@ import ar.edu.utn.frba.dds.domain.solicitud.Estado;
 import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDeEliminacion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
+@Entity
 public class RepoSolicitudesDeEliminacion {
+  @Id
+  @GeneratedValue
+  private Long id;
+  @OneToMany
   private List<SolicitudDeEliminacion> solicitudesDeEliminacion = new ArrayList<>();
+  @Embedded
   private final DetectorDeSpam detector;
 
   public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {

@@ -1,12 +1,22 @@
 package ar.edu.utn.frba.dds.repo;
 
-import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
+@Entity
 public class RepoFuentesDelSistema {
+  @Id
+  @GeneratedValue
+  private Long id;
+  @OneToMany
   private List<Fuente> fuentes;
+  @Transient
   private static final RepoFuentesDelSistema INSTANCE = new RepoFuentesDelSistema();
 
   private RepoFuentesDelSistema() {

@@ -13,12 +13,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 @Entity
 public class FuenteDemo extends  Fuente {
-  @Transient
+  @Embedded
   private final Conexion conexion;
   @Transient
   private final URL url;
