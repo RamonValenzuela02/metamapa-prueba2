@@ -24,12 +24,16 @@ public class Coleccion {
   private final Fuente fuente;
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
-  @Setter
-  @Getter
-  private ModoNavegacion modoNavegacion;
+  //@Setter
+  //@Getter
+  //private ModoNavegacion modoNavegacion;
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;
+  @Getter
+  @Setter
+  private List<Hecho> hechosConsensuados = new ArrayList<>();
+
 
   public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios,
                    ModoNavegacion modoNavegacion, AlgoritmoConsenso algoritmoConsenso) {
@@ -38,10 +42,9 @@ public class Coleccion {
     this.descripcion = descripcion;
     this.fuente = fuente;
     this.criterios = criterios;
-    this.modoNavegacion = modoNavegacion;
     this.algoritmoConsenso = algoritmoConsenso;
   }
-
+  /*
   public List<Hecho> getHechos() {
     List<Hecho> hechos = fuente.obtenerHechos();
     if (modoNavegacion == ModoNavegacion.IRRESTRICTA) {
@@ -57,13 +60,34 @@ public class Coleccion {
           .collect(Collectors.toList());
     }
   }
+  */
+  public List<Hecho> getHechos() {
+    return fuente.obtenerHechos().stream()
+      .filter(hecho -> !hecho.estaEliminado())
+      .filter(this::cumpleTodosLosCriterios)
+      .collect(Collectors.toList());
+  }
 
   private boolean cumpleTodosLosCriterios(Hecho hecho) {
     return criterios.stream().allMatch(criterio -> criterio.cumpleCriterio(hecho));
   }
 
-  private boolean estaConsensuado(Hecho hecho) {
-    if (algoritmoConsenso == null) return true;
-    return algoritmoConsenso.estaConsensuado(hecho, fuente.fuentesDelNodo());
+  private void actualizarConsensuado(Hecho hecho) {
+    if(algoritmoConsenso.estaConsensuado(hecho)){
+      hechosConsensuados.add(hecho);
+    }
   }
+
+  private List<Hecho> getHechosConNavegacion(ModoNavegacion modoNavegacion) {
+    if(modoNavegacion==ModoNavegacion.IRRESTRICTA){
+      return getHechos();
+    }else{
+      return hechosConsensuados;
+    }
+  }
+
+  private void actualizarHechosConsensuados() {
+    fuente.obtenerHechos().forEach(this::actualizarConsensuado);
+  }
+
 }

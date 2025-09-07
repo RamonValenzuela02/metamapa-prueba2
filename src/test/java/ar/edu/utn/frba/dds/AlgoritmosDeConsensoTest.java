@@ -69,7 +69,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente2.obtenerHechos()).thenReturn(List.of(hecho2));
 
         AlgoritmoConsenso algoritmo = new ConsensoMultiplesMenciones();
-        boolean hechoConsensuado = algoritmo.estaConsensuado(hecho1, List.of(fuente1, fuente2));
+        boolean hechoConsensuado = algoritmo.estaConsensuado(hecho1);
 
         assertFalse(hechoConsensuado);
     }
@@ -94,7 +94,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente3.obtenerHechos()).thenReturn(List.of());  // No le agrego el hecho a la fuente
 
         AlgoritmoConsenso algoritmo = new ConsensoMayoriaSimple();
-        boolean consensuado = algoritmo.estaConsensuado(hecho, List.of(fuente1, fuente2, fuente3));
+        boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertTrue(consensuado);
     }
@@ -144,7 +144,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente3.obtenerHechos()).thenReturn(List.of(hecho));
 
         AlgoritmoConsenso algoritmo = new ConsensoAbsoluta();
-        boolean consensuado = algoritmo.estaConsensuado(hecho, List.of(fuente1, fuente2, fuente3));
+        boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertTrue(consensuado);
     }
@@ -169,7 +169,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente3.obtenerHechos()).thenReturn(List.of(hecho));
 
         AlgoritmoConsenso algoritmo = new ConsensoAbsoluta();
-        boolean consensuado = algoritmo.estaConsensuado(hecho, List.of(fuente1, fuente2, fuente3));
+        boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertFalse(consensuado);
     }
