@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class RepoHechosDinamicos {
   @Id
   @GeneratedValue
   private Long id;
-  @Transient
+  @OneToMany
   private List<Hecho> hechos;
   @Transient
   private static final RepoHechosDinamicos INSTANCE = new RepoHechosDinamicos();

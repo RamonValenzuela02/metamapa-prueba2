@@ -107,7 +107,6 @@ class FuenteDemoTest {
       "descripcion",
       fuenteDemo,
       List.of(criterio),
-      ModoNavegacion.IRRESTRICTA,
       new ConsensoAbsoluta());
 
     assertEquals(1, coleccion.getHechos().size());

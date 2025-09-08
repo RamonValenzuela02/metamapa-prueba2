@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 public class FuenteAgregadora extends Fuente {
   @Transient
   private List<Hecho> hechos = new ArrayList<>();
-  @Transient
+  @Transient //aca hay un many to many
   private List<Fuente> fuentesAgregadas;
 
   public FuenteAgregadora() {

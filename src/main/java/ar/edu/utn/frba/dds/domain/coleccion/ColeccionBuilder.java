@@ -55,7 +55,7 @@ public class ColeccionBuilder {
 
     public Coleccion crear() {
         validarColeccion(handle,titulo,descripcion,fuente,criterios);
-        Coleccion coleccion = new Coleccion(handle, titulo, descripcion, fuente, criterios, modoNavegacion, algoritmoConsenso);
+        Coleccion coleccion = new Coleccion(handle, titulo, descripcion, fuente, criterios, algoritmoConsenso);
         return coleccion;
     }
 

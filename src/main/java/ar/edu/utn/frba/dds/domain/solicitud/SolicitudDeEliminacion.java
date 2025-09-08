@@ -11,6 +11,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import lombok.Getter;
 
@@ -28,10 +30,10 @@ public class SolicitudDeEliminacion {
   @Enumerated(EnumType.STRING)
   @Getter
   private Estado estado = Estado.PENDIENTE;
-  @Transient
+  @OneToOne
   private final Fuente fuente;
-  @Transient
-  private static final List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
+  //@Transient
+  //private static final List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
 
   public SolicitudDeEliminacion(String tituloHecho, String motivo, Fuente fuenteCsv) {
     this.tituloHecho = tituloHecho;

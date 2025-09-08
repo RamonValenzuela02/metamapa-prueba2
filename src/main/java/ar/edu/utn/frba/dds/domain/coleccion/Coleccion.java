@@ -7,33 +7,53 @@ import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.domain.criterio.Criterio;
 import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * Representa una colección de hechos basada en un criterio y una fuente.
  */
+@Entity
 public class Coleccion {
+  @Id
+  @GeneratedValue
+  private Long id;
+  @Column
   @Getter
   private final String handle;
+  @Column
   @Getter
   private final String titulo;
+  @Column
   @Getter
   private final String descripcion;
+  @ManyToOne
+  //JoinColumn me parece que iria
   @Getter
   private final Fuente fuente;
+  //@ManyToMany
+  @Transient
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
+  @Transient
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;
+  @Transient
   @Getter
   @Setter
   private List<Hecho> hechosConsensuados = new ArrayList<>();
 
 
-  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios,
-                   ModoNavegacion modoNavegacion, AlgoritmoConsenso algoritmoConsenso) {
+  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
     this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
     this.titulo = titulo;
     this.descripcion = descripcion;
