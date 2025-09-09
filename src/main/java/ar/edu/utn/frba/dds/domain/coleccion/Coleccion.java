@@ -9,6 +9,8 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -42,7 +44,7 @@ public class Coleccion {
   @ManyToMany
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
-  @Transient
+  @Enumerated(EnumType.STRING)
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;

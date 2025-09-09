@@ -2,9 +2,6 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
-import ar.edu.utn.frba.dds.domain.consenso.ConsensoAbsoluta;
-import ar.edu.utn.frba.dds.domain.consenso.ConsensoMayoriaSimple;
-import ar.edu.utn.frba.dds.domain.consenso.ConsensoMultiplesMenciones;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
 import ar.edu.utn.frba.dds.domain.Hecho;
 import org.junit.jupiter.api.Test;
@@ -68,7 +65,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente1.obtenerHechos()).thenReturn(List.of(hecho1));
         when(fuente2.obtenerHechos()).thenReturn(List.of(hecho2));
 
-        AlgoritmoConsenso algoritmo = new ConsensoMultiplesMenciones();
+        AlgoritmoConsenso algoritmo = AlgoritmoConsenso.CONSENSO_MULTIPLES_MENSIONES;
         boolean hechoConsensuado = algoritmo.estaConsensuado(hecho1);
 
         assertFalse(hechoConsensuado);
@@ -93,7 +90,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente2.obtenerHechos()).thenReturn(List.of(hecho));
         when(fuente3.obtenerHechos()).thenReturn(List.of());  // No le agrego el hecho a la fuente
 
-        AlgoritmoConsenso algoritmo = new ConsensoMayoriaSimple();
+        AlgoritmoConsenso algoritmo = AlgoritmoConsenso.CONSENSO_MAYORIA_SIEMPLE;
         boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertTrue(consensuado);
@@ -143,7 +140,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente2.obtenerHechos()).thenReturn(List.of(hecho));
         when(fuente3.obtenerHechos()).thenReturn(List.of(hecho));
 
-        AlgoritmoConsenso algoritmo = new ConsensoAbsoluta();
+        AlgoritmoConsenso algoritmo = AlgoritmoConsenso.CONSENSO_ABSOLUTO;
         boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertTrue(consensuado);
@@ -168,7 +165,7 @@ public class AlgoritmosDeConsensoTest {
         when(fuente2.obtenerHechos()).thenReturn(List.of(hecho));
         when(fuente3.obtenerHechos()).thenReturn(List.of(hecho));
 
-        AlgoritmoConsenso algoritmo = new ConsensoAbsoluta();
+        AlgoritmoConsenso algoritmo = AlgoritmoConsenso.CONSENSO_ABSOLUTO;
         boolean consensuado = algoritmo.estaConsensuado(hecho);
 
         assertFalse(consensuado);

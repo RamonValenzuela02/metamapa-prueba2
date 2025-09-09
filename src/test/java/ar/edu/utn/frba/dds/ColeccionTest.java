@@ -38,7 +38,6 @@ public class ColeccionTest {
         .conDescripcion("Incendios en el norte")
         .conFuente(fuente)
         .conCriterios(criterios)
-        .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
         .crear();
 
     assertEquals(4, coleccion.getHechos().size());
@@ -59,7 +58,6 @@ public class ColeccionTest {
         .conDescripcion("Incendios en el norte")
         .conFuente(fuente)
         .conCriterios(criterios)
-        .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
         .crear();
 
     assertEquals(3, coleccion.getHechos().size());
@@ -88,7 +86,6 @@ public class ColeccionTest {
             .conDescripcion("No se muestran hechos eliminados en una coleccion")
             .conFuente(fuente)
             .conCriterios(criterios)
-            .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
             .crear();
 
     List<Hecho> hechosColeccion = coleccion.getHechos();
@@ -169,7 +166,6 @@ public class ColeccionTest {
             .conTitulo("Para test")
             .conDescripcion("Test Navegacion Irrestricta")
             .conFuente(fuenteMock)
-            .conModoNavegacion(ModoNavegacion.IRRESTRICTA)
             .conAlgoritmoConsenso(consensoMock)
             .crear();
 

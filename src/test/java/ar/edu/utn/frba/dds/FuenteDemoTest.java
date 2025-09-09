@@ -6,10 +6,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.coleccion.Coleccion;
-import ar.edu.utn.frba.dds.domain.coleccion.ModoNavegacion;
-import ar.edu.utn.frba.dds.domain.consenso.ConsensoAbsoluta;
+import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.domain.criterio.Criterio;
 import ar.edu.utn.frba.dds.domain.criterio.CriterioPorAntiguedad;
 import ar.edu.utn.frba.dds.domain.fuente.Conexion;
@@ -22,11 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 
 class FuenteDemoTest {
   private Conexion conexion;
@@ -107,7 +103,7 @@ class FuenteDemoTest {
       "descripcion",
       fuenteDemo,
       List.of(criterio),
-      new ConsensoAbsoluta());
+      AlgoritmoConsenso.CONSENSO_ABSOLUTO);
 
     assertEquals(1, coleccion.getHechos().size());
   }

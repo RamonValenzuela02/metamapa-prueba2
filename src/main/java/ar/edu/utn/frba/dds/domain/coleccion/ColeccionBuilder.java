@@ -15,7 +15,6 @@ public class ColeccionBuilder {
     private String descripcion;
     private Fuente fuente;
     private List<Criterio> criterios = new ArrayList<>();
-    private ModoNavegacion modoNavegacion = ModoNavegacion.IRRESTRICTA;
     private AlgoritmoConsenso algoritmoConsenso;
 
     public ColeccionBuilder conHandle(String handle) {
@@ -40,11 +39,6 @@ public class ColeccionBuilder {
 
     public ColeccionBuilder conCriterios(List<Criterio> criterios) {
         this.criterios = criterios;
-        return this;
-    }
-
-    public ColeccionBuilder conModoNavegacion(ModoNavegacion modo) {
-        this.modoNavegacion = modo;
         return this;
     }
 
