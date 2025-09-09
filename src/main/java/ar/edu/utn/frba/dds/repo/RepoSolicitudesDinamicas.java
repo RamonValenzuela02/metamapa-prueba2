@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.repo;
 
 import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDinamica;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -10,19 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import lombok.Getter;
 
-@Entity
-public class RepoSolicitudesDinamicas {
-  @Id
-  @GeneratedValue
-  private Long id;
-  @OneToMany
-  @Getter
-  private List<SolicitudDinamica> solicitudes;
-  @Transient
+public class RepoSolicitudesDinamicas implements WithSimplePersistenceUnit {
   private static final RepoSolicitudesDinamicas INSTANCE = new RepoSolicitudesDinamicas();
 
   private RepoSolicitudesDinamicas() {
-    solicitudes = new ArrayList<>();
   }
 
   public static RepoSolicitudesDinamicas getInstance() {
@@ -30,7 +22,13 @@ public class RepoSolicitudesDinamicas {
   }
 
   public void agregarSolicitud(SolicitudDinamica solicitud) {
-    solicitudes.add(solicitud);
+    entityManager().persist(solicitud);
+  }
+
+  public List<SolicitudDinamica> getSolicitudes() {
+    return entityManager()
+      .createQuery("SELECT s FROM SolicitudDinamica ")
+      .getResultList();
   }
 
 }

@@ -14,11 +14,7 @@ import lombok.Getter;
 
 @Entity
 public class FuenteDinamica extends Fuente{
-  @OneToOne
-  private RepoHechosDinamicos repositorio;
-
   public FuenteDinamica() {
-    repositorio = RepoHechosDinamicos.getInstance();
     RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
@@ -28,6 +24,6 @@ public class FuenteDinamica extends Fuente{
   }
 
   public List<Hecho> obtenerHechos() {
-    return repositorio.getHechos();
+    return RepoHechosDinamicos.getInstance().obtenerHechos();
   }
 }
