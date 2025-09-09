@@ -16,7 +16,7 @@ public class FuenteAgregadora extends Fuente {
 
   public FuenteAgregadora() {
     this.fuentesAgregadas = new ArrayList<>();
-    RepoFuentesDelSistema.getInstance().agregarFuente(this);
+    //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public void agregarFuente(Fuente fuente) {

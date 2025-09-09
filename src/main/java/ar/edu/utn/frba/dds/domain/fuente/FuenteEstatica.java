@@ -27,7 +27,7 @@ public class FuenteEstatica extends Fuente {
 
   public FuenteEstatica(String path) {
     this.path = path;
-    RepoFuentesDelSistema.getInstance().agregarFuente(this);
+    //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public List<Hecho> obtenerHechos() {

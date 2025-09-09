@@ -5,7 +5,7 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import lombok.Getter;
 
 @Getter
-public class CriterioPorUbicacion implements Criterio {
+public class CriterioPorUbicacion extends Criterio {
   private final String latitud;
   private final String longitud;
 

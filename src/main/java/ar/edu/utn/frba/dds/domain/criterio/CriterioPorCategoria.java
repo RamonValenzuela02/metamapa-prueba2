@@ -2,9 +2,13 @@ package ar.edu.utn.frba.dds.domain.criterio;
 
 
 import ar.edu.utn.frba.dds.domain.Hecho;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import lombok.Getter;
 
-public class CriterioPorCategoria implements Criterio {
+@Entity
+public class CriterioPorCategoria extends Criterio {
+  @Transient
   @Getter
   private final Categoria categoria;
 

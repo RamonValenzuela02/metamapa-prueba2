@@ -15,7 +15,7 @@ import lombok.Getter;
 @Entity
 public class FuenteDinamica extends Fuente{
   public FuenteDinamica() {
-    RepoFuentesDelSistema.getInstance().agregarFuente(this);
+    //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public void agregarHecho(Hecho hecho) {

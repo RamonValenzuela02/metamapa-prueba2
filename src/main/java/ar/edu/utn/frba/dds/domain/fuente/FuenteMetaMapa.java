@@ -19,7 +19,7 @@
 
     public FuenteMetaMapa(Api api) {
       this.api = api;
-      RepoFuentesDelSistema.getInstance().agregarFuente(this);
+      //RepoFuentesDelSistema.getInstance().agregarFuente(this);
     }
     // Implementación del metodo abstracto de Fuente.
     // Devuelve todos los hechos sin ningún criterio (GET a /hecho)

@@ -9,13 +9,24 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
     <class>ar.edu.utn.frba.dds.domain.Hecho</class>
+
     <class>ar.edu.utn.frba.dds.domain.fuente.Fuente</class>
     <class>ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica</class>
     <class>ar.edu.utn.frba.dds.domain.fuente.FuenteDemo</class>
     <class>ar.edu.utn.frba.dds.domain.fuente.FuenteAgregadora</class>
     <class>ar.edu.utn.frba.dds.domain.fuente.FuenteEstatica</class>
     <class>ar.edu.utn.frba.dds.domain.fuente.FuenteMetaMapa</class>
+
     <class>ar.edu.utn.frba.dds.domain.coleccion.Coleccion</class>
+
+    <class>ar.edu.utn.frba.dds.domain.criterio.Criterio</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioCumplidorSiempre</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioPorAntiguedad</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioPorCategoria</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioPorFechaCarga</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioPorFechaHecho</class>
+    <class>ar.edu.utn.frba.dds.domain.criterio.CriterioPorUbicacion</class>
+
 
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>

@@ -2,19 +2,14 @@ package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.Hecho;
-import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -27,7 +22,7 @@ public class FuenteDemo extends  Fuente {
   private final URL url;
   @Column
   private LocalDateTime fechaUltimaConsulta;
-  @OneToMany
+  @Transient
   private List<Hecho> hechosDemo;
 
   public FuenteDemo(Conexion conexion, URL url) {
@@ -35,7 +30,7 @@ public class FuenteDemo extends  Fuente {
     this.url = url;
     this.fechaUltimaConsulta = LocalDateTime.now();
     this.hechosDemo = new ArrayList<>();
-    RepoFuentesDelSistema.getInstance().agregarFuente(this);
+    //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public void actualizarHechos() {

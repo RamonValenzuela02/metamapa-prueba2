@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
 import java.util.List;
 
+//podria ser un enum
 public interface AlgoritmoConsenso {
     boolean estaConsensuado(Hecho hecho);
 }

@@ -39,8 +39,7 @@ public class Coleccion {
   //JoinColumn me parece que iria
   @Getter
   private final Fuente fuente;
-  //@ManyToMany
-  @Transient
+  @ManyToMany
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
   @Transient

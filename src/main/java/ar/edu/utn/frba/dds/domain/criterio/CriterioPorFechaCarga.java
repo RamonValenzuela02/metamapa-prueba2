@@ -1,13 +1,17 @@
 package ar.edu.utn.frba.dds.domain.criterio;
 
 import ar.edu.utn.frba.dds.domain.Hecho;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import lombok.Getter;
 
 import java.time.LocalDate;
+@Entity
 @Getter
-public class CriterioPorFechaCarga implements Criterio {
-
+public class CriterioPorFechaCarga extends Criterio {
+  @Transient
   private final LocalDate fechaDesde;
+  @Transient
   private final LocalDate fechaHasta;
 
   public CriterioPorFechaCarga(String fechaFiltro, String fechaDesde, String fechaHasta) {
