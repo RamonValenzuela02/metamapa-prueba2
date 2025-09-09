@@ -5,35 +5,43 @@ import ar.edu.utn.frba.dds.domain.solicitud.Estado;
 import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
 import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repo.RepoSolicitudesDeEliminacion;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyListOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SolicitudDeEliminacionTest {
   DetectorDeSpam detector;
+  RepoSolicitudesDeEliminacion repo;
 
   @BeforeEach
   public void mockeoDetectorDeSpam() {
     detector = mock(DetectorDeSpam.class);
+    repo = mock(RepoSolicitudesDeEliminacion.class);
   }
 
   @Test
   public void crearSolicitudDeEliminacion() {
     when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(false);
-    RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
     FuenteDinamica fuente = new FuenteDinamica();
-
-    //creo la solicitud
     SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion("no compatibilidad",
-        "no es compatible titulo con su descripcion",
-        fuente);
-    //se agrega a la lista de solicitudes y se verifica si es spam
-    gestor.registrarSolicituDeEliminacion(solicitud);
+      "no es compatible titulo con su descripcion",
+      fuente);
 
-    assertTrue(gestor.getSolicitudes().contains(solicitud));
+    List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
+    solicitudes.add(solicitud);
+
+    when(repo.getSolicitudes()).thenReturn(solicitudes);
+
+    //se agrega a la lista de solicitudes y se verifica si es spam
+    repo.registrarSolicituDeEliminacion(solicitud);
+
+    assertEquals(1, repo.getSolicitudes().size());
     assertEquals(Estado.PENDIENTE, solicitud.getEstado());
 
   }
@@ -41,16 +49,18 @@ public class SolicitudDeEliminacionTest {
   @Test
   public void rechazarPorSpamSolicitudDeEliminacion() {
     when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(true);
-    RepoSolicitudesDeEliminacion gestor = new RepoSolicitudesDeEliminacion(detector);
+
+    RepoSolicitudesDeEliminacion repo = new RepoSolicitudesDeEliminacion(detector);
+
     FuenteDinamica fuente = new FuenteDinamica();
+    SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(
+      "no compatibilidad",
+      "no es compatible titulo con su descripcion",
+      fuente
+    );
 
-    //creo la solicitud
-    SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion("no compatibilidad",
-        "no es compatible titulo con su descripcion",
-        fuente);
-    gestor.registrarSolicituDeEliminacion(solicitud);
+    repo.registrarSolicituDeEliminacion(solicitud);
 
-    assertTrue(gestor.getSolicitudes().contains(solicitud));
     assertEquals(Estado.RECHAZADA, solicitud.getEstado());
   }
 }

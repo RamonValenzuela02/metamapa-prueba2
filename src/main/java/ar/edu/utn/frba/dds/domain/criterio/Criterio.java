@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//me falta poner los discriminatorValues
 public abstract class Criterio {
   @Id
   @GeneratedValue
