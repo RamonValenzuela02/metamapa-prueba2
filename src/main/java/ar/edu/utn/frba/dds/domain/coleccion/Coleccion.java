@@ -107,5 +107,10 @@ public class Coleccion {
   private void actualizarHechosConsensuados() {
     fuente.obtenerHechos().forEach(this::actualizarConsensuado);
   }
+  //De una colección, ¿en qué provincia se agrupan la mayor cantidad de hechos reportados?
+  public String provinciaConMayorCantidadDeHechos() {
+    return "provincia ";
+  }
+
 
 }

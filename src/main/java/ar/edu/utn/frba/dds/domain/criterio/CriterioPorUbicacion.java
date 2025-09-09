@@ -17,6 +17,7 @@ public class CriterioPorUbicacion extends Criterio {
   }
   @Override
   public Boolean cumpleCriterio(Hecho hecho) {
-    return hecho.getLatitud().equals(latitud) && hecho.getLongitud().equals(longitud);
+    return hecho.getUbicacion().getLatitud().equals(latitud) &&
+      hecho.getUbicacion().getLongitud().equals(longitud);
   }
 }

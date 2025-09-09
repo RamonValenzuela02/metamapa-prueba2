@@ -2,8 +2,10 @@ package ar.edu.utn.frba.dds.domain;
 
 import static java.util.Objects.requireNonNull;
 
+import ar.edu.utn.frba.dds.domain.ubicacion.Ubicacion;
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import lombok.Getter;
@@ -24,10 +26,8 @@ public class Hecho {
   private final String descripcion;
   @Enumerated(EnumType.STRING)
   private final Categoria categoria;
-  @Column
-  private final String latitud;
-  @Column
-  private final String longitud;
+  @Embedded
+  private final Ubicacion ubicacion;
   @Column
   private final LocalDate fechaHecho;
   @Column
@@ -41,8 +41,7 @@ public class Hecho {
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;
-    this.latitud = latitud;
-    this.longitud = longitud;
+    this.ubicacion = new Ubicacion(latitud,longitud);
     this.fechaHecho = fechaHecho;
     this.fechaCarga = fechaCarga;
   }

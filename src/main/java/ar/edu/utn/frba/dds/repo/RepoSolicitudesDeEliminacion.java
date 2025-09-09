@@ -5,10 +5,13 @@ import ar.edu.utn.frba.dds.domain.solicitud.Estado;
 import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDeEliminacion;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
+import lombok.Getter;
 
 
 public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
   private final DetectorDeSpam detector;
+  @Getter
+  private int cantidadDeSpam = 0;
 
   public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {
     this.detector = detector;
@@ -17,6 +20,7 @@ public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
   public void registrarSolicituDeEliminacion(SolicitudDeEliminacion solicitud) {
     if (detector.esSpam(solicitud.getMotivo())){
       solicitud.rechazar();
+      this.cantidadDeSpam++;
     }
     entityManager().persist(solicitud);
   }

@@ -24,32 +24,32 @@ public class FuenteEstaticaTest {
     assertEquals("Incendio Forestal en Bariloche", hecho1.getTitulo());
     assertEquals("Hubo un incendio en Bariloche", hecho1.getDescripcion());
     assertEquals(Categoria.INCENDIO_FORESTAL, hecho1.getCategoria());
-    assertEquals("11.2222", hecho1.getLatitud());
-    assertEquals("33.4444", hecho1.getLongitud());
+    assertEquals("11.2222", hecho1.getUbicacion().getLatitud());
+    assertEquals("33.4444", hecho1.getUbicacion().getLongitud());
     assertEquals(LocalDate.parse("2025-04-05"), hecho1.getFechaHecho());
 
     Hecho hecho2 = hechos.get(1);
     assertEquals("Accidente Fatal en General Paz", hecho2.getTitulo());
     assertEquals("Accidente fatal en General Paz. Hubo 3 victimas.", hecho2.getDescripcion());
     assertEquals(Categoria.ACCIDENTE_VIAL, hecho2.getCategoria());
-    assertEquals("55.6666", hecho2.getLatitud());
-    assertEquals("77.8888", hecho2.getLongitud());
+    assertEquals("55.6666", hecho2.getUbicacion().getLatitud());
+    assertEquals("77.8888", hecho2.getUbicacion().getLongitud());
     assertEquals(LocalDate.parse("2025-04-05"), hecho2.getFechaHecho());
 
     Hecho hecho3 = hechos.get(2);
     assertEquals("Incendio Forestal en Peru", hecho3.getTitulo());
     assertEquals("Hubo un incendio en la capital", hecho3.getDescripcion());
     assertEquals(Categoria.INCENDIO_FORESTAL, hecho3.getCategoria());
-    assertEquals("55.6666", hecho3.getLatitud());
-    assertEquals("77.8888", hecho3.getLongitud());
+    assertEquals("55.6666", hecho3.getUbicacion().getLatitud());
+    assertEquals("77.8888", hecho3.getUbicacion().getLongitud());
     assertEquals(LocalDate.parse("2025-05-07"), hecho3.getFechaHecho());
 
     Hecho hecho4 = hechos.get(3);
     assertEquals("Incendio Forestal en Cordoba", hecho4.getTitulo());
     assertEquals("Hubo un incendio en Cordoba", hecho4.getDescripcion());
     assertEquals(Categoria.INCENDIO_FORESTAL, hecho4.getCategoria());
-    assertEquals("55.6666", hecho4.getLatitud());
-    assertEquals("98.5521", hecho4.getLongitud());
+    assertEquals("55.6666", hecho4.getUbicacion().getLatitud());
+    assertEquals("98.5521", hecho4.getUbicacion().getLongitud());
     assertEquals(LocalDate.parse("2025-04-05"), hecho4.getFechaHecho());
   }
 
