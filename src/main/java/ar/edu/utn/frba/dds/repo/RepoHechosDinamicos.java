@@ -21,7 +21,7 @@ public class RepoHechosDinamicos implements WithSimplePersistenceUnit {
   }
   public List<Hecho> obtenerHechos() {
     return entityManager()
-      .createQuery("from Hecho")
+      .createQuery("SELECT h FROM Hecho h", Hecho.class)
       .getResultList();
   }
 }

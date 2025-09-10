@@ -67,7 +67,7 @@ public class ColeccionTest {
 
     Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
     List<Criterio> criterios = List.of(criterio);
-
+  /*
     Hecho hecho = new Hecho("habia una vez",
             "holaholhola",
             Categoria.INCENDIO_FORESTAL,
@@ -77,8 +77,15 @@ public class ColeccionTest {
             LocalDate.now());
     hecho.marcarComoEliminado();
 
+   */
     FuenteDinamica fuente = new FuenteDinamica();
-    fuente.agregarHecho(hecho);
+    fuente.agregarHecho("habia una vez",
+      "holaholhola",
+      Categoria.INCENDIO_FORESTAL,
+      "1234",
+      "5678",
+      LocalDate.now(),
+      LocalDate.now());
 
     Coleccion coleccion = new ColeccionBuilder()
             .conHandle("ak1fjd1")

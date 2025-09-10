@@ -21,7 +21,7 @@ public class RepoSolicitudesDinamicas implements WithSimplePersistenceUnit {
 
   public List<SolicitudDinamica> getSolicitudes() {
     return entityManager()
-      .createQuery("SELECT s FROM SolicitudDinamica ")
+      .createQuery("SELECT s FROM SolicitudDinamica s", SolicitudDinamica.class)
       .getResultList();
   }
 

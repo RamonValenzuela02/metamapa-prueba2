@@ -24,7 +24,7 @@ public class RepoFuentesDelSistema implements WithSimplePersistenceUnit {
 
   public List<Fuente> obtenerFuentes(){
     return entityManager()
-      .createQuery("from Fuente", Fuente.class)
+      .createQuery("SELECT f FROM Fuente f", Fuente.class)
       .getResultList();
   }
 }

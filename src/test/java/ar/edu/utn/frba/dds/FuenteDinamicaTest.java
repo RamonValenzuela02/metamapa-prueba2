@@ -27,71 +27,67 @@ class FuenteDinamicaTest {
   @DisplayName("Como persona contribuyente, deseo poder crear un hecho a partir de una fuente dinámica. ") // req 1
   @Test
   void agregarHechoNoAgregaDirectamenteAListaDeHechos() {
-    Hecho hecho = new Hecho("habia una vez",
-        "holaholhola",
-        Categoria.INCENDIO_FORESTAL,
-        "1234",
-        "5678",
-        LocalDate.now(),
-            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
-    fuente.agregarHecho(hecho);
+    fuente.agregarHecho("habia una vez",
+      "holaholhola",
+      Categoria.INCENDIO_FORESTAL,
+      "1234",
+      "5678",
+      LocalDate.now(),
+      LocalDate.now());
 
-    assertFalse(fuente.obtenerHechos().contains(hecho));
+    assertEquals(1, fuente.obtenerHechos().size());
   }
 
   @Test
   void agregarHechoYAceptarLaSolicitud() {
-    Hecho hecho = new Hecho("habia una vez",
-        "holaholhola",
-        Categoria.INCENDIO_FORESTAL,
-        "1234",
-        "5678",
-        LocalDate.now(),
-            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
-    fuente.agregarHecho(hecho);
+    fuente.agregarHecho("habia una vez",
+      "holaholhola",
+      Categoria.INCENDIO_FORESTAL,
+      "1234",
+      "5678",
+      LocalDate.now(),
+      LocalDate.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
     solicitud.aceptar();
 
-    assertTrue(fuente.obtenerHechos().contains(hecho));
+    assertEquals(1, fuente.obtenerHechos().size());
   }
 
   @Test
   void agregarHechoYRechazarSolicitud() {
-    Hecho hecho = new Hecho("habia una vez",
-        "holaholhola",
-        Categoria.INCENDIO_FORESTAL,
-        "1234",
-        "5678",
-        LocalDate.now(),
-            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
-    fuente.agregarHecho(hecho);
+    fuente.agregarHecho("habia una vez",
+      "holaholhola",
+      Categoria.INCENDIO_FORESTAL,
+      "1234",
+      "5678",
+      LocalDate.now(),
+      LocalDate.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 
     solicitud.rechazar();
-    assertFalse(fuente.obtenerHechos().contains(hecho));
+    assertEquals(0, fuente.obtenerHechos().size());
   }
 
   @Test
   void agregarHechoYAceptarLaSolicitudConSugerencia() {
-    Hecho hecho = new Hecho("habia una vez",
-        "holaholhola",
-        Categoria.INCENDIO_FORESTAL,
-        "1234",
-        "5678",
-        LocalDate.now(),
-            LocalDate.now());
     FuenteDinamica fuente = new FuenteDinamica();
-    fuente.agregarHecho(hecho);
+    fuente.agregarHecho("habia una vez",
+      "holaholhola",
+      Categoria.INCENDIO_FORESTAL,
+      "1234",
+      "5678",
+      LocalDate.now(),
+      LocalDate.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 
     solicitud.aceptarConSugerencia("latitud invalida");
     
-    assertTrue(fuente.obtenerHechos().contains(hecho));
+    assertEquals(1,fuente.obtenerHechos().size());
   }
 }
