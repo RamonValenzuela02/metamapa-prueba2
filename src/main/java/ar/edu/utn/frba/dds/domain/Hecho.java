@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import ar.edu.utn.frba.dds.domain.ubicacion.Ubicacion;
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import java.util.Arrays;
 import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 @Getter
 @Entity
@@ -63,5 +65,18 @@ public class Hecho {
 
   public boolean estaEliminado() {
     return eliminado;
+  }
+
+  public boolean cumpleConBusqueda(String texto) {
+    LevenshteinDistance distancia = new LevenshteinDistance();
+    int tolerancia = 2; //tolera hasta dos errores por palabra
+
+    String[] palabrasBusqueda =  texto.toLowerCase().split("\\s+");
+    String textoBusqueda = titulo.toLowerCase() + " " + descripcion.toLowerCase();
+    String[] tokens = textoBusqueda.split("\\s+");
+
+    return Arrays.stream(palabrasBusqueda)
+      .allMatch(palabra -> Arrays.stream(tokens)
+        .anyMatch(token -> distancia.apply(token, palabra) <= tolerancia));
   }
 }
