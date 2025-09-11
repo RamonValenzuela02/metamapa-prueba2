@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.Hecho;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

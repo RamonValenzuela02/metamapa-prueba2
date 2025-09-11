@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.domain.fuente;
 
 import ar.edu.utn.frba.dds.domain.Hecho;
-import ar.edu.utn.frba.dds.repo.RepoFuentesDelSistema;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.persistence.Entity;
