@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
 import ar.edu.utn.frba.dds.domain.fuente.FuenteEstatica;
 import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.domain.coleccion.ModoNavegacion;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -151,8 +152,8 @@ public class ColeccionTest {
             Categoria.INCENDIO_FORESTAL,
             "10.0",
             "20.0",
-            LocalDate.of(2025, 6, 30),
-            LocalDate.of(2025, 6, 30));
+            LocalDateTime.of(2025, 6, 30,17,0,0,0),
+            LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
     Hecho hecho2 = new Hecho(
             "Incendio Forestal",
@@ -160,8 +161,8 @@ public class ColeccionTest {
             Categoria.INCENDIO_FORESTAL,
             "10.0",
             "20.0",
-            LocalDate.of(2025, 6, 30),
-            LocalDate.of(2025, 6, 30));
+            LocalDateTime.of(2025, 6, 30,17,0,0,0),
+            LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
     Fuente fuenteMock = mock(Fuente.class);
     when(fuenteMock.obtenerHechos()).thenReturn(List.of(hecho1, hecho2));

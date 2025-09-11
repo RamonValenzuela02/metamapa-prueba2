@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import ar.edu.utn.frba.dds.domain.ubicacion.Ubicacion;
 import java.time.LocalDate;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import javax.persistence.Embedded;
 import javax.persistence.EnumType;
@@ -31,14 +32,14 @@ public class Hecho {
   @Embedded
   private final Ubicacion ubicacion;
   @Column
-  private final LocalDate fechaHecho;
+  private final LocalDateTime fechaHecho;
   @Column
-  private final LocalDate fechaCarga;
+  private final LocalDateTime fechaCarga;
   @Column
   private boolean eliminado = false;
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
-               String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
+               String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {
     validarNotNull(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
     this.titulo = titulo;
     this.descripcion = descripcion;
@@ -49,7 +50,7 @@ public class Hecho {
   }
 
   private void validarNotNull(String titulo, String descripcion, Categoria categoria,
-                              String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
+                              String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {
     requireNonNull(titulo);
     requireNonNull(descripcion);
     requireNonNull(categoria);
@@ -78,5 +79,13 @@ public class Hecho {
     return Arrays.stream(palabrasBusqueda)
       .allMatch(palabra -> Arrays.stream(tokens)
         .anyMatch(token -> distancia.apply(token, palabra) <= tolerancia));
+  }
+
+  public String getProvincia() {
+    return ubicacion.getProvincia();
+  }
+
+  public Integer getHoraDelHecho() {
+    return fechaHecho.getHour();
   }
 }

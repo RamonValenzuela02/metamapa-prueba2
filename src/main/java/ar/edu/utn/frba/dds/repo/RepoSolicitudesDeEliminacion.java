@@ -37,4 +37,8 @@ public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
       .createQuery("SELECT s FROM SolicitudDeEliminacion s", SolicitudDeEliminacion.class)
       .getResultList();
   }
+
+  public int cantidadDeSolicitudesRechazadasPorSpam() {
+    return cantidadDeSpam;
+  }
 }
