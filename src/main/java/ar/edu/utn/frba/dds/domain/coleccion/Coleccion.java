@@ -104,7 +104,7 @@ public class Coleccion {
     }
   }
 
-  private void actualizarHechosConsensuados() {
+  public void actualizarHechosConsensuados() {
     fuente.obtenerHechos().forEach(this::actualizarConsensuado);
   }
 

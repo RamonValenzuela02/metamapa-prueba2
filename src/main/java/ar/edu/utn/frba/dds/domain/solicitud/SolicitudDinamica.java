@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.domain.ubicacion.Ubicacion;
 import ar.edu.utn.frba.dds.repo.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicas;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -33,16 +34,16 @@ public class SolicitudDinamica {
   @Column
   private final String longitud;
   @Column
-  private final LocalDate fechaHecho;
+  private final LocalDateTime fechaHecho;
   @Column
-  private final LocalDate fechaCarga;
+  private final LocalDateTime fechaCarga;
   @Enumerated(EnumType.STRING)
   private EstadoSolicitudDinamica estado;
   @Column
   @Setter
   private String sugerencia;
 
-  public SolicitudDinamica(String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDate fechaHecho, LocalDate fechaCarga) {
+  public SolicitudDinamica(String titulo, String descripcion, Categoria categoria, String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.categoria = categoria;

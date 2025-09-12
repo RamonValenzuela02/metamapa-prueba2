@@ -7,6 +7,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
@@ -39,7 +40,7 @@ public class FuenteEstatica extends Fuente {
         Categoria categoria = Categoria.valueOf(fila[2]);
         String latitud = fila[3];
         String longitud = fila[4];
-        LocalDate fecha = LocalDate.parse(fila[5]);
+        LocalDateTime fecha = LocalDateTime.parse(fila[5]);
 
         Hecho hecho = new Hecho(titulo, descripcion, categoria, latitud, longitud, fecha, fecha);
         agregarHechoNuevo(hecho, hechos);

@@ -21,4 +21,7 @@ public abstract class Fuente {
 
   public abstract List<Hecho> obtenerHechos();
 
+  //es para la fuenteDemo pero no se me ocurre otra cosa
+  public void actualizarHechos() {}
+
 }

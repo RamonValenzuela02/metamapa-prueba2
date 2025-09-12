@@ -85,8 +85,8 @@ public class ColeccionTest {
       Categoria.INCENDIO_FORESTAL,
       "1234",
       "5678",
-      LocalDate.now(),
-      LocalDate.now());
+      LocalDateTime.now(),
+      LocalDateTime.now());
 
     Coleccion coleccion = new ColeccionBuilder()
             .conHandle("ak1fjd1")

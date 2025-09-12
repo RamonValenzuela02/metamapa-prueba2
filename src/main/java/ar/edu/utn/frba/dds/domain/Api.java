@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import java.time.LocalDateTime;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -120,8 +121,8 @@ public class Api {
         Categoria categoria = Categoria.valueOf((String) dato.get("categoria"));
         String latitud = (String) dato.get("latitud");
         String longitud = (String) dato.get("longitud");
-        LocalDate fechaHecho = LocalDate.parse((String) dato.get("fechaHecho"));
-        LocalDate fechaCarga = LocalDate.parse((String) dato.get("fechaCarga"));
+        LocalDateTime fechaHecho = LocalDateTime.parse((String) dato.get("fechaHecho"));
+        LocalDateTime fechaCarga = LocalDateTime.parse((String) dato.get("fechaCarga"));
 
         return new Hecho(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
     }

@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
 import ar.edu.utn.frba.dds.domain.Hecho;
 import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicas;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,8 +34,8 @@ class FuenteDinamicaTest {
       Categoria.INCENDIO_FORESTAL,
       "1234",
       "5678",
-      LocalDate.now(),
-      LocalDate.now());
+      LocalDateTime.now(),
+      LocalDateTime.now());
 
     assertEquals(1, fuente.obtenerHechos().size());
   }
@@ -47,8 +48,8 @@ class FuenteDinamicaTest {
       Categoria.INCENDIO_FORESTAL,
       "1234",
       "5678",
-      LocalDate.now(),
-      LocalDate.now());
+      LocalDateTime.now(),
+      LocalDateTime.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
     solicitud.aceptar();
@@ -64,8 +65,8 @@ class FuenteDinamicaTest {
       Categoria.INCENDIO_FORESTAL,
       "1234",
       "5678",
-      LocalDate.now(),
-      LocalDate.now());
+      LocalDateTime.now(),
+      LocalDateTime.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 
@@ -81,8 +82,8 @@ class FuenteDinamicaTest {
       Categoria.INCENDIO_FORESTAL,
       "1234",
       "5678",
-      LocalDate.now(),
-      LocalDate.now());
+      LocalDateTime.now(),
+      LocalDateTime.now());
 
     SolicitudDinamica solicitud  = RepoSolicitudesDinamicas.getInstance().getSolicitudes().get(0);
 

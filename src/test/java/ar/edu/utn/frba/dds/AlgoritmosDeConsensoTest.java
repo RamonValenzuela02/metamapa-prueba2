@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.domain.criterio.Categoria;
 import ar.edu.utn.frba.dds.domain.fuente.Fuente;
 import ar.edu.utn.frba.dds.domain.Hecho;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -47,8 +48,8 @@ public class AlgoritmosDeConsensoTest {
                 Categoria.INCENDIO_FORESTAL,
                 "10.0",
                 "20.0",
-                LocalDate.of(2025, 6, 30),
-                LocalDate.of(2025, 6, 30));
+                LocalDateTime.of(2025, 6, 30,17,0,0,0),
+                LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
         Hecho hecho2 = new Hecho(
                 "Incendio Forestal",
@@ -56,8 +57,8 @@ public class AlgoritmosDeConsensoTest {
                 Categoria.INCENDIO_FORESTAL,
                 "10.0",
                 "20.0",
-                LocalDate.of(2025, 6, 30),
-                LocalDate.of(2025, 6, 30));
+                LocalDateTime.of(2025, 6, 30,17,0,0,0),
+                LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
         Fuente fuente1 = mock(Fuente.class);
         Fuente fuente2 = mock(Fuente.class);
@@ -79,8 +80,8 @@ public class AlgoritmosDeConsensoTest {
                 Categoria.INCENDIO_FORESTAL,
                 "10.0",
                 "20.0",
-                LocalDate.of(2025, 6, 30),
-                LocalDate.of(2025, 6, 30));
+                LocalDateTime.of(2025, 6, 30,17,0,0,0),
+                LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
         Fuente fuente1 = mock(Fuente.class);
         Fuente fuente2 = mock(Fuente.class);
@@ -129,8 +130,8 @@ public class AlgoritmosDeConsensoTest {
                 Categoria.INCENDIO_FORESTAL,
                 "10.0",
                 "20.0",
-                LocalDate.of(2025, 6, 30),
-                LocalDate.of(2025, 6, 30));
+                LocalDateTime.of(2025, 6, 30,17,0,0,0),
+                LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
         Fuente fuente1 = mock(Fuente.class);
         Fuente fuente2 = mock(Fuente.class);
@@ -154,8 +155,8 @@ public class AlgoritmosDeConsensoTest {
                 Categoria.INCENDIO_FORESTAL,
                 "10.0",
                 "20.0",
-                LocalDate.of(2025, 6, 30),
-                LocalDate.of(2025, 6, 30));
+                LocalDateTime.of(2025, 6, 30,17,0,0,0),
+                LocalDateTime.of(2025, 6, 30,17,0,0,0));
 
         Fuente fuente1 = mock(Fuente.class);
         Fuente fuente2 = mock(Fuente.class);

@@ -33,6 +33,7 @@ public class FuenteDemo extends  Fuente {
     //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
+  @Override
   public void actualizarHechos() {
     Map<String, Object> datosHecho = conexion.siguienteHecho(url, fechaUltimaConsulta);
     while (datosHecho != null) {
@@ -49,8 +50,8 @@ public class FuenteDemo extends  Fuente {
     Categoria categoria = Categoria.fromString((String) datos.get("categoria"));
     String latitud = (String) datos.get("latitud");
     String longitud = (String) datos.get("longitud");
-    LocalDate fechaHecho = (LocalDate) datos.get("fechaHecho");
-    LocalDate fechaCarga = (LocalDate) datos.get("fechaCarga");
+    LocalDateTime fechaHecho = (LocalDateTime) datos.get("fechaHecho");
+    LocalDateTime fechaCarga = (LocalDateTime) datos.get("fechaCarga");
 
     return new Hecho(titulo, descripcion, categoria, latitud, longitud, fechaHecho, fechaCarga);
   }
