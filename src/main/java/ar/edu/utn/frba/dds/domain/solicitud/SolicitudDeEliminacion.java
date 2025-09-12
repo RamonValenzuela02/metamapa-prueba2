@@ -23,17 +23,19 @@ public class SolicitudDeEliminacion {
   private Long id;
   @Column
   @Getter
-  private final String tituloHecho;
+  private String tituloHecho;
   @Column
   @Getter
-  private final String motivo;
+  private String motivo;
   @Enumerated(EnumType.STRING)
   @Getter
   private Estado estado = Estado.PENDIENTE;
   @OneToOne
-  private final Fuente fuente;
+  private Fuente fuente;
   //@Transient
   //private static final List<SolicitudDeEliminacion> solicitudes = new ArrayList<>();
+
+  protected SolicitudDeEliminacion() {};
 
   public SolicitudDeEliminacion(String tituloHecho, String motivo, Fuente fuenteCsv) {
     this.tituloHecho = tituloHecho;

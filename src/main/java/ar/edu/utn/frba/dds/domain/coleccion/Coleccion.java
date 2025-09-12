@@ -48,7 +48,7 @@ public class Coleccion {
   @Getter
   @Setter
   private AlgoritmoConsenso algoritmoConsenso;
-  @Transient
+  @ManyToMany
   @Getter
   @Setter
   private List<Hecho> hechosConsensuados = new ArrayList<>();

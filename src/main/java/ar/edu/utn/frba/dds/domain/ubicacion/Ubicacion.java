@@ -6,14 +6,16 @@ import lombok.Getter;
 @Embeddable
 public class Ubicacion {
   @Getter
-  private final String latitud;
+  private String latitud;
   @Getter
-  private final String longitud;
+  private String longitud;
 
   public Ubicacion(String latitud, String longitud) {
     this.latitud = latitud;
     this.longitud = longitud;
   }
+
+  protected Ubicacion(){};
 
   public String getProvincia(){
     ClaseMoldeProvincia respuesta = ServicioProvincia.getInstancia().provincia(latitud, longitud);

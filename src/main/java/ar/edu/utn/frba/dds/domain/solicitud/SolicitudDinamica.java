@@ -24,19 +24,19 @@ public class SolicitudDinamica {
   @GeneratedValue
   private Long id;
   @Column
-  private final String titulo;
+  private String titulo;
   @Column
-  private final String descripcion;
+  private String descripcion;
   @Enumerated(EnumType.STRING)
-  private final Categoria categoria;
+  private Categoria categoria;
   @Column
-  private final String latitud;
+  private String latitud;
   @Column
-  private final String longitud;
+  private String longitud;
   @Column
-  private final LocalDateTime fechaHecho;
+  private LocalDateTime fechaHecho;
   @Column
-  private final LocalDateTime fechaCarga;
+  private LocalDateTime fechaCarga;
   @Enumerated(EnumType.STRING)
   private EstadoSolicitudDinamica estado;
   @Column
@@ -53,6 +53,8 @@ public class SolicitudDinamica {
     this.fechaCarga = fechaCarga;
     this.estado = EstadoSolicitudDinamica.PENDIENTE;
   }
+
+  protected SolicitudDinamica() {};
 
   public void aceptar() {
     this.estado = EstadoSolicitudDinamica.ACEPTADA;

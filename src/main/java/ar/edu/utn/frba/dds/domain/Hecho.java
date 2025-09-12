@@ -24,19 +24,21 @@ public class Hecho {
   @GeneratedValue
   private Long id;
   @Column
-  private final String titulo;
+  private String titulo;
   @Column
-  private final String descripcion;
+  private String descripcion;
   @Enumerated(EnumType.STRING)
-  private final Categoria categoria;
+  private Categoria categoria;
   @Embedded
-  private final Ubicacion ubicacion;
+  private Ubicacion ubicacion;
   @Column
-  private final LocalDateTime fechaHecho;
+  private LocalDateTime fechaHecho;
   @Column
-  private final LocalDateTime fechaCarga;
+  private LocalDateTime fechaCarga;
   @Column
   private boolean eliminado = false;
+
+  protected Hecho(){};
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
                String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {
