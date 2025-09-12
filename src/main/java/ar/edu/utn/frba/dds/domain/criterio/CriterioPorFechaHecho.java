@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.domain.criterio;
 
 import ar.edu.utn.frba.dds.domain.Hecho;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
@@ -14,11 +15,11 @@ import java.time.LocalDate;
 @Getter
 @DiscriminatorValue("FechaHecho")
 public class CriterioPorFechaHecho extends Criterio {
-  @Transient
+  @Column
   private final LocalDateTime fechaDesde;
-  @Transient
+  @Column
   private final LocalDateTime fechaHasta;
-  @Transient
+  @Column
   private final LocalDateTime fechaFiltro;
 
   public CriterioPorFechaHecho(String fechaFiltro, String fechaDesde, String fechaHasta) {
