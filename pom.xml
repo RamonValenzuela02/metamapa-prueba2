@@ -196,43 +196,73 @@
           <target>17</target>
         </configuration>
       </plugin>
-      <plugin>
-        <!-- Build an executable JAR -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>Main</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
         <executions>
+
           <execution>
+            <id>fuente-demo</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
             </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ActualizarFuenteDemo</mainClass>
+                </manifest>
+              </archive>
+              <finalName>fuente-demo</finalName>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>hechos-agregados</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ActualizarHechosFuenteAgregadora</mainClass>
+                </manifest>
+              </archive>
+              <finalName>hechos-agregados</finalName>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>consensuar-hechos</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ConsensuarHechos</mainClass>
+                </manifest>
+              </archive>
+              <finalName>consensuar-hechos</finalName>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>ar.edu.utn.frba.dds.domain.Main</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
       </plugin>
 
     </plugins>
   </build>
+
 </project>

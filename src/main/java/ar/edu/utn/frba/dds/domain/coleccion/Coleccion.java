@@ -63,23 +63,7 @@ public class Coleccion {
     this.criterios = criterios;
     this.algoritmoConsenso = algoritmoConsenso;
   }
-  /*
-  public List<Hecho> getHechos() {
-    List<Hecho> hechos = fuente.obtenerHechos();
-    if (modoNavegacion == ModoNavegacion.IRRESTRICTA) {
-      return hechos.stream()
-          .filter(hecho -> !hecho.estaEliminado())
-          .filter(this::cumpleTodosLosCriterios)
-          .collect(Collectors.toList());
-    } else {
-      return hechos.stream()
-          .filter(hecho -> !hecho.estaEliminado())
-          .filter(this::estaConsensuado)
-          .filter(this::cumpleTodosLosCriterios)
-          .collect(Collectors.toList());
-    }
-  }
-  */
+
   public List<Hecho> getHechos() {
     return fuente.obtenerHechos().stream()
       .filter(hecho -> !hecho.estaEliminado())

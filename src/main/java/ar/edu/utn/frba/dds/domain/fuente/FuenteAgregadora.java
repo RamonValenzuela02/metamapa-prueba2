@@ -4,18 +4,18 @@ import ar.edu.utn.frba.dds.domain.Hecho;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 @Entity
 public class FuenteAgregadora extends Fuente {
-  @Transient
+  @ManyToMany
   private List<Hecho> hechos = new ArrayList<>();
-  @Transient //aca hay un many to many
+  @ManyToMany
   private List<Fuente> fuentesAgregadas;
 
   public FuenteAgregadora() {
     this.fuentesAgregadas = new ArrayList<>();
-    //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
 
   public void agregarFuente(Fuente fuente) {
@@ -28,22 +28,13 @@ public class FuenteAgregadora extends Fuente {
     this.fuentesAgregadas.remove(fuente);
   }
 
-  /*
   @Override
   public List<Hecho> obtenerHechos() {
-    return fuentesAgregadoras.flatmap(fuente -> fuente.obtenerHechos());
-  }
-  */
-  //aca no tendria que retornar los hechos de cada fuente??? para mi es como hice arriba
-  @Override
-  public List<Hecho> obtenerHechos() {
-    return hechos;
-  }
-
-  public void actualizarCache() {
-    this.hechos = this.fuentesAgregadas.stream()
+    hechos = this.fuentesAgregadas.stream()
         .flatMap(fuente -> fuente.obtenerHechos().stream())
         .collect(Collectors.toList());
+
+    return  hechos;
   }
 
 }
