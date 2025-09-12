@@ -16,17 +16,19 @@ import java.time.LocalDate;
 @DiscriminatorValue("FechaHecho")
 public class CriterioPorFechaHecho extends Criterio {
   @Column
-  private final LocalDateTime fechaDesde;
+  private LocalDateTime fechaDesde;
   @Column
-  private final LocalDateTime fechaHasta;
+  private LocalDateTime fechaHasta;
   @Column
-  private final LocalDateTime fechaFiltro;
+  private LocalDateTime fechaFiltro;
 
   public CriterioPorFechaHecho(String fechaFiltro, String fechaDesde, String fechaHasta) {
     this.fechaDesde = LocalDateTime.parse(fechaDesde);
     this.fechaHasta = LocalDateTime.parse(fechaHasta);
     this.fechaFiltro = LocalDateTime.parse(fechaFiltro);
   }
+
+  public CriterioPorFechaHecho() {};
 
   @Override
   public Boolean cumpleCriterio(Hecho hecho) {

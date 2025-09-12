@@ -22,6 +22,8 @@ public class CriterioPorAntiguedad extends Criterio {
     this.antiguedad = antiguedad;
   }
 
+  protected CriterioPorAntiguedad() {};
+
   @Override
   public Boolean cumpleCriterio(Hecho hecho) {
     Duration duracion = Duration.between(hecho.getFechaCarga(), fechaReferencia);

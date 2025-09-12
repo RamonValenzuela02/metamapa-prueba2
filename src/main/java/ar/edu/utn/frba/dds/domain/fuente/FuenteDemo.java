@@ -17,14 +17,15 @@ import javax.persistence.Transient;
 @Entity
 public class FuenteDemo extends  Fuente {
   @Embedded
-  private final Conexion conexion;
+  private Conexion conexion;
   @Transient
-  private final URL url;
+  private URL url;
   @Column
   private LocalDateTime fechaUltimaConsulta;
   @Transient
   private List<Hecho> hechosDemo;
 
+  protected FuenteDemo(){};
   public FuenteDemo(Conexion conexion, URL url) {
     this.conexion = conexion;
     this.url = url;

@@ -24,12 +24,14 @@ public class FuenteEstatica extends Fuente {
   @Transient
   List<Hecho> hechos = new ArrayList<>();
   @Column
-  private final String path;
+  private String path;
 
   public FuenteEstatica(String path) {
     this.path = path;
     //RepoFuentesDelSistema.getInstance().agregarFuente(this);
   }
+
+  protected FuenteEstatica(){};
 
   public List<Hecho> obtenerHechos() {
     try (CSVReader reader = new CSVReader(new FileReader(path))) {

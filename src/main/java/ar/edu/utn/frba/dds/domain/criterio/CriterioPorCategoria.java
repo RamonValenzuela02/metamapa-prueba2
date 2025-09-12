@@ -14,12 +14,13 @@ import lombok.Getter;
 public class CriterioPorCategoria extends Criterio {
   @Enumerated(EnumType.STRING)
   @Getter
-  private final Categoria categoria;
-
+  private Categoria categoria;
 
   public CriterioPorCategoria(Categoria categoria) {
     this.categoria = categoria;
   }
+
+  public CriterioPorCategoria() {};
 
   @Override
   public Boolean cumpleCriterio(Hecho hecho) {

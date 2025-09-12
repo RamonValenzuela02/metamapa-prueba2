@@ -14,14 +14,16 @@ import java.time.LocalDate;
 @DiscriminatorValue("FechaCarga")
 public class CriterioPorFechaCarga extends Criterio {
   @Column
-  private final LocalDateTime fechaDesde;
+  private LocalDateTime fechaDesde;
   @Column
-  private final LocalDateTime fechaHasta;
+  private LocalDateTime fechaHasta;
 
   public CriterioPorFechaCarga(String fechaFiltro, String fechaDesde, String fechaHasta) {
     this.fechaDesde = LocalDateTime.parse(fechaDesde);
     this.fechaHasta = LocalDateTime.parse(fechaHasta);
   }
+
+  public CriterioPorFechaCarga() {};
 
   @Override
   public Boolean cumpleCriterio(Hecho hecho) {

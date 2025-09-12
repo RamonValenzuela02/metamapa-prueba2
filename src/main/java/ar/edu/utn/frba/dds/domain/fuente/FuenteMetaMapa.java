@@ -15,12 +15,15 @@
   @Entity
   public class FuenteMetaMapa extends Fuente {
     @Transient
-    private final Api api;
+    private Api api;
 
     public FuenteMetaMapa(Api api) {
       this.api = api;
       //RepoFuentesDelSistema.getInstance().agregarFuente(this);
     }
+
+    protected FuenteMetaMapa() {};
+
     // Implementación del metodo abstracto de Fuente.
     // Devuelve todos los hechos sin ningún criterio (GET a /hecho)
     @Override
