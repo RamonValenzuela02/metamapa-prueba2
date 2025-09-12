@@ -30,17 +30,17 @@ public class Coleccion {
   private Long id;
   @Column
   @Getter
-  private final String handle;
+  private String handle;
   @Column
   @Getter
-  private final String titulo;
+  private String titulo;
   @Column
   @Getter
-  private final String descripcion;
+  private String descripcion;
   @ManyToOne
   //JoinColumn me parece que iria
   @Getter
-  private final Fuente fuente;
+  private Fuente fuente;
   @ManyToMany
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
@@ -53,6 +53,7 @@ public class Coleccion {
   @Setter
   private List<Hecho> hechosConsensuados = new ArrayList<>();
 
+  protected Coleccion(){};
 
   public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
     this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
