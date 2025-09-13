@@ -25,11 +25,11 @@ public class ExportarCSVSpam {
         try (FileWriter fileWriter = new FileWriter("cantidad_solicitudes_spam.csv");
              CSVWriter writer = new CSVWriter(fileWriter)) {
 
-            writer.writeNext(new String[] { "Cantidad_Total_Spam" });
-            writer.writeNext(new String[] { String.valueOf(cantidad) });
+            writer.writeNext(new String[]{"Cantidad_Total_Spam"});
+            writer.writeNext(new String[]{String.valueOf(cantidad)});
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
 }
