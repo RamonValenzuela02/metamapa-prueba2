@@ -66,17 +66,7 @@ public class ColeccionTest {
 
     Criterio criterio = new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL);
     List<Criterio> criterios = List.of(criterio);
-  /*
-    Hecho hecho = new Hecho("habia una vez",
-            "holaholhola",
-            Categoria.INCENDIO_FORESTAL,
-            "1234",
-            "5678",
-            LocalDate.now(),
-            LocalDate.now());
-    hecho.marcarComoEliminado();
 
-   */
     FuenteDinamica fuente = new FuenteDinamica();
     fuente.agregarHecho("habia una vez",
       "holaholhola",

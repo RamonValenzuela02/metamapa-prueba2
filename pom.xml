@@ -126,6 +126,26 @@
       <artifactId>handlebars</artifactId>
       <version>4.3.1</version>
     </dependency>
+
+    <!-- dependecnias provicionales por error de JETTY-->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>11.0.23</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>11.0.23</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <version>11.0.23</version>
+    </dependency>
+
   </dependencies>
 
   <build>
