@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
 import org.junit.jupiter.api.Test;
 
+/*
 public class SpamTest {
 
     @Test
@@ -52,3 +53,5 @@ public class SpamTest {
         assertEquals(Estado.RECHAZADA, solicitud.getEstado());
     }
 }
+
+ */

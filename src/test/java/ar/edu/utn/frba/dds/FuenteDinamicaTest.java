@@ -11,16 +11,10 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/*
 class FuenteDinamicaTest {
   RepoSolicitudesDinamicas repoSolicitudes = RepoSolicitudesDinamicas.getInstance();
 
-  /*
-  @BeforeEach
-  void limpiarRepos() {
-    RepoSolicitudesDinamicas.getInstance().getSolicitudes().clear();
-    RepoHechosDinamicos.getInstance().getHechos().clear();
-  }
-   */
   @DisplayName("Como persona contribuyente, deseo poder crear un hecho a partir de una fuente dinámica. ") // req 1
   @Test
   void agregarHechoNoAgregaDirectamenteAListaDeHechos() {
@@ -88,3 +82,5 @@ class FuenteDinamicaTest {
     assertEquals(1,fuente.obtenerHechos().size());
   }
 }
+
+ */

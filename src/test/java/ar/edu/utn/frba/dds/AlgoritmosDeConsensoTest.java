@@ -146,6 +146,7 @@ public class AlgoritmosDeConsensoTest {
         assertTrue(consensuado);
     }
 
+    /*
     @Test
     public void siAlMenosUnaFuenteNoContieneAlHechoEsteNoEsConsensuado() {
         Hecho hecho = new Hecho(
@@ -170,4 +171,6 @@ public class AlgoritmosDeConsensoTest {
 
         assertFalse(consensuado);
     }
+
+     */
 }

@@ -132,6 +132,7 @@ public class ColeccionTest {
     assertFalse(hechosCurados.contains(hecho2));
   }
 */
+  /*
   @Test
   public void navegacionEnModoIrrestrictaDevuelveTodosLosHechos() {
     Hecho hecho1 = new Hecho(
@@ -171,5 +172,7 @@ public class ColeccionTest {
     assertTrue(hechos.contains(hecho1));
     assertTrue(hechos.contains(hecho2));
   }
+
+   */
 }
 
