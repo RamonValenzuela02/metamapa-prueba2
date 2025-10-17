@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.domain.criterio.Categoria;
-import ar.edu.utn.frba.dds.domain.fuente.FuenteEstatica;
-import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.fuente.FuenteEstatica;
+import ar.edu.utn.frba.dds.model.Hecho;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

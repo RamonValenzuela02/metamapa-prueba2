@@ -101,6 +101,31 @@
       <artifactId>converter-gson</artifactId>
       <version>2.9.0</version>
     </dependency>
+
+    <!--JAVALIN -->
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin</artifactId>
+      <version>6.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.11</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin-rendering</artifactId>
+      <version>6.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <version>4.3.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -215,7 +240,7 @@
               </descriptorRefs>
               <archive>
                 <manifest>
-                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ActualizarFuenteDemo</mainClass>
+                  <mainClass>ar.edu.utn.frba.dds.model.tareasExternas.ActualizarFuenteDemo</mainClass>
                 </manifest>
               </archive>
               <finalName>fuente-demo</finalName>
@@ -234,7 +259,7 @@
               </descriptorRefs>
               <archive>
                 <manifest>
-                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ActualizarHechosFuenteAgregadora</mainClass>
+                  <mainClass>ar.edu.utn.frba.dds.model.tareasExternas.ActualizarHechosFuenteAgregadora</mainClass>
                 </manifest>
               </archive>
               <finalName>hechos-agregados</finalName>
@@ -253,7 +278,7 @@
               </descriptorRefs>
               <archive>
                 <manifest>
-                  <mainClass>ar.edu.utn.frba.dds.domain.tareasExternas.ConsensuarHechos</mainClass>
+                  <mainClass>ar.edu.utn.frba.dds.model.tareasExternas.ConsensuarHechos</mainClass>
                 </manifest>
               </archive>
               <finalName>consensuar-hechos</finalName>

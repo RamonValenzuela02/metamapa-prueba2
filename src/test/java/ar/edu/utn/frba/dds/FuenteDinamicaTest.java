@@ -3,15 +3,11 @@ package ar.edu.utn.frba.dds;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
-import ar.edu.utn.frba.dds.domain.solicitud.SolicitudDinamica;
-import ar.edu.utn.frba.dds.repo.RepoHechosDinamicos;
-import java.time.LocalDate;
-import ar.edu.utn.frba.dds.domain.criterio.Categoria;
-import ar.edu.utn.frba.dds.domain.fuente.FuenteDinamica;
-import ar.edu.utn.frba.dds.domain.Hecho;
-import ar.edu.utn.frba.dds.repo.RepoSolicitudesDinamicas;
+import ar.edu.utn.frba.dds.model.solicitud.SolicitudDinamica;
+import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.fuente.FuenteDinamica;
+import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDinamicas;
 import java.time.LocalDateTime;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

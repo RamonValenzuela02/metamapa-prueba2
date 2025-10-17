@@ -1,13 +1,12 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
-import ar.edu.utn.frba.dds.domain.criterio.Categoria;
-import ar.edu.utn.frba.dds.domain.fuente.Fuente;
-import ar.edu.utn.frba.dds.domain.Hecho;
+import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
+import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.fuente.Fuente;
+import ar.edu.utn.frba.dds.model.Hecho;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -6,12 +6,12 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import ar.edu.utn.frba.dds.domain.coleccion.Coleccion;
-import ar.edu.utn.frba.dds.domain.consenso.AlgoritmoConsenso;
-import ar.edu.utn.frba.dds.domain.criterio.Criterio;
-import ar.edu.utn.frba.dds.domain.criterio.CriterioPorAntiguedad;
-import ar.edu.utn.frba.dds.domain.fuente.Conexion;
-import ar.edu.utn.frba.dds.domain.fuente.FuenteDemo;
+import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
+import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
+import ar.edu.utn.frba.dds.model.criterio.Criterio;
+import ar.edu.utn.frba.dds.model.criterio.CriterioPorAntiguedad;
+import ar.edu.utn.frba.dds.model.fuente.Conexion;
+import ar.edu.utn.frba.dds.model.fuente.FuenteDemo;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
