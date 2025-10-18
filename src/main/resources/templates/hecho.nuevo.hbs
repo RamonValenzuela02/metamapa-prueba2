@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>PROYECTO DISENIO 26</title>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
+            <li><a href="/login">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+</head>
+<body>
+    <form action="/hechos" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="title">
+
+        <label for="descripcion">Descripcion:</label>
+        <input type="text" name="description">
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" name="categoria">
+
+        <label for="latitud">Latitud:</label>
+        <input type="text" name="latitud">
+
+        <label for="longitud">Longitud:</label>
+        <input type="text" name="longitud">
+
+        <label for="fechaHecho">Fecha del Hecho:</label>
+        <input type="date" name="fechaHecho">
+
+        <label for="fechaCarga">Fecha de Carga:</label>
+        <input type="date" name="fechaCarga">
+
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
