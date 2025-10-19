@@ -1,14 +1,15 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.controllers.HomeController;
+import ar.edu.utn.frba.dds.controllers.SessionController;
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import io.javalin.Javalin;
 import java.util.HashMap;
 
 public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
-    HomeController controller = new HomeController();
-
+    HomeController home = new HomeController();
+    SessionController session = new SessionController();
     /*
     app.before(ctx -> {
       entityManager().clear();
@@ -23,14 +24,14 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 2
     //crear hecho
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
-    app.post("/hechos", controller::crearHecho);
+    app.post("/hechos", home::crearHecho);
     //crear solicitud de eliminacion
     //app.get("/hechos/:id/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
     //app.post("/hechos/:id/eliminar", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     //login
-    app.get("/login", ctx -> ctx.result("login"));
+    app.get("/login", session::show);
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
