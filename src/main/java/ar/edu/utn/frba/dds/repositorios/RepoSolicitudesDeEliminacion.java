@@ -9,9 +9,18 @@ import lombok.Getter;
 
 
 public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
+  private static RepoSolicitudesDeEliminacion instancia;
+
   private final DetectorDeSpam detector;
   @Getter
   private int cantidadDeSpam = 0;
+
+  public static RepoSolicitudesDeEliminacion getInstance(DetectorDeSpam detector) {
+    if (instancia == null) {
+      instancia = new RepoSolicitudesDeEliminacion(detector);
+    }
+    return instancia;
+  }
 
   public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {
     this.detector = detector;

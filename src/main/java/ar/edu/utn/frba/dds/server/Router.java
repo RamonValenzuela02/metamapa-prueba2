@@ -16,7 +16,7 @@ public class Router implements SimplePersistenceTest {
      */
 
 
-    //REQUERIMIENTO 1 (me falta lo del mapa)
+    //REQUERIMIENTO 1
     app.get("/", context -> context.redirect("/home"));
     app.get("/home", ctx -> ctx.render("home.hbs", new HashMap<>()));
 
@@ -25,8 +25,8 @@ public class Router implements SimplePersistenceTest {
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
     app.post("/hechos", controller::crearHecho);
     //crear solicitud de eliminacion
-    //app.get("/hechos/:id/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
-    //app.post("/hechos/:id/eliminar", controller::solicitarEliminacion);
+    app.get("/hechos/{id}/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
+    app.post("/hechos/{id}/eliminar", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     //login
@@ -36,6 +36,9 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 5
     //REQUERIMIENTO 6
     //REQUERIMIENTO 7
+    app.get("/solicitudes", ctx -> ctx.render("solicitudes.hbs", controller.listarSolicitudes(ctx)));
+    app.post("/solicitudes/{id}/aprobar", HomeController::aprobarSolicitud);
+    app.post("/solicitudes/{id}/rechazar", HomeController::rechazarSolicitud);
     //REQUERIMIENTO 8
 
   }

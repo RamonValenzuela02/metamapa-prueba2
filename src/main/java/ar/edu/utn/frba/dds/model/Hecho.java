@@ -37,7 +37,7 @@ public class Hecho {
   @Column
   private boolean eliminado = false;
 
-  protected Hecho(){};
+  public Hecho(){};
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
                String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {

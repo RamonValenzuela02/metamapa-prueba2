@@ -24,4 +24,11 @@ public abstract class Fuente {
   //es para la fuenteDemo pero no se me ocurre otra cosa
   public void actualizarHechos() {}
 
+  public Hecho obtenerHechoConId(int hechoId) {
+    return obtenerHechos().
+      stream().
+      filter(h -> h.getId() == hechoId)
+      .findFirst()
+      .orElse(null);
+  }
 }

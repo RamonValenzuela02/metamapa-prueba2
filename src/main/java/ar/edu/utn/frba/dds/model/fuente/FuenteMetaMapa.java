@@ -41,7 +41,7 @@
     public void enviarSolicitudDeEliminacion(SolicitudDeEliminacion solicitud) {
       // Arma un JSON con los datos de la solicitud y lo envía por POST
       api.postJson("solicitudes", Map.of(
-              "tituloHecho", solicitud.getTituloHecho(),
+              "tituloHecho", solicitud.getHecho().getTitulo(),
               "motivo", solicitud.getMotivo()
       ));
     }

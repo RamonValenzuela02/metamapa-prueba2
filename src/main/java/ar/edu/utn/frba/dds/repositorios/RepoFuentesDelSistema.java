@@ -73,4 +73,11 @@ public class RepoFuentesDelSistema implements WithSimplePersistenceUnit {
       .orElse(null);
 
   }
+
+  public Fuente obtenerFuenteConId(int fuenteId) {
+    return entityManager()
+      .createQuery("SELECT f FROM Fuente f WHERE f.id = :fuenteId", Fuente.class)
+      .setParameter("fuenteId", fuenteId)
+      .getSingleResult();
+  }
 }
