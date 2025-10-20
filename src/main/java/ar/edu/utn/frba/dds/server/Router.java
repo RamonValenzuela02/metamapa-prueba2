@@ -30,8 +30,8 @@ public class Router implements SimplePersistenceTest {
     //app.post("/hechos/:id/eliminar", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
-    //login
     app.get("/login", session::show);
+    app.post("/login", session::create);
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
