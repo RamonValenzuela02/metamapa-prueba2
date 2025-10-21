@@ -26,7 +26,7 @@ public class HomeController{
       .toList();
 
     Map<String,Object> model = new HashMap<>();
-    model.put("fuentes",fuentes);
+    model.put("hechos", hechos);
 
     return model;
   }
@@ -37,7 +37,14 @@ public class HomeController{
     Categoria categoria = Categoria.valueOf(ctx.formParam("categoria"));
     String latitud = ctx.formParam("latitud");
     String longitud = ctx.formParam("longitud");
-    LocalDateTime fechaHecho = LocalDateTime.parse(Objects.requireNonNull(ctx.formParam("fechaHecho")));
+    String fechaHechoSt = ctx.formParam("fechaHecho");
+
+    LocalDateTime fechaHecho;
+    try {
+      fechaHecho = LocalDateTime.parse(fechaHechoSt);
+    } catch (Exception e) {
+      fechaHecho = LocalDateTime.parse(fechaHechoSt + ":00");
+    }
 
     Hecho hecho = new Hecho(
       titulo,
@@ -48,6 +55,8 @@ public class HomeController{
       fechaHecho,
       LocalDateTime.now()
     );
+
+
     RepoHechosDinamicos repo = RepoHechosDinamicos.getInstance();
     repo.withTransaction(() -> repo.agregarHecho(hecho));
 
@@ -67,13 +76,25 @@ public class HomeController{
 
 
   public static void aprobarSolicitud(@NotNull Context context) {
-    //falta logica de aprobacion
-    context.redirect("/solicitudes");
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
+    SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+
+    if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
+      solicitud.aceptar();
+      //no se si tendria que sacarlo de la fuente a ese hecho
+    }
+
+    context.redirect("/solicitudesEliminacion");
   }
 
   public static void rechazarSolicitud(@NotNull Context context) {
-    //falta logica de rechazo
-    context.redirect("/solicitudes");
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
+    SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+
+    if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
+      solicitud.aceptar();
+    }
+    context.redirect("/solicitudesEliminacion");
   }
 
 
@@ -92,10 +113,15 @@ public class HomeController{
   }
 
   public void solicitarEliminacion(@NotNull Context context) {
+
     //SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion();
     //RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico()).registrarSolicituDeEliminacion(solicitudDeEliminacion);
     context.redirect("/solicitudes");
   }
 
 
+  /*
+  public void crearColeccion(@NotNull Context ctx) {
+  }
+     */
 }

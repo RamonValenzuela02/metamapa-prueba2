@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 
 public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
@@ -39,6 +40,13 @@ public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
         .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.estado = :estado", SolicitudDeEliminacion.class)
         .setParameter("estado", Estado.ACEPTADA)
         .getResultList();
+  }
+
+  public SolicitudDeEliminacion getSolicitudPorId(Long id) {
+    return entityManager()
+      .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.id = :id", SolicitudDeEliminacion.class)
+      .setParameter("id", id)
+      .getSingleResult();
   }
 
   public List<SolicitudDeEliminacion> getSolicitudes() {

@@ -7,19 +7,42 @@
             <li><a href="/">Home</a></li>
             <li><a href="/hecho/nuevo">Crear Hecho</a></li>
             <li><a href="/login">Iniciar Sesión</a></li>
-            <li> <a href="/solicitudes">Solicitudes de Eliminacion</a></li>
+            <li> <a href="/solicitudesEliminacion">Solicitudes de Eliminacion</a></li>
         </ul>
     </nav>
 </head>
 <body>
 <main>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor in
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor in
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor in
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor in
-    </p>
+    {{#if hechos.length}}
+        <table>
+            <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Fecha del Hecho</th>
+                <th>Fecha de Carga</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each hechos}}
+                <tr>
+                    <td>{{titulo}}</td>
+                    <td>{{descripcion}}</td>
+                    <td>{{categoria}}</td>
+                    <td>{{ubicacion.latitud}}</td>
+                    <td>{{ubicacion.longitud}}</td>
+                    <td>{{fechaHecho}}</td>
+                    <td>{{fechaCarga}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p>No hay hechos registrados aun.</p>
+    {{/if}}
 </main>
 <footer class="footer">
     <p>institucion: UTN FRBA</p>

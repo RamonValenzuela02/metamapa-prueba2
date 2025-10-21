@@ -9,22 +9,23 @@ public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
     HomeController controller = new HomeController();
 
-    /*
+/*
     app.before(ctx -> {
       entityManager().clear();
     });
-     */
 
+ */
 
     //REQUERIMIENTO 1
+    //muestra los hechos
     app.get("/", context -> context.redirect("/home"));
     app.get("/home", ctx -> ctx.render("home.hbs", new HashMap<>()));
 
     //REQUERIMIENTO 2
-    //crear hecho
+    //crear hecho y crear solicitud de eliminacion
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
     app.post("/hechos", controller::crearHecho);
-    //crear solicitud de eliminacion
+
     app.get("/hechos/{id}/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
     app.post("/hechos/{id}/eliminar", controller::solicitarEliminacion);
 
@@ -35,10 +36,11 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
     //REQUERIMIENTO 6
+
     //REQUERIMIENTO 7
-    app.get("/solicitudes", ctx -> ctx.render("solicitudes.hbs", controller.listarSolicitudes(ctx)));
-    app.post("/solicitudes/{id}/aprobar", HomeController::aprobarSolicitud);
-    app.post("/solicitudes/{id}/rechazar", HomeController::rechazarSolicitud);
+    app.get("/solicitudesEliminacion", ctx -> ctx.render("solicitudesEliminacion.hbs", controller.listarSolicitudes(ctx)));
+    app.post("/solicitudesEliminacion/{id}/aprobar", HomeController::aprobarSolicitud);
+    app.post("/solicitudesEliminacion/{id}/rechazar", HomeController::rechazarSolicitud);
     //REQUERIMIENTO 8
 
   }
