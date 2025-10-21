@@ -49,7 +49,7 @@ public class ColeccionBuilder {
 
     public Coleccion crear() {
         validarColeccion(handle,titulo,descripcion,fuente,criterios);
-        Coleccion coleccion = new Coleccion(handle, titulo, descripcion, fuente, criterios, algoritmoConsenso);
+        Coleccion coleccion = new Coleccion(titulo, descripcion, fuente, criterios, algoritmoConsenso);
         return coleccion;
     }
 

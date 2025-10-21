@@ -1,21 +1,26 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
+import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.criterio.Criterio;
+import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.model.ubicacion.Ubicacion;
+import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
 import io.javalin.http.Context;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeController{
@@ -139,9 +144,54 @@ public class HomeController{
     context.redirect("/solicitudes");
   }
 
+  public void crearColeccion(@NotNull Context context) {
+    try {
+      String titulo = context.formParam("titulo");
+      String descripcion = context.formParam("descripcion");
+      String fuenteStr = context.formParam("fuente");
+      String algoritmoStr = context.formParam("algoritmo");
+      List<Criterio> criterios = List.of(new CriterioCumplidorSiempre());
+      //List<String> criteriosStr = context.formParams("criterio");
 
-  /*
-  public void crearColeccion(@NotNull Context ctx) {
+      if (titulo == null || titulo.isBlank() ||
+        descripcion == null || descripcion.isBlank()) {
+        context.status(400).result("Faltan campos obligatorios");
+        return;
+      }
+
+      /*
+      List<Criterio> criterios = criteriosStr.stream()
+        .map(this::crearCriterioDesdeTexto)
+        .toList();
+      */
+
+      AlgoritmoConsenso algoritmoConsenso;
+      try {
+        algoritmoConsenso = AlgoritmoConsenso.valueOf(algoritmoStr.toUpperCase());
+      } catch (IllegalArgumentException e) {
+        context.status(400).result("Algoritmo inválido: " + algoritmoStr);
+        return;
+      }
+      Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId(Integer.parseInt(fuenteStr));
+
+      Coleccion coleccion = new Coleccion(titulo,descripcion, fuente, criterios, algoritmoConsenso );
+
+      RepoDeColecciones repo = RepoDeColecciones.getInstance();
+      repo.withTransaction(() -> repo.agregarColeccion(coleccion));
+
+      context.redirect("/home");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      context.status(500).result("Ocurrió un error al crear la coleccion: " + e.getMessage());
+    }
   }
-     */
+
+  public Map<String,Object> formularioNuevaColeccion() {
+    List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
+
+    Map<String,Object> model = new HashMap<>();
+    model.put("fuente",fuentes);
+    return model;
+  }
 }

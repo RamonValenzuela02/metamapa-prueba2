@@ -19,7 +19,7 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 1
     //muestra los hechos
     app.get("/", context -> context.redirect("/home"));
-    app.get("/home", ctx -> ctx.render("home.hbs", new HashMap<>()));
+    app.get("/home", ctx -> ctx.render("home.hbs", controller.index(ctx)));
 
     //REQUERIMIENTO 2
     //crear hecho y crear solicitud de eliminacion
@@ -35,6 +35,8 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
+    app.get("/coleccion/nuevo", ctx -> ctx.render("coleccion.nuevo.hbs", controller.formularioNuevaColeccion()));
+    app.post("/colecciones", controller::crearColeccion);
     //REQUERIMIENTO 6
 
     //REQUERIMIENTO 7
