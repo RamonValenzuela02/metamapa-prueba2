@@ -32,37 +32,57 @@ public class HomeController{
   }
 
   public void crearHecho(@NotNull Context ctx) {
-    String titulo = ctx.formParam("titulo");
-    String descripcion = ctx.formParam("descripcion");
-    Categoria categoria = Categoria.valueOf(ctx.formParam("categoria"));
-    String latitud = ctx.formParam("latitud");
-    String longitud = ctx.formParam("longitud");
-    String fechaHechoSt = ctx.formParam("fechaHecho");
-
-    LocalDateTime fechaHecho;
     try {
-      fechaHecho = LocalDateTime.parse(fechaHechoSt);
+      String titulo = ctx.formParam("titulo");
+      String descripcion = ctx.formParam("descripcion");
+      String categoriaStr = ctx.formParam("categoria");
+      String latitud = ctx.formParam("latitud");
+      String longitud = ctx.formParam("longitud");
+      String fechaHechoStr = ctx.formParam("fechaHecho");
+
+      if (titulo == null || titulo.isBlank() ||
+        descripcion == null || descripcion.isBlank() ||
+        categoriaStr == null || categoriaStr.isBlank() ||
+        fechaHechoStr == null || fechaHechoStr.isBlank()) {
+        ctx.status(400).result("Faltan campos obligatorios");
+        return;
+      }
+
+      Categoria categoria;
+      try {
+        categoria = Categoria.valueOf(categoriaStr.toUpperCase()); // convertir a mayúsculas
+      } catch (IllegalArgumentException e) {
+        ctx.status(400).result("Categoría inválida: " + categoriaStr);
+        return;
+      }
+
+      LocalDateTime fechaHecho;
+      try {
+        fechaHecho = LocalDateTime.parse(fechaHechoStr);
+      } catch (Exception e) {
+        fechaHecho = LocalDateTime.parse(fechaHechoStr + ":00");
+      }
+
+      Hecho hecho = new Hecho(
+        titulo,
+        descripcion,
+        categoria,
+        latitud,
+        longitud,
+        fechaHecho,
+        LocalDateTime.now()
+      );
+
+      RepoHechosDinamicos repo = RepoHechosDinamicos.getInstance();
+      repo.withTransaction(() -> repo.agregarHecho(hecho));
+
+      ctx.redirect("/home");
+
     } catch (Exception e) {
-      fechaHecho = LocalDateTime.parse(fechaHechoSt + ":00");
+      e.printStackTrace();
+      ctx.status(500).result("Ocurrió un error al crear el hecho: " + e.getMessage());
     }
-
-    Hecho hecho = new Hecho(
-      titulo,
-      descripcion,
-      categoria,
-      latitud,
-      longitud,
-      fechaHecho,
-      LocalDateTime.now()
-    );
-
-
-    RepoHechosDinamicos repo = RepoHechosDinamicos.getInstance();
-    repo.withTransaction(() -> repo.agregarHecho(hecho));
-
-    ctx.redirect("/home");
   }
-
 
   public Map<String, Object> listarSolicitudes(@NotNull Context ctx) {
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
