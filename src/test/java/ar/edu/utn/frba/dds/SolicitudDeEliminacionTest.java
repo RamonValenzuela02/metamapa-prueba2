@@ -71,7 +71,7 @@ public class SolicitudDeEliminacionTest {
   public void rechazarPorSpamSolicitudDeEliminacion() {
     when(detector.esSpam("no es compatible titulo con su descripcion")).thenReturn(true);
 
-    RepoSolicitudesDeEliminacion repo = new RepoSolicitudesDeEliminacion(detector);
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
 
     FuenteDinamica fuente = new FuenteDinamica();
     SolicitudDeEliminacion solicitud = new SolicitudDeEliminacion(

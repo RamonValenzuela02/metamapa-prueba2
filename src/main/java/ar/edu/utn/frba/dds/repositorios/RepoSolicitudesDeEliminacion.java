@@ -12,26 +12,19 @@ import org.jetbrains.annotations.NotNull;
 public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
   private static RepoSolicitudesDeEliminacion instancia;
 
-  private final DetectorDeSpam detector;
   @Getter
   private int cantidadDeSpam = 0;
 
-  public static RepoSolicitudesDeEliminacion getInstance(DetectorDeSpam detector) {
+  public static RepoSolicitudesDeEliminacion getInstance() {
     if (instancia == null) {
-      instancia = new RepoSolicitudesDeEliminacion(detector);
+      instancia = new RepoSolicitudesDeEliminacion();
     }
     return instancia;
   }
 
-  public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {
-    this.detector = detector;
-  }
+  private RepoSolicitudesDeEliminacion() {}
 
   public void registrarSolicituDeEliminacion(SolicitudDeEliminacion solicitud) {
-    if (detector.esSpam(solicitud.getMotivo())){
-      solicitud.rechazar();
-      this.cantidadDeSpam++;
-    }
     entityManager().persist(solicitud);
   }
 

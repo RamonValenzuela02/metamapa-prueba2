@@ -8,15 +8,14 @@ import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
+import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
-import ar.edu.utn.frba.dds.model.ubicacion.Ubicacion;
 import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
 import io.javalin.http.Context;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +89,7 @@ public class HomeController{
   }
 
   public Map<String, Object> listarSolicitudes(@NotNull Context ctx) {
-    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
     repo.getSolicitudes();
 
     Map<String, Object> model = new HashMap<>();
@@ -101,7 +100,7 @@ public class HomeController{
 
 
   public static void aprobarSolicitud(@NotNull Context context) {
-    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
     SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
 
     if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
@@ -113,7 +112,7 @@ public class HomeController{
   }
 
   public static void rechazarSolicitud(@NotNull Context context) {
-    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico());
+    RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
     SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
 
     if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
@@ -140,7 +139,9 @@ public class HomeController{
   public void solicitarEliminacion(@NotNull Context context) {
 
     //SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion();
-    //RepoSolicitudesDeEliminacion.getInstance(new DetectorDeSpamBasico()).registrarSolicituDeEliminacion(solicitudDeEliminacion);
+    //ServicioDeSolicitudesEliminacion servicio = new ServicioDeSolicitudesEliminacion(new DetectorDeSpamBasico());
+    //servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
+
     context.redirect("/solicitudes");
   }
 
