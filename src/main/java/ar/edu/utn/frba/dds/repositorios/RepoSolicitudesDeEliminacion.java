@@ -6,22 +6,25 @@ import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 
 public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
-  private final DetectorDeSpam detector;
+  private static RepoSolicitudesDeEliminacion instancia;
+
   @Getter
   private int cantidadDeSpam = 0;
 
-  public RepoSolicitudesDeEliminacion(DetectorDeSpam detector) {
-    this.detector = detector;
+  public static RepoSolicitudesDeEliminacion getInstance() {
+    if (instancia == null) {
+      instancia = new RepoSolicitudesDeEliminacion();
+    }
+    return instancia;
   }
 
+  private RepoSolicitudesDeEliminacion() {}
+
   public void registrarSolicituDeEliminacion(SolicitudDeEliminacion solicitud) {
-    if (detector.esSpam(solicitud.getMotivo())){
-      solicitud.rechazar();
-      this.cantidadDeSpam++;
-    }
     entityManager().persist(solicitud);
   }
 
@@ -30,6 +33,13 @@ public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
         .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.estado = :estado", SolicitudDeEliminacion.class)
         .setParameter("estado", Estado.ACEPTADA)
         .getResultList();
+  }
+
+  public SolicitudDeEliminacion getSolicitudPorId(Long id) {
+    return entityManager()
+      .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.id = :id", SolicitudDeEliminacion.class)
+      .setParameter("id", id)
+      .getSingleResult();
   }
 
   public List<SolicitudDeEliminacion> getSolicitudes() {

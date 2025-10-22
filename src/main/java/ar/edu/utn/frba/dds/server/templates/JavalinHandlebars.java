@@ -13,6 +13,18 @@ import java.util.Map;
 
 public class JavalinHandlebars implements FileRenderer {
   Handlebars handlebars = new Handlebars();
+
+  public JavalinHandlebars() {
+    this.handlebars = new Handlebars();
+
+    handlebars.registerHelper("eq", (context, options) -> {
+      Object param1 = options.param(0);
+      Object param2 = options.param(1);
+      if (param1 == null || param2 == null) return false;
+      return param1.toString().equals(param2.toString());
+    });
+  }
+
   @NotNull
   @Override
   public String render(@NotNull String path, @NotNull Map<String, ?> model, @NotNull Context context) {

@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -72,5 +72,12 @@ public class RepoFuentesDelSistema implements WithSimplePersistenceUnit {
       .map(Map.Entry::getKey)
       .orElse(null);
 
+  }
+
+  public Fuente obtenerFuenteConId(int fuenteId) {
+    return entityManager()
+      .createQuery("SELECT f FROM Fuente f WHERE f.id = :fuenteId", Fuente.class)
+      .setParameter("fuenteId", fuenteId)
+      .getSingleResult();
   }
 }

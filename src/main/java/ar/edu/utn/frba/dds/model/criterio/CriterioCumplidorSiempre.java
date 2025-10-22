@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.criterio;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 

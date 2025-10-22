@@ -2,7 +2,7 @@
 
   import ar.edu.utn.frba.dds.model.Api;
   import ar.edu.utn.frba.dds.model.criterio.Criterio;
-  import ar.edu.utn.frba.dds.model.Hecho;
+  import ar.edu.utn.frba.dds.model.Hecho.Hecho;
   import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
   import java.util.List;
   import java.util.Map;
@@ -41,7 +41,7 @@
     public void enviarSolicitudDeEliminacion(SolicitudDeEliminacion solicitud) {
       // Arma un JSON con los datos de la solicitud y lo envía por POST
       api.postJson("solicitudes", Map.of(
-              "tituloHecho", solicitud.getTituloHecho(),
+              "tituloHecho", solicitud.getHecho().getTitulo(),
               "motivo", solicitud.getMotivo()
       ));
     }

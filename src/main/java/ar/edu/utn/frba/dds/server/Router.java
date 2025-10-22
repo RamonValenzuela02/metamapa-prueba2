@@ -13,19 +13,23 @@ public class Router implements SimplePersistenceTest {
 
     app.before(ctx -> {
       entityManager().clear();
+      ctx.contentType("text/html; charset=UTF-8");
     });
 
-    //REQUERIMIENTO 1 (me falta lo del mapa)
+
+
+    //REQUERIMIENTO 1
+    //muestra los hechos
     app.get("/", context -> context.redirect("/home"));
-    app.get("/home", ctx -> ctx.render("home.hbs", new HashMap<>()));
+    app.get("/home", ctx -> ctx.render("home.hbs", controller.index(ctx)));
 
     //REQUERIMIENTO 2
-    //crear hecho
+    //crear hecho y crear solicitud de eliminacion
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
-    app.post("/hechos", home::crearHecho);
-    //crear solicitud de eliminacion
-    //app.get("/hechos/:id/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
-    //app.post("/hechos/:id/eliminar", controller::solicitarEliminacion);
+    app.post("/hechos", controller::crearHecho);
+
+    app.get("/hechos/{id}/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
+    app.post("/hechos/{id}/eliminar", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     app.get("/login", session::show);
@@ -33,8 +37,14 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
+    app.get("/coleccion/nuevo", ctx -> ctx.render("coleccion.nuevo.hbs", controller.formularioNuevaColeccion()));
+    app.post("/colecciones", controller::crearColeccion);
     //REQUERIMIENTO 6
+
     //REQUERIMIENTO 7
+    app.get("/solicitudesEliminacion", ctx -> ctx.render("solicitudesEliminacion.hbs", controller.listarSolicitudes(ctx)));
+    app.post("/solicitudesEliminacion/{id}/aprobar", HomeController::aprobarSolicitud);
+    app.post("/solicitudesEliminacion/{id}/rechazar", HomeController::rechazarSolicitud);
     //REQUERIMIENTO 8
 
   }

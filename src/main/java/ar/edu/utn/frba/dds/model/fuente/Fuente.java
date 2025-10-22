@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.fuente;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,4 +24,11 @@ public abstract class Fuente {
   //es para la fuenteDemo pero no se me ocurre otra cosa
   public void actualizarHechos() {}
 
+  public Hecho obtenerHechoConId(int hechoId) {
+    return obtenerHechos().
+      stream().
+      filter(h -> h.getId() == hechoId)
+      .findFirst()
+      .orElse(null);
+  }
 }

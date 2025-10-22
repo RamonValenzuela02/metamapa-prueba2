@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.model.fuente;
 
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.solicitud;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import java.time.LocalDateTime;

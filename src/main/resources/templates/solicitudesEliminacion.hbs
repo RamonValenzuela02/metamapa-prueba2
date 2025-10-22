@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PROYECTO DISENIO 26</title>
+</head>
+<body>
+
+<h2>Solicitudes de eliminación</h2>
+
+<p><strong>Solicitudes marcadas como spam:</strong> {{cantidadSpam}}</p>
+
+{{#if solicitudes.length}}
+    <table>
+        <thead>
+        <tr>
+            <th>Hecho</th>
+            <th>Motivo</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each solicitudes}}
+            <tr>
+                <td>{{hecho.titulo}}</td>
+                <td>{{motivo}}</td>
+                <td>{{fechaSolicitud}}</td>
+                <td>
+                    {{#if (eq estado "PENDIENTE")}} Pendiente{{/if}}
+                    {{#if (eq estado "ACEPTADA")}} Aceptada{{/if}}
+                    {{#if (eq estado "RECHAZADA")}} Rechazada{{/if}}
+                </td>
+                <td>
+                    {{#if (eq estado "PENDIENTE")}}
+                        <form action="/solicitudesEliminacion/{{id}}/aprobar" method="post" style="display:inline;">
+                            <button type="submit" class="btn-aprobar">Aprobar</button>
+                        </form>
+                        <form action="/solicitudesEliminacion/{{id}}/rechazar" method="post" style="display:inline;">
+                            <button type="submit" class="btn-rechazar">Rechazar</button>
+                        </form>
+                    {{else}}
+                        <em>No disponible</em>
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>No hay solicitudes registradas.</p>
+{{/if}}
+
+</body>
+</html>
+

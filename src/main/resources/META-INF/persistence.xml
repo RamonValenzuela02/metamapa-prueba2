@@ -8,7 +8,7 @@
   <persistence-unit name="simple-persistence-unit" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <class>ar.edu.utn.frba.dds.model.Hecho</class>
+    <class>ar.edu.utn.frba.dds.model.Hecho.Hecho</class>
 
     <class>ar.edu.utn.frba.dds.model.fuente.Fuente</class>
     <class>ar.edu.utn.frba.dds.model.fuente.FuenteDinamica</class>

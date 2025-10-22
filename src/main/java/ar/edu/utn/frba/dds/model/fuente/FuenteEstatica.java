@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.model.fuente;
 
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileReader;
 import java.io.IOException;

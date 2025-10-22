@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,10 +25,7 @@ import lombok.Setter;
 public class Coleccion {
   @Id
   @GeneratedValue
-  private Long id;
-  @Column
-  @Getter
-  private String handle;
+  private Long handle;
   @Column
   @Getter
   private String titulo;
@@ -53,8 +50,8 @@ public class Coleccion {
 
   protected Coleccion(){};
 
-  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
-    this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
+  public Coleccion(String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
+    //this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;

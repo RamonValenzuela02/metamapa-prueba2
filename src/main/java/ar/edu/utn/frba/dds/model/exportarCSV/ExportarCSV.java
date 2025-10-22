@@ -1,5 +1,5 @@
 package ar.edu.utn.frba.dds.model.exportarCSV;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
