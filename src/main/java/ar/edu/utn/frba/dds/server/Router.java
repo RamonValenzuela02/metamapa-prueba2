@@ -10,12 +10,10 @@ public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
     HomeController home = new HomeController();
     SessionController session = new SessionController();
-    /*
+
     app.before(ctx -> {
       entityManager().clear();
     });
-     */
-
 
     //REQUERIMIENTO 1 (me falta lo del mapa)
     app.get("/", context -> context.redirect("/home"));

@@ -1,12 +1,14 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import io.github.flbulgarelli.jpa.extras.TransactionalOps;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 
-public class SessionController {
+public class SessionController implements WithSimplePersistenceUnit, TransactionalOps {
 
   public void show(Context ctx){
     if (ctx.sessionAttribute("user_id") != null) {
@@ -22,7 +24,12 @@ public class SessionController {
   public void create(Context ctx) {
     try {
       RepoUsuarios repo = RepoUsuarios.getInstance();
-      var usuario = repo.buscarUsuario(ctx.formParam("nombre"),ctx.formParam("password"));
+      String nombre = ctx.formParam("nombre");
+      String password = ctx.formParam("password");
+      var usuario = repo.buscarUsuario(nombre,password);
+     // System.out.println(usuario.getId());
+     // System.out.println(usuario.getNombre()); Son para probar si me devuelve bien buscarUsuario
+     // System.out.println(usuario.getPassword());
       ctx.sessionAttribute("user_id", usuario.getId());
       ctx.redirect("/");
     } catch (Exception e) {

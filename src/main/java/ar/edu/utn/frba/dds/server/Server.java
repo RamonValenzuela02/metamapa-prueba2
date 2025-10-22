@@ -8,7 +8,6 @@ import io.javalin.config.JavalinConfig;
 
 public class Server {
   public void start() {
-    new Bootstrap().init();
     var app = Javalin.create(config -> {
       initializeStaticFiles(config);
       initializeTemplating(config);

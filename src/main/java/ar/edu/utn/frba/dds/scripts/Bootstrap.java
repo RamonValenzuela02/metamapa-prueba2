@@ -6,7 +6,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.Arrays;
 
 public class Bootstrap implements WithSimplePersistenceUnit {
-  public void init() {/*
+  public void init() {
     RepoUsuarios repo = RepoUsuarios.getInstance();
     withTransaction(() -> {
       var usuarios = Arrays.asList(
@@ -14,6 +14,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
           new Usuario("Contribuyente", "Juan", "Juan"),
           new Usuario("Admin", "Mati", "Mati"));
       usuarios.forEach(repo::agregar);
-    });*/
+    });
   }
 }
