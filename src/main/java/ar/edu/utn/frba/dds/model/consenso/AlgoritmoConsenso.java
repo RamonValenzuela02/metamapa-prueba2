@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.consenso;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import java.util.List;

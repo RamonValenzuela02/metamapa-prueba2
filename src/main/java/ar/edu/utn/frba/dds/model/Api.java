@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.model;
 
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioPorCategoria;

@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.scripts;
 
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.fuente.FuenteDinamica;

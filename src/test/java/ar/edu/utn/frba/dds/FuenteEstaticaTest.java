@@ -2,11 +2,10 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.FuenteEstatica;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

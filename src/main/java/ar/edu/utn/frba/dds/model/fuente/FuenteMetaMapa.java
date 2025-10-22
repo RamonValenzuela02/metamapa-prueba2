@@ -2,7 +2,7 @@
 
   import ar.edu.utn.frba.dds.model.Api;
   import ar.edu.utn.frba.dds.model.criterio.Criterio;
-  import ar.edu.utn.frba.dds.model.Hecho;
+  import ar.edu.utn.frba.dds.model.Hecho.Hecho;
   import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
   import java.util.List;
   import java.util.Map;

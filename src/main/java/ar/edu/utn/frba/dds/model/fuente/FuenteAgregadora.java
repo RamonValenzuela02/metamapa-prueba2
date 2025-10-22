@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.fuente;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.persistence.Entity;

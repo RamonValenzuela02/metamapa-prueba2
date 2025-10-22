@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpam;
 import ar.edu.utn.frba.dds.model.solicitud.Estado;
@@ -9,7 +9,6 @@ import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

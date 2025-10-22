@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.model.fuente;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import java.time.LocalDateTime;
 import java.util.List;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDinamica;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDinamicas;

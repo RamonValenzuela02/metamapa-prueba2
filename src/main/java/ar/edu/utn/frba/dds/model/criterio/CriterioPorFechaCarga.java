@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.model.criterio;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

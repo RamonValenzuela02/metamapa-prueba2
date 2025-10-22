@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;

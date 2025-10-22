@@ -9,12 +9,9 @@ public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
     HomeController controller = new HomeController();
 
-/*
     app.before(ctx -> {
       entityManager().clear();
     });
-
- */
 
     //REQUERIMIENTO 1
     //muestra los hechos

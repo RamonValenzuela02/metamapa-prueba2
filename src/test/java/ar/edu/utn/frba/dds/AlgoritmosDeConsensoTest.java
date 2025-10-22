@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 

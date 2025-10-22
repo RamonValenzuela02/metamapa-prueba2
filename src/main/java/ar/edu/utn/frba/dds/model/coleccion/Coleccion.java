@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import javax.persistence.Column;
 import javax.persistence.Entity;

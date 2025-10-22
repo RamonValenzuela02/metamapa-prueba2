@@ -1,25 +1,30 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
+import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
-import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
-import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
+import ar.edu.utn.frba.dds.repositorios.RepoArchivosMultimedia;
 import io.javalin.http.Context;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import io.javalin.http.UploadedFile;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeController{
@@ -43,6 +48,7 @@ public class HomeController{
       String latitud = ctx.formParam("latitud");
       String longitud = ctx.formParam("longitud");
       String fechaHechoStr = ctx.formParam("fechaHecho");
+      List<UploadedFile> archivos = ctx.uploadedFiles("multimedia");
 
       if (titulo == null || titulo.isBlank() ||
         descripcion == null || descripcion.isBlank() ||
@@ -77,8 +83,29 @@ public class HomeController{
         LocalDateTime.now()
       );
 
-      RepoHechosDinamicos repo = RepoHechosDinamicos.getInstance();
-      repo.withTransaction(() -> repo.agregarHecho(hecho));
+      RepoHechosDinamicos repoHechosDinamicos = RepoHechosDinamicos.getInstance();
+      repoHechosDinamicos.withTransaction(() -> repoHechosDinamicos.agregarHecho(hecho));
+
+      for (UploadedFile archivo : archivos) {
+        String nombreArchivo = archivo.filename();
+        String rutaDestino = "src/main/resources/public/uploads/" + nombreArchivo;
+
+        // Guardar el archivo físico
+        try (InputStream in = archivo.content()) {
+          Files.copy(in, Paths.get(rutaDestino), StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        // Crear entidad y asociar
+        ArchivoMultimedia nuevoArchivo = new ArchivoMultimedia(
+            nombreArchivo,
+            "/uploads/" + nombreArchivo, // ruta accesible desde la vista
+            hecho
+        );
+
+        hecho.agregarArchivo(nuevoArchivo);
+        RepoArchivosMultimedia repoArchivosMultimedia = RepoArchivosMultimedia.getInstance();
+        repoArchivosMultimedia.withTransaction(() -> repoArchivosMultimedia.agregarArchivo(nuevoArchivo));
+      }
 
       ctx.redirect("/home");
 

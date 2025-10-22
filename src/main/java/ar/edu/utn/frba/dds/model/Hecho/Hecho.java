@@ -1,21 +1,28 @@
-package ar.edu.utn.frba.dds.model;
+package ar.edu.utn.frba.dds.model.Hecho;
 
 import static java.util.Objects.requireNonNull;
 
+import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
 import ar.edu.utn.frba.dds.model.ubicacion.Ubicacion;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import lombok.Getter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Setter;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+
 
 @Getter
 @Entity
@@ -38,6 +45,8 @@ public class Hecho {
   @Column
   @Setter
   private boolean eliminado = false;
+  @OneToMany(mappedBy = "hecho", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<ArchivoMultimedia> archivosMultimedia = new ArrayList<>();
 
  public Hecho(){};
 
@@ -90,5 +99,8 @@ public class Hecho {
 
   public Integer getHoraDelHecho() {
     return fechaHecho.getHour();
+  }
+
+  public void agregarArchivo(ArchivoMultimedia nuevoArchivo) {
   }
 }

@@ -1,15 +1,13 @@
 package ar.edu.utn.frba.dds;
-import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
 import ar.edu.utn.frba.dds.model.coleccion.ColeccionBuilder;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.criterio.CriterioPorCategoria;
-import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.fuente.FuenteDinamica;
 import ar.edu.utn.frba.dds.model.fuente.FuenteEstatica;
-import ar.edu.utn.frba.dds.model.Hecho;
+import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.List;
 
