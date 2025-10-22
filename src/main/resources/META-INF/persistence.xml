@@ -27,7 +27,7 @@
     <class>ar.edu.utn.frba.dds.model.criterio.CriterioPorFechaHecho</class>
     <class>ar.edu.utn.frba.dds.model.criterio.CriterioPorUbicacion</class>
 
-    <class>ar.edu.utn.frba.dds.model.Usuario</class>
+    <class>ar.edu.utn.frba.dds.model.Usuario.Usuario</class>
 
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>

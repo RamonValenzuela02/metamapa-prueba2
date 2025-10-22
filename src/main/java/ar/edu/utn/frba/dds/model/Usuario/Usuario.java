@@ -1,8 +1,10 @@
-package ar.edu.utn.frba.dds.model;
+package ar.edu.utn.frba.dds.model.Usuario;
 
 import lombok.Getter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -18,11 +20,11 @@ public class Usuario {
   @Column
   @Getter
   private String password;
-  @Column
+  @Enumerated(EnumType.STRING)
   @Getter
-  private String tipo;
+  private TipoUsuario tipo;
 
-  public Usuario(String tipo, String nombre, String password) {
+  public Usuario(TipoUsuario tipo, String nombre, String password) {
     this.tipo = tipo;
     this.nombre = nombre;
     this.password = password;
