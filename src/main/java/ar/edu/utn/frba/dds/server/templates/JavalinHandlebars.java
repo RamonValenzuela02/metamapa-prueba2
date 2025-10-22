@@ -6,6 +6,8 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.FileRenderer;
 import org.jetbrains.annotations.NotNull;
+import com.github.jknack.handlebars.Helper;
+import com.github.jknack.handlebars.Options;
 
 import java.io.IOException;
 import java.util.Map;
@@ -17,11 +19,21 @@ public class JavalinHandlebars implements FileRenderer {
   public JavalinHandlebars() {
     this.handlebars = new Handlebars();
 
-    handlebars.registerHelper("eq", (context, options) -> {
-      Object param1 = options.param(0);
-      Object param2 = options.param(1);
-      if (param1 == null || param2 == null) return false;
-      return param1.toString().equals(param2.toString());
+    handlebars.registerHelper("eq", new Helper<Object>() {
+      @Override
+      public Object apply(Object context, Options options) throws IOException {
+        Object left = context;
+        Object right = null;
+
+        if (options.params != null && options.params.length > 0) {
+          right = options.param(0, null);
+        }
+
+        if (left == null && right == null) return true;
+        if (left == null || right == null) return false;
+
+        return left.toString().equalsIgnoreCase(right.toString());
+      }
     });
   }
 

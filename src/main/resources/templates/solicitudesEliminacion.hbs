@@ -16,7 +16,6 @@
         <tr>
             <th>Hecho</th>
             <th>Motivo</th>
-            <th>Fecha</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -26,7 +25,6 @@
             <tr>
                 <td>{{hecho.titulo}}</td>
                 <td>{{motivo}}</td>
-                <td>{{fechaSolicitud}}</td>
                 <td>
                     {{#if (eq estado "PENDIENTE")}} Pendiente{{/if}}
                     {{#if (eq estado "ACEPTADA")}} Aceptada{{/if}}

@@ -27,7 +27,7 @@ public class SolicitudDeEliminacion {
   private String motivo;
   @Enumerated(EnumType.STRING)
   @Getter
-  private Estado estado = Estado.PENDIENTE;
+  private Estado estado;
   @OneToOne
   private Fuente fuente;
 
@@ -37,6 +37,7 @@ public class SolicitudDeEliminacion {
     this.hecho = hecho;
     this.motivo = motivo;
     this.fuente = fuenteCsv;
+    this.estado = Estado.PENDIENTE;
     validarSolicitud();
   }
 

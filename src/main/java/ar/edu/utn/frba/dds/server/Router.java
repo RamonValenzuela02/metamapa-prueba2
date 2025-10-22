@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
-    HomeController home = new HomeController();
+    HomeController controller = new HomeController();
     SessionController session = new SessionController();
 
     app.before(ctx -> {
@@ -28,8 +28,8 @@ public class Router implements SimplePersistenceTest {
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
     app.post("/hechos", controller::crearHecho);
 
-    app.get("/hechos/{id}/eliminar", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
-    app.post("/hechos/{id}/eliminar", controller::solicitarEliminacion);
+    app.get("/hechos/{hechoId}/solEliminacion", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
+    app.post("/hechos/{hechoId}/solEliminacion", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     app.get("/login", session::show);

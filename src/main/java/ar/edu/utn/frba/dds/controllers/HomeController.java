@@ -8,6 +8,8 @@ import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
+import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
+import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
@@ -117,7 +119,6 @@ public class HomeController{
 
   public Map<String, Object> listarSolicitudes(@NotNull Context ctx) {
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
-    repo.getSolicitudes();
 
     Map<String, Object> model = new HashMap<>();
     model.put("solicitudes",repo.getSolicitudes());
@@ -164,14 +165,21 @@ public class HomeController{
   }
 
   public void solicitarEliminacion(@NotNull Context context) {
+    int hechoId = Integer.parseInt(context.pathParam("hechoId"));
+    int fuenteId = Integer.parseInt(Objects.requireNonNull(context.queryParam("fuenteId")));
+    String motivo = context.formParam("motivo");
 
-    //SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion();
-    //ServicioDeSolicitudesEliminacion servicio = new ServicioDeSolicitudesEliminacion(new DetectorDeSpamBasico());
-    //servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
+    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId(fuenteId);
+    Hecho hecho = fuente.obtenerHechoConId(hechoId);
+
+    SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion(hecho,motivo,fuente);
+    ServicioDeSolicitudesEliminacion servicio = new ServicioDeSolicitudesEliminacion(new DetectorDeSpamBasico());
+    servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
 
     context.redirect("/solicitudes");
   }
 
+  //CREAR COLECCION
   public void crearColeccion(@NotNull Context context) {
     try {
       String titulo = context.formParam("titulo");
