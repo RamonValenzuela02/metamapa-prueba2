@@ -11,7 +11,10 @@ public class Router implements SimplePersistenceTest {
 
     app.before(ctx -> {
       entityManager().clear();
+      ctx.contentType("text/html; charset=UTF-8");
     });
+
+
 
     //REQUERIMIENTO 1
     //muestra los hechos
