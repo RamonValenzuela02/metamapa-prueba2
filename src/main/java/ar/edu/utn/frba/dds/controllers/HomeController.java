@@ -131,7 +131,7 @@ public class HomeController{
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
     SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
 
-    if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
+    if (solicitud != null) {
       solicitud.aceptar();
       solicitud.getHecho().setEliminado(true);
     }
@@ -143,12 +143,11 @@ public class HomeController{
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
     SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
 
-    if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
-      solicitud.aceptar();
+    if (solicitud != null) {
+        solicitud.rechazar();
     }
     context.redirect("/solicitudesEliminacion");
   }
-
 
 
   public Map<String,Object> solicitarEliminacionForm(@NotNull Context ctx) {

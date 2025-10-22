@@ -27,14 +27,12 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
       String nombre = ctx.formParam("nombre");
       String password = ctx.formParam("password");
       var usuario = repo.buscarUsuario(nombre,password);
-     // System.out.println(usuario.getId());
-     // System.out.println(usuario.getNombre()); Son para probar si me devuelve bien buscarUsuario
-     // System.out.println(usuario.getPassword());
+
       ctx.sessionAttribute("user_id", usuario.getId());
       ctx.redirect("/");
     } catch (Exception e) {
       Map<String, Object> modelo = new HashMap<>();
-      ctx.redirect("/login?error=true"); //Siempre dirige al get a menos que lo cambies
+      ctx.redirect("/login?error=true");
     }
   }
 }

@@ -18,6 +18,7 @@ import lombok.Getter;
 public class SolicitudDeEliminacion {
   @Id
   @GeneratedValue
+  @Getter
   private Long id;
   @ManyToOne
   @Getter
