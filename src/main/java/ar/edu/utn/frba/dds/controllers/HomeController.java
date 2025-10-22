@@ -106,7 +106,7 @@ public class HomeController{
 
     if (solicitud != null && solicitud.getEstado().equals("PENDIENTE")) {
       solicitud.aceptar();
-      //no se si tendria que sacarlo de la fuente a ese hecho
+      solicitud.getHecho().setEliminado(true);
     }
 
     context.redirect("/solicitudesEliminacion");

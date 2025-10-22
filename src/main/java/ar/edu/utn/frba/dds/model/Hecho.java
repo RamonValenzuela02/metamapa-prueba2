@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import lombok.Setter;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 @Getter
@@ -35,9 +36,10 @@ public class Hecho {
   @Column
   private LocalDateTime fechaCarga;
   @Column
+  @Setter
   private boolean eliminado = false;
 
- // public Hecho(){};
+ public Hecho(){};
 
   public Hecho(String titulo, String descripcion, Categoria categoria,
                String latitud, String longitud, LocalDateTime fechaHecho, LocalDateTime fechaCarga) {
