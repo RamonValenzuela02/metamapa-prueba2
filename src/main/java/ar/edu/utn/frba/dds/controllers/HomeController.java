@@ -178,7 +178,7 @@ public class HomeController{
   }
 
   public void solicitarEliminacion(@NotNull Context context) {
-    int hechoId = Integer.parseInt(context.pathParam("hechoId"));
+    int hechoId = Integer.parseInt(context.formParam("hechoId"));
     int fuenteId = Integer.parseInt(Objects.requireNonNull(context.formParam("fuenteId")));
     String motivo = context.formParam("motivo");
 

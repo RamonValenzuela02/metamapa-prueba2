@@ -1,10 +1,14 @@
-{{#partial "contenido"}}
+<!DOCTYPE html>
+<html>
+
+<body>
     <form method="POST" action="/solEliminacion/nueva">
         <input type="hidden" name="fuenteId" value="{{fuente.id}}">
         <input type="hidden" name="hechoId" value="{{hecho.id}}">
-        <label>Motivo</label><input name="nombre">
+        <label>Motivo</label>
         <input type="text" name="motivo">
-        <input type="submit">Guardar</input>
+        <input type="submit">
     </form>
-    {{error}}
-{{/partial}}
+</body>
+</html>
+
