@@ -34,10 +34,10 @@ public class SolicitudDeEliminacion {
 
   protected SolicitudDeEliminacion() {};
 
-  public SolicitudDeEliminacion(Hecho hecho, String motivo, Fuente fuenteCsv) {
+  public SolicitudDeEliminacion(Hecho hecho, String motivo, Fuente fuente) {
     this.hecho = hecho;
     this.motivo = motivo;
-    this.fuente = fuenteCsv;
+    this.fuente = fuente;
     this.estado = Estado.PENDIENTE;
     validarSolicitud();
   }

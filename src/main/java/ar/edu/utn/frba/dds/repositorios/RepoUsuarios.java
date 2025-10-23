@@ -13,11 +13,6 @@ public class RepoUsuarios implements WithSimplePersistenceUnit {
   public static RepoUsuarios getInstance() { return INSTANCE; }
 
   public void agregar(Usuario usuario) { entityManager().persist(usuario); }
-/*
-  public Usuario buscarUsuario(int id) {
-    return entityManager().find(Usuario.class, id);
-  }
-*/
 
   public Usuario buscarUsuario(String nombre, String password) {
       List<Usuario> resultados = entityManager()

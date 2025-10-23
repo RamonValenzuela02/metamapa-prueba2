@@ -74,7 +74,7 @@ public class RepoFuentesDelSistema implements WithSimplePersistenceUnit {
 
   }
 
-  public Fuente obtenerFuenteConId(int fuenteId) {
+  public Fuente obtenerFuenteConId(Long fuenteId) {
     return entityManager()
       .createQuery("SELECT f FROM Fuente f WHERE f.id = :fuenteId", Fuente.class)
       .setParameter("fuenteId", fuenteId)

@@ -30,8 +30,8 @@ public class Router implements SimplePersistenceTest {
     app.get("/hecho/nuevo", ctx -> ctx.render("hecho.nuevo.hbs", new HashMap<>()));
     app.post("/hechos", controller::crearHecho);
 
-    app.get("/hechos/{hechoId}/solEliminacion", ctx -> ctx.render("hechos.eliminar.hbs", controller.solicitarEliminacionForm(ctx)));
-    app.post("/hechos/{hechoId}/solEliminacion", controller::solicitarEliminacion);
+    app.get("/solEliminacion/nueva", ctx -> ctx.render("solEliminacion.nueva.hbs", controller.solicitarEliminacionForm(ctx)));
+    app.post("/solEliminacion/nueva", controller::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     app.get("/login", session::show);

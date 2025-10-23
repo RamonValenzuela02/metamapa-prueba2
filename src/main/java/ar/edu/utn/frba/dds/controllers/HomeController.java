@@ -32,15 +32,24 @@ import org.jetbrains.annotations.NotNull;
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
     List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
-    List<Hecho> hechos = fuentes.stream()
-      .flatMap(x-> x.obtenerHechos().stream())
+
+    List<Map<String, Object>> fuentesConHechos = fuentes.stream()
+      .map(f -> {
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("fuenteID", f.getId());
+        datos.put("hechos", f.obtenerHechos()
+          .stream()
+          .filter(x -> !x.estaEliminado())
+          .toList());
+        return datos;
+      })
       .toList();
 
     Map<String,Object> model = new HashMap<>();
-    model.put("hechos", hechos);
-
+    model.put("fuentes", fuentesConHechos);
     return model;
   }
+
 
   public void crearHecho(@NotNull Context ctx) {
     try {
@@ -159,7 +168,7 @@ public class HomeController{
     int fuenteId = Integer.parseInt(Objects.requireNonNull(ctx.queryParam("fuenteId")));
     int hechoId = Integer.parseInt(Objects.requireNonNull(ctx.queryParam("hechoId")));
 
-    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId(fuenteId);
+    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) fuenteId);
     Hecho hecho = fuente.obtenerHechoConId(hechoId);
 
     Map<String,Object> model = new HashMap<>();
@@ -170,17 +179,20 @@ public class HomeController{
 
   public void solicitarEliminacion(@NotNull Context context) {
     int hechoId = Integer.parseInt(context.pathParam("hechoId"));
-    int fuenteId = Integer.parseInt(Objects.requireNonNull(context.queryParam("fuenteId")));
+    int fuenteId = Integer.parseInt(Objects.requireNonNull(context.formParam("fuenteId")));
     String motivo = context.formParam("motivo");
 
-    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId(fuenteId);
+    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) fuenteId);
     Hecho hecho = fuente.obtenerHechoConId(hechoId);
 
     SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion(hecho,motivo,fuente);
     ServicioDeSolicitudesEliminacion servicio = new ServicioDeSolicitudesEliminacion(new DetectorDeSpamBasico());
-    servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
 
-    context.redirect("/solicitudes");
+    RepoSolicitudesDeEliminacion.getInstance().withTransaction(() -> {
+      servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
+    });
+
+    context.redirect("/solicitudesEliminacion");
   }
 
   //CREAR COLECCION
@@ -212,7 +224,7 @@ public class HomeController{
         context.status(400).result("Algoritmo inválido: " + algoritmoStr);
         return;
       }
-      Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId(Integer.parseInt(fuenteStr));
+      Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) Integer.parseInt(fuenteStr));
 
       Coleccion coleccion = new Coleccion(titulo,descripcion, fuente, criterios, algoritmoConsenso );
 
