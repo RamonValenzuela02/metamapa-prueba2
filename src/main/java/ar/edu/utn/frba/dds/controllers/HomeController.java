@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -241,9 +242,11 @@ public class HomeController{
 
   public Map<String,Object> formularioNuevaColeccion() {
     List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
+    List<AlgoritmoConsenso> algoritmos = Arrays.asList(AlgoritmoConsenso.values());
 
     Map<String,Object> model = new HashMap<>();
-    model.put("fuente",fuentes);
+    model.put("algoritmos",algoritmos);
+    model.put("fuentes",fuentes);
     return model;
   }
 }

@@ -40,4 +40,12 @@ public enum AlgoritmoConsenso {
         }
     };
     public abstract boolean estaConsensuado(Hecho hecho);
+    public String toString() {
+      return switch (this) {
+        case CONSENSO_ABSOLUTO -> "CONSENSO_ABSOLUTO";
+        case CONSENSO_MAYORIA_SIEMPLE -> "CONSENSO_MAYORIA_SIEMPLE";
+        case CONSENSO_MULTIPLES_MENSIONES -> "CONSENSO_MULTIPLES_MENSIONES";
+        default -> null;
+      };
+    }
 }

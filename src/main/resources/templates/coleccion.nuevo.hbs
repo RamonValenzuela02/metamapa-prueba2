@@ -10,34 +10,32 @@
     </nav>
 </head>
 <body>
-<form action="/hechos" method="POST">
-    <form action="/colecciones" method="POST">
-        <label for="titulo">Título:</label>
-        <input type="text" name="titulo" required>
+<form action="/colecciones" method="POST">
+    <label for="titulo">Título:</label>
+    <input type="text" name="titulo" required>
 
-        <label for="descripcion">Descripción:</label>
-        <input type="text" name="descripcion" required>
+    <label for="descripcion">Descripción:</label>
+    <input type="text" name="descripcion" required>
 
-        <label for="fuente">Fuente:</label>
-        <select name="fuente">
-            <option value="1">Fuente 1</option>
-            <option value="2">Fuente 2</option>
-        </select>
+    <label for="fuente">Fuente:</label>
+    <select name="fuenteId" required>
+        {{#each fuentes}}
+            <option value="{{id}}">{{nombre}} (ID: {{id}})</option>
+        {{/each}}
+    </select>
 
-        <label for="algoritmo">Algoritmo:</label>
-        <select name="algoritmo">
-            <option value="CONSENSO_SIMPLE">Consenso simple</option>
-            <option value="MAYORIA">Mayoría</option>
-        </select>
+    <label for="algoritmo">Algoritmo:</label>
+    <select name="algoritmo">
+        {{#each algoritmos}}
+            <option value="{{this.name}}">{{this.toString}}</option>
+        {{/each}}
+    </select>
 
-        <label for="criterios">Criterios:</label><br>
-        <input type="text" name="criterio" value="categoria=INCENDIO_FORESTAL"><br>
-        <input type="text" name="criterio" value="fecha>2025-01-01"><br>
-        <input type="text" name="criterio" value="provincia=CORDOBA"><br>
+    <label for="criterio">Criterio:</label>
+    <input type="text" name="criterio" placeholder="categoria=INCENDIO_FORESTAL" required>
 
-        <input type="submit" value="Crear colección">
-    </form>
-
+    <br>
+    <input type="submit" value="Crear colección">
 </form>
 </body>
 </html>
