@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.fuente.FuenteDinamica;
+import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
+import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
@@ -32,13 +34,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoHechosDinamicos.getInstance().agregarHecho(h3);
       RepoHechosDinamicos.getInstance().agregarHecho(h4);
       RepoHechosDinamicos.getInstance().agregarHecho(h5);
-
-      entityManager().persist(h1);
-      entityManager().persist(h2);
-      entityManager().persist(h3);
-      entityManager().persist(h4);
-      entityManager().persist(h5);
-      entityManager().persist(fuenteDinamica);
 
       RepoFuentesDelSistema.getInstance().agregarFuente(fuenteDinamica);
 

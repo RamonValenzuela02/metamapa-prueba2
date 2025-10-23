@@ -29,6 +29,7 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 public class Hecho {
   @Id
   @GeneratedValue
+  @Getter
   private Long id;
   @Column
   private String titulo;

@@ -129,23 +129,28 @@ public class HomeController{
 
   public static void aprobarSolicitud(@NotNull Context context) {
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
-    SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
 
-    if (solicitud != null) {
-      solicitud.aceptar();
-      solicitud.getHecho().setEliminado(true);
-    }
+      repo.withTransaction(()->{
+        SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+        if (solicitud != null) {
+          solicitud.aceptar();
+          solicitud.getHecho().setEliminado(true);
+          repo.entityManager().merge(solicitud);
+        }
+      });
 
     context.redirect("/solicitudesEliminacion");
   }
 
   public static void rechazarSolicitud(@NotNull Context context) {
     RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
-    SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
-
-    if (solicitud != null) {
+    repo.withTransaction(()->{
+      SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+      if (solicitud != null) {
         solicitud.rechazar();
-    }
+        repo.entityManager().merge(solicitud);
+      }
+    });
     context.redirect("/solicitudesEliminacion");
   }
 

@@ -11,10 +11,12 @@ public class Router implements SimplePersistenceTest {
     HomeController controller = new HomeController();
     SessionController session = new SessionController();
 
+    /*
     app.before(ctx -> {
       entityManager().clear();
       ctx.contentType("text/html; charset=UTF-8");
     });
+     */
 
 
 
