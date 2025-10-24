@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +37,7 @@ public class Coleccion {
   //JoinColumn me parece que iria
   @Getter
   private Fuente fuente;
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
   @Getter
   private List<Criterio> criterios = new ArrayList<>();
   @Enumerated(EnumType.STRING)
