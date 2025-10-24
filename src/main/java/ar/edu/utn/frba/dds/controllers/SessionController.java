@@ -27,17 +27,16 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
   }
 
   public void create(Context ctx) {
-    RepoUsuarios repo = RepoUsuarios.getInstance();
-    String nombre = ctx.formParam("nombre");
-    String password = ctx.formParam("password");
+    try {
+      RepoUsuarios repo = RepoUsuarios.getInstance();
+      String nombre = ctx.formParam("nombre");
+      String password = ctx.formParam("password");
 
-    var usuario = repo.buscarUsuario(nombre, password);
+      var usuario = repo.buscarPorNombreYPassword(nombre, password);
 
-    if (usuario != null) {
-      // Usuario encontrado -> guardamos la session
       ctx.sessionAttribute("user_id", usuario.getId());
       ctx.redirect("/");
-    } else {
+    }catch(Exception e) {
       ctx.redirect("/login?error=true");
     }
   }
