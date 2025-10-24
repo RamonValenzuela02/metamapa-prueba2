@@ -14,13 +14,17 @@ public class RepoUsuarios implements WithSimplePersistenceUnit {
 
   public void agregar(Usuario usuario) { entityManager().persist(usuario); }
 
-  public Usuario buscarUsuario(String nombre, String password) {
+  public Usuario buscarPorNombreYPassword(String nombre, String password) {
       List<Usuario> resultados = entityManager()
           .createQuery("SELECT u FROM Usuario u WHERE u.nombre = :nombre AND u.password = :password", Usuario.class)
           .setParameter("nombre", nombre)
           .setParameter("password", password)
           .getResultList();
       return resultados.isEmpty() ? null : resultados.get(0);
+  }
+
+  public Usuario buscarPorId(Long id) {
+    return entityManager().find(Usuario.class, id);
   }
 
 }
