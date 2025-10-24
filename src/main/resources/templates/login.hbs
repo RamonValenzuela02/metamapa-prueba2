@@ -1,13 +1,26 @@
+{{#partial "navbar"}}
+{{/partial}}
+
 {{#partial "contenido-header"}}
     Iniciar Sesión
 {{/partial}}
 
 {{#partial "contenido"}}
-    <form method="POST" action="/login">
-        <label>Nombre</label><input name="nombre">
-        <label>Password</label><input name="password">
-        <button>Ingresar</button>
+    <div class="login-container">
+    <form method="POST" action="/login" class="form-login">
+        <div class="form-field">
+            <label>Usuario </label><input type="text" placeholder="Usuario" name="nombre" required>
+        </div>
+
+        <div class="form-field">
+            <label>Contraseña</label><input type="password" placeholder="••••••••••••" name="password" required>
+        </div>
+
+        <div class="form-field">
+            <input type="submit" value="Iniciar Sesion">
+        </div>
     </form>
+    </div>
     {{error}}
 {{/partial}}
 
