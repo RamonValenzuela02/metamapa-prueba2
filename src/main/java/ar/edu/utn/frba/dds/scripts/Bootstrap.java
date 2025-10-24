@@ -44,13 +44,15 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s1);
       RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s2);
 
+    });
+
+    // usuarios
+    withTransaction(() -> {
       RepoUsuarios repo = RepoUsuarios.getInstance();
-        var usuarios = Arrays.asList(
-          new Usuario(TipoUsuario.ADMINISTRADOR, "Facundo", "Facundo"),
-          new Usuario(TipoUsuario.CONTRIBUYENTE, "Juan", "Juan"),
-          new Usuario(TipoUsuario.ADMINISTRADOR, "Mati", "Mati"));
-        usuarios.forEach(repo::agregar);
-      });
+      repo.agregar(new Usuario(TipoUsuario.ADMINISTRADOR, "Facundo", "Facundo"));
+      repo.agregar(new Usuario(TipoUsuario.CONTRIBUYENTE, "Juan", "Juan"));
+      repo.agregar(new Usuario(TipoUsuario.ADMINISTRADOR, "Mati", "Mati"));
+    });
 
   }
 
