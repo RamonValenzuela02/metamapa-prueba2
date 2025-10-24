@@ -1,26 +1,27 @@
-{{#partial "navbar"}}
+{{#partial "head"}}
+    <link rel="stylesheet" href="assets/login.css">
 {{/partial}}
 
-{{#partial "contenido-header"}}
-    Iniciar Sesión
-{{/partial}}
+{{#partial "navbar"}}{{/partial}}
 
-{{#partial "contenido"}}
+{{#partial "contenido-main"}}
     <div class="login-container">
-    <form method="POST" action="/login" class="form-login">
-        <div class="form-field">
-            <label>Usuario </label><input type="text" placeholder="Usuario" name="nombre" required>
-        </div>
+        <h2> Iniciar Sesion </h2>
+        <form method="POST" action="/login" class="form-login">
+            <div class="form-field">
+                <input type="text" placeholder="Usuario" name="nombre" required>
+            </div>
 
-        <div class="form-field">
-            <label>Contraseña</label><input type="password" placeholder="••••••••••••" name="password" required>
-        </div>
+            <div class="form-field">
+                <input type="password" placeholder="••••••••••••" name="password" required>
+            </div>
 
-        <div class="form-field">
-            <input type="submit" value="Iniciar Sesion">
-        </div>
-    </form>
-    </div>
+            <div class="form-field">
+                <input type="submit" class="form-button" value="Iniciar Sesion">
+            </div>
+            <p class="registro"> No tenes cuenta? <a href="#" class="link"> Registrame </a> </p>
+        </form>
+     </div>
     {{error}}
 {{/partial}}
 

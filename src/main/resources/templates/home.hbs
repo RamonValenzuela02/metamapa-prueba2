@@ -2,16 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/main.css">
     <title>PROYECTO DISEÑO 26</title>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-            <li><a href="/login">Iniciar Sesión</a></li>
-        </ul>
-    </nav>
 </head>
 <body>
+    {{#partial "navbar"}}
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/hecho/nuevo">Crear Hecho</a></li>
+                <li><a href="/login">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    {{/block}}
 <main>
     {{#if fuentes.length}}
         {{#each fuentes}}

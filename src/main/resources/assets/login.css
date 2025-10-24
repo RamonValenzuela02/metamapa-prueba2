@@ -1,0 +1,75 @@
+body {
+    background-color: #354152;
+    color: #7e8ba3;
+    height: 100vh;
+    font-family: "Roboto Light", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: rgba(40, 44, 52, 0.95);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    height:100vh;
+    max-width: 420px;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-field{
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #242c37;
+    background-color: rgba(255,255,255,.08);
+    color: #fff;
+    text-align: center;
+}
+
+input:focus {
+    border-color: #007bff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-button {
+    border-radius: 10px;
+    background-color: #3a7bd5;
+    color: #fff;
+    width: 100%;
+}
+
+.form-button:hover{ filter:brightness(1.06); }
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    letter-spacing: 1px;
+}
+
+.registro {
+    margin-top: 20px;
+    color: #7e8ba3;
+}
+
+a {
+    color: #7e8ba3;
+}

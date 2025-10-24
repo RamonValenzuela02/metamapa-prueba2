@@ -5,26 +5,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/main.css">
     <title>PROYECTO DISENIO 26</title>
+    {{#block "head"}} {{/block}}
 </head>
 
 <body>
-    {{#block "navbar" }}
-    <nav class="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-            <li><a href="/login">Iniciar Sesión</a></li>
-        </ul>
-    </nav>
-    {{/block}}
+    {{#block "navbar" }}{{/block}}
 <main>
-    {{#block "contenido" }}
+    {{#block "contenido-main" }}
     {{/block}}
 </main>
 <footer>
     <p>institucion: UTN FRBA</p>
-    <p>materia: disenio de sitemas</p>
-    <p>grupo 26</p>>
+    <p>materia: disenio de sistemas</p>
+    <p>grupo 26</p>
 </footer>
 </body>
 
