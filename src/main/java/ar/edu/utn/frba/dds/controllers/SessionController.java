@@ -27,10 +27,10 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
       RepoUsuarios repo = RepoUsuarios.getInstance();
       String nombre = ctx.formParam("nombre");
       String password = ctx.formParam("password");
-      var usuario = repo.buscarUsuario(nombre,password);
+      //var usuario = repo.buscarUsuario(nombre,password);
 
-      ctx.sessionAttribute("user_id", usuario.getId());
-      ctx.redirect("/");
+      //ctx.sessionAttribute("user_id", usuario.getId());
+      ctx.render("home.administrador.hbs", new HashMap() {{}});
     } catch (Exception e) {
       Map<String, Object> modelo = new HashMap<>();
       ctx.redirect("/login?error=true");
