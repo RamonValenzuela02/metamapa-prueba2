@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/main.css">
-    <title>PROYECTO DISEÑO 26</title>
-</head>
-<body>
-    {{#partial "navbar"}}
-        <nav class="navbar">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-                <li><a href="/login">Iniciar Sesión</a></li>
-            </ul>
-        </nav>
-    {{/block}}
-<main>
+{{#partial "head"}}
+{{/partial}}
+
+{{#partial "navbar"}}
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
+            <li><a href="/login">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+{{/partial}}
+
+{{#partial "contenido-main"}}
     {{#if fuentes.length}}
         {{#each fuentes}}
             <section>
@@ -67,12 +63,6 @@
     {{else}}
         <p>No hay fuentes disponibles.</p>
     {{/if}}
-</main>
+{{/partial}}
 
-<footer class="footer">
-    <p>Institución: UTN FRBA</p>
-    <p>Materia: Diseño de Sistemas</p>
-    <p>Grupo 26</p>
-</footer>
-</body>
-</html>
+{{> templates/layout}}
