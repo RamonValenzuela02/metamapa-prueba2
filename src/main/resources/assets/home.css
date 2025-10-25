@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Light", sans-serif;
+}
+
 body {
     background-color: #ffffff;
 }
@@ -53,4 +60,10 @@ button {
 button:hover {
     background-color: rgba(0,136,169,0.8);
     color: #0088a9;
+}
+
+footer {
+    background-color: #eeeeee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-align: center;
 }
