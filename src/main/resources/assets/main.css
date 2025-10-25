@@ -6,11 +6,14 @@
 }
 
 footer {
-    background-color: #f1c40f;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 30px 10%;
+    background-color: #eeeeee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .titulo {
