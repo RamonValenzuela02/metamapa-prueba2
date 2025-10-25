@@ -1,8 +1,22 @@
 {{#partial "head"}}
     <link rel="stylesheet" href="assets/home.css">
+    <title> MetaMapa </title>
 {{/partial}}
 
 {{#partial "contenido-main"}}
+    <div>
+        <select name="colecciones"> Colecciones
+            <option> Coleccion 1 </option>
+            <option> Coleccion 2 </option>
+            <option> Coleccion 3 </option>
+        </select>
+        <label>
+            <input type="radio" name="tipoNavegacion" value="navegacionCurada"/> Navegacion Curada
+        </label>
+        <label>
+            <input type="radio" name="tipoNavegacion" value='navegacionIrrestrica'/> Navegacion Irrestricta
+        </label>
+    </div>
     {{#if fuentes.length}}
         {{#each fuentes}}
             <section>
