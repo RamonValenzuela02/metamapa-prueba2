@@ -29,5 +29,11 @@ public class Server {
       staticFileConfig.hostedPath = "/assets";
       staticFileConfig.directory = "/assets";
     });
+
+    config.staticFiles.add(staticFileConfig -> {
+      staticFileConfig.hostedPath = "/images";
+      staticFileConfig.directory = "/images";
+    });
+
   }
 }
