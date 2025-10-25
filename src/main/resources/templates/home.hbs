@@ -5,65 +5,45 @@
 
 {{#partial "contenido-main"}}
     <div>
-        <select name="colecciones"> Colecciones
-            <option> Coleccion 1 </option>
-            <option> Coleccion 2 </option>
-            <option> Coleccion 3 </option>
-        </select>
+        <label> Seleccionar Coleccion
+            <select name="colecciones">
+                <option> Coleccion 1 </option>
+                <option> Coleccion 2 </option>
+                <option> Coleccion 3 </option>
+            </select>
+        </label>
+
         <label>
             <input type="radio" name="tipoNavegacion" value="navegacionCurada"/> Navegacion Curada
         </label>
+
         <label>
             <input type="radio" name="tipoNavegacion" value='navegacionIrrestrica'/> Navegacion Irrestricta
         </label>
     </div>
     {{#if fuentes.length}}
         {{#each fuentes}}
-            <section>
-                <h2>Fuente: {{fuenteID}}</h2>
-
+            <h2>Fuente: {{fuenteID}}</h2>
+            <div class="container-tarjetas">
                 {{#if hechos.length}}
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Categoría</th>
-                            <th>Latitud</th>
-                            <th>Longitud</th>
-                            <th>Fecha del Hecho</th>
-                            <th>Fecha de Carga</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
                         {{#each hechos}}
-                            <tr>
-                                <td>{{id}}</td>
-                                <td>{{titulo}}</td>
-                                <td>{{descripcion}}</td>
-                                <td>{{categoria}}</td>
-                                <td>{{latitud}}</td>
-                                <td>{{longitud}}</td>
-                                <td>{{fechaHecho}}</td>
-                                <td>{{fechaCarga}}</td>
-                                <td>
-                                    <form action="/solEliminacion/nueva" method="get">
-                                        <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
-                                        <input type="hidden" name="hechoId" value="{{id}}">
-                                        <button type="submit">Solicitar eliminación</button>
-                                    </form>
-                                </td>
-                            </tr>
+                            <div class="tarjeta-hecho">
+                                <div class="hecho-data">
+                                    <p> {{id}} </p>
+                                    <p> {{titulo}} </p>
+                                    <p> {{descripcion}} </p>
+                                    <p> {{categoria}} </p>
+                                    <p> {{latitud}} </p>
+                                    <p> {{longitud}} </p>
+                                    <p> {{fechaHecho}} </p>
+                                    <p> {{fechaCarga}} </p>
+                                </div>
+                            </div>
                         {{/each}}
-                        </tbody>
-                    </table>
                 {{else}}
                     <p>No hay hechos registrados en esta fuente.</p>
                 {{/if}}
-            </section>
-            <hr/>
+            </div>
         {{/each}}
     {{else}}
         <p>No hay fuentes disponibles.</p>
