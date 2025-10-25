@@ -1,3 +1,7 @@
+body {
+    background-color: #24252A;
+}
+
 li, a, button {
     text-decoration: none;
     color: #edf0f1;
