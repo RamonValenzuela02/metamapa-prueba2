@@ -1,7 +1,60 @@
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    background-color: #24252A;
+    font-family: "Roboto Light", sans-serif;
+}
+
+li, a, button {
+    text-decoration: none;
+    color: #edf0f1;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.nav-links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav-links li a:hover {
+    color: #0088a9
+}
+
+.logo {
+    cursor: pointer;
+    height: auto;
+    width: 40px;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: rgba(0,136,169,0.8);
+    color: #0088a9;
 }
 
 footer {
@@ -14,25 +67,4 @@ footer {
 
 .titulo {
     font-size: 20px;
-}
-
-img {
-    height: 400px;
-    object-fit: contain;
-}
-
-.card-title {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-}
-
-.card-title a {
-    text-decoration: none;
-    color: #007bff;
-    transition: color 0.3s ease;
-}
-
-.card-title a:hover {
-    color: #0056b3;
-    text-decoration: underline;
 }

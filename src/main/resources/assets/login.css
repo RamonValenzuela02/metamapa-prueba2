@@ -2,8 +2,6 @@ body {
     background-color: #354152;
     color: #7e8ba3;
     height: 100vh;
-    font-family: "Roboto Light", sans-serif;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
