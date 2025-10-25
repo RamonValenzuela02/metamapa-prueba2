@@ -61,7 +61,7 @@ public class HomeController{
     TipoUsuario tipo = ctx.sessionAttribute("tipo_usuario");
 
     if (tipo == null) {
-      ctx.redirect("/home/");
+      ctx.render("home.hbs", index(ctx));
       return;
     }
 
