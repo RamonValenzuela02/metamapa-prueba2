@@ -12,16 +12,19 @@
 
 <body>
     <header>
-      {{#block "navbar" }}
-        <img src="images/bars-solid-full.svg" class="logo" alt="">
-        <nav>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-            </ul>
-        </nav>
-    <a href="/login"><button class="nav-login">Iniciar Sesion</button></a>
-    {{/block}}
+        {{#if esconderNav}}
+        {{else}}
+            {{#block "navbar" }}
+                <img src="images/bars-solid-full.svg" class="logo" alt="">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/hecho/nuevo">Crear Hecho</a></li>
+                    </ul>
+                </nav>
+                <a href="/login"><button class="nav-login">Iniciar Sesion</button></a>
+             {{/block}}
+         {{/if}}
     </header>
 <main>
     {{#block "contenido-main" }}{{/block}}

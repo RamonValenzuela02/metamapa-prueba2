@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
 import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
@@ -48,6 +49,11 @@ public class HomeController{
 
     Map<String,Object> model = new HashMap<>();
     model.put("fuentes", fuentesConHechos);
+    model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
+    if (ctx.sessionAttribute("user_id") != null) {
+      var usuario = RepoUsuarios.getInstance().buscarPorId(ctx.sessionAttribute("user_id"));
+      model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
+    }
     return model;
   }
 

@@ -11,14 +11,10 @@ public class Router implements SimplePersistenceTest {
     HomeController controller = new HomeController();
     SessionController session = new SessionController();
 
-    /*
     app.before(ctx -> {
       entityManager().clear();
       ctx.contentType("text/html; charset=UTF-8");
     });
-     */
-
-
 
     //REQUERIMIENTO 1
     //muestra los hechos
@@ -36,6 +32,7 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 3
     app.get("/login", session::show);
     app.post("/login", session::create);
+    app.get("/logout", session::logout);
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
