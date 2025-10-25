@@ -19,7 +19,7 @@ public class Router implements SimplePersistenceTest {
     //REQUERIMIENTO 1
     //muestra los hechos
     app.get("/", context -> context.redirect("/home"));
-    app.get("/home", ctx -> ctx.render("home.hbs", controller.index(ctx)));
+    app.get("/home", controller::showHome);
 
     //REQUERIMIENTO 2
     //crear hecho y crear solicitud de eliminacion
