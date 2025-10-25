@@ -1,19 +1,5 @@
 {{#partial "head"}}
-{{/partial}}
-
-{{#partial "navbar"}}
-    <nav class="navbar">
-        <ul>
-            {{#if usuarioLogueado}}
-                    <li>Hola, {{nombreUsuario}}!</li>
-                    <li><a href="/logout">Cerrar Sesión</a></li>
-            {{else}}
-                <li><a href="/login">Iniciar Sesión</a></li>
-            {{/if}}
-            <li><a href="/">Home</a></li>
-            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-        </ul>
-    </nav>
+    <link rel="stylesheet" href="assets/home.css">
 {{/partial}}
 
 {{#partial "contenido-main"}}
