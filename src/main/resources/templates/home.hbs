@@ -37,6 +37,11 @@
                                     <p> {{longitud}} </p>
                                     <p> {{fechaHecho}} </p>
                                     <p> {{fechaCarga}} </p>
+                                    <form action="/solEliminacion/nueva" method="get">
+                                        <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
+                                        <input type="hidden" name="hechoId" value="{{id}}">
+                                        <button type="submit" class="sol-eliminacion">Solicitar Eliminar</button>
+                                    </form>
                                 </div>
                             </div>
                         {{/each}}
