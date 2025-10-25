@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
+import ar.edu.utn.frba.dds.model.Usuario.TipoUsuario;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
@@ -55,6 +56,25 @@ public class HomeController{
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
     return model;
+  }
+  public void showHome(Context ctx) {
+    TipoUsuario tipo = ctx.sessionAttribute("tipo_usuario");
+
+    if (tipo == null) {
+      ctx.redirect("/home/");
+      return;
+    }
+
+    switch (tipo) {
+      case ADMINISTRADOR:
+        ctx.render("home.administrador.hbs", index(ctx));
+        break;
+      case CONTRIBUYENTE:
+        ctx.render("home.contribuyente.hbs", index(ctx));
+        break;
+      default:
+        ctx.redirect("/login");
+    }
   }
 
 
@@ -199,7 +219,7 @@ public class HomeController{
       servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
     });
 
-    context.redirect("/solicitudesEliminacion");
+    context.redirect("/home");
   }
 
   //CREAR COLECCION

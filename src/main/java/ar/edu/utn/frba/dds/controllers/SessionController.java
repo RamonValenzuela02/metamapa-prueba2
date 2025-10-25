@@ -37,6 +37,7 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
       var usuario = repo.buscarPorNombreYPassword(nombre, password);
 
       ctx.sessionAttribute("user_id", usuario.getId());
+      ctx.sessionAttribute("tipo_usuario", usuario.getTipo());
       ctx.redirect("/");
     }catch(Exception e) {
       ctx.redirect("/login?error=true");
