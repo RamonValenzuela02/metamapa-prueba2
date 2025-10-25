@@ -19,6 +19,8 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
     }
 
     Map<String, Object> modelo = new HashMap<>();
+    modelo.put("esconderNav", true);
+
     if ("true".equals(ctx.queryParam("error"))) {
       modelo.put("error", "Usuario o contraseña inválidas");
     }
