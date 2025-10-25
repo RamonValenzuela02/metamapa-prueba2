@@ -56,18 +56,28 @@ button:hover {
 
 .container-tarjetas {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    margin: 10px;
 }
 
 .tarjeta-hecho {
     max-width: 370px;
-    width: 100%;
     background: #ffffff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     border-radius: 24px;
     padding: 20px;
-    margin: 0 10px;
+    margin: 10px;
+}
+
+.form-sol-eliminacion {
+    display: flex;
+    justify-content: center;
+}
+
+.form-sol-eliminacion button {
+    width: 100vw;
+    text-align: center;
+    margin-top: 10px;
 }
