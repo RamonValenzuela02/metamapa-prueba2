@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.model.ubicacion;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 import lombok.Getter;
 
 @Embeddable

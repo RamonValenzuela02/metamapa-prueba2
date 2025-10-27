@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.model.ubicacion;
 
 import java.io.IOException;
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,7 +34,13 @@ public class ServicioProvincia {
   public ClaseMoldeProvincia provincia(String latitud, String longitud) {
     provinciaService service = retrofit.create(provinciaService.class);
     try {
-      Response<ClaseMoldeProvincia> response = service.getProvincia(latitud, longitud, "json").execute();
+      Call<ClaseMoldeProvincia> call = service.getProvincia(latitud, longitud, "json",1);
+
+
+      System.out.println("URL -> " + call.request().url()); // una solicitud por hecho, merjo tenerlas en cache
+
+
+      Response<ClaseMoldeProvincia> response = call.execute();
       if (response.isSuccessful()) {
         return response.body();
       } else {

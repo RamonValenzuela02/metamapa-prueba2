@@ -22,11 +22,11 @@ import java.util.Arrays;
 public class Bootstrap implements WithSimplePersistenceUnit {
   public void init() {
     withTransaction(() -> {
-      Hecho h1 = new Hecho("incendio", "incendio en buenos aires", Categoria.INCENDIO_FORESTAL, "1000", "10001", LocalDateTime.now(), LocalDateTime.now());
-      Hecho h2 = new Hecho("accidente", "accidente en buenos aires", Categoria.ACCIDENTE_VIAL, "1000", "10001", LocalDateTime.now(), LocalDateTime.now());
-      Hecho h3 = new Hecho("homicidio", "homicidio en buenos aires", Categoria.HOMICIDOS_DOLOSOS, "1000", "10001", LocalDateTime.now(), LocalDateTime.now());
-      Hecho h4 = new Hecho("incendio", "incendio en la patagonia", Categoria.INCENDIO_FORESTAL, "1000", "10001", LocalDateTime.now(), LocalDateTime.now());
-      Hecho h5 = new Hecho("incendio", "incendio en Codoba", Categoria.INCENDIO_FORESTAL, "1000", "10001", LocalDateTime.now(), LocalDateTime.now());
+      Hecho h1 = new Hecho("incendio", "incendio en Cordoba", Categoria.INCENDIO_FORESTAL, "-31.427502308472217", "-64.15248731961331", LocalDateTime.now(), LocalDateTime.now());
+      Hecho h2 = new Hecho("accidente", "accidente en buenos aires", Categoria.ACCIDENTE_VIAL, "-34.63590479382364", "-58.44512378698377", LocalDateTime.now(), LocalDateTime.now());
+      Hecho h3 = new Hecho("homicidio", "homicidio en buenos aires", Categoria.HOMICIDOS_DOLOSOS, "-34.62158055780353", "-58.44372922151555", LocalDateTime.now(), LocalDateTime.now());
+      Hecho h4 = new Hecho("incendio", "incendio en la patagonia", Categoria.INCENDIO_FORESTAL, "-41.572616430443965", "-70.67058748910377", LocalDateTime.now(), LocalDateTime.now());
+      Hecho h5 = new Hecho("incendio", "incendio en Cordoba", Categoria.INCENDIO_FORESTAL, "-31.92098099373357", "-64.46001571183002", LocalDateTime.now(), LocalDateTime.now());
 
       Fuente fuenteDinamica = new FuenteDinamica();
       RepoHechosDinamicos.getInstance().agregarHecho(h1);

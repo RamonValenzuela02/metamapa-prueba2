@@ -24,11 +24,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import io.javalin.http.UploadedFile;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,13 +46,24 @@ public class HomeController{
       })
       .toList();
 
+
+    Set<String> provincias = fuentes.stream().flatMap(f -> f.obtenerHechos().stream())
+            .filter(h -> !h.estaEliminado())
+            .map(Hecho::getProvincia)
+            .collect(Collectors.toSet());
+
+
     Map<String,Object> model = new HashMap<>();
+    model.put("provincias", provincias);
     model.put("fuentes", fuentesConHechos);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
     if (ctx.sessionAttribute("user_id") != null) {
       var usuario = RepoUsuarios.getInstance().buscarPorId(ctx.sessionAttribute("user_id"));
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
+
+    System.out.println("provincias = " + provincias.size() + " -> " + provincias);
+
     return model;
   }
   public void showHome(Context ctx) {

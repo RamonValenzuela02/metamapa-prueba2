@@ -1,6 +1,5 @@
 {{#partial "head"}}
     <link rel="stylesheet" href="assets/home.css">
-    <title> MetaMapa </title>
 {{/partial}}
 
 {{#partial "contenido-main"}}
@@ -12,20 +11,43 @@
                 <option> Coleccion 3 </option>
             </select>
         </label>
-
-        <label>
-            <input type="radio" name="tipoNavegacion" value="navegacionCurada"/> Navegacion Curada
-        </label>
-
-        <label>
-            <input type="radio" name="tipoNavegacion" value='navegacionIrrestrica'/> Navegacion Irrestricta
-        </label>
     </div>
-    {{#if fuentes.length}}
-        {{#each fuentes}}
-            <h2>Fuente: {{fuenteID}}</h2>
-            <div class="container-tarjetas">
-                {{#if hechos.length}}
+
+    <div class="contenedor-padre">
+        <div class="container-filtros">
+            <label class="container-filtros-label"> Modo de Navegacion </label>
+            <ul class="lista-navegacion">
+                <li>
+                    <input type="radio" name="modoNavegacion" value="navegacionIrrestrica"/> Navegación Irrestricta
+                </li>
+                <li>
+                    <input type="radio" name="modoNavegacion" value='navegacionCurada'/> Navegación Curada
+                </li>
+                <li>
+                    <small> Podrás ver los hechos más confiables </small>
+                </li>
+            </ul>
+
+            <label class="container-filtros-label"> Provincia </label>
+            <ul class="lista-ubicacion">
+                {{#each provincias}}
+                    <li>
+                        <input type="checkbox" name="provincias[]" value="{{this}}">
+                        <label>{{this}}</label>
+                    </li>
+                {{/each}}
+            </ul>
+
+            <label class="container-filtros-label"> Fecha </label>
+            <ul class="lista-fecha">
+            </ul>
+
+        </div>
+
+        <div class="container-tarjetas">
+            {{#if fuentes.length}}
+                {{#each fuentes}}
+                    {{#if hechos.length}}
                         {{#each hechos}}
                             <div class="tarjeta-hecho">
                                 <div class="hecho-data">
@@ -37,6 +59,7 @@
                                     <p> {{longitud}} </p>
                                     <p> {{fechaHecho}} </p>
                                     <p> {{fechaCarga}} </p>
+
                                     <form action="/solEliminacion/nueva" method="get" class="form-sol-eliminacion">
                                         <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
                                         <input type="hidden" name="hechoId" value="{{id}}">
@@ -45,14 +68,15 @@
                                 </div>
                             </div>
                         {{/each}}
-                {{else}}
-                    <p>No hay hechos registrados en esta fuente.</p>
-                {{/if}}
-            </div>
-        {{/each}}
-    {{else}}
-        <p>No hay fuentes disponibles.</p>
-    {{/if}}
+                    {{else}}
+                        <p>No hay hechos registrados en esta fuente.</p>
+                    {{/if}}
+                {{/each}}
+            {{else}}
+                <p>No hay fuentes disponibles.</p>
+            {{/if}}
+        </div> <!-- contenedor-tarjetas-->
+    </div> <!-- contenedor-padre-->
 {{/partial}}
 
 {{> templates/layout}}
