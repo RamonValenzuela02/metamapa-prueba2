@@ -10,6 +10,7 @@ import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 
 
@@ -34,6 +35,17 @@ public class JavalinHandlebars implements FileRenderer {
 
         return left.toString().equalsIgnoreCase(right.toString());
       }
+    });
+
+    handlebars.registerHelper("ifIn", (context, options) -> {
+      // context = valor (provincia)
+      // param0 = lista (provSeleccionadas)
+      Object listObj = options.param(0, null);
+      if (listObj instanceof Collection<?> col) {
+        boolean contiene = (context != null && col.contains(context));
+        return contiene ? options.fn() : options.inverse();
+      }
+      return options.inverse();
     });
   }
 

@@ -1,0 +1,28 @@
+{{#if fuentes}}
+  {{#each fuentes}}
+    {{#if hechos.length}}
+      {{#each hechos}}
+        <div class="tarjeta-hecho">
+          <div class="hecho-data">
+            <p>{{id}}</p>
+            <p>{{titulo}}</p>
+            <p>{{descripcion}}</p>
+            <p>{{categoria}}</p>
+            <p>{{fechaHecho}}</p>
+            <p>{{fechaCarga}}</p>
+
+            <form action="/solEliminacion/nueva" method="get" class="form-sol-eliminacion">
+              <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
+              <input type="hidden" name="hechoId" value="{{id}}">
+              <button type="submit">Solicitar Eliminar</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <p>No hay hechos registrados en esta fuente.</p>
+    {{/if}}
+  {{/each}}
+{{else}}
+  <p>No hay fuentes disponibles.</p>
+{{/if}}

@@ -26,25 +26,34 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import io.javalin.http.UploadedFile;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
+
+    List<String> provinciasSeleccionadas = new ArrayList<>();
+    provinciasSeleccionadas.addAll(ctx.queryParams("provincias"));
+
     List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
 
     List<Map<String, Object>> fuentesConHechos = fuentes.stream()
       .map(f -> {
+
+        Stream<Hecho> hechos = f.obtenerHechos().stream()
+                .filter(h -> !h.estaEliminado());
+
+        if(!provinciasSeleccionadas.isEmpty()){
+          hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));
+        }
+
         Map<String, Object> datos = new HashMap<>();
         datos.put("fuenteID", f.getId());
-        datos.put("hechos", f.obtenerHechos()
-          .stream()
-          .filter(x -> !x.estaEliminado())
-          .toList());
+        datos.put("hechos", hechos.toList());
         return datos;
-      })
-      .toList();
+      }).toList();
 
 
     Set<String> provincias = fuentes.stream()
@@ -55,8 +64,9 @@ public class HomeController{
             .collect(Collectors.toCollection(TreeSet::new));
 
     Map<String,Object> model = new HashMap<>();
-    model.put("provincias", provincias);
     model.put("fuentes", fuentesConHechos);
+    model.put("provincias", provincias);
+    model.put("provSeleccionadas", provinciasSeleccionadas);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
 
     if (ctx.sessionAttribute("user_id") != null) {
@@ -70,6 +80,13 @@ public class HomeController{
   }
   public void showHome(Context ctx) {
     TipoUsuario tipo = ctx.sessionAttribute("tipo_usuario");
+    boolean esHtmx = "true".equalsIgnoreCase(ctx.header("HX-Request"));
+
+    if (esHtmx) {
+      ctx.render("partials.resultados.hbs",index(ctx));
+    }else {
+      ctx.render("home.hbs", index(ctx));
+    }
 
     if (tipo == null) {
       ctx.render("home.hbs", index(ctx));
