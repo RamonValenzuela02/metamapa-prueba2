@@ -47,16 +47,18 @@ public class HomeController{
       .toList();
 
 
-    Set<String> provincias = fuentes.stream().flatMap(f -> f.obtenerHechos().stream())
+    Set<String> provincias = fuentes.stream()
+            .flatMap(f -> f.obtenerHechos().stream())
             .filter(h -> !h.estaEliminado())
             .map(Hecho::getProvincia)
-            .collect(Collectors.toSet());
-
+            .filter(Objects::nonNull)
+            .collect(Collectors.toCollection(TreeSet::new));
 
     Map<String,Object> model = new HashMap<>();
     model.put("provincias", provincias);
     model.put("fuentes", fuentesConHechos);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
+
     if (ctx.sessionAttribute("user_id") != null) {
       var usuario = RepoUsuarios.getInstance().buscarPorId(ctx.sessionAttribute("user_id"));
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);

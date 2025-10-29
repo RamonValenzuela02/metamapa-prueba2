@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.model.Hecho;
 import static java.util.Objects.requireNonNull;
 
 import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
+import ar.edu.utn.frba.dds.model.ubicacion.ServicioProvincia;
 import ar.edu.utn.frba.dds.model.ubicacion.Ubicacion;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import java.time.LocalDateTime;
@@ -39,6 +40,8 @@ public class Hecho {
   private Categoria categoria;
   @Embedded
   private Ubicacion ubicacion;
+  @Getter
+  private String provincia;
   @Column
   private LocalDateTime fechaHecho;
   @Column
@@ -58,6 +61,7 @@ public class Hecho {
     this.descripcion = descripcion;
     this.categoria = categoria;
     this.ubicacion = new Ubicacion(latitud,longitud);
+    this.provincia = ServicioProvincia.getInstancia().provincia(latitud, longitud);
     this.fechaHecho = fechaHecho;
     this.fechaCarga = fechaCarga;
   }
@@ -94,11 +98,7 @@ public class Hecho {
         .anyMatch(token -> distancia.apply(token, palabra) <= tolerancia));
   }
 
-  public String getProvincia() {
-    return ubicacion.getProvincia();
-  }
-
-  public Integer getHoraDelHecho() {
+    public Integer getHoraDelHecho() {
     return fechaHecho.getHour();
   }
 
