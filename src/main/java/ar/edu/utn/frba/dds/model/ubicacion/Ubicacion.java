@@ -18,10 +18,4 @@ public class Ubicacion {
   }
 
   protected Ubicacion(){};
-
-  public String getProvincia(){
-    ClaseMoldeProvincia respuesta = ServicioProvincia.getInstancia().provincia(latitud, longitud);
-    return respuesta.getAddress().getState();
-  }
-
 }
