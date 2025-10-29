@@ -11,6 +11,7 @@ public class ServicioProvincia {
   private static ServicioProvincia instancia;
   private static final String urlApi = "https://nominatim.openstreetmap.org/";
   private Retrofit retrofit;
+  private final provinciaService service;
 
   private ServicioProvincia() {
     OkHttpClient client = new OkHttpClient.Builder()
@@ -22,6 +23,8 @@ public class ServicioProvincia {
       .client(client)
       .addConverterFactory(GsonConverterFactory.create())
       .build();
+
+    this.service = retrofit.create(provinciaService.class);
   }
 
   public static ServicioProvincia getInstancia() {
@@ -31,8 +34,8 @@ public class ServicioProvincia {
     return instancia;
   }
 
-  public ClaseMoldeProvincia provincia(String latitud, String longitud) {
-    provinciaService service = retrofit.create(provinciaService.class);
+  public String provincia(String latitud, String longitud) {
+
     try {
       Call<ClaseMoldeProvincia> call = service.getProvincia(latitud, longitud, "json",1);
 
@@ -42,14 +45,13 @@ public class ServicioProvincia {
 
       Response<ClaseMoldeProvincia> response = call.execute();
       if (response.isSuccessful()) {
-        return response.body();
+        return response.body().getAddress().getState();
       } else {
         throw new RuntimeException("Error en Api: " + response.message());
       }
     } catch (IOException e) {
       throw new RuntimeException("Error en Api: " + e.getMessage());
     }
-
   }
 
 }
