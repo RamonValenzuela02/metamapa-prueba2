@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.controllers.HechoNuevoController;
+import ar.edu.utn.frba.dds.controllers.HechoController;
 import ar.edu.utn.frba.dds.controllers.HomeController;
 import ar.edu.utn.frba.dds.controllers.SessionController;
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
@@ -9,7 +9,7 @@ import io.javalin.Javalin;
 public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
     HomeController controller = new HomeController();
-    HechoNuevoController hechoNuevoController = new HechoNuevoController();
+    HechoController hechoController = new HechoController();
     SessionController session = new SessionController();
 
     app.before(ctx -> {
@@ -24,9 +24,9 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 2
     //crear hecho y crear solicitud de eliminacion
-    app.get("/hecho/nuevo", hechoNuevoController::formHechoNuevo);
-    app.post("/hechos", hechoNuevoController::crearHecho);
-    app.get("/hecho/{id}", hechoNuevoController::ver);
+    app.get("/hecho/nuevo", hechoController::formHechoNuevo);
+    app.post("/hechos", hechoController::crearHecho);
+    app.get("/hecho/{id}", hechoController::ver);
 
     app.get("/solEliminacion/nueva", ctx -> ctx.render("solEliminacion/solEliminacion.nueva.hbs", controller.solicitarEliminacionForm(ctx)));
     app.post("/solEliminacion/nueva", controller::solicitarEliminacion);
@@ -38,7 +38,7 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
-    app.get("/coleccion/nuevo", ctx -> ctx.render("coleccion/coleccion.nuevo.hbs", controller.formularioNuevaColeccion()));
+    app.get("/coleccion/nuevo", ctx -> ctx.render("coleccion/coleccion.hecho.nuevo.hbs", controller.formularioNuevaColeccion()));
     app.post("/colecciones", controller::crearColeccion);
     //REQUERIMIENTO 6
 

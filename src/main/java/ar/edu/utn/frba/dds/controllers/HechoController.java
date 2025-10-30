@@ -9,7 +9,7 @@ import io.javalin.http.UploadedFile;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class HechoNuevoController {
+public class HechoController {
 
     public void formHechoNuevo(Context ctx){
         Map<String, Object> model = new HashMap<>();
@@ -150,7 +150,7 @@ public class HechoNuevoController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("hecho", hecho);
-
+        model.put("fuenteID", ctx.queryParam("fuenteID"));
         ctx.render("hecho/hecho.detalle.hbs", model);
     }
 }

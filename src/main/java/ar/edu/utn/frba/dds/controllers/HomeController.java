@@ -60,7 +60,6 @@ public class HomeController{
 
         Stream<Hecho> hechos = f.obtenerHechos().stream()
                 .filter(h -> !h.estaEliminado());
-
         
         if(!provinciasSeleccionadas.isEmpty()){
           hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));

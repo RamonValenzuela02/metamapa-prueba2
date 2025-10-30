@@ -79,14 +79,14 @@ header {
     justify-content: space-between;
 }
 
-.form-sol-eliminacion {
-    display: flex;
-    justify-content: center;
+.hecho-data {
+    margin: 5px;
 }
 
-.form-sol-eliminacion button {
+.btn {
+    display: block;
     width: 100%;
-    margin-top: 10px;
+    text-align: center;
 }
 
 .form-filtros button {

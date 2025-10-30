@@ -43,12 +43,17 @@
     padding:4px 0;
 }
 
-.volver {
+.actions {
     margin-top:16px;
     display:flex;
     justify-content:flex-end;
 }
 
-.volver a {
+.form-sol-eliminacion {
+    margin-left: 5px;
+}
+
+.actions a {
+    margin-left: 5px;
     text-decoration: none;
 }

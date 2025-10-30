@@ -3,19 +3,35 @@
     {{#if hechos}}
       {{#each hechos}}
         <div class="tarjeta-hecho">
+
           <div class="hecho-data">
             <p>{{id}}</p>
-            <p>{{titulo}}</p>
-            <p>{{descripcion}}</p>
-            <p>{{categoria}}</p>
-            <p>{{fechaHecho}}</p>
-            <p>{{fechaCarga}}</p>
+          </div>
 
-            <form action="/solEliminacion/nueva" method="get" class="form-sol-eliminacion">
-              <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
-              <input type="hidden" name="hechoId" value="{{id}}">
-              <button type="submit" class="btn">Solicitar Eliminar</button>
-            </form>
+          <div class="hecho-data">
+            <p>{{titulo}}</p>
+          </div>
+
+          <div class="hecho-data">
+            <p>{{descripcion}}</p>
+          </div>
+
+          <div class="hecho-data">
+            <p>{{categoria}}</p>
+          </div>
+
+          <div class="hecho-data">
+            <p>{{fechaHecho}}</p>
+          </div>
+
+          <div class="hecho-data">
+            <p>{{fechaCarga}}</p>
+          </div>
+
+          <div class="hecho-data">
+            <a class="btn" href="/hecho/{{id}}?fuenteID={{../fuenteID}}">
+                Ver Detalle
+            </a>
           </div>
         </div>
       {{/each}}
