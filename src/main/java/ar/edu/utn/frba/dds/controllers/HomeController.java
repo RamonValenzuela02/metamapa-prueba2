@@ -23,7 +23,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,8 +36,22 @@ import org.jetbrains.annotations.NotNull;
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
 
+    String modo = ctx.queryParam("modoNavegacion");
+
     List<String> provinciasSeleccionadas = new ArrayList<>();
     provinciasSeleccionadas.addAll(ctx.queryParams("provincias"));
+
+    String fechaDesdeString = ctx.queryParam("fechaDesde");
+    String fechaHastaString = ctx.queryParam("fechaHasta");
+
+    System.out.println("Fecha Desde Str: " + fechaDesdeString);
+    System.out.println("Fecha Hasta Str: " + fechaHastaString);
+
+    LocalDateTime desde = parsearFechaComoInicioDeDia(fechaDesdeString);
+    LocalDateTime hasta = parsearFechaComoFinDeDia(fechaHastaString);
+
+    System.out.println("Fecha Desde: " + desde);
+    System.out.println("Fecha Hasta: " + hasta);
 
     List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
 
@@ -45,8 +61,16 @@ public class HomeController{
         Stream<Hecho> hechos = f.obtenerHechos().stream()
                 .filter(h -> !h.estaEliminado());
 
+        
         if(!provinciasSeleccionadas.isEmpty()){
           hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));
+        }
+
+        if(desde != null){
+          hechos = hechos.filter(h -> !h.getFechaHecho().isBefore(desde));
+        }
+        if(hasta != null){
+          hechos = hechos.filter(h -> !h.getFechaHecho().isAfter(hasta));
         }
 
         Map<String, Object> datos = new HashMap<>();
@@ -66,6 +90,9 @@ public class HomeController{
     Map<String,Object> model = new HashMap<>();
     model.put("fuentes", fuentesConHechos);
     model.put("provincias", provincias);
+    model.put("modoSeleccionado", modo);
+    model.put("fechaDesde", desde);
+    model.put("fechaHasta", hasta);
     model.put("provSeleccionadas", provinciasSeleccionadas);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
 
@@ -224,5 +251,17 @@ public class HomeController{
     model.put("algoritmos",algoritmos);
     model.put("fuentes",fuentes);
     return model;
+  }
+
+  private LocalDateTime parsearFechaComoInicioDeDia(String fecha) {
+    if (fecha == null || fecha.isBlank()) return null;
+    LocalDate d = LocalDate.parse(fecha);
+    return d.atStartOfDay(); // 2025-10-20T00:00:00
+  }
+
+  private LocalDateTime parsearFechaComoFinDeDia(String fecha) {
+    if (fecha == null || fecha.isBlank()) return null;
+    LocalDate d = LocalDate.parse(fecha); // "2025-10-20"
+    return d.plusDays(1).atStartOfDay().minusSeconds(1); // 2025-10-20T23:59:59
   }
 }
