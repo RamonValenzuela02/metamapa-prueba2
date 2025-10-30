@@ -25,7 +25,7 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
       modelo.put("error", "Usuario o contraseña inválidas");
     }
 
-    ctx.render("login.hbs", modelo);
+    ctx.render("login/login.hbs", modelo);
   }
 
   public void create(Context ctx) {

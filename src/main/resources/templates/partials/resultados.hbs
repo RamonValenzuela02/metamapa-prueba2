@@ -1,6 +1,6 @@
 {{#if fuentes}}
   {{#each fuentes}}
-    {{#if hechos.length}}
+    {{#if hechos}}
       {{#each hechos}}
         <div class="tarjeta-hecho">
           <div class="hecho-data">
@@ -14,7 +14,7 @@
             <form action="/solEliminacion/nueva" method="get" class="form-sol-eliminacion">
               <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
               <input type="hidden" name="hechoId" value="{{id}}">
-              <button type="submit">Solicitar Eliminar</button>
+              <button type="submit" class="btn">Solicitar Eliminar</button>
             </form>
           </div>
         </div>

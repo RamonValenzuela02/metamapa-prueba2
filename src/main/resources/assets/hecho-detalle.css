@@ -1,0 +1,54 @@
+.hecho-detalle {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 8px 16px;
+}
+
+.header {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    justify-content:space-between;
+}
+
+.categoria {
+    background:#eef2ff;
+    color:#1e3a8a;
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:12px;
+}
+
+.grid {
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap:16px;
+    margin:16px 0;
+}
+
+.tarjeta-hecho {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    padding: 16px;
+}
+
+.datos {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.datos li {
+    padding:4px 0;
+}
+
+.volver {
+    margin-top:16px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.volver a {
+    text-decoration: none;
+}

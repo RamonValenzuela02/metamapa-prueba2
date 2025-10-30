@@ -1,0 +1,45 @@
+{{#partial "head"}}
+  <link rel="stylesheet" href="/assets/hecho-detalle.css">
+  <title> {{hecho.titulo}} - MetaMapa</title>
+{{/partial}}
+
+
+{{#partial "navbar"}} {{/partial}}
+
+{{#partial "footer"}} {{/partial}}
+
+{{#partial "contenido-main"}}
+<section class="hecho-detalle">
+
+    <header class="header">
+        <h1>{{hecho.titulo}}</h1>
+        {{#if hecho.categoria}}<span class="categoria">{{hecho.categoria}}</span>{{/if}}
+    </header>
+
+  <div class="grid">
+    <div class="tarjeta-hecho">
+      <h2>Descripción</h2>
+      <p>{{hecho.descripcion}}</p>
+    </div>
+
+    <div class="tarjeta-hecho">
+      <h2>Datos</h2>
+      <ul class="datos">
+        {{#if hecho.provincia}}<li><strong>Provincia:</strong> {{hecho.provincia}}</li>{{/if}}
+        {{#if hecho.latitud}}<li><strong>Lat:</strong> {{hecho.latitud}}</li>{{/if}}
+        {{#if hecho.longitud}}<li><strong>Lon:</strong> {{hecho.longitud}}</li>{{/if}}
+        {{#if hecho.fechaHecho}}<li><strong>Fecha del hecho:</strong> {{hecho.fechaHecho}}</li>{{/if}}
+        {{#if hecho.fechaCarga}}<li><strong>Fecha de carga:</strong> {{hecho.fechaCarga}}</li>{{/if}}
+        {{#if hecho.fuente}}<li><strong>Fuente:</strong> {{hecho.fuente.id}}</li>{{/if}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="volver">
+    <a class="btn" href="/home">Volver</a>
+  </div>
+
+</section>
+{{/partial}}
+
+{{> templates/layout/layout}}

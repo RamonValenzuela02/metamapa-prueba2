@@ -74,8 +74,6 @@ public class HomeController{
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
 
-    System.out.println("provincias = " + provincias.size() + " -> " + provincias);
-
     return model;
   }
   public void showHome(Context ctx) {
@@ -83,101 +81,25 @@ public class HomeController{
     boolean esHtmx = "true".equalsIgnoreCase(ctx.header("HX-Request"));
 
     if (esHtmx) {
-      ctx.render("partials.resultados.hbs",index(ctx));
+      ctx.render("partials/resultados.hbs",index(ctx));
     }else {
-      ctx.render("home.hbs", index(ctx));
+      ctx.render("home/home.hbs", index(ctx));
     }
 
     if (tipo == null) {
-      ctx.render("home.hbs", index(ctx));
+      ctx.render("home/home.hbs", index(ctx));
       return;
     }
 
     switch (tipo) {
       case ADMINISTRADOR:
-        ctx.render("home.administrador.hbs", index(ctx));
+        ctx.render("home/home.administrador.hbs", index(ctx));
         break;
       case CONTRIBUYENTE:
-        ctx.render("home.contribuyente.hbs", index(ctx));
+        ctx.render("home/home.contribuyente.hbs", index(ctx));
         break;
       default:
         ctx.redirect("/login");
-    }
-  }
-
-
-  public void crearHecho(@NotNull Context ctx) {
-    try {
-      String titulo = ctx.formParam("titulo");
-      String descripcion = ctx.formParam("descripcion");
-      String categoriaStr = ctx.formParam("categoria");
-      String latitud = ctx.formParam("latitud");
-      String longitud = ctx.formParam("longitud");
-      String fechaHechoStr = ctx.formParam("fechaHecho");
-      List<UploadedFile> archivos = ctx.uploadedFiles("multimedia");
-
-      if (titulo == null || titulo.isBlank() ||
-        descripcion == null || descripcion.isBlank() ||
-        categoriaStr == null || categoriaStr.isBlank() ||
-        fechaHechoStr == null || fechaHechoStr.isBlank()) {
-        ctx.status(400).result("Faltan campos obligatorios");
-        return;
-      }
-
-      Categoria categoria;
-      try {
-        categoria = Categoria.valueOf(categoriaStr.toUpperCase()); // convertir a mayúsculas
-      } catch (IllegalArgumentException e) {
-        ctx.status(400).result("Categoría inválida: " + categoriaStr);
-        return;
-      }
-
-      LocalDateTime fechaHecho;
-      try {
-        fechaHecho = LocalDateTime.parse(fechaHechoStr);
-      } catch (Exception e) {
-        fechaHecho = LocalDateTime.parse(fechaHechoStr + ":00");
-      }
-
-      Hecho hecho = new Hecho(
-        titulo,
-        descripcion,
-        categoria,
-        latitud,
-        longitud,
-        fechaHecho,
-        LocalDateTime.now()
-      );
-
-      RepoHechosDinamicos repoHechosDinamicos = RepoHechosDinamicos.getInstance();
-      repoHechosDinamicos.withTransaction(() -> repoHechosDinamicos.agregarHecho(hecho));
-
-      for (UploadedFile archivo : archivos) {
-        String nombreArchivo = archivo.filename();
-        String rutaDestino = "src/main/resources/public/uploads/" + nombreArchivo;
-
-        // Guardar el archivo físico
-        try (InputStream in = archivo.content()) {
-          Files.copy(in, Paths.get(rutaDestino), StandardCopyOption.REPLACE_EXISTING);
-        }
-
-        // Crear entidad y asociar
-        ArchivoMultimedia nuevoArchivo = new ArchivoMultimedia(
-            nombreArchivo,
-            "/uploads/" + nombreArchivo, // ruta accesible desde la vista
-            hecho
-        );
-
-        hecho.agregarArchivo(nuevoArchivo);
-        RepoArchivosMultimedia repoArchivosMultimedia = RepoArchivosMultimedia.getInstance();
-        repoArchivosMultimedia.withTransaction(() -> repoArchivosMultimedia.agregarArchivo(nuevoArchivo));
-      }
-
-      ctx.redirect("/home");
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      ctx.status(500).result("Ocurrió un error al crear el hecho: " + e.getMessage());
     }
   }
 

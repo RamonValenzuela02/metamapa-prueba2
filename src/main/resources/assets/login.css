@@ -6,7 +6,6 @@
 }
 
 body {
-    background-color: #354152;
     color: #7e8ba3;
     height: 100vh;
     display: flex;
@@ -55,9 +54,6 @@ input:focus {
 }
 
 .form-button {
-    border-radius: 10px;
-    background-color: #3a7bd5;
-    color: #fff;
     width: 100%;
 }
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang= "es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/main.css">
+
+    {{!-- Inyectar CSS y Titulo de la vista que corresponda --}}
+    {{#block "head"}}
+        <title> MetaMapa </title>
+    {{/block}}
+</head>
+
+<body>
+    {{#block "navbar"}}
+        <header>
+            <img src="images/bars-solid-full.svg" class="logo" alt="">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/hecho/nuevo">Crear Hecho</a></li>
+                </ul>
+            </nav>
+            <a href="/login"><button class="btn nav-login">Iniciar Sesion</button></a>
+        </header>
+    {{/block}}
+<main>
+    {{#block "contenido-main" }}{{/block}}
+</main>
+
+{{#block "footer"}}
+    <footer>
+        <p> UTN FRBA - Diseño de Sistemas - Grupo 26 </p>
+    </footer>
+{{/block}}
+</body>
+
+</html>

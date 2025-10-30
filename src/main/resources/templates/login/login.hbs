@@ -1,8 +1,10 @@
 {{#partial "head"}}
-    <link rel="stylesheet" href="assets/login.css">
+    <link rel="stylesheet" href="/assets/login.css">
+    <title> Iniciar Sesión - MetaMapa</title>
 {{/partial}}
 
-{{#partial "navbar"}}{{/partial}}
+{{#partial "navbar"}} {{/partial}}
+{{#partial "footer"}} {{/partial}}
 
 {{#partial "contenido-main"}}
     <div class="login-container">
@@ -17,7 +19,7 @@
             </div>
 
             <div class="form-field">
-                <input type="submit" class="form-button" value="Iniciar Sesion">
+                <input type="submit" class="btn form-button" value="Iniciar Sesion">
             </div>
             <p class="registro"> No tenes cuenta? <a href="#" class="link"> Registrame </a> </p>
         </form>
@@ -25,4 +27,4 @@
     {{error}}
 {{/partial}}
 
-{{>templates/layout}}
+{{> templates/layout/layout}}

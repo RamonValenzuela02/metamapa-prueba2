@@ -24,4 +24,8 @@ public class RepoHechosDinamicos implements WithSimplePersistenceUnit {
       .createQuery("SELECT h FROM Hecho h", Hecho.class)
       .getResultList();
   }
+
+  public Hecho obtenerHechoPorId(Long id) {
+    return entityManager().find(Hecho.class, id);
+  }
 }

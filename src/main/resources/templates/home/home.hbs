@@ -1,5 +1,6 @@
 {{#partial "head"}}
-    <link rel="stylesheet" href="assets/home.css">
+    <link rel="stylesheet" href="/assets/home.css">
+    <title> MetaMapa</title>
 {{/partial}}
 
 {{#partial "contenido-main"}}
@@ -52,14 +53,14 @@
                      </li>
                 </ul>
 
-               <button type="submit">Aplicar Filtros</button>
+               <button type="submit" class="btn">Aplicar Filtros</button>
            </form>
         </div>
 
         <div id="resultados" class="container-tarjetas">
-            {{> templates/partials.resultados}}
+            {{> templates/partials/resultados}}
         </div> <!-- contenedor-tarjetas-->
     </div> <!-- contenedor-padre-->
 {{/partial}}
 
-{{> templates/layout}}
+{{> templates/layout/layout}}
