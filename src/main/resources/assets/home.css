@@ -99,6 +99,10 @@ header {
     margin: 5px;
 }
 
+.hecho-data .btn {
+    width: 100%;
+}
+
 .form-filtros button {
     width: 100%;
     margin-top: 10px;

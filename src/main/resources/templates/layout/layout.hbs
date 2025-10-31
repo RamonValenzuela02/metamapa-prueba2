@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/main.css">
+    <link rel="icon" type="image/jpeg" href="/images/metamapa.jpeg">
 
     {{!-- Inyectar CSS y Titulo de la vista que corresponda --}}
     {{#block "head"}}
@@ -13,19 +14,22 @@
 
 <body>
     {{#block "navbar"}}
-        <header>
-            <img src="images/bars-solid-full.svg" class="logo" alt="">
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-                </ul>
-            </nav>
-            <a href="/login"><button class="btn nav-login">Iniciar Sesion</button></a>
+        <header class="header">
+            <div class="header-container">
+                <a href="/" class="header-left">
+                    <img src="/images/metamapa.jpeg" class="logo" alt="MetaMapa">
+                    <span class="logo-text"> MetaMapa </span>
+                </a>
+
+                <div class="header-right">
+                    <a href="/hecho/nuevo" class="nav-link">Crear Hecho</a>
+                    <a href="/login" class="btn nav-login">Iniciar Sesion</a>
+                </div>
+            </div>
         </header>
     {{/block}}
 <main>
-    {{#block "contenido-main" }}{{/block}}
+    {{#block "contenido-main"}}{{/block}}
 </main>
 
 {{#block "footer"}}
