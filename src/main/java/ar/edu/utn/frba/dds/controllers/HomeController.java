@@ -1,11 +1,10 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
-import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
 import ar.edu.utn.frba.dds.model.Usuario.TipoUsuario;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
+import ar.edu.utn.frba.dds.model.coleccion.ModoNavegacion;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
-import ar.edu.utn.frba.dds.model.criterio.Categoria;
 import ar.edu.utn.frba.dds.model.criterio.Criterio;
 import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
@@ -15,84 +14,108 @@ import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
-import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
-import ar.edu.utn.frba.dds.repositorios.RepoArchivosMultimedia;
 import io.javalin.http.Context;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import io.javalin.http.UploadedFile;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
 
-    String modo = ctx.queryParam("modoNavegacion");
+    String coleccionQuery = ctx.queryParam("coleccionId");
+    String modoQuery = ctx.queryParam("modoNavegacion");
+    ModoNavegacion modoNavegacion = "CURADA".equalsIgnoreCase(modoQuery) ? ModoNavegacion.CURADA : ModoNavegacion.IRRESTRICTA;
 
-    List<String> provinciasSeleccionadas = new ArrayList<>();
-    provinciasSeleccionadas.addAll(ctx.queryParams("provincias"));
+    List<String> provinciasSeleccionadas = new ArrayList<>(ctx.queryParams("provincias"));
 
     String fechaDesdeString = ctx.queryParam("fechaDesde");
     String fechaHastaString = ctx.queryParam("fechaHasta");
 
-    System.out.println("Fecha Desde Str: " + fechaDesdeString);
-    System.out.println("Fecha Hasta Str: " + fechaHastaString);
-
     LocalDateTime desde = parsearFechaComoInicioDeDia(fechaDesdeString);
     LocalDateTime hasta = parsearFechaComoFinDeDia(fechaHastaString);
 
-    System.out.println("Fecha Desde: " + desde);
-    System.out.println("Fecha Hasta: " + hasta);
+    RepoDeColecciones repoColecciones = RepoDeColecciones.getInstance();
+    List<Coleccion> colecciones = repoColecciones.obtenerColecciones();
 
-    List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
+    Coleccion coleccionElegida = null;
+    if (coleccionQuery != null) {
+      try {
+        Long coleccionId = Long.parseLong(coleccionQuery);
+        coleccionElegida = repoColecciones.obtenerColeccionPorId(coleccionId);
+      } catch (NumberFormatException e) {
 
-    List<Map<String, Object>> fuentesConHechos = fuentes.stream()
-      .map(f -> {
+      }
+    }
+    if (coleccionElegida == null && !colecciones.isEmpty()) {
+      coleccionElegida = colecciones.get(0);
+    }
 
-        Stream<Hecho> hechos = f.obtenerHechos().stream()
-                .filter(h -> !h.estaEliminado());
-        
-        if(!provinciasSeleccionadas.isEmpty()){
-          hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));
-        }
+    List<Hecho> hechosDeColeccion = new ArrayList<>();
+    if (coleccionElegida != null) {
+      hechosDeColeccion = coleccionElegida.getHechosConNavegacion(modoNavegacion);
+    }
 
-        if(desde != null){
-          hechos = hechos.filter(h -> !h.getFechaHecho().isBefore(desde));
-        }
-        if(hasta != null){
-          hechos = hechos.filter(h -> !h.getFechaHecho().isAfter(hasta));
-        }
-
-        Map<String, Object> datos = new HashMap<>();
-        datos.put("fuenteID", f.getId());
-        datos.put("hechos", hechos.toList());
-        return datos;
-      }).toList();
+    List<Hecho> hechosFiltrados = hechosDeColeccion.stream()
+            .filter(hecho -> provinciasSeleccionadas.isEmpty() || provinciasSeleccionadas.contains(hecho.getProvincia()))
+            .filter(hecho -> desde == null || !hecho.getFechaHecho().isBefore(desde))
+            .filter(hecho -> hasta == null || !hecho.getFechaHecho().isAfter(hasta))
+            .toList();
 
 
-    Set<String> provincias = fuentes.stream()
-            .flatMap(f -> f.obtenerHechos().stream())
-            .filter(h -> !h.estaEliminado())
+    Set<String> provinciasDisponibles = hechosDeColeccion.stream()
             .map(Hecho::getProvincia)
             .filter(Objects::nonNull)
             .collect(Collectors.toCollection(TreeSet::new));
 
+//    List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
+//
+//    List<Map<String, Object>> fuentesConHechos = fuentes.stream()
+//      .map(f -> {
+//
+//        Stream<Hecho> hechos = f.obtenerHechos().stream()
+//                .filter(h -> !h.estaEliminado());
+//
+//        if(!provinciasSeleccionadas.isEmpty()){
+//          hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));
+//        }
+//
+//        if(desde != null){
+//          hechos = hechos.filter(h -> !h.getFechaHecho().isBefore(desde));
+//        }
+//        if(hasta != null){
+//          hechos = hechos.filter(h -> !h.getFechaHecho().isAfter(hasta));
+//        }
+//
+//        Map<String, Object> datos = new HashMap<>();
+//        datos.put("fuenteID", f.getId());
+//        datos.put("hechos", hechos.toList());
+//        return datos;
+//      }).toList();
+//
+//
+//    Set<String> provincias = fuentes.stream()
+//            .flatMap(f -> f.obtenerHechos().stream())
+//            .filter(h -> !h.estaEliminado())
+//            .map(Hecho::getProvincia)
+//            .filter(Objects::nonNull)
+//            .collect(Collectors.toCollection(TreeSet::new));
+
     Map<String,Object> model = new HashMap<>();
-    model.put("fuentes", fuentesConHechos);
-    model.put("provincias", provincias);
-    model.put("modoSeleccionado", modo);
+//    model.put("fuentes", fuentesConHechos);
+    model.put("modoSeleccionado", modoNavegacion.name());
+    model.put("hechos", hechosFiltrados);
+    model.put("provincias", provinciasDisponibles);
+    model.put("provSeleccionadas", provinciasSeleccionadas);
     model.put("fechaDesde", desde);
     model.put("fechaHasta", hasta);
-    model.put("provSeleccionadas", provinciasSeleccionadas);
+    model.put("colecciones", colecciones);
+    model.put("coleccionSeleccionada", coleccionElegida != null ? coleccionElegida.getId() : null);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
 
     if (ctx.sessionAttribute("user_id") != null) {
@@ -201,6 +224,7 @@ public class HomeController{
   //CREAR COLECCION
   public void crearColeccion(@NotNull Context context) {
     try {
+      String handle = context.formParam("handle");
       String titulo = context.formParam("titulo");
       String descripcion = context.formParam("descripcion");
       String fuenteStr = context.formParam("fuente");
@@ -229,7 +253,7 @@ public class HomeController{
       }
       Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) Integer.parseInt(fuenteStr));
 
-      Coleccion coleccion = new Coleccion(titulo,descripcion, fuente, criterios, algoritmoConsenso );
+      Coleccion coleccion = new Coleccion(handle, titulo,descripcion, fuente, criterios, algoritmoConsenso );
 
       RepoDeColecciones repo = RepoDeColecciones.getInstance();
       repo.withTransaction(() -> repo.agregarColeccion(coleccion));

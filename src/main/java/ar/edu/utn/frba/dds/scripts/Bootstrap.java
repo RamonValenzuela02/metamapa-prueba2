@@ -2,21 +2,27 @@ package ar.edu.utn.frba.dds.scripts;
 
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
+import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
+import ar.edu.utn.frba.dds.model.coleccion.ColeccionBuilder;
+import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.criterio.Criterio;
+import ar.edu.utn.frba.dds.model.criterio.CriterioPorCategoria;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
+import ar.edu.utn.frba.dds.model.fuente.FuenteDemo;
 import ar.edu.utn.frba.dds.model.fuente.FuenteDinamica;
+import ar.edu.utn.frba.dds.model.fuente.FuenteEstatica;
 import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
 import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
-import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
-import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
-import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
+import ar.edu.utn.frba.dds.repositorios.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.time.LocalDateTime;
 import ar.edu.utn.frba.dds.model.Usuario.TipoUsuario;
 import ar.edu.utn.frba.dds.model.Usuario.Usuario;
-import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
+
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Bootstrap implements WithSimplePersistenceUnit {
@@ -36,6 +42,35 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoHechosDinamicos.getInstance().agregarHecho(h5);
 
       RepoFuentesDelSistema.getInstance().agregarFuente(fuenteDinamica);
+
+      Coleccion colIncendiosForestales = new ColeccionBuilder()
+              .conTitulo("Incendios Forestales")
+              .conHandle("incendios")
+              .conDescripcion("Incendios Forestales en el pais")
+              .conCriterios(List.of (new CriterioPorCategoria(Categoria.INCENDIO_FORESTAL)))
+              .conAlgoritmoConsenso(AlgoritmoConsenso.CONSENSO_ABSOLUTO)
+              .conFuente(fuenteDinamica)
+              .crear();
+
+      Coleccion colAccidentes = new ColeccionBuilder()
+              .conTitulo("Accidentes")
+              .conHandle("accidentes")
+              .conDescripcion("Accidentes en el pais")
+              .conCriterios(List.of (new CriterioPorCategoria(Categoria.ACCIDENTE_VIAL)))
+              .conFuente(fuenteDinamica)
+              .crear();
+
+      Coleccion colHomicidiosDolosos = new ColeccionBuilder()
+              .conTitulo("Homicidios Dolosos")
+              .conHandle("homicidios_dolosos")
+              .conDescripcion("Homicidios en el pais")
+              .conCriterios(List.of (new CriterioPorCategoria(Categoria.HOMICIDOS_DOLOSOS)))
+              .conFuente(fuenteDinamica)
+              .crear();
+
+      RepoDeColecciones.getInstance().agregarColeccion(colIncendiosForestales);
+      RepoDeColecciones.getInstance().agregarColeccion(colAccidentes);
+      RepoDeColecciones.getInstance().agregarColeccion(colHomicidiosDolosos);
 
       //SOLICITUDES DE ELIMINACION BASE
       SolicitudDeEliminacion s1 = new SolicitudDeEliminacion(h1,"mala redaccion de contenido", fuenteDinamica);

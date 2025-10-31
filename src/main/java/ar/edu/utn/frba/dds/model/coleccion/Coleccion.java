@@ -26,7 +26,10 @@ import lombok.Setter;
 public class Coleccion {
   @Id
   @GeneratedValue
-  private Long handle;
+  @Getter
+  private Long id;
+  @Getter
+  private String handle;
   @Column
   @Getter
   private String titulo;
@@ -51,8 +54,8 @@ public class Coleccion {
 
   protected Coleccion(){};
 
-  public Coleccion(String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
-    //this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
+  public Coleccion(String handle, String titulo, String descripcion, Fuente fuente, List<Criterio> criterios, AlgoritmoConsenso algoritmoConsenso) {
+    this.handle = handle; //es un alias que se le da a una coleccion que sirve para identificarla cuando la exponemos por API REST
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.fuente = fuente;
@@ -77,7 +80,7 @@ public class Coleccion {
     }
   }
 
-  private List<Hecho> getHechosConNavegacion(ModoNavegacion modoNavegacion) {
+  public List<Hecho> getHechosConNavegacion(ModoNavegacion modoNavegacion) {
     if(modoNavegacion==ModoNavegacion.IRRESTRICTA){
       return getHechos();
     }else{

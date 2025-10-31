@@ -7,6 +7,11 @@ li, a, button {
 
 ul {
     list-style: none;
+    margin-top: 10px;
+}
+
+ul li {
+    margin-top: 5px;
 }
 
 header {
@@ -50,10 +55,21 @@ header {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     color: #333;
     gap: 20px;
+    border: 1px solid #e5e7eb;
 }
 
 .container-filtros-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: #323439;
+    margin-top: 16px;
+}
+
+.lista-navegacion,
+.lista-ubicacion,
+.lista-fecha {
+    margin-top: 8px;
 }
 
 .lista-navegacion li {
@@ -83,13 +99,16 @@ header {
     margin: 5px;
 }
 
-.btn {
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-
 .form-filtros button {
     width: 100%;
     margin-top: 10px;
+}
+
+.select-coleccion {
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
 }

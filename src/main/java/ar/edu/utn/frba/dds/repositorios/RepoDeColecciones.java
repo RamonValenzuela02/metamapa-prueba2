@@ -22,4 +22,8 @@ public class RepoDeColecciones implements WithSimplePersistenceUnit {
         .createQuery("SELECT c FROM Coleccion c", Coleccion.class)
         .getResultList();
     }
+
+    public Coleccion obtenerColeccionPorId(Long id) {
+        return entityManager().find(Coleccion.class, id);
+    }
 }

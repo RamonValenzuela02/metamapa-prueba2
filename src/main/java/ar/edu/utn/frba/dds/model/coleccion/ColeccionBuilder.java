@@ -49,7 +49,7 @@ public class ColeccionBuilder {
 
     public Coleccion crear() {
         validarColeccion(handle,titulo,descripcion,fuente,criterios);
-        Coleccion coleccion = new Coleccion(titulo, descripcion, fuente, criterios, algoritmoConsenso);
+        Coleccion coleccion = new Coleccion(handle, titulo, descripcion, fuente, criterios, algoritmoConsenso);
         return coleccion;
     }
 
@@ -58,7 +58,7 @@ public class ColeccionBuilder {
         requireNonNull(titulo);
         requireNonNull(descripcion);
         requireNonNull(fuente);
-        requireNonNull(criterios);
+        //requireNonNull(criterios);
 
         if (!handle.matches("^[a-zA-Z0-9_-]+$")) {
             throw new IllegalArgumentException("El handle debe ser alfanumérico, sin espacios.");

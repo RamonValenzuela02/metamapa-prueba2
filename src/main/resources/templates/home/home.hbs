@@ -1,31 +1,42 @@
 {{#partial "head"}}
     <link rel="stylesheet" href="/assets/home.css">
-    <title> MetaMapa</title>
+    <title>MetaMapa</title>
 {{/partial}}
 
 {{#partial "contenido-main"}}
-    <div>
-        <label> Seleccionar Coleccion
-            <select name="colecciones">
-                <option> Coleccion 1 </option>
-                <option> Coleccion 2 </option>
-                <option> Coleccion 3 </option>
-            </select>
-        </label>
-    </div>
 
     <div class="contenedor-padre">
         <div class="container-filtros">
             <form action="/home" method="get" class="form-filtros"
                 hx-get="/home" hx-target="#resultados" hx-push-url="true" hx-trigger="submit">
 
+                <label class="container-filtros-label">
+                    Seleccionar Coleccion
+                    <select name="coleccionId"
+                            class="select-coleccion"
+                            hx-get="/home"
+                            hx-target="#resultados"
+                            hx-push-url="true"
+                            hx-trigger="change">
+                        {{#each colecciones}}
+                            <option value="{{id}}"
+                                {{#eq id ../coleccionSeleccionada}}selected{{/eq}}>
+                                {{titulo}}
+                            </option>
+                        {{/each}}
+                    </select>
+                </label>
+
+
                 <label class="container-filtros-label"> Modo de Navegacion </label>
                 <ul class="lista-navegacion">
                     <li>
-                        <input type="radio" name="modoNavegacion" value="navegacionIrrestrica"/> Navegación Irrestricta
+                        <input id="navegacion-irrestricta" type="radio" name="modoNavegacion" value="irrestrica"/>
+                        <label for="navegacion-irrestricta"> Navegación Irrestricta </label>
                     </li>
                     <li>
-                        <input type="radio" name="modoNavegacion" value='navegacionCurada'/> Navegación Curada
+                        <input id="navegacion-curada" type="radio" name="modoNavegacion" value='curada'/>
+                        <label for="navegacion-curada"> Navegación Curada </label>
                     </li>
                     <li><small> Podrás ver los hechos más confiables </small></li>
                 </ul>
@@ -34,9 +45,9 @@
                 <ul class="lista-ubicacion">
                     {{#each provincias}}
                         <li>
-                            <input type="checkbox" name="provincias" value="{{this}}"
+                            <input id="{{this}}"type="checkbox" name="provincias" value="{{this}}"
                                  {{#ifIn this ../provSeleccionadas}}checked{{/ifIn}}>
-                            <label>{{this}}</label>
+                            <label for="{{this}}">{{this}}</label>
                         </li>
                     {{/each}}
                 </ul>

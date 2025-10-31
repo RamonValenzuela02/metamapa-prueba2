@@ -1,44 +1,38 @@
-{{#if fuentes}}
-  {{#each fuentes}}
-    {{#if hechos}}
-      {{#each hechos}}
-        <div class="tarjeta-hecho">
+{{#if hechos}}
+  {{#each hechos}}
+    <div class="tarjeta-hecho">
 
-          <div class="hecho-data">
-            <p>{{id}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{titulo}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <p>{{titulo}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{descripcion}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <p>{{descripcion}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{categoria}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <p>{{categoria}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{provincia}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <p>{{fechaHecho}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{fechaHecho}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <p>{{fechaCarga}}</p>
-          </div>
+      <div class="hecho-data">
+        <p>{{fechaCarga}}</p>
+      </div>
 
-          <div class="hecho-data">
-            <a class="btn" href="/hecho/{{id}}?fuenteID={{../fuenteID}}">
-                Ver Detalle
-            </a>
-          </div>
-        </div>
-      {{/each}}
-    {{else}}
-      <p>No hay hechos registrados en esta fuente.</p>
-    {{/if}}
+      <div class="hecho-data">
+        <a class="btn" href="/hecho/{{id}}?fuenteID={{../fuenteID}}">
+            Ver Detalle
+        </a>
+      </div>
+    </div>
   {{/each}}
 {{else}}
-  <p>No hay fuentes disponibles.</p>
+  <p>No se encontraron hechos con los filtros seleccionados.</p>
 {{/if}}

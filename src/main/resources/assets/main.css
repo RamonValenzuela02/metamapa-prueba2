@@ -14,12 +14,16 @@ body {
 }
 
 .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
     background-color: rgba(0,136,180,1);
     color: aliceblue;
     padding: 9px 25px;
     border:none;
     border-radius: 6px;
     font-weight: 500;
+    line-height: 1.2;
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
