@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
 
+    String busqueda = ctx.queryParam("likeTexto");
     String coleccionQuery = ctx.queryParam("coleccionId");
     String modoQuery = ctx.queryParam("modoNavegacion");
     ModoNavegacion modoNavegacion = "CURADA".equalsIgnoreCase(modoQuery) ? ModoNavegacion.CURADA : ModoNavegacion.IRRESTRICTA;
@@ -65,6 +66,12 @@ public class HomeController{
             .filter(hecho -> provinciasSeleccionadas.isEmpty() || provinciasSeleccionadas.contains(hecho.getProvincia()))
             .filter(hecho -> desde == null || !hecho.getFechaHecho().isBefore(desde))
             .filter(hecho -> hasta == null || !hecho.getFechaHecho().isAfter(hasta))
+            .filter(h -> {
+              if(busqueda == null || busqueda.isBlank()) return true;
+              String titulo =h.getTitulo().toLowerCase();
+              String descripcion = h.getDescripcion().toLowerCase();
+              return titulo.contains(busqueda.toLowerCase()) || descripcion.contains(busqueda.toLowerCase());
+            })
             .toList();
 
 
@@ -116,6 +123,7 @@ public class HomeController{
     model.put("fechaHasta", hasta);
     model.put("colecciones", colecciones);
     model.put("coleccionSeleccionada", coleccionElegida != null ? coleccionElegida.getId() : null);
+    model.put("busqueda", busqueda);
     model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
 
     if (ctx.sessionAttribute("user_id") != null) {

@@ -5,6 +5,16 @@
 
 {{#partial "contenido-main"}}
 
+    <div class="busqueda">
+        <form role="search" action="/home" method="GET"
+              hx-get="/home" hx-target="#resultados" hx-push-url="true" hx-trigger="submit"
+              class="form-busqueda">
+            <input type="search" name="likeTexto" placeholder="Buscar hecho..." value="{{busqueda}}" class="input-busqueda">
+            <button class="btn btn-buscar" type="submit"> Buscar </button>
+        </form>
+            <a href="/hecho/nuevo" class="nav-link">Crear Hecho</a>
+    </div>
+
     <div class="contenedor-padre">
         <div class="container-filtros">
             <form action="/home" method="get" class="form-filtros"
