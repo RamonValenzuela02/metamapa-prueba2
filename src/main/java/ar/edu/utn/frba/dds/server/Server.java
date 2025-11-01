@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.server.templates.JavalinHandlebars;
 import ar.edu.utn.frba.dds.server.templates.JavalinRenderer;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
+import io.javalin.http.staticfiles.Location;
 
 public class Server {
   public void start() {
@@ -35,5 +36,10 @@ public class Server {
       staticFileConfig.directory = "/images";
     });
 
+    config.staticFiles.add(staticFiles -> {
+      staticFiles.hostedPath = "/uploads";
+      staticFiles.directory = "uploads";
+      staticFiles.location = Location.EXTERNAL;
+    });
   }
 }

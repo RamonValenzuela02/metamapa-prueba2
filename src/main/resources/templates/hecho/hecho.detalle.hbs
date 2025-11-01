@@ -12,7 +12,7 @@
 <section class="hecho-detalle">
 
     <header class="header">
-        <h1>{{hecho.titulo}}</h1>
+        <h1>{{hecho.titulo.toUpperCase}}</h1>
         {{#if hecho.categoria}}<span class="categoria">{{hecho.categoria}}</span>{{/if}}
     </header>
 
@@ -28,14 +28,20 @@
       <h2>Datos</h2>
       <ul class="datos">
         {{#if hecho.provincia}}<li><strong>Provincia:</strong> {{hecho.provincia}}</li>{{/if}}
-        {{#if hecho.latitud}}<li><strong>Lat:</strong> {{hecho.latitud}}</li>{{/if}}
-        {{#if hecho.longitud}}<li><strong>Lon:</strong> {{hecho.longitud}}</li>{{/if}}
-        {{#if hecho.fechaHecho}}<li><strong>Fecha del hecho:</strong> {{hecho.fechaHecho}}</li>{{/if}}
-        {{#if hecho.fechaCarga}}<li><strong>Fecha de carga:</strong> {{hecho.fechaCarga}}</li>{{/if}}
+        {{#if hecho.latitud}}<li><strong>Lat:</strong> {{hecho.ubicacion.latitud}}</li>{{/if}}
+        {{#if hecho.longitud}}<li><strong>Lon:</strong> {{hecho.ubicacion.latitud}}</li>{{/if}}
+        {{#if hecho.fechaHecho}}<li><strong>Fecha del hecho:</strong> {{hecho.fechaHecho.getDayOfMonth}}/{{hecho.fechaHecho.getMonthValue}}/{{hecho.fechaHecho.getYear}} {{hecho.fechaHecho.getHour}}:{{hecho.fechaHecho.getMinute}}:{{hecho.fechaHecho.getSecond}}</li>{{/if}}
+        {{#if hecho.fechaCarga}}<li><strong>Fecha de carga:</strong> {{hecho.fechaCarga.getDayOfMonth}}/{{hecho.fechaCarga.getMonthValue}}/{{hecho.fechaCarga.getYear}} {{hecho.fechaCarga.getHour}}:{{hecho.fechaCarga.getMinute}}:{{hecho.fechaCarga.getSecond}}</li>{{/if}}
         {{#if hecho.fuente}}<li><strong>Fuente:</strong> {{hecho.fuente.id}}</li>{{/if}}
       </ul>
     </div>
   </div>
+
+<section class="galeria-multimedia">
+  {{#each hecho.archivosMultimedia}}
+      <img src="{{rutaArchivo}}" class="media-item"/>
+  {{/each}}
+</section>
 
   <div class="actions">
 

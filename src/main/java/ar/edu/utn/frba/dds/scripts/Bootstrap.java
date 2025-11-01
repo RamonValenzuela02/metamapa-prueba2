@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.scripts;
 
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
+import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
 import ar.edu.utn.frba.dds.model.coleccion.ColeccionBuilder;
 import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;

@@ -49,6 +49,7 @@ public class Hecho {
   @Column
   @Setter
   private boolean eliminado = false;
+  @Getter
   @OneToMany(mappedBy = "hecho", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<ArchivoMultimedia> archivosMultimedia = new ArrayList<>();
 
@@ -103,5 +104,6 @@ public class Hecho {
   }
 
   public void agregarArchivo(ArchivoMultimedia nuevoArchivo) {
+      this.archivosMultimedia.add(nuevoArchivo);
   }
 }
