@@ -19,11 +19,9 @@
     font-size:12px;
 }
 
-.grid {
-    display:grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap:16px;
-    margin:16px 0;
+.container {
+    display:flex;
+    margin-top: 20px;
 }
 
 .tarjeta-hecho {
@@ -31,6 +29,19 @@
     border-radius: 6px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     padding: 16px;
+}
+
+.tarjeta-hecho:first-child {
+    flex: 2 ;
+}
+
+.tarjeta-hecho:last-child {
+    flex:1;
+    margin-left: 10px;
+}
+
+.descripcion {
+    overflow: auto;
 }
 
 .datos {

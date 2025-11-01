@@ -3,27 +3,27 @@
     <div class="tarjeta-hecho">
 
       <div class="hecho-data">
-        <p>{{titulo}}</p>
+        <h2 class="hecho-titulo">{{titulo.toUpperCase}}</h2>
+        <span class="hecho-categoria">{{categoria}}</span>
       </div>
 
       <div class="hecho-data">
-        <p>{{descripcion}}</p>
+        <p class="hecho-descripcion">{{descripcion}}</p>
       </div>
 
       <div class="hecho-data">
-        <p>{{categoria}}</p>
+        <span class="hecho-provincia"> Provincia:</span>
+        <span> {{provincia}}</span>
       </div>
 
       <div class="hecho-data">
-        <p>{{provincia}}</p>
+        <span class="hecho-fecha"> Fecha del Hecho:</span>
+        <span> {{fechaHecho.getDayOfMonth}}/{{fechaHecho.getMonthValue}}/{{fechaHecho.getYear}} {{fechaHecho.getHour}}:{{fechaHecho.getMinute}}:{{fechaHecho.getSecond}} </span>
       </div>
 
       <div class="hecho-data">
-        <p>{{fechaHecho}}</p>
-      </div>
-
-      <div class="hecho-data">
-        <p>{{fechaCarga}}</p>
+        <span class="hecho-carga"> Fecha de Carga:</span>
+        <span> {{fechaCarga.getDayOfMonth}}/{{fechaCarga.getMonthValue}}/{{fechaCarga.getYear}} {{fechaCarga.getHour}}:{{fechaCarga.getMinute}}:{{fechaCarga.getSecond}}</span>
       </div>
 
       <div class="hecho-data">
