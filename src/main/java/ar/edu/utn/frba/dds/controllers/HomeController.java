@@ -11,10 +11,7 @@ import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
 import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
-import ar.edu.utn.frba.dds.repositorios.RepoDeColecciones;
-import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
-import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
-import ar.edu.utn.frba.dds.repositorios.RepoSolicitudesDeEliminacion;
+import ar.edu.utn.frba.dds.repositorios.*;
 import io.javalin.http.Context;
 
 import java.time.LocalDate;
@@ -199,14 +196,11 @@ public class HomeController{
 
 
   public Map<String,Object> solicitarEliminacionForm(@NotNull Context ctx) {
-    int fuenteId = Integer.parseInt(Objects.requireNonNull(ctx.queryParam("fuenteId")));
-    int hechoId = Integer.parseInt(Objects.requireNonNull(ctx.queryParam("hechoId")));
+    Long hechoId = Long.parseLong(Objects.requireNonNull(ctx.queryParam("hechoId")));
 
-    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) fuenteId);
-    Hecho hecho = fuente.obtenerHechoConId(hechoId);
+    Hecho hecho = RepoHechosDinamicos.getInstance().obtenerHechoPorId(hechoId);
 
     Map<String,Object> model = new HashMap<>();
-    model.put("fuente",fuente);
     model.put("hecho",hecho);
     return model;
   }

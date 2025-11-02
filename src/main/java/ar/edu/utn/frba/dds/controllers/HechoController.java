@@ -19,7 +19,6 @@ public class HechoController {
 
     public void formHechoNuevo(Context ctx){
         Map<String, Object> model = new HashMap<>();
-        // Sugerencia: si necesitás selects (categorías, provincias), cargalos acá
         model.put("categorias", Arrays.asList("INCENDIO_FORESTAL", "HOMICIDOS_DOLOSOS", "ACCIDENTE_VIAL"));
         model.put("values", Collections.emptyMap());
         model.put("errors", Collections.emptyList());

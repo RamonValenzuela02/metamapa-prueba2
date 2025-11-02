@@ -1,14 +1,37 @@
-<!DOCTYPE html>
-<html>
+{{#partial "head"}}
+  <title>Solicitar eliminación - {{hecho.titulo}}</title>
+  <link rel="stylesheet" href="/assets/sol-eliminacion.css">
+{{/partial}}
 
-<body>
-    <form method="POST" action="/solEliminacion/nueva">
-        <input type="hidden" name="fuenteId" value="{{fuente.id}}">
-        <input type="hidden" name="hechoId" value="{{hecho.id}}">
-        <label>Motivo</label>
-        <input type="text" name="motivo">
-        <input type="submit">
-    </form>
-</body>
-</html>
+{{#partial "navbar"}} {{/partial}}
+{{#partial "footer"}} {{/partial}}
+
+{{#partial "contenido-main"}}
+<section class="sol-eliminacion">
+
+  <form action="/solEliminacion/nueva" method="post" class="form-sol-eliminacion">
+
+     <h1>Solicitar Eliminación</h1>
+
+      <p>
+        Estás solicitando eliminar el hecho:
+        <a href="/hecho/{{hecho.id}}">"{{hecho.titulo}}"</a>
+      </p>
+
+    <input type="hidden" name="hechoId" value="{{hecho.id}}">
+
+    <label for="motivo">Motivo (mínimo 500 caracteres)</label>
+    <textarea
+      name="motivo"
+      minlength="500"
+      required
+      placeholder="Explicá por qué este hecho debería ser eliminado"
+    >{{motivo}}</textarea>
+
+    <button type="submit" class="btn">Enviar solicitud</button>
+  </form>
+</section>
+{{/partial}}
+
+{{> templates/layout/layout}}
 
