@@ -73,12 +73,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoDeColecciones.getInstance().agregarColeccion(colAccidentes);
       RepoDeColecciones.getInstance().agregarColeccion(colHomicidiosDolosos);
 
-      //SOLICITUDES DE ELIMINACION BASE
-      SolicitudDeEliminacion s1 = new SolicitudDeEliminacion(h1,"mala redaccion de contenido", fuenteDinamica);
-      SolicitudDeEliminacion s2 = new SolicitudDeEliminacion(h2,"ubicacion erronea", fuenteDinamica);
-
-      RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s1);
-      RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s2);
+//      //SOLICITUDES DE ELIMINACION BASE
+//      SolicitudDeEliminacion s1 = new SolicitudDeEliminacion(h1,"mala redaccion de contenido", fuenteDinamica);
+//      SolicitudDeEliminacion s2 = new SolicitudDeEliminacion(h2,"ubicacion erronea", fuenteDinamica);
+//
+//      RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s1);
+//      RepoSolicitudesDeEliminacion.getInstance().registrarSolicituDeEliminacion(s2);
 
     });
 

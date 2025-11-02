@@ -8,28 +8,29 @@
 
 {{#partial "contenido-main"}}
 <section class="sol-eliminacion">
+    {{#if error}}
+      <div class="error">{{error}}</div>
+    {{/if}}
 
-  <form action="/solEliminacion/nueva" method="post" class="form-sol-eliminacion">
+    <form action="/solEliminacion/nueva" method="post" class="form-sol-eliminacion">
+        <h1>Solicitar Eliminación</h1>
+        <p>
+            Estás solicitando eliminar el hecho:
+            <a href="/hecho/{{hecho.id}}">"{{hecho.titulo}}"</a>
+        </p>
 
-     <h1>Solicitar Eliminación</h1>
+        <input type="hidden" name="hechoId" value="{{hecho.id}}">
 
-      <p>
-        Estás solicitando eliminar el hecho:
-        <a href="/hecho/{{hecho.id}}">"{{hecho.titulo}}"</a>
-      </p>
+        <label for="motivo">Motivo (mínimo 500 caracteres)</label>
+        <textarea
+          name="motivo"
+          minlength="500"
+          required
+          placeholder="Explicá por qué este hecho debería ser eliminado"
+        >{{motivo}}</textarea>
 
-    <input type="hidden" name="hechoId" value="{{hecho.id}}">
-
-    <label for="motivo">Motivo (mínimo 500 caracteres)</label>
-    <textarea
-      name="motivo"
-      minlength="500"
-      required
-      placeholder="Explicá por qué este hecho debería ser eliminado"
-    >{{motivo}}</textarea>
-
-    <button type="submit" class="btn">Enviar solicitud</button>
-  </form>
+        <button type="submit" class="btn">Enviar solicitud</button>
+    </form>
 </section>
 {{/partial}}
 

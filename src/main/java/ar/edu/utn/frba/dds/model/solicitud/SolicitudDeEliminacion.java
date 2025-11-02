@@ -23,7 +23,7 @@ public class SolicitudDeEliminacion {
   @ManyToOne
   @Getter
   private Hecho hecho;
-  @Column
+  @Column(length = 2000)
   @Getter
   private String motivo;
   @Enumerated(EnumType.STRING)
@@ -34,10 +34,9 @@ public class SolicitudDeEliminacion {
 
   protected SolicitudDeEliminacion() {};
 
-  public SolicitudDeEliminacion(Hecho hecho, String motivo, Fuente fuente) {
+  public SolicitudDeEliminacion(Hecho hecho, String motivo) {
     this.hecho = hecho;
     this.motivo = motivo;
-    this.fuente = fuente;
     this.estado = Estado.PENDIENTE;
     validarSolicitud();
   }
@@ -45,7 +44,6 @@ public class SolicitudDeEliminacion {
   private void validarSolicitud() {
     requireNonNull(hecho);
     requireNonNull(motivo);
-    requireNonNull(fuente);
   }
 
   public void aceptar() {

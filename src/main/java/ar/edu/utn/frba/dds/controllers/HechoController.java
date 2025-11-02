@@ -130,16 +130,12 @@ public class HechoController {
     }
 
     public void ver(Context ctx) {
-        final Long id;
-        try {
-            id = Long.parseLong(ctx.pathParam("id"));
-        } catch (NumberFormatException e) {
-            ctx.status(400).result("ID de hecho inválido");
-            return;
-        }
+        long id = Long.parseLong(ctx.pathParam("id"));
 
         RepoHechosDinamicos repo = RepoHechosDinamicos.getInstance();
         Hecho hecho = repo.obtenerHechoPorId(id);
+
+        boolean solicitudEnviada = "1".equals(ctx.queryParam("ok"));
 
         if (hecho == null) {
             ctx.status(404).render("errors/404.hbs", Map.of(
@@ -157,7 +153,7 @@ public class HechoController {
 
         Map<String, Object> model = new HashMap<>();
         model.put("hecho", hecho);
-        model.put("fuenteID", ctx.queryParam("fuenteID"));
+        model.put("solicitudEnviada", solicitudEnviada);
         ctx.render("hecho/hecho.detalle.hbs", model);
     }
 }

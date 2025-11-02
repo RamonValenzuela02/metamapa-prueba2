@@ -44,7 +44,11 @@
 </section>
 
   <div class="actions">
-
+    {{#if solicitudEnviada}}
+        <div class="sol-eliminacion">
+            Tu solicitud de eliminación fue enviada.
+        </div>
+    {{/if}}
     <form action="/solEliminacion/nueva" method="get" class="form-sol-eliminacion">
       <input type="hidden" name="hechoId" value="{{hecho.id}}">
       <button type="submit" class="btn">Solicitar Eliminar</button>

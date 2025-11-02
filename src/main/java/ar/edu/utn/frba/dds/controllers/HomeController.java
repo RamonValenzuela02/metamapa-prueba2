@@ -206,21 +206,31 @@ public class HomeController{
   }
 
   public void solicitarEliminacion(@NotNull Context context) {
-    int hechoId = Integer.parseInt(context.formParam("hechoId"));
-    int fuenteId = Integer.parseInt(Objects.requireNonNull(context.formParam("fuenteId")));
+
+    long hechoId = Long.parseLong(Objects.requireNonNull(context.formParam("hechoId")));
     String motivo = context.formParam("motivo");
 
-    Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) fuenteId);
-    Hecho hecho = fuente.obtenerHechoConId(hechoId);
+    Hecho hecho = RepoHechosDinamicos.getInstance().obtenerHechoPorId(hechoId);
 
-    SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion(hecho,motivo,fuente);
+    if (motivo.length() < 500) {
+      Map<String, Object> model = new HashMap<>();
+      model.put("hecho", hecho);
+      model.put("motivo", motivo);
+      model.put("error", "El motivo debe tener al menos 500 caracteres.");
+
+      context.status(400)
+              .render("solEliminacion/solEliminacion.nueva.hbs", model);
+      return;
+    }
+
+    SolicitudDeEliminacion solicitudDeEliminacion = new SolicitudDeEliminacion(hecho,motivo);
     ServicioDeSolicitudesEliminacion servicio = new ServicioDeSolicitudesEliminacion(new DetectorDeSpamBasico());
 
     RepoSolicitudesDeEliminacion.getInstance().withTransaction(() -> {
       servicio.registrarSolicituDeEliminacion(solicitudDeEliminacion);
     });
 
-    context.redirect("/home");
+    context.redirect("/hecho/" + hechoId + "?ok=1");
   }
 
   //CREAR COLECCION

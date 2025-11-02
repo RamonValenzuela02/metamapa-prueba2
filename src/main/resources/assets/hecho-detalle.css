@@ -58,15 +58,31 @@
     margin-top:16px;
     display:flex;
     justify-content:flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.actions a {
+    margin-left: 5px;
+    text-decoration: none;
 }
 
 .form-sol-eliminacion {
     margin-left: 5px;
 }
 
-.actions a {
-    margin-left: 5px;
-    text-decoration: none;
+.sol-eliminacion {
+    background-color: #e6ffed;
+    border: 1px solid #6ccf88;
+    color: #0b4f2c;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 9px 25px;
+    border-radius: 6px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
 }
 
 .galeria-multimedia {
