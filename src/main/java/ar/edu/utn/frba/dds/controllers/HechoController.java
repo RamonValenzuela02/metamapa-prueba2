@@ -19,7 +19,7 @@ public class HechoController {
 
     public void formHechoNuevo(Context ctx){
         Map<String, Object> model = new HashMap<>();
-        model.put("categorias", Arrays.asList("INCENDIO_FORESTAL", "HOMICIDOS_DOLOSOS", "ACCIDENTE_VIAL"));
+        model.put("categorias", Categoria.values());
         model.put("values", Collections.emptyMap());
         model.put("errors", Collections.emptyList());
         ctx.render("hecho/hecho.nuevo.hbs", model);
@@ -77,7 +77,7 @@ public class HechoController {
                 values.put("longitud", longitud);
                 values.put("fecha", fechaStr);
 
-                model.put("categorias", Arrays.asList("INCENDIO_FORESTAL", "HOMICIDOS_DOLOSOS", "ACCIDENTE_VIAL"));
+                model.put("categorias", Categoria.values());
                 model.put("values", values);
                 model.put("errors", errors);
 
