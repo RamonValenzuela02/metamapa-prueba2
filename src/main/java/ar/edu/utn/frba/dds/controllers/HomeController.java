@@ -40,13 +40,13 @@ public class HomeController{
     LocalDateTime hasta = parsearFechaComoFinDeDia(fechaHastaString);
 
     RepoDeColecciones repoColecciones = RepoDeColecciones.getInstance();
-    List<Coleccion> colecciones = repoColecciones.obtenerColecciones();
+    List<Coleccion> colecciones = repoColecciones.getColecciones();
 
     Coleccion coleccionElegida = null;
     if (coleccionQuery != null) {
       try {
         Long coleccionId = Long.parseLong(coleccionQuery);
-        coleccionElegida = repoColecciones.obtenerColeccionPorId(coleccionId);
+        coleccionElegida = repoColecciones.getColeccionPorId(coleccionId);
       } catch (NumberFormatException e) {
 
       }
@@ -94,7 +94,6 @@ public class HomeController{
       var usuario = RepoUsuarios.getInstance().buscarPorId(user_id);
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
-
     return model;
   }
 
@@ -105,7 +104,7 @@ public class HomeController{
       ctx.redirect("/admin");
       return;
     }
-    
+
     boolean esHtmx = "true".equalsIgnoreCase(ctx.header("HX-Request"));
 
     if (esHtmx) {
@@ -142,61 +141,6 @@ public class HomeController{
     }
 
     ctx.render("home/home.administrador.hbs", modeloHomeAdmin(ctx));
-  }
-
-  //CREAR COLECCION
-  public void crearColeccion(@NotNull Context context) {
-    try {
-      String handle = context.formParam("handle");
-      String titulo = context.formParam("titulo");
-      String descripcion = context.formParam("descripcion");
-      String fuenteStr = context.formParam("fuente");
-      String algoritmoStr = context.formParam("algoritmo");
-      List<Criterio> criterios = List.of(new CriterioCumplidorSiempre());
-      //List<String> criteriosStr = context.formParams("criterio");
-
-      if (titulo == null || titulo.isBlank() ||
-        descripcion == null || descripcion.isBlank()) {
-        context.status(400).result("Faltan campos obligatorios");
-        return;
-      }
-
-      /*
-      List<Criterio> criterios = criteriosStr.stream()
-        .map(this::crearCriterioDesdeTexto)
-        .toList();
-      */
-
-      AlgoritmoConsenso algoritmoConsenso;
-      try {
-        algoritmoConsenso = AlgoritmoConsenso.valueOf(algoritmoStr.toUpperCase());
-      } catch (IllegalArgumentException e) {
-        context.status(400).result("Algoritmo inválido: " + algoritmoStr);
-        return;
-      }
-      Fuente fuente = RepoFuentesDelSistema.getInstance().obtenerFuenteConId((long) Integer.parseInt(fuenteStr));
-
-      Coleccion coleccion = new Coleccion(handle, titulo,descripcion, fuente, criterios, algoritmoConsenso );
-
-      RepoDeColecciones repo = RepoDeColecciones.getInstance();
-      repo.withTransaction(() -> repo.agregarColeccion(coleccion));
-
-      context.redirect("/home");
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      context.status(500).result("Ocurrió un error al crear la coleccion: " + e.getMessage());
-    }
-  }
-
-  public Map<String,Object> formularioNuevaColeccion() {
-    List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
-    List<AlgoritmoConsenso> algoritmos = Arrays.asList(AlgoritmoConsenso.values());
-
-    Map<String,Object> model = new HashMap<>();
-    model.put("algoritmos",algoritmos);
-    model.put("fuentes",fuentes);
-    return model;
   }
 
   private LocalDateTime parsearFechaComoInicioDeDia(String fecha) {

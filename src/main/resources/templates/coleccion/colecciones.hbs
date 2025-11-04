@@ -1,0 +1,39 @@
+{{#partial "head"}}
+    <title> Panel de Colecciones - MetaMapa </title>
+    <link rel="stylesheet" href="/assets/admin/colecciones.css">
+{{/partial}}
+
+{{#partial "contenido-main"}}
+  <section class="admin-section">
+    <h1>Gestión de Colecciones</h1>
+
+    <div class="acciones">
+      <a href="/admin/coleccion/nueva" class="btn">+ Crear Colección</a>
+    </div>
+
+    {{#if colecciones.length}}
+      <table class="tabla-admin">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Fuente</th>
+            <th>Algoritmo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each colecciones}}
+            <tr>
+              <td>{{titulo}}</td>
+              <td>{{fuente.nombre}}</td>
+              <td>{{algoritmo}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p>No hay colecciones creadas aún.</p>
+    {{/if}}
+  </section>
+{{/partial}}
+
+{{> templates/layout/layout.administrador}}

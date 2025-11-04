@@ -17,6 +17,11 @@ body {
     align-items: center;
 }
 
+.admin-nav {
+    display: flex;
+    align-items: center;
+}
+
 .header-logo {
     display: flex;
     align-items: center;
@@ -24,7 +29,11 @@ body {
 }
 
 .nav-links {
+    display: flex;
+    align-items: center;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {

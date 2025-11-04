@@ -26,7 +26,9 @@
                 <li> <a href="/admin/solicitudes"> Solicitudes de Eliminacion </a></li>
             </ul>
         </nav>
-        <a href="/login" class="btn">Cerrar Sesion</a>
+        <form action="/logout" method="get">
+            <button type="submit" class="btn">Cerrar Sesion</button>
+        </form>
     </header>
     <main>
         {{#block "contenido-main"}}{{/block}}

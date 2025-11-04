@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.controllers.HechoController;
-import ar.edu.utn.frba.dds.controllers.HomeController;
-import ar.edu.utn.frba.dds.controllers.SessionController;
-import ar.edu.utn.frba.dds.controllers.SolicitudController;
+import ar.edu.utn.frba.dds.controllers.*;
 import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import io.javalin.Javalin;
 
@@ -12,6 +9,7 @@ public class Router implements SimplePersistenceTest {
     HomeController homeController = new HomeController();
     HechoController hechoController = new HechoController();
     SolicitudController solicitudController = new SolicitudController();
+    ColeccionController coleccionController = new ColeccionController();
     SessionController session = new SessionController();
 
     app.before(ctx -> {
@@ -31,9 +29,8 @@ public class Router implements SimplePersistenceTest {
     app.get("/hecho/nuevo", hechoController::formHechoNuevo);
     app.post("/hechos", hechoController::crearHecho);
     app.get("/hecho/{id}", hechoController::ver);
-
-    app.get("/solEliminacion/nueva", ctx -> ctx.render("solEliminacion/solEliminacion.nueva.hbs", solicitudController.solicitarEliminacionForm(ctx)));
-    app.post("/solEliminacion/nueva", solicitudController::solicitarEliminacion);
+    app.get("/solicitud/nueva", solicitudController::solicitarEliminacionForm);
+    app.post("/solicitud/nueva", solicitudController::solicitarEliminacion);
 
     //REQUERIMIENTO 3
     app.get("/login", session::show);
@@ -42,14 +39,15 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 4
     //REQUERIMIENTO 5
-    app.get("/coleccion/nuevo", ctx -> ctx.render("coleccion/coleccion.hecho.nuevo.hbs", homeController.formularioNuevaColeccion()));
-    app.post("/colecciones", homeController::crearColeccion);
+    app.get("/admin/colecciones", coleccionController::listarColecciones);
+    app.get("/admin/coleccion/nueva", coleccionController::formNuevaColeccion);
+    app.post("/admin/colecciones", coleccionController::crearColeccion);
     //REQUERIMIENTO 6
 
     //REQUERIMIENTO 7
-    app.get("/solicitudesEliminacion", ctx -> ctx.render("solEliminacion/solicitudesEliminacion.hbs", solicitudController.listarSolicitudes(ctx)));
-    app.post("/admin/solicitudes/{id}/aprobar", SolicitudController::aprobarSolicitud);
-    app.post("/admin/solicitudes/{id}/rechazar", SolicitudController::rechazarSolicitud);
+    app.get("/admin/solicitudes", solicitudController::listarSolicitudes);
+    app.post("/admin/solicitudes/{id}/aprobar", solicitudController::aprobarSolicitud);
+    app.post("/admin/solicitudes/{id}/rechazar", solicitudController::rechazarSolicitud);
     //REQUERIMIENTO 8
 
   }

@@ -1,0 +1,54 @@
+{{#partial "head"}}
+    <title> Nueva Coleccion - MetaMapa </title>
+{{/partial}}
+
+{{#partial "contenido-main"}}
+  <section class="admin-section">
+    <h1>Crear Nueva Colección</h1>
+
+    <form action="/admin/colecciones" method="post" class="form-admin">
+      <div class="form-group">
+        <label for="handle">Handle</label>
+        <input type="text" id="handle" name="handle" required>
+      </div>
+
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" required>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="fuente">Fuente</label>
+        <select id="fuente" name="fuente" required>
+          <option value="">Seleccionar fuente...</option>
+          {{#each fuentes}}
+            <option value="{{id}}">{{nombre}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="algoritmo">Algoritmo de Consenso</label>
+        <select id="algoritmo" name="algoritmo" required>
+          <option value="">Seleccionar algoritmo...</option>
+          {{#each algoritmos}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Crear Colección</button>
+        <a href="/admin/colecciones" class="btn btn-secundario">Cancelar</a>
+      </div>
+    </form>
+  </section>
+
+{{/partial}}
+
+{{> templates/layout/layout.administrador}}

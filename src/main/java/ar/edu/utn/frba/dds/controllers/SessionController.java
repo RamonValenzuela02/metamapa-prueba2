@@ -38,7 +38,11 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
 
       ctx.sessionAttribute("user_id", usuario.getId());
       ctx.sessionAttribute("tipo_usuario", usuario.getTipo());
-      ctx.redirect("/");
+      if (usuario.getTipo() == TipoUsuario.ADMINISTRADOR) {
+        ctx.redirect("/admin");
+      } else {
+        ctx.redirect("/home");
+      }
     }catch(Exception e) {
       ctx.redirect("/login?error=true");
     }

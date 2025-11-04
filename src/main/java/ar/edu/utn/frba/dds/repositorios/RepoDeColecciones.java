@@ -17,13 +17,13 @@ public class RepoDeColecciones implements WithSimplePersistenceUnit {
       entityManager().persist(coleccion);
     }
 
-    public List<Coleccion> obtenerColecciones() {
+    public List<Coleccion> getColecciones() {
       return entityManager()
         .createQuery("SELECT c FROM Coleccion c", Coleccion.class)
         .getResultList();
     }
 
-    public Coleccion obtenerColeccionPorId(Long id) {
+    public Coleccion getColeccionPorId(Long id) {
         return entityManager().find(Coleccion.class, id);
     }
 }
