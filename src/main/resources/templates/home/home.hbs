@@ -9,7 +9,7 @@
         <a href="/hecho/nuevo" class="nav-link">Crear Hecho</a>
 
         <div class="busqueda">
-            <form role="search" action="/home" method="GET"
+            <form role="search"
                   hx-get="/home" hx-target="#resultados" hx-push-url="true" hx-trigger="submit"
                   class="form-busqueda">
                 <input type="search" name="likeTexto" placeholder="Buscar hecho..." value="{{busqueda}}" class="input-busqueda">

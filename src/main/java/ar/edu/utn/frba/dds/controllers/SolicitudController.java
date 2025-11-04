@@ -31,8 +31,6 @@ public class SolicitudController {
         System.out.println("aprobarSolicitud con id = " + id);
         RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
 
-        System.out.println("estado de la solicitud: " + repo.getSolicitudPorId(id).getEstado());
-
         repo.withTransaction(() -> {
             SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(id);
             if (solicitud != null) {
@@ -41,8 +39,6 @@ public class SolicitudController {
                 repo.entityManager().merge(solicitud);
             }
         });
-
-        System.out.println("estado de la solicitud: " + repo.getSolicitudPorId(id).getEstado());
 
         boolean esHtmx = "true".equalsIgnoreCase(context.header("HX-Request"));
 
@@ -60,8 +56,6 @@ public class SolicitudController {
         long id = Long.valueOf(context.pathParam("id"));
         RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
 
-        System.out.println("estado de la solicitud: " + repo.getSolicitudPorId(id).getEstado());
-
         repo.withTransaction(() -> {
             SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(id);
             if (solicitud != null) {
@@ -69,8 +63,6 @@ public class SolicitudController {
                 repo.entityManager().merge(solicitud);
             }
         });
-
-        System.out.println("estado de la solicitud: " + repo.getSolicitudPorId(id).getEstado());
 
         boolean esHtmx = "true".equalsIgnoreCase(context.header("HX-Request"));
 

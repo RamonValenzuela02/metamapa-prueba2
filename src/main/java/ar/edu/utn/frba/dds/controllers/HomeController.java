@@ -4,12 +4,6 @@ import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.Usuario.TipoUsuario;
 import ar.edu.utn.frba.dds.model.coleccion.Coleccion;
 import ar.edu.utn.frba.dds.model.coleccion.ModoNavegacion;
-import ar.edu.utn.frba.dds.model.consenso.AlgoritmoConsenso;
-import ar.edu.utn.frba.dds.model.criterio.Criterio;
-import ar.edu.utn.frba.dds.model.criterio.CriterioCumplidorSiempre;
-import ar.edu.utn.frba.dds.model.fuente.Fuente;
-import ar.edu.utn.frba.dds.model.solicitud.DetectorDeSpamBasico;
-import ar.edu.utn.frba.dds.model.solicitud.ServicioDeSolicitudesEliminacion;
 import ar.edu.utn.frba.dds.model.solicitud.SolicitudDeEliminacion;
 import ar.edu.utn.frba.dds.repositorios.*;
 import io.javalin.http.Context;
@@ -18,12 +12,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.jetbrains.annotations.NotNull;
 
 public class HomeController{
-  public Map<String,Object> index(@NotNull Context ctx) {
+  public Map<String,Object> modeloHome(@NotNull Context ctx) {
 
     Long user_id = ctx.sessionAttribute("user_id");
     String busqueda = ctx.queryParam("likeTexto");
@@ -108,11 +101,11 @@ public class HomeController{
     boolean esHtmx = "true".equalsIgnoreCase(ctx.header("HX-Request"));
 
     if (esHtmx) {
-      ctx.render("partials/resultados-y-provincias.hbs",index(ctx));
+      ctx.render("partials/resultados-y-provincias.hbs", modeloHome(ctx));
       return;
     }
 
-    ctx.render("home/home.hbs", index(ctx));
+    ctx.render("home/home.hbs", modeloHome(ctx));
   }
 
   public Map<String,Object> modeloHomeAdmin(Context ctx){
