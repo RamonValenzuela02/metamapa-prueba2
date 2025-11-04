@@ -11,13 +11,15 @@ public class Router implements SimplePersistenceTest {
   public void configure(Javalin app) {
     HomeController homeController = new HomeController();
     HechoController hechoController = new HechoController();
-    SolicitudController  solicitudController = new SolicitudController();
+    SolicitudController solicitudController = new SolicitudController();
     SessionController session = new SessionController();
 
     app.before(ctx -> {
       entityManager().clear();
       ctx.contentType("text/html; charset=UTF-8");
     });
+
+    app.get("/admin", homeController::showAdminHome);
 
     //REQUERIMIENTO 1
     //muestra los hechos
@@ -46,8 +48,8 @@ public class Router implements SimplePersistenceTest {
 
     //REQUERIMIENTO 7
     app.get("/solicitudesEliminacion", ctx -> ctx.render("solEliminacion/solicitudesEliminacion.hbs", solicitudController.listarSolicitudes(ctx)));
-    app.post("/solicitudesEliminacion/{id}/aprobar", SolicitudController::aprobarSolicitud);
-    app.post("/solicitudesEliminacion/{id}/rechazar", SolicitudController::rechazarSolicitud);
+    app.post("/admin/solicitudes/{id}/aprobar", SolicitudController::aprobarSolicitud);
+    app.post("/admin/solicitudes/{id}/rechazar", SolicitudController::rechazarSolicitud);
     //REQUERIMIENTO 8
 
   }

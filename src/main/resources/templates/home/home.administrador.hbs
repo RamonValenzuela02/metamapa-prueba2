@@ -1,76 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>PROYECTO DISEÑO 26</title>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/hecho/nuevo">Crear Hecho</a></li>
-            <li><a href="/coleccion/nuevo">Crear Colecciones</a></li>
-            <li><a href="/solicitudesEliminacion/">Solicitudes Eliminacion</a></li>
-        </ul>
-    </nav>
-</head>
-<body>
-<main>
-    {{#if fuentes.length}}
-        {{#each fuentes}}
-            <section>
-                <h2>Fuente: {{fuenteID}}</h2>
+{{#partial "head"}}
+    <title> Panel de Administración - MetaMapa </title>
+    <link rel="stylesheet" href="/assets/admin/admin-home.css">
+{{/partial}}
 
-                {{#if hechos.length}}
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Categoría</th>
-                            <th>Latitud</th>
-                            <th>Longitud</th>
-                            <th>Fecha del Hecho</th>
-                            <th>Fecha de Carga</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{#each hechos}}
-                            <tr>
-                                <td>{{id}}</td>
-                                <td>{{titulo}}</td>
-                                <td>{{descripcion}}</td>
-                                <td>{{categoria}}</td>
-                                <td>{{latitud}}</td>
-                                <td>{{longitud}}</td>
-                                <td>{{fechaHecho}}</td>
-                                <td>{{fechaCarga}}</td>
-                                <td>
-                                    <form action="/solEliminacion/nueva" method="get">
-                                        <input type="hidden" name="fuenteId" value="{{../fuenteID}}">
-                                        <input type="hidden" name="hechoId" value="{{id}}">
-                                        <button type="submit">Solicitar eliminación</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {{/each}}
-                        </tbody>
-                    </table>
-                {{else}}
-                    <p>No hay hechos registrados en esta fuente.</p>
-                {{/if}}
-            </section>
-            <hr/>
-        {{/each}}
-    {{else}}
-        <p>No hay fuentes disponibles.</p>
-    {{/if}}
-</main>
+{{#partial "contenido-main"}}
+    <div class="dashboard">
+        <p class="dashboard-bienvenida"> Hola, {{nombreUsuario}} </p>
+    </div>
 
-<footer class="footer">
-    <p>Institución: UTN FRBA</p>
-    <p>Materia: Diseño de Sistemas</p>
-    <p>Grupo 26</p>
-</footer>
-</body>
-</html>
+    <div id="solicitudesPendientes" class="tarjeta-hecho">
+        {{> templates/partials/solicitudesPendientes}}
+    </div>
+{{/partial}}
+{{> templates/layout/layout.administrador}}

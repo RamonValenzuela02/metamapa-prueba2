@@ -35,6 +35,13 @@ public class RepoSolicitudesDeEliminacion implements WithSimplePersistenceUnit {
         .getResultList();
   }
 
+  public List<SolicitudDeEliminacion> getSolicitudesPendientes() {
+    return entityManager()
+            .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.estado = :estado", SolicitudDeEliminacion.class)
+            .setParameter("estado", Estado.PENDIENTE)
+            .getResultList();
+  }
+
   public SolicitudDeEliminacion getSolicitudPorId(Long id) {
     return entityManager()
       .createQuery("SELECT s FROM SolicitudDeEliminacion s WHERE s.id = :id", SolicitudDeEliminacion.class)

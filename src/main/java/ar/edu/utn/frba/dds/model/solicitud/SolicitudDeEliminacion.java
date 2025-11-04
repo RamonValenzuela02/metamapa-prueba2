@@ -4,15 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.fuente.Fuente;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
+import javax.persistence.*;
+
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class SolicitudDeEliminacion {
@@ -29,6 +26,8 @@ public class SolicitudDeEliminacion {
   @Enumerated(EnumType.STRING)
   @Getter
   private Estado estado;
+  @Getter
+  private LocalDateTime fechaSolicitud;
   @OneToOne
   private Fuente fuente;
 
@@ -38,6 +37,7 @@ public class SolicitudDeEliminacion {
     this.hecho = hecho;
     this.motivo = motivo;
     this.estado = Estado.PENDIENTE;
+    this.fechaSolicitud = LocalDateTime.now();
     validarSolicitud();
   }
 
@@ -53,5 +53,7 @@ public class SolicitudDeEliminacion {
   public void rechazar() {
     this.estado = Estado.RECHAZADA;
   }
+
+  public void pendiente() { this.estado = Estado.PENDIENTE; }
 
 }

@@ -20,8 +20,8 @@
 
     <div class="contenedor-padre">
         <div class="container-filtros">
-            <form action="/home" method="get" class="form-filtros"
-                hx-get="/home" hx-target="#resultados" hx-push-url="true" hx-trigger="submit">
+            <form class="form-filtros"
+                hx-get="/home" hx-target="#resultados" hx-push-url="true">
 
                 <label class="container-filtros-label">
                     Seleccionar Coleccion
@@ -55,14 +55,8 @@
                 </ul>
 
                 <label class="container-filtros-label"> Provincia </label>
-                <ul class="lista-ubicacion">
-                    {{#each provincias}}
-                        <li>
-                            <input id="{{this}}"type="checkbox" name="provincias" value="{{this}}"
-                                 {{#ifIn this ../provSeleccionadas}}checked{{/ifIn}}>
-                            <label for="{{this}}">{{this}}</label>
-                        </li>
-                    {{/each}}
+                <ul id="filtro-provincias" class="lista-ubicacion">
+                    {{> templates/partials/filtro-provincias}}
                 </ul>
 
                 <label class="container-filtros-label"> Fecha </label>

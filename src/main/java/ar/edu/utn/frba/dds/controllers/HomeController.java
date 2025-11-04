@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class HomeController{
   public Map<String,Object> index(@NotNull Context ctx) {
 
+    Long user_id = ctx.sessionAttribute("user_id");
     String busqueda = ctx.queryParam("likeTexto");
     String coleccionQuery = ctx.queryParam("coleccionId");
     String modoQuery = ctx.queryParam("modoNavegacion");
@@ -77,41 +78,7 @@ public class HomeController{
             .filter(Objects::nonNull)
             .collect(Collectors.toCollection(TreeSet::new));
 
-//    List<Fuente> fuentes = RepoFuentesDelSistema.getInstance().obtenerFuentes();
-//
-//    List<Map<String, Object>> fuentesConHechos = fuentes.stream()
-//      .map(f -> {
-//
-//        Stream<Hecho> hechos = f.obtenerHechos().stream()
-//                .filter(h -> !h.estaEliminado());
-//
-//        if(!provinciasSeleccionadas.isEmpty()){
-//          hechos = hechos.filter(h -> provinciasSeleccionadas.contains(h.getProvincia()));
-//        }
-//
-//        if(desde != null){
-//          hechos = hechos.filter(h -> !h.getFechaHecho().isBefore(desde));
-//        }
-//        if(hasta != null){
-//          hechos = hechos.filter(h -> !h.getFechaHecho().isAfter(hasta));
-//        }
-//
-//        Map<String, Object> datos = new HashMap<>();
-//        datos.put("fuenteID", f.getId());
-//        datos.put("hechos", hechos.toList());
-//        return datos;
-//      }).toList();
-//
-//
-//    Set<String> provincias = fuentes.stream()
-//            .flatMap(f -> f.obtenerHechos().stream())
-//            .filter(h -> !h.estaEliminado())
-//            .map(Hecho::getProvincia)
-//            .filter(Objects::nonNull)
-//            .collect(Collectors.toCollection(TreeSet::new));
-
     Map<String,Object> model = new HashMap<>();
-//    model.put("fuentes", fuentesConHechos);
     model.put("modoSeleccionado", modoNavegacion.name());
     model.put("hechos", hechosFiltrados);
     model.put("provincias", provinciasDisponibles);
@@ -121,40 +88,60 @@ public class HomeController{
     model.put("colecciones", colecciones);
     model.put("coleccionSeleccionada", coleccionElegida != null ? coleccionElegida.getId() : null);
     model.put("busqueda", busqueda);
-    model.put("usuarioLogueado", ctx.sessionAttribute("user_id") != null);
+    model.put("usuarioLogueado", user_id != null);
 
-    if (ctx.sessionAttribute("user_id") != null) {
-      var usuario = RepoUsuarios.getInstance().buscarPorId(ctx.sessionAttribute("user_id"));
+    if (user_id != null) {
+      var usuario = RepoUsuarios.getInstance().buscarPorId(user_id);
       model.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
 
     return model;
   }
+
   public void showHome(Context ctx) {
     TipoUsuario tipo = ctx.sessionAttribute("tipo_usuario");
+
+    if(tipo == TipoUsuario.ADMINISTRADOR) {
+      ctx.redirect("/admin");
+      return;
+    }
+    
     boolean esHtmx = "true".equalsIgnoreCase(ctx.header("HX-Request"));
 
     if (esHtmx) {
-      ctx.render("partials/resultados.hbs",index(ctx));
-    }else {
-      ctx.render("home/home.hbs", index(ctx));
-    }
-
-    if (tipo == null) {
-      ctx.render("home/home.hbs", index(ctx));
+      ctx.render("partials/resultados-y-provincias.hbs",index(ctx));
       return;
     }
 
-    switch (tipo) {
-      case ADMINISTRADOR:
-        ctx.render("home/home.administrador.hbs", index(ctx));
-        break;
-      case CONTRIBUYENTE:
-        ctx.render("home/home.contribuyente.hbs", index(ctx));
-        break;
-      default:
-        ctx.redirect("/login");
+    ctx.render("home/home.hbs", index(ctx));
+  }
+
+  public Map<String,Object> modeloHomeAdmin(Context ctx){
+    Map<String,Object> modelo = new HashMap<>();
+    Long user_id = ctx.sessionAttribute("user_id");
+    modelo.put("usuarioLogueado", user_id != null);
+
+    if (user_id != null) {
+      var usuario = RepoUsuarios.getInstance().buscarPorId(user_id);
+      modelo.put("nombreUsuario", usuario != null ? usuario.getNombre() : null);
     }
+    List<SolicitudDeEliminacion> pendientes = RepoSolicitudesDeEliminacion.getInstance().getSolicitudesPendientes();
+
+    modelo.put("solicitudesPendientes", pendientes);
+    modelo.put("cantidadSolicitudesPendientes", pendientes.size());
+    modelo.put("tieneSolicitudesPendientes", !pendientes.isEmpty());
+    return modelo;
+  }
+
+  public void showAdminHome(Context ctx) {
+    TipoUsuario tipo = ctx.sessionAttribute("tipo_usuario");
+
+    if(tipo != TipoUsuario.ADMINISTRADOR){
+      ctx.redirect("/home");
+      return;
+    }
+
+    ctx.render("home/home.administrador.hbs", modeloHomeAdmin(ctx));
   }
 
   //CREAR COLECCION

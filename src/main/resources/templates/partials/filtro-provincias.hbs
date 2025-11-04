@@ -1,0 +1,7 @@
+{{#each provincias}}
+    <li>
+        <input id="{{this}}"type="checkbox" name="provincias" value="{{this}}"
+             {{#ifIn this ../provSeleccionadas}}checked{{/ifIn}}>
+        <label for="{{this}}">{{this}}</label>
+    </li>
+{{/each}}

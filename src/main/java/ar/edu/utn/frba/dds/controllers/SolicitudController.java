@@ -25,10 +25,12 @@ public class SolicitudController {
 
 
     public static void aprobarSolicitud(@NotNull Context context) {
+
+        long id = Long.valueOf(context.pathParam("id"));
         RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
 
-        repo.withTransaction(()->{
-            SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+        repo.withTransaction(() -> {
+            SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(id);
             if (solicitud != null) {
                 solicitud.aceptar();
                 solicitud.getHecho().setEliminado(true);
@@ -36,19 +38,39 @@ public class SolicitudController {
             }
         });
 
-        context.redirect("/solicitudesEliminacion");
+        boolean esHtmx = "true".equalsIgnoreCase(context.header("HX-Request"));
+
+        if (esHtmx) {
+            HomeController homeController = new HomeController();
+            Map<String, Object> modelo = homeController.modeloHomeAdmin(context);
+            context.render("partials/solicitudesPendientes.hbs",modelo);
+        }else{
+            context.redirect("/admin");
+        }
     }
 
     public static void rechazarSolicitud(@NotNull Context context) {
+
+        long id = Long.valueOf(context.pathParam("id"));
         RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
-        repo.withTransaction(()->{
-            SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(Long.valueOf(context.pathParam("id")));
+
+        repo.withTransaction(() -> {
+            SolicitudDeEliminacion solicitud = repo.getSolicitudPorId(id);
             if (solicitud != null) {
                 solicitud.rechazar();
                 repo.entityManager().merge(solicitud);
             }
         });
-        context.redirect("/solicitudesEliminacion");
+
+        boolean esHtmx = "true".equalsIgnoreCase(context.header("HX-Request"));
+
+        if (esHtmx) {
+            HomeController homeController = new HomeController();
+            Map<String, Object> modelo = homeController.modeloHomeAdmin(context);
+            context.render("partials/solicitudesPendientes.hbs",modelo);
+            return;
+        }
+        context.redirect("/admin");
     }
 
 
