@@ -25,7 +25,11 @@ public class HechoController {
         model.put("categorias", Categoria.values());
         model.put("values", Collections.emptyMap());
         model.put("errors", Collections.emptyList());
-        ctx.render("hecho/hecho.nuevo.hbs", model);
+        if(ctx.sessionAttribute("user_id") != null){
+            ctx.render("hecho/hecho.nuevo.hbs", model);
+        }else{
+            ctx.render("hecho/hecho.nuevo.usuario.hbs", model);
+        }
     }
 
     public void crearHecho(Context ctx){
