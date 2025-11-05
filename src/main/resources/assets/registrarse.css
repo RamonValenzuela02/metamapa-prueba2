@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Light", sans-serif;
+}
+
+body {
+    color: #7e8ba3;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registro-container {
+    background: rgba(40, 44, 52, 0.95);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    height: 100vh;
+    max-width: 420px;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-registro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-field {
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #242c37;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-align: center;
+}
+
+input:focus {
+    border-color: #007bff;
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+}
+
+.btn-form-registro {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.btn-form-registro:hover {
+    filter: brightness(1.06);
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    letter-spacing: 1px;
+}
+
+.login {
+    margin-top: 20px;
+    color: #7e8ba3;
+    text-align: center;
+}
+
+.link {
+    color: #7e8ba3;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: #9aa7c3;
+}
+
+
+footer {
+    background-color: #eeeeee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-align: center;
+}

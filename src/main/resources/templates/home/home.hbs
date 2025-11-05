@@ -3,6 +3,14 @@
     <title>MetaMapa</title>
 {{/partial}}
 
+{{#partial "boton-login"}}
+    {{#if usuarioLogueado}}
+        <a href="/logout" class="btn nav-login">Cerrar Sesión</a>
+    {{else}}
+        <a href="/login" class="btn nav-login">Iniciar Sesión</a>
+    {{/if}}
+{{/partial}}
+
 {{#partial "contenido-main"}}
     <section class="contenido-header">
 

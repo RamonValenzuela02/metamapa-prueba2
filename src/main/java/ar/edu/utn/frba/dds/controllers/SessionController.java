@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.model.Usuario.TipoUsuario;
+import ar.edu.utn.frba.dds.model.Usuario.Usuario;
 import io.github.flbulgarelli.jpa.extras.TransactionalOps;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import io.javalin.http.Context;
@@ -12,7 +13,7 @@ import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 public class SessionController implements WithSimplePersistenceUnit, TransactionalOps {
 
 
-  public void show(Context ctx) {
+  public void showLogin(Context ctx) {
     if (ctx.sessionAttribute("user_id") != null) {
       ctx.redirect("/");
       return;
@@ -25,10 +26,10 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
       modelo.put("error", "Usuario o contraseña inválidas");
     }
 
-    ctx.render("login/login.hbs", modelo);
+    ctx.render("session/login.hbs", modelo);
   }
 
-  public void create(Context ctx) {
+  public void createLogin(Context ctx) {
     try {
       RepoUsuarios repo = RepoUsuarios.getInstance();
       String nombre = ctx.formParam("nombre");
@@ -49,7 +50,22 @@ public class SessionController implements WithSimplePersistenceUnit, Transaction
   }
 
   public void logout(Context ctx) {
-    ctx.sessionAttribute("user_id", null);
+    ctx.req().getSession().invalidate();
+    ctx.redirect("/login");
+  }
+
+  public void showRegistro(Context ctx) {
+    Map<String, Object> modelo = new HashMap<>();
+    ctx.render("session/registro.hbs", modelo);
+  }
+
+  public void createRegistro(Context ctx) {
+    RepoUsuarios repo = RepoUsuarios.getInstance();
+    String nombre = ctx.formParam("nombre");
+    String password = ctx.formParam("password");
+
+    repo.withTransaction(() -> repo.agregar(new Usuario(TipoUsuario.CONTRIBUYENTE,nombre,password)));
+
     ctx.redirect("/login");
   }
 }
