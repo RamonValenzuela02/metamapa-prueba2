@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.model.fuente;
 
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,10 @@ public abstract class Fuente {
   @Getter
   @Setter
   private Long id;
+  @Column
+  @Getter
+  @Setter
+  String nombre;
 
   public abstract List<Hecho> obtenerHechos();
 

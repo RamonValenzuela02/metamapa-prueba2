@@ -14,17 +14,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class SolicitudController {
-    public void listarSolicitudes(@NotNull Context ctx) {
-        RepoSolicitudesDeEliminacion repo = RepoSolicitudesDeEliminacion.getInstance();
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("solicitudes",repo.getSolicitudes());
-        model.put("cantidadSpam",repo.getCantidadDeSpam());
-
-        ctx.render("solicitudes/listar.solicitudes.hbs", model);
-    }
-
-
     public void aprobarSolicitud(@NotNull Context context) {
 
         long id = Long.valueOf(context.pathParam("id"));

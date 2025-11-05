@@ -36,7 +36,7 @@ public class Router implements SimplePersistenceTest {
     app.get("/admin/coleccion/nueva", coleccionController::formNuevaColeccion);
     app.post("/admin/colecciones", coleccionController::crearColeccion);
 
-    app.get("/admin/solicitudes", solicitudController::listarSolicitudes);
+
     app.post("/admin/solicitudes/{id}/aprobar", solicitudController::aprobarSolicitud);
     app.post("/admin/solicitudes/{id}/rechazar", solicitudController::rechazarSolicitud);
   }

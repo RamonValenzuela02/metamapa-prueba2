@@ -36,6 +36,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Hecho h5 = new Hecho("incendio", "incendio en Cordoba", Categoria.INCENDIO_FORESTAL, "-31.92098099373357", "-64.46001571183002", LocalDateTime.now(), LocalDateTime.now());
 
       Fuente fuenteDinamica = new FuenteDinamica();
+      fuenteDinamica.setNombre("FuenteDinamica");
       RepoHechosDinamicos.getInstance().agregarHecho(h1);
       RepoHechosDinamicos.getInstance().agregarHecho(h2);
       RepoHechosDinamicos.getInstance().agregarHecho(h3);

@@ -3,7 +3,9 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.model.Hecho.Hecho;
 import ar.edu.utn.frba.dds.model.Multimedia.ArchivoMultimedia;
 import ar.edu.utn.frba.dds.model.criterio.Categoria;
+import ar.edu.utn.frba.dds.model.fuente.Fuente;
 import ar.edu.utn.frba.dds.repositorios.RepoArchivosMultimedia;
+import ar.edu.utn.frba.dds.repositorios.RepoFuentesDelSistema;
 import ar.edu.utn.frba.dds.repositorios.RepoHechosDinamicos;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
@@ -14,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
 
 public class HechoController {
 
