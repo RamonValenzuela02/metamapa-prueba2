@@ -299,7 +299,27 @@
               <finalName>consensuar-hechos</finalName>
             </configuration>
           </execution>
+          <execution>
+            <id>app-web</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.server.App</mainClass>
+                </manifest>
+              </archive>
+              <finalName>app-web</finalName>
+            </configuration>
+          </execution>
+
         </executions>
+
       </plugin>
 
     </plugins>
